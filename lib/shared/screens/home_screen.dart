@@ -1,6 +1,9 @@
 import 'package:final_project/data/local/local_pref.dart';
+import 'package:final_project/features/category/provider/category_provider.dart';
+import 'package:final_project/features/category/views/categories_list.dart';
 import 'package:final_project/shared/screens/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   static const String id = '/homeView';
@@ -13,7 +16,16 @@ class HomeView extends StatelessWidget {
           onPressed: () => _logout(context),
           icon: const Icon(Icons.logout),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              context.read<CategoryProvider>().getAllCategories();
+            },
+          ),
+        ],
       ),
+      body: const CategoriesList(),
     );
   }
 
