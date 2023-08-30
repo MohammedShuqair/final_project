@@ -21,7 +21,7 @@ class ResponseBuilder<T> extends StatelessWidget {
       return onError!(context, response.message);
     } else if (response.status == Status.LOADING && onLoading != null) {
       return onLoading!(context);
-    } else if (onError != null) {
+    } else if (onComplete != null && response.data != null) {
       return onComplete!(context, response.data, response.message);
     } else {
       return const SizedBox();

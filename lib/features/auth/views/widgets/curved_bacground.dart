@@ -12,9 +12,13 @@ class CurvedBackground extends StatelessWidget {
         ClipPath(
           clipper: MyCustomClipper(),
           child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              kLightSub,
+              kDarkSub.withOpacity(0.8),
+            ])),
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 2.5,
-            color: kLightSub,
           ),
         ),
         child,

@@ -22,40 +22,26 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: CurvedBackground(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 68.0,
-                    ),
-                    Container(
-                        color: kLightSub,
-                        child: Hero(
-                            tag: 'logo',
-                            child: Logo.small(
-                                style: kLogo.copyWith(fontSize: 22)))),
-                    const SizedBox(
-                      height: 18.0,
-                    ),
-                    const RegistrationForm(),
-                  ],
+      body: SingleChildScrollView(
+        child: CurvedBackground(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 68.0,
                 ),
-              ),
+                Hero(
+                    tag: 'logo',
+                    child: Logo.small(style: kLogo.copyWith(fontSize: 22))),
+                const SizedBox(
+                  height: 18.0,
+                ),
+                const RegistrationForm(),
+              ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Colors.white.withOpacity(0.2),
-              Colors.transparent
-            ])),
-          )
-        ],
+        ),
       ),
     );
   }
