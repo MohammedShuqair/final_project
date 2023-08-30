@@ -8,6 +8,7 @@ const kDarkText = Color(0xFF272727);
 const kText = Color(0xFF7C7C7C);
 const kSubText = Color(0xFFB2B2B2);
 const kUnselect = Color(0xFFE6E6E6);
+const kBorder = Color(0xFFEAEAF5);
 
 const kBackground = Color(0xFFF7F6FF);
 const kWhite = Color(0xffffffff);

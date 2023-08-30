@@ -1,6 +1,5 @@
 import 'package:final_project/features/auth/provider/auth_provider.dart';
-import 'package:final_project/features/auth/views/screens/login_view.dart';
-import 'package:final_project/features/auth/views/screens/register_view.dart';
+import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/mail/provider/mail_provider.dart';
@@ -17,21 +16,14 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) => const SplashView(),
       );
-    case LoginView.id:
+    case AuthView.id:
       return MaterialPageRoute(
         builder: (_) => ChangeNotifierProvider(
           create: (BuildContext context) => AuthProvider(),
-          child: const LoginView(),
+          child: const AuthView(),
         ),
       );
 
-    case RegisterView.id:
-      return MaterialPageRoute(
-        builder: (_) => ChangeNotifierProvider(
-          create: (BuildContext context) => AuthProvider(),
-          child: const RegisterView(),
-        ),
-      );
     case HomeView.id:
       return MaterialPageRoute(
         builder: (_) => MultiProvider(

@@ -1,4 +1,6 @@
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/shared/widgets/logo.dart';
 import 'package:flutter/material.dart';
 
 class CurvedBackground extends StatelessWidget {
@@ -7,6 +9,9 @@ class CurvedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double h = MediaQuery.of(context).size.height;
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Stack(
       children: [
         ClipPath(
@@ -18,10 +23,26 @@ class CurvedBackground extends StatelessWidget {
               kDarkSub.withOpacity(0.8),
             ])),
             width: double.infinity,
-            height: MediaQuery.of(context).size.height / 2.5,
+            height: isPortrait ? h * 0.45 : h * 0.7,
           ),
         ),
-        child,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 68.0,
+              ),
+              Hero(
+                  tag: 'logo',
+                  child: Logo.small(style: kLogo.copyWith(fontSize: 22))),
+              const SizedBox(
+                height: 18.0,
+              ),
+              child,
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -33,7 +54,7 @@ class MyCustomClipper extends CustomClipper<Path> {
     double width = size.width;
     double height = size.height;
     double fy1 = 0.8;
-    double fy2 = fy1 * 0.75;
+    double fy2 = fy1 * 0.85;
     double fx1 = 0.2;
     double fx2 = fx1 * 2;
     double fx3 = fx2 + (1 - fx2) / 2;

@@ -1,6 +1,6 @@
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/data/local/local_pref.dart';
-import 'package:final_project/features/auth/views/screens/login_view.dart';
+import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/shared/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class _SplashViewState extends State<SplashView> {
     if (temp.getToken().isNotEmpty) {
       path = HomeView.id;
     } else {
-      path = LoginView.id;
+      path = AuthView.id;
     }
 
     if (mounted) {

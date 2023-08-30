@@ -15,3 +15,11 @@ void handelResponseStatus(Status status, BuildContext context,
     }
   }
 }
+
+bool testPasswordLength(String? value) => value!.length < 6;
+
+bool testEmailValidation(String? value) => value?.contains('@') ?? true;
+
+bool testEmpty(String? value) => value?.isEmpty ?? true;
+
+bool testNull(String? value) => value == null;
