@@ -1,13 +1,11 @@
 import 'package:final_project/core/util/assets.dart';
 import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/widgets/auth_button.dart';
 import 'package:final_project/features/auth/views/widgets/auth_option_button.dart';
 import 'package:final_project/shared/screens/home_screen.dart';
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/auth/views/widgets/curved_bacground.dart';
-import 'package:final_project/shared/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -129,8 +127,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     return 'Please click on the email field and enter your email';
                   } else if (testEmpty(value)) {
                     return 'Please enter the email and do not leave the field empty';
-                  } else if (!testEmailValidation(value)) {
-                    return 'Please enter a valid email';
                   }
                   return null;
                 },
@@ -202,25 +198,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
             builder: (context, provider, child) {
               return AuthButton(
                   onTap: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await provider.loginUser(
-                          emailController.text, passwordController.text);
-                      if (mounted) {
-                        handelResponseStatus(
-                          provider.loginResponse.status,
-                          context,
-                          message: provider.loginResponse.message,
-                          onComplete: () async {
-                            if (mounted) {
-                              Navigator.pushReplacementNamed(
-                                  context, HomeView.id);
-                            }
-                          },
-                        );
-                      }
+                    if (isSignin) {
+                      await signIn(provider, context);
+                    } else {
+                      await signUp(provider, context);
                     }
                   },
-                  text: 'LOGIN');
+                  text: isSignin ? 'Sign in' : 'Sign up');
             },
           ),
           const Padding(
@@ -243,6 +227,43 @@ class _RegistrationFormState extends State<RegistrationForm> {
         ]),
       ),
     );
+  }
+
+  Future<void> signIn(AuthProvider provider, BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      await provider.loginUser(emailController.text, passwordController.text);
+      if (mounted) {
+        handelResponseStatus(
+          provider.loginResponse.status,
+          context,
+          message: provider.loginResponse.message,
+          onComplete: () async {
+            if (mounted) {
+              Navigator.pushReplacementNamed(context, HomeView.id);
+            }
+          },
+        );
+      }
+    }
+  }
+
+  Future<void> signUp(AuthProvider provider, BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      await provider.registerUser(emailController.text, usernameController.text,
+          passwordController.text, confPasswordController.text);
+      if (mounted) {
+        handelResponseStatus(
+          provider.registerResponse.status,
+          context,
+          message: provider.registerResponse.message,
+          onComplete: () async {
+            if (mounted) {
+              Navigator.pushReplacementNamed(context, HomeView.id);
+            }
+          },
+        );
+      }
+    }
   }
 
   void _signUpFocus() {
@@ -280,10 +301,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
     usernameController = TextEditingController();
     passwordController = TextEditingController();
     confPasswordController = TextEditingController();
-    if (isSignin)
-      Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (isSignin) {
         emailNode.requestFocus();
-      });
+      }
+    });
   }
 
   void _dispose() {

@@ -33,14 +33,15 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void registerUser({
-    required String email,
-    required String name,
-    required String password,
-    required String passwordConfirmation,
-  }) async {
+  Future<void> registerUser(
+    String email,
+    String name,
+    String password,
+    String passwordConfirmation,
+  ) async {
     registerResponse = ApiResponse.loading(message: 'registering...');
     notifyListeners();
+    print("here");
     try {
       final UserResponse user = await _repository.register(
           email, name, password, passwordConfirmation);
