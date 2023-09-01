@@ -1,15 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:final_project/data/local/local_pref.dart';
 import 'package:http/http.dart' as http;
 import 'app_exception.dart';
 
 mixin class ApiBaseHelper {
   static const String baseUrl = 'https://palmail.gsgtt.tech/api/';
-  Future<dynamic> get(String url, {Map<String, String>? header}) async {
+  Map<String, String>? get headers =>
+      {HttpHeaders.authorizationHeader: "Bearer ${SharedHelper().getToken()}"};
+
+  Future<dynamic> get(
+    String url,
+  ) async {
     var responseJson;
     try {
       final response =
-          await http.get(Uri.parse(baseUrl + url), headers: header);
+          await http.get(Uri.parse(baseUrl + url), headers: headers);
       responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -20,13 +26,15 @@ mixin class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> post(String url, Map<String, String> body,
-      {Map<String, String>? header}) async {
+  Future<dynamic> post(
+    String url,
+    Map<String, String> body,
+  ) async {
     var responseJson;
     try {
       final response = await http.post(
         Uri.parse(baseUrl + url),
-        headers: header,
+        headers: headers,
         body: body,
       );
       responseJson = _returnResponse(response);
@@ -42,10 +50,8 @@ mixin class ApiBaseHelper {
   Future<dynamic> put(String url, Map<String, dynamic> body) async {
     var responseJson;
     try {
-      final response = await http.put(
-        Uri.parse(baseUrl + url),
-        body: body,
-      );
+      final response = await http.put(Uri.parse(baseUrl + url),
+          body: body, headers: headers);
       responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
