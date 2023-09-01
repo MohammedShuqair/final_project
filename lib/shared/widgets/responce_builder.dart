@@ -17,9 +17,9 @@ class ResponseBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (response.status == Status.ERROR && onError != null) {
+    if (response.status == ApiStatus.ERROR && onError != null) {
       return onError!(context, response.message);
-    } else if (response.status == Status.LOADING && onLoading != null) {
+    } else if (response.status == ApiStatus.LOADING && onLoading != null) {
       return onLoading!(context);
     } else if (onComplete != null && response.data != null) {
       return onComplete!(context, response.data, response.message);

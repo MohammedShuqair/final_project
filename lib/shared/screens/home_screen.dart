@@ -1,6 +1,7 @@
 import 'package:final_project/data/local/local_pref.dart';
+import 'package:final_project/data_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
-import 'package:final_project/features/category/views/categories_list.dart';
+import 'package:final_project/features/status/repo/status_repo.dart';
 import 'package:final_project/shared/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +24,15 @@ class HomeView extends StatelessWidget {
               context.read<CategoryProvider>().getAllCategories();
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.call),
+            onPressed: () {
+              StatusRepository().getSingleStatus(2, false);
+            },
+          ),
         ],
       ),
-      body: const CategoriesList(),
+      body: const DataListView(),
     );
   }
 

@@ -4,9 +4,9 @@ import 'package:shimmer/shimmer.dart';
 class CustomShimmer extends StatelessWidget {
   const CustomShimmer({
     super.key,
-    required this.child,
+    this.child,
   });
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class CustomShimmer extends StatelessWidget {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       period: const Duration(seconds: 1),
-      child: child,
+      child: child ?? const CircularProgressIndicator(),
     );
   }
 }

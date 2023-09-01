@@ -1,20 +1,19 @@
-import 'package:final_project/features/category/provider/category_provider.dart';
-import 'package:final_project/features/category/views/test_shimmer.dart';
+import 'package:final_project/features/status/provider/status_provider.dart';
+import 'package:final_project/test_shimmer.dart';
 import 'package:final_project/shared/widgets/core_background.dart';
-import 'package:final_project/shared/widgets/custom_shimmer.dart';
 import 'package:final_project/shared/widgets/responce_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CategoriesList extends StatelessWidget {
-  const CategoriesList({Key? key}) : super(key: key);
+class DataListView extends StatelessWidget {
+  const DataListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CategoryProvider>(
+    return Consumer<StatusProvider>(
       builder: (context, provider, child) {
         return ResponseBuilder(
-            response: provider.response,
+            response: provider.singleStatus,
             onLoading: (_) {
               return ListView.separated(
                 itemBuilder: (_, __) {
@@ -24,14 +23,17 @@ class CategoriesList extends StatelessWidget {
                 itemCount: 5,
               );
             },
-            onComplete: (context, catList, message) {
+            onComplete: (context, data, message) {
               return ListView.separated(
                 itemBuilder: (_, index) => Core(
                   margin: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Text(catList[index]),
+                  child: Text(
+                    data?.name ?? '',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
                 separatorBuilder: (_, __) => child!,
-                itemCount: catList!.length,
+                itemCount: 1,
               );
             });
       },
