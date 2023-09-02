@@ -1,18 +1,45 @@
 import 'package:final_project/core/util/api_response.dart';
-import 'package:flutter/foundation.dart';
+import 'package:final_project/features/category/models/category.dart';
+import 'package:final_project/features/category/repo/category_repo.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 class CategoryProvider extends ChangeNotifier {
-  late ApiResponse<List<String>> response;
+  late CategoryRepository _repository;
+  late ApiResponse<List<Category>> allCategory;
+  late ApiResponse<Category> singleCategory;
+
   CategoryProvider() {
+    _repository = CategoryRepository();
     getAllCategories();
+    getSingleCategory(1);
   }
   Future<void> getAllCategories() async {
-    response = ApiResponse.loading();
+    allCategory = ApiResponse.loading(message: 'logging...');
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 1));
-    response = ApiResponse.completed(
-        List.generate(30, (index) => lorem(paragraphs: 1, words: 10)));
+    try {
+      final List<Category> categories = await _repository.getAllCategory();
+      allCategory = ApiResponse.completed(categories,
+          message: 'Categories fetched successfully');
+      notifyListeners();
+    } catch (e, s) {
+      allCategory = ApiResponse.error(message: e.toString());
+      notifyListeners();
+    }
+  }
+
+  Future<void> getSingleCategory(int id) async {
+    singleCategory = ApiResponse.loading(message: 'logging...');
     notifyListeners();
+    try {
+      final Category? category = await _repository.getSingleCategory(id);
+      print('category: ${category}');
+      singleCategory = ApiResponse.completed(category,
+          message: 'Category fetched successfully');
+      notifyListeners();
+    } catch (e, s) {
+      singleCategory = ApiResponse.error(message: e.toString());
+      notifyListeners();
+    }
   }
 }
