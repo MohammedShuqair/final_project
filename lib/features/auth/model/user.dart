@@ -10,6 +10,10 @@ class User {
   String? createdAt;
   String? updatedAt;
   Role? role;
+  @override
+  String toString() {
+    return 'User{id: $id, name: $name, email: $email, image: $image, emailVerifiedAt: $emailVerifiedAt, roleId: $roleId, createdAt: $createdAt, updatedAt: $updatedAt, role: $role}';
+  }
 
   User(
       {this.id,

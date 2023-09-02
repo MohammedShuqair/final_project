@@ -1,7 +1,9 @@
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/features/category/models/category.dart';
+import 'package:final_project/features/tag/provider/tag_provider.dart';
 import 'package:final_project/test_api_view/category_data_view.dart';
+import 'package:final_project/test_api_view/tag_data_view.dart';
 import 'package:final_project/test_api_view/user_data_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
@@ -32,7 +34,9 @@ class HomeView extends StatelessWidget {
             onPressed: () {
               // context.read<CategoryProvider>().getAllCategories();
               // context.read<CategoryProvider>().getSingleCategory(1);
-              context.read<CategoryProvider>().createCategory('test team 7');
+              // context.read<CategoryProvider>().createCategory('test team 7');
+              context.read<TagProvider>().getMailTags(2);
+              context.read<TagProvider>().getTagsWithMails([1, 2, 3]);
             },
           ),
           IconButton(
@@ -43,12 +47,14 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: Selector<CategoryProvider, ApiResponse<Category>?>(
+      body: const TagDataListView()
+      /* Selector<CategoryProvider, ApiResponse<Category>?>(
         selector: (context, provider) => provider.createdCategoryResponse,
         builder: (context, value, child) {
           return Text('create data ${value?.data}');
         },
-      ),
+      )*/
+      ,
     );
   }
 

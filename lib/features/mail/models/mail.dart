@@ -21,6 +21,10 @@ class Mail {
   List<Tag>? tags;
   List<String>? attachments;
   List<Activity>? activities;
+  @override
+  String toString() {
+    return 'Mail{id: $id, subject: $subject, description: $description, senderId: $senderId, archiveNumber: $archiveNumber, archiveDate: $archiveDate, decision: $decision, statusId: $statusId, finalDecision: $finalDecision, createdAt: $createdAt, updatedAt: $updatedAt, sender: $sender, status: $status, tags: $tags, attachments: $attachments, activities: $activities}';
+  }
 
   Mail(
       {this.id,

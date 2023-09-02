@@ -7,7 +7,7 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 class CategoryProvider extends ChangeNotifier {
   late CategoryRepository _repository;
   late ApiResponse<List<Category>> allCategory;
-  late ApiResponse<Category> singleCategory;
+  ApiResponse<Category>? singleCategory;
   ApiResponse<Category>? createdCategoryResponse;
 
   CategoryProvider() {

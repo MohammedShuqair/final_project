@@ -15,19 +15,14 @@ class CategoryDataListView extends StatefulWidget {
 }
 
 class _CategoryDataListViewState extends State<CategoryDataListView> {
-  TextEditingController name = TextEditingController();
-  @override
-  void dispose() {
-    name.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Selector<CategoryProvider, ApiResponse<Category>>(
-            builder: (context, response, child) {
+        Selector<CategoryProvider, ApiResponse<Category>?>(
+          selector: (_, provider) => provider.singleCategory,
+          builder: (context, response, child) {
+            if (response != null) {
               return Expanded(
                 child: ResponseBuilder(
                     response: response,
@@ -54,8 +49,12 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                       );
                     }),
               );
-            },
-            selector: (_, provider) => provider.singleCategory),
+            } else {
+              return const Center(
+                  child: Text('some thing wrong please try again'));
+            }
+          },
+        ),
         Selector<CategoryProvider, ApiResponse<List<Category>>>(
           builder: (context, response, child) {
             return Expanded(

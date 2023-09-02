@@ -23,6 +23,10 @@ class Activity {
       this.createdAt,
       this.updatedAt,
       this.user});
+  @override
+  String toString() {
+    return 'Activity{id: $id, body: $body, userId: $userId, mailId: $mailId, sendNumber: $sendNumber, sendDate: $sendDate, sendDestination: $sendDestination, createdAt: $createdAt, updatedAt: $updatedAt, user: $user}';
+  }
 
   Activity.fromMap(Map<String, dynamic> json) {
     id = json['id'];
