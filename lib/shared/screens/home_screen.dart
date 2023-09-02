@@ -1,4 +1,6 @@
+import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/test_api_view/category_data_view.dart';
 import 'package:final_project/test_api_view/user_data_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
@@ -29,7 +31,8 @@ class HomeView extends StatelessWidget {
             icon: const Icon(Icons.refresh),
             onPressed: () {
               // context.read<CategoryProvider>().getAllCategories();
-              context.read<CategoryProvider>().getSingleCategory(1);
+              // context.read<CategoryProvider>().getSingleCategory(1);
+              context.read<CategoryProvider>().createCategory('test team 7');
             },
           ),
           IconButton(
@@ -40,7 +43,12 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: const CategoryDataListView(),
+      body: Selector<CategoryProvider, ApiResponse<Category>?>(
+        selector: (context, provider) => provider.createdCategoryResponse,
+        builder: (context, value, child) {
+          return Text('create data ${value?.data}');
+        },
+      ),
     );
   }
 

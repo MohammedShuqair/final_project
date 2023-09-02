@@ -8,6 +8,7 @@ class CategoryProvider extends ChangeNotifier {
   late CategoryRepository _repository;
   late ApiResponse<List<Category>> allCategory;
   late ApiResponse<Category> singleCategory;
+  ApiResponse<Category>? createdCategoryResponse;
 
   CategoryProvider() {
     _repository = CategoryRepository();
@@ -39,6 +40,21 @@ class CategoryProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e, s) {
       singleCategory = ApiResponse.error(message: e.toString());
+      notifyListeners();
+    }
+  }
+
+  Future<void> createCategory(String name) async {
+    createdCategoryResponse = ApiResponse.loading(message: 'logging...');
+    notifyListeners();
+    try {
+      final Category category = await _repository.createCategory(name);
+      print('category: ${category}');
+      createdCategoryResponse = ApiResponse.completed(category,
+          message: 'Category created successfully');
+      notifyListeners();
+    } catch (e, s) {
+      createdCategoryResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
   }

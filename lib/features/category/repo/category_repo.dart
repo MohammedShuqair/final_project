@@ -13,8 +13,6 @@ class CategoryRepository with ApiBaseHelper {
     final response = await get(
       'categories/$id',
     );
-    print('category response $response');
-
     List<Category> list = Category.mapValueToList(response['category']);
 
     if (list.isNotEmpty) {
@@ -22,5 +20,11 @@ class CategoryRepository with ApiBaseHelper {
     } else {
       return null;
     }
+  }
+
+  Future<Category> createCategory(String name) async {
+    final response = await post('categories', {"name": name});
+    print('create category response $response');
+    return Category.fromMap(response['category']);
   }
 }

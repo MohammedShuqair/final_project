@@ -1,9 +1,7 @@
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
-import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/test_api_view/test_shimmer.dart';
 import 'package:final_project/shared/widgets/responce_builder.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +48,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                     onComplete: (context, data, message) {
                       return Text(
                         'single category $data',
-                        style: TextStyle(
+                        style: const TextStyle(
                             backgroundColor: Colors.greenAccent,
                             color: Colors.black),
                       );
@@ -80,13 +78,13 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                   onComplete: (context, data, message) {
                     return Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 38,
                         ),
                         Expanded(
                           child: ListView.separated(
                             itemCount: data?.length ?? 0,
-                            separatorBuilder: (_, index) => SizedBox(
+                            separatorBuilder: (_, index) => const SizedBox(
                               height: 8,
                             ),
                             itemBuilder: (_, index) => Container(
@@ -95,42 +93,42 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                                 children: [
                                   Text(
                                     "id :${data![index].id}",
-                                    style:
-                                        TextStyle(backgroundColor: kLightSub),
+                                    style: const TextStyle(
+                                        backgroundColor: kLightSub),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   Text(
                                     "name :${data[index].name}",
-                                    style:
-                                        TextStyle(backgroundColor: kLightSub),
+                                    style: const TextStyle(
+                                        backgroundColor: kLightSub),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   Text(
                                     "senders :${data[index].senders}",
-                                    style:
-                                        TextStyle(backgroundColor: kLightSub),
+                                    style: const TextStyle(
+                                        backgroundColor: kLightSub),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   Text(
                                     "sendersCount :${data[index].sendersCount}",
-                                    style:
-                                        TextStyle(backgroundColor: kLightSub),
+                                    style: const TextStyle(
+                                        backgroundColor: kLightSub),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                   Text(
                                     "updatedAt link :${data[index].updatedAt}",
-                                    style:
-                                        TextStyle(backgroundColor: kLightSub),
+                                    style: const TextStyle(
+                                        backgroundColor: kLightSub),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 8,
                                   ),
                                 ],
