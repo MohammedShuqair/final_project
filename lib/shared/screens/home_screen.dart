@@ -1,14 +1,11 @@
 import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/data/local/local_pref.dart';
-import 'package:final_project/data_view.dart';
+import 'package:final_project/test_api_view/category_data_view.dart';
+import 'package:final_project/test_api_view/user_data_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
-import 'package:final_project/features/status/repo/status_repo.dart';
 import 'package:final_project/shared/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../features/current_user/repo/current_user_repo.dart';
 
 class HomeView extends StatelessWidget {
   static const String id = '/homeView';
@@ -31,7 +28,8 @@ class HomeView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
-              context.read<CategoryProvider>().getAllCategories();
+              // context.read<CategoryProvider>().getAllCategories();
+              context.read<CategoryProvider>().getSingleCategory(1);
             },
           ),
           IconButton(
@@ -42,7 +40,7 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: const DataListView(),
+      body: const CategoryDataListView(),
     );
   }
 
@@ -53,7 +51,6 @@ class HomeView extends StatelessWidget {
       context,
       message: provider.currentUserResponse.message,
       onComplete: () {
-        print('here');
         Navigator.pushNamedAndRemoveUntil(
             context, SplashView.id, (route) => false);
       },

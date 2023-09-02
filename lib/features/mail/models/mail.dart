@@ -40,7 +40,7 @@ class Mail {
       this.attachments,
       this.activities});
 
-  Mail.fromJson(Map<String, dynamic> json) {
+  Mail.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     subject = json['subject'];
     description = json['description'];
@@ -52,25 +52,24 @@ class Mail {
     finalDecision = json['final_decision'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    sender = json['sender'] != null ? Sender.fromJson(json['sender']) : null;
-    status =
-        json['status'] != null ? MailStatus.fromJson(json['status']) : null;
+    sender = json['sender'] != null ? Sender.fromMap(json['sender']) : null;
+    status = json['status'] != null ? MailStatus.fromMap(json['status']) : null;
     if (json['tags'] != null) {
       tags = <Tag>[];
       json['tags'].forEach((v) {
-        tags!.add(Tag.fromJson(v));
+        tags!.add(Tag.fromMap(v));
       });
     }
     attachments = json['attachments'].cast<String>();
     if (json['activities'] != null) {
       activities = <Activity>[];
       json['activities'].forEach((v) {
-        activities!.add(Activity.fromJson(v));
+        activities!.add(Activity.fromMap(v));
       });
     }
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['subject'] = subject;
@@ -84,17 +83,17 @@ class Mail {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     if (sender != null) {
-      data['sender'] = sender!.toJson();
+      data['sender'] = sender!.toMap();
     }
     if (status != null) {
-      data['status'] = status!.toJson();
+      data['status'] = status!.toMap();
     }
     if (tags != null) {
-      data['tags'] = tags!.map((v) => v.toJson()).toList();
+      data['tags'] = tags!.map((v) => v.toMap()).toList();
     }
     data['attachments'] = attachments;
     if (activities != null) {
-      data['activities'] = activities!.map((v) => v.toJson()).toList();
+      data['activities'] = activities!.map((v) => v.toMap()).toList();
     }
     return data;
   }

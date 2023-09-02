@@ -22,7 +22,7 @@ class User {
       this.updatedAt,
       this.role});
 
-  User.fromJson(Map<String, dynamic> json) {
+  User.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -31,10 +31,10 @@ class User {
     roleId = json['role_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    role = json['role'] != null ? Role.fromJson(json['role']) : null;
+    role = json['role'] != null ? Role.fromMap(json['role']) : null;
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
@@ -45,7 +45,7 @@ class User {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     if (role != null) {
-      data['role'] = role!.toJson();
+      data['role'] = role!.toMap();
     }
     return data;
   }

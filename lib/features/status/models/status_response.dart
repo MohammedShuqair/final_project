@@ -5,19 +5,19 @@ class StatusResponse {
 
   StatusResponse({this.statuses});
 
-  StatusResponse.fromJson(Map<String, dynamic> json) {
+  StatusResponse.fromMap(Map<String, dynamic> json) {
     if (json['statuses'] != null) {
       statuses = <Status>[];
       json['statuses'].forEach((v) {
-        statuses!.add(Status.fromJson(v));
+        statuses!.add(Status.fromMap(v));
       });
     }
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (statuses != null) {
-      data['statuses'] = statuses!.map((v) => v.toJson()).toList();
+      data['statuses'] = statuses!.map((v) => v.toMap()).toList();
     }
     return data;
   }

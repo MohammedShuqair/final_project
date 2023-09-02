@@ -7,15 +7,13 @@ class StatusRepository with ApiBaseHelper {
     final response = await get(
       'statuses?mail=$withMails',
     );
-    return StatusResponse.fromJson(response);
+    return StatusResponse.fromMap(response);
   }
 
   Future<Status> getSingleStatus(int id, bool withMails) async {
     final response = await get(
       'statuses/$id?mail=$withMails',
     );
-    print("single status test********************");
-    print(response);
-    return Status.fromJson(response['status']);
+    return Status.fromMap(response['status']);
   }
 }

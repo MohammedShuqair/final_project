@@ -24,7 +24,7 @@ class Activity {
       this.updatedAt,
       this.user});
 
-  Activity.fromJson(Map<String, dynamic> json) {
+  Activity.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     body = json['body'];
     userId = json['user_id'];
@@ -34,10 +34,10 @@ class Activity {
     sendDestination = json['send_destination'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromMap(json['user']) : null;
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['body'] = body;
@@ -49,7 +49,7 @@ class Activity {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     if (user != null) {
-      data['user'] = user!.toJson();
+      data['user'] = user!.toMap();
     }
     return data;
   }

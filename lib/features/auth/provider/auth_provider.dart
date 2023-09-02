@@ -22,7 +22,7 @@ class AuthProvider extends ChangeNotifier {
         SharedHelper shared = SharedHelper();
         shared.setToken(user.token!);
         await shared.saveData(
-            key: 'user', value: jsonEncode(user.user!.toJson()));
+            key: 'user', value: jsonEncode(user.user!.toMap()));
       }
       loginResponse =
           ApiResponse.completed(user, message: 'login completed successfully');
@@ -41,7 +41,6 @@ class AuthProvider extends ChangeNotifier {
   ) async {
     registerResponse = ApiResponse.loading(message: 'registering...');
     notifyListeners();
-    print("here");
     try {
       final UserResponse user = await _repository.register(
           email, name, password, passwordConfirmation);

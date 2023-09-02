@@ -7,22 +7,22 @@ class Tag {
 
   Tag({this.id, this.name, this.createdAt, this.updatedAt, this.pivot});
 
-  Tag.fromJson(Map<String, dynamic> json) {
+  Tag.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    pivot = json['pivot'] != null ? Pivot.fromJson(json['pivot']) : null;
+    pivot = json['pivot'] != null ? Pivot.fromMap(json['pivot']) : null;
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     if (pivot != null) {
-      data['pivot'] = pivot!.toJson();
+      data['pivot'] = pivot!.toMap();
     }
     return data;
   }
@@ -34,12 +34,12 @@ class Pivot {
 
   Pivot({this.mailId, this.tagId});
 
-  Pivot.fromJson(Map<String, dynamic> json) {
+  Pivot.fromMap(Map<String, dynamic> json) {
     mailId = json['mail_id'];
     tagId = json['tag_id'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['mail_id'] = mailId;
     data['tag_id'] = tagId;

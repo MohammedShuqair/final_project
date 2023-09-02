@@ -1,9 +1,9 @@
-import 'package:final_project/core/util/api_response.dart';
-import 'package:flutter/foundation.dart';
+import 'package:final_project/features/category/models/category.dart';
+import 'package:flutter/widgets.dart';
 
 class MailProvider extends ChangeNotifier {
-  List<String> test = [];
-  void setData(List<String> data) {
+  List<Category> test = [];
+  void setData(List<Category> data) {
     test = data;
     notifyListeners();
   }

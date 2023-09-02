@@ -6,15 +6,15 @@ class UserResponse {
 
   UserResponse({this.user, this.token});
 
-  UserResponse.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+  UserResponse.fromMap(Map<String, dynamic> json) {
+    user = json['user'] != null ? User.fromMap(json['user']) : null;
     token = json['token'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = {};
     if (user != null) {
-      data['user'] = user!.toJson();
+      data['user'] = user!.toMap();
     }
     data['token'] = token;
     return data;

@@ -5,13 +5,13 @@ class MailStatus {
 
   MailStatus({this.id, this.name, this.color});
 
-  MailStatus.fromJson(Map<String, dynamic> json) {
+  MailStatus.fromMap(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     color = json['color'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;

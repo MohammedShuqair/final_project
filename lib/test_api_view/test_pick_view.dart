@@ -23,7 +23,7 @@ class _PickViewState extends State<PickView> {
               onPressed: () {
                 CurrentUserRepository().updateUser('mo shuqair', file?.path);
               },
-              icon: Icon(Icons.api))
+              icon: const Icon(Icons.api))
         ],
       ),
       body: Column(
@@ -38,7 +38,7 @@ class _PickViewState extends State<PickView> {
                     itemBuilder: (_, index) {
                       return Image.file(files[index]);
                     },
-                    separatorBuilder: (_, index) => SizedBox(
+                    separatorBuilder: (_, index) => const SizedBox(
                           width: 8,
                         ),
                     itemCount: files.length)),
@@ -50,32 +50,29 @@ class _PickViewState extends State<PickView> {
                     pickGelleryImage().then((value) {
                       if (value != null) {
                         file = File(value.path);
-                        print(file.toString());
                         setState(() {});
                       }
                     });
                   },
-                  icon: Icon(Icons.image)),
+                  icon: const Icon(Icons.image)),
               IconButton(
                   onPressed: () {
                     pickCameraImage().then((value) {
                       if (value != null) {
                         file = File(value.path);
-                        print(file.toString());
                         setState(() {});
                       }
                     });
                   },
-                  icon: Icon(Icons.camera)),
+                  icon: const Icon(Icons.camera)),
               TextButton(
                   onPressed: () {
                     pickMullImage().then((value) {
                       files = value.map((e) => File(e.path)).toList();
-                      print(file.toString());
                       setState(() {});
                     });
                   },
-                  child: Text("Multi")),
+                  child: const Text("Multi")),
             ],
           )
         ],

@@ -18,7 +18,7 @@ class Status {
       this.mailsCount,
       this.mails});
 
-  Status.fromJson(
+  Status.fromMap(
     Map<String, dynamic> json,
   ) {
     id = json['id'];
@@ -30,12 +30,12 @@ class Status {
     if (json['mails'] != null) {
       mails = <Mail>[];
       json['mails'].forEach((v) {
-        mails!.add(Mail.fromJson(v));
+        mails!.add(Mail.fromMap(v));
       });
     }
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
@@ -44,7 +44,7 @@ class Status {
     data['updated_at'] = updatedAt;
     data['mails_count'] = mailsCount;
     if (mails != null) {
-      data['mails'] = mails!.map((v) => v.toJson()).toList();
+      data['mails'] = mails!.map((v) => v.toMap()).toList();
     }
     return data;
   }

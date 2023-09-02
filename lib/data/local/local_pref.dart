@@ -14,7 +14,10 @@ class SharedHelper {
   }
 
   dynamic getData({required String key}) {
-    return sharedPreferences.get(key);
+    if (sharedPreferences.containsKey(key)) {
+      return sharedPreferences.get(key);
+    }
+    return null;
   }
 
   Future<bool> saveData({required String key, required dynamic value}) async {

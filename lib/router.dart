@@ -29,13 +29,12 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         builder: (_) => MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(
-                create: (_) => StatusProvider()..getSingleStatus(1, true)),
+            ChangeNotifierProvider(create: (_) => StatusProvider()),
             ChangeNotifierProvider(create: (_) => CategoryProvider()),
             ChangeNotifierProxyProvider<CategoryProvider, MailProvider>(
               create: (_) => MailProvider(),
               update: (_, categoryProvider, mailProvider) {
-                mailProvider?.setData(categoryProvider.response.data ?? []);
+                mailProvider?.setData(categoryProvider.allCategory.data ?? []);
                 return mailProvider ?? MailProvider();
               },
             ),

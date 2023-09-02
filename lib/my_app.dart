@@ -1,8 +1,6 @@
 import 'package:final_project/router.dart';
 import 'package:final_project/core/util/themes.dart';
-import 'package:final_project/test_pick_view.dart';
 import 'package:flutter/material.dart';
-import 'features/auth/views/screens/auth_view.dart';
 import 'shared/screens/splash_view.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Final Project',
       theme: lightTheme,
-      initialRoute: AuthView.id,
+      initialRoute: SplashView.id,
       // home: PickView(),
       onGenerateRoute: generateRoute,
     );

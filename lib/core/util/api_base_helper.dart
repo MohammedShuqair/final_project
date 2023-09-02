@@ -30,7 +30,7 @@ mixin class ApiBaseHelper {
 
   Future<dynamic> post(
     String url,
-    Map<String, String>? body,
+    Map<String, dynamic>? body,
   ) async {
     var responseJson;
     try {
@@ -39,7 +39,8 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
-      print(response.statusCode);
+      print('post');
+      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -65,13 +66,13 @@ mixin class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> postWithImage(String url, Map<String, String> body,
+  Future<dynamic> postWithImage(String url, Map<String, dynamic> body,
       {String? filePath}) async {
     if (filePath != null) {
       var request = http.MultipartRequest("POST", Uri.parse(baseUrl + url));
       var pic = await http.MultipartFile.fromPath('image', filePath);
 
-      request.fields.addAll(body);
+      request.fields.addAll(body as Map<String, String>);
 
       request.files.add(pic);
 
@@ -81,12 +82,10 @@ mixin class ApiBaseHelper {
       // stream.bytesToString()
       var responseData = await response.stream.toBytes();
       var responseString = String.fromCharCodes(responseData);
-      print('response *****************************');
-      print(responseString);
-      print(response.statusCode);
 
       return _returnResponse(responseString, response.statusCode);
     } else {
+      body.addAll({'image': null});
       return await post(url, body);
     }
   }

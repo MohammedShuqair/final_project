@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:final_project/core/util/api_base_helper.dart';
 import 'package:final_project/features/auth/model/user_response.dart';
 
@@ -9,7 +7,7 @@ class AuthRepository with ApiBaseHelper {
       'login',
       {"email": email, "password": password},
     );
-    return UserResponse.fromJson(response);
+    return UserResponse.fromMap(response);
   }
 
   Future<UserResponse> register(
@@ -24,6 +22,6 @@ class AuthRepository with ApiBaseHelper {
       "password": password,
       "password_confirmation": passwordConfirmation
     });
-    return UserResponse.fromJson(response);
+    return UserResponse.fromMap(response);
   }
 }
