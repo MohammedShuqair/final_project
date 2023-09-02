@@ -34,7 +34,9 @@ class CategoryProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final Category? category = await _repository.getSingleCategory(id);
-      print('category: ${category}');
+      if (category == null) {
+        throw 'error in fetching category';
+      }
       singleCategory = ApiResponse.completed(category,
           message: 'Category fetched successfully');
       notifyListeners();

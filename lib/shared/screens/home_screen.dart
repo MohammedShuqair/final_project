@@ -1,11 +1,8 @@
-import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/features/category/models/category.dart';
+import 'package:final_project/features/sender/views/sender_view.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
-import 'package:final_project/test_api_view/category_data_view.dart';
+import 'package:final_project/test_api_view/sender_data_view.dart';
 import 'package:final_project/test_api_view/tag_data_view.dart';
-import 'package:final_project/test_api_view/user_data_view.dart';
-import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/shared/screens/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +36,10 @@ class HomeView extends StatelessWidget {
               context.read<TagProvider>().getTagsWithMails([1, 2, 3]);
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.call),
+          TextButton(
+            child: const Text('go to sender'),
             onPressed: () {
-              // CurrentUserRepository().getCurrentUser();
+              Navigator.pushNamed(context, SenderView.id);
             },
           ),
         ],

@@ -66,6 +66,21 @@ mixin class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> delete(String url, {Map<String, dynamic>? body}) async {
+    var responseJson;
+    try {
+      final response = await http.delete(Uri.parse(baseUrl + url),
+          body: body, headers: headers);
+      responseJson = _returnResponse(response.body, response.statusCode);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    if (responseJson == null) {
+      throw UnExpectedResponseFormatException('null result');
+    }
+    return responseJson;
+  }
+
   Future<dynamic> postWithImage(String url, Map<String, dynamic> body,
       {String? filePath}) async {
     if (filePath != null) {

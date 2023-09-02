@@ -7,6 +7,7 @@ class Sender {
   String? address;
   String? categoryId;
   String? createdAt;
+  String? mailCount;
   String? updatedAt;
 
   //just id and name of category
@@ -20,10 +21,21 @@ class Sender {
       this.categoryId,
       this.createdAt,
       this.updatedAt,
+      this.mailCount,
       this.category});
   @override
   String toString() {
-    return 'Sender {id: $id, name: $name, mobile: $mobile, address: $address, categoryId: $categoryId, createdAt: $createdAt, updatedAt: $updatedAt, category: $category}';
+    return 'Sender {id: $id, name: $name, mobile: $mobile, address: $address, categoryId: $categoryId, createdAt: $createdAt, updatedAt: $updatedAt, mail count: $mailCount, category: $category}';
+  }
+
+  static List<Sender> mapValueToList(List? response) {
+    List<Sender> senders = [];
+    if (response != null) {
+      response.forEach((v) {
+        senders.add(Sender.fromMap(v));
+      });
+    }
+    return senders;
   }
 
   Sender.fromMap(Map<String, dynamic> json) {
@@ -34,6 +46,7 @@ class Sender {
     categoryId = json['category_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    mailCount = json['mails_count'];
     category =
         json['category'] != null ? Category.fromMap(json['category']) : null;
   }
@@ -47,19 +60,10 @@ class Sender {
     data['category_id'] = categoryId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['mails_count'] = mailCount;
     if (category != null) {
       data['category'] = category!.toMap();
     }
     return data;
-  }
-
-  static List<Sender> mapValueToList(List? json) {
-    List<Sender> senders = [];
-    if (json != null) {
-      json.forEach((v) {
-        senders.add(Sender.fromMap(v));
-      });
-    }
-    return senders;
   }
 }

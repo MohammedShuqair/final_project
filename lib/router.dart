@@ -3,6 +3,8 @@ import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/mail/provider/mail_provider.dart';
+import 'package:final_project/features/sender/provider/sender_provider.dart';
+import 'package:final_project/features/sender/views/sender_view.dart';
 import 'package:final_project/features/status/provider/status_provider.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
 import 'package:final_project/shared/screens/home_screen.dart';
@@ -23,11 +25,19 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           child: const AuthView(),
         ),
       );
+    case SenderView.id:
+      return MaterialPageRoute(
+        builder: (_) => ChangeNotifierProvider(
+          create: (BuildContext context) => SenderProvider(),
+          child: const SenderView(),
+        ),
+      );
 
     case HomeView.id:
       return MaterialPageRoute(
         builder: (_) => MultiProvider(
           providers: [
+            ChangeNotifierProvider(create: (_) => UserProvider()),
             ChangeNotifierProvider(create: (_) => UserProvider()),
             ChangeNotifierProvider(create: (_) => StatusProvider()),
             ChangeNotifierProvider(create: (_) => CategoryProvider()),
