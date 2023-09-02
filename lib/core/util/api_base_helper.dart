@@ -6,8 +6,10 @@ import 'app_exception.dart';
 
 mixin class ApiBaseHelper {
   static const String baseUrl = 'https://palmail.gsgtt.tech/api/';
-  Map<String, String>? get headers =>
-      {HttpHeaders.authorizationHeader: "Bearer ${SharedHelper().getToken()}"};
+  Map<String, String> get headers => {
+        HttpHeaders.authorizationHeader: "Bearer ${SharedHelper().getToken()}",
+        HttpHeaders.acceptHeader: 'application/json'
+      };
 
   Future<dynamic> get(
     String url,
@@ -16,7 +18,7 @@ mixin class ApiBaseHelper {
     try {
       final response =
           await http.get(Uri.parse(baseUrl + url), headers: headers);
-      responseJson = _returnResponse(response);
+      responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
     }
@@ -28,7 +30,7 @@ mixin class ApiBaseHelper {
 
   Future<dynamic> post(
     String url,
-    Map<String, String> body,
+    Map<String, String>? body,
   ) async {
     var responseJson;
     try {
@@ -37,7 +39,8 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
-      responseJson = _returnResponse(response);
+      print(response.statusCode);
+      responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
     }
@@ -52,7 +55,7 @@ mixin class ApiBaseHelper {
     try {
       final response = await http.put(Uri.parse(baseUrl + url),
           body: body, headers: headers);
-      responseJson = _returnResponse(response);
+      responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
     }
@@ -62,10 +65,36 @@ mixin class ApiBaseHelper {
     return responseJson;
   }
 
-  dynamic _returnResponse(http.Response response) {
+  Future<dynamic> postWithImage(String url, Map<String, String> body,
+      {String? filePath}) async {
+    if (filePath != null) {
+      var request = http.MultipartRequest("POST", Uri.parse(baseUrl + url));
+      var pic = await http.MultipartFile.fromPath('image', filePath);
+
+      request.fields.addAll(body);
+
+      request.files.add(pic);
+
+      request.headers.addAll(headers);
+      var response = await request.send();
+
+      // stream.bytesToString()
+      var responseData = await response.stream.toBytes();
+      var responseString = String.fromCharCodes(responseData);
+      print('response *****************************');
+      print(responseString);
+      print(response.statusCode);
+
+      return _returnResponse(responseString, response.statusCode);
+    } else {
+      return await post(url, body);
+    }
+  }
+
+  dynamic _returnResponse(String body, int statusCode) {
     try {
-      var responseJson = json.decode(response.body.toString());
-      switch (response.statusCode) {
+      var responseJson = json.decode(body);
+      switch (statusCode) {
         case 200:
           return responseJson;
         case 400:
@@ -76,7 +105,7 @@ mixin class ApiBaseHelper {
         case 500:
         default:
           throw FetchDataException(
-              'Error occurred while Communication with Server with StatusCode : ${response.statusCode}');
+              'Error occurred while Communication with Server with StatusCode : ${statusCode}');
       }
     } catch (e) {
       throw UnExpectedResponseFormatException('not json format');

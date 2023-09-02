@@ -23,23 +23,25 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          'assets/images/palestine_bird.png',
-          height: height,
-          width: width,
-          fit: BoxFit.cover,
-        ),
-        SizedBox(
-          height: margin,
-        ),
-        Text(
-          'ديوان رئيس الوزراء',
-          style: style,
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/palestine_bird.png',
+            height: height,
+            width: width,
+            fit: BoxFit.cover,
+          ),
+          SizedBox(
+            height: margin,
+          ),
+          Text(
+            'ديوان رئيس الوزراء',
+            style: style,
+          )
+        ],
+      ),
     );
   }
 }

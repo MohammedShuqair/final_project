@@ -12,38 +12,40 @@ class CurvedBackground extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     bool isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
-    return Stack(
-      children: [
-        ClipPath(
-          clipper: MyCustomClipper(),
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              kLightSub,
-              kDarkSub.withOpacity(0.8),
-            ])),
-            width: double.infinity,
-            height: isPortrait ? h * 0.45 : h * 0.7,
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          ClipPath(
+            clipper: MyCustomClipper(),
+            child: Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                kLightSub,
+                kDarkSub.withOpacity(0.8),
+              ])),
+              width: double.infinity,
+              height: isPortrait ? h * 0.45 : h * 0.7,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 68.0,
-              ),
-              Hero(
-                  tag: 'logo',
-                  child: Logo.small(style: kLogo.copyWith(fontSize: 22))),
-              const SizedBox(
-                height: 18.0,
-              ),
-              child,
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 68.0,
+                ),
+                Hero(
+                    tag: 'logo',
+                    child: Logo.small(style: kLogo.copyWith(fontSize: 22))),
+                const SizedBox(
+                  height: 18.0,
+                ),
+                child,
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
