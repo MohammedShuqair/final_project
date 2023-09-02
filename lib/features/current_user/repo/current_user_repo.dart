@@ -6,7 +6,7 @@ class CurrentUserRepository with ApiBaseHelper {
     final response = await get(
       'user',
     );
-    return User.fromJson(response['user']);
+    return User.fromMap(response['user']);
   }
 
   Future<User> updateUser(String name, String? imagePath) async {
@@ -16,7 +16,7 @@ class CurrentUserRepository with ApiBaseHelper {
           'name': name,
         },
         filePath: imagePath);
-    return User.fromJson(response['user']);
+    return User.fromMap(response['user']);
   }
 
   Future logout() async {
