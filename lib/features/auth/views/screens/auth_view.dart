@@ -3,7 +3,7 @@ import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/widgets/auth_button.dart';
 import 'package:final_project/features/auth/views/widgets/auth_option_button.dart';
-import 'package:final_project/shared/screens/home_screen.dart';
+import 'package:final_project/views/home/home_screen.dart';
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/auth/views/widgets/curved_bacground.dart';
 import 'package:flutter/material.dart';

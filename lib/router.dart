@@ -7,8 +7,8 @@ import 'package:final_project/features/sender/provider/sender_provider.dart';
 import 'package:final_project/features/sender/views/sender_view.dart';
 import 'package:final_project/features/status/provider/status_provider.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
-import 'package:final_project/shared/screens/home_screen.dart';
-import 'package:final_project/shared/screens/splash_view.dart';
+import 'package:final_project/views/home/home_screen.dart';
+import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

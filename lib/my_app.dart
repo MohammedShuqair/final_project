@@ -1,7 +1,7 @@
 import 'package:final_project/router.dart';
 import 'package:final_project/core/util/themes.dart';
 import 'package:flutter/material.dart';
-import 'shared/screens/splash_view.dart';
+import 'features/auth/views/screens/splash_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

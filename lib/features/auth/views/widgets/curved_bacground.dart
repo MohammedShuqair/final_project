@@ -1,6 +1,6 @@
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
-import 'package:final_project/shared/widgets/logo.dart';
+import 'package:final_project/views/shared/logo.dart';
 import 'package:flutter/material.dart';
 
 class CurvedBackground extends StatelessWidget {
