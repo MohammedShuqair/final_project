@@ -31,3 +31,6 @@ const TextStyle kTitleMailCard = TextStyle(color: kDarkText, fontSize: 18,fontWe
 const TextStyle kSubTitleMailCard = TextStyle(color: kDarkText, fontSize: 14,fontWeight: FontWeight.normal );
 const TextStyle kSubSubTitleMailCard = TextStyle(color: kLightSub, fontSize: 14,fontWeight: FontWeight.normal );
 const TextStyle kSubSubTagTitleMailCard = TextStyle(color: kLightSub, fontSize: 14,fontWeight: FontWeight.w600 );
+
+//user information
+const TextStyle textInUserInformation = TextStyle(color: kText, fontSize: 18,fontWeight: FontWeight.w600 );
