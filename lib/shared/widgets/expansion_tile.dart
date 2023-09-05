@@ -33,6 +33,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
       children: <Widget>[
         ExpansionTile(
           // how to animation
+          shape: Border.all(color: Colors.transparent),
           onExpansionChanged: (_) {
             setState(() {
               isClose = !isClose;
@@ -44,25 +45,25 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
           ),
           trailing: isClose
               ? const Row(
-            //Question in design
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "2",
-                style: kNumArrowInExpansion,
-              ),
-              Icon(
-                Icons.arrow_forward_ios_outlined,
-                size: 16,
-                color: kSubText,
-              ),
-            ],
-          )
+                  //Question in design
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "2",
+                      style: kNumArrowInExpansion,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      size: 16,
+                      color: kSubText,
+                    ),
+                  ],
+                )
               : const Icon(
-            Icons.keyboard_arrow_down_outlined,
-            color: kLightSub,
-            size: 24,
-          ),
+                  Icons.keyboard_arrow_down_outlined,
+                  color: kLightSub,
+                  size: 24,
+                ),
           children: const <Widget>[
             ListTile(
               title: Text('stile 1'),
@@ -70,7 +71,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
             ListTile(
               title: Text('stile 2'),
             ),
-          ],//here pass children
+          ], //here pass children
         ),
       ],
     );
