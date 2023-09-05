@@ -1,10 +1,9 @@
+import 'package:final_project/app_views/home/views/home_screen.dart';
+import 'package:final_project/app_views/shared/logo.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/data/local/local_pref.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
-import 'package:final_project/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../views/shared/logo.dart';
 
 class SplashView extends StatefulWidget {
   static const String id = "/splashView";

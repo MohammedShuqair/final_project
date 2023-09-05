@@ -1,13 +1,13 @@
+import 'package:final_project/app_views/home/views/home_screen.dart';
+import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/mail/provider/mail_provider.dart';
 import 'package:final_project/features/sender/provider/sender_provider.dart';
-import 'package:final_project/features/sender/views/sender_view.dart';
 import 'package:final_project/features/status/provider/status_provider.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
-import 'package:final_project/views/home/home_screen.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

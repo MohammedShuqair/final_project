@@ -1,9 +1,9 @@
+import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/test_api_view/test_shimmer.dart';
-import 'package:final_project/views/shared/responce_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

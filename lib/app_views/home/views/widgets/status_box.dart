@@ -1,8 +1,6 @@
-
+import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/util/styles.dart';
-import '../../../shared/widgets/core_background.dart';
 
 class StatusClass extends StatelessWidget {
   final Color statusColor;
@@ -19,7 +17,7 @@ class StatusClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Core(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
