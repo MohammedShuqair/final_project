@@ -5,3 +5,10 @@ const TextStyle kLogo = TextStyle(fontSize: 31, color: kWhite);
 const TextStyle kSelectedButton =
     TextStyle(fontSize: 14, color: kWhite, fontWeight: FontWeight.w600);
 const TextStyle kUnSelectedButton = TextStyle(fontSize: 14, color: kDarkSub);
+
+
+//zaki TextStyles
+
+//status
+const TextStyle kStatusNumberTextStyle = TextStyle(color: kDarkText, fontSize: 20,fontWeight: FontWeight.w600 );
+const TextStyle kStatusNameTextStyle = TextStyle(color: kSubText, fontSize: 18,fontWeight: FontWeight.w600 );
