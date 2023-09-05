@@ -26,3 +26,8 @@ const TextStyle kNumArrowInExpansion = TextStyle(fontSize:14, fontWeight: FontWe
 //search
 const TextStyle kSearchText = TextStyle(fontSize:12, fontWeight: FontWeight.normal, color:kSubText );//font weight
 
+//mail Card
+const TextStyle kTitleMailCard = TextStyle(color: kDarkText, fontSize: 18,fontWeight: FontWeight.w600 );
+const TextStyle kSubTitleMailCard = TextStyle(color: kDarkText, fontSize: 14,fontWeight: FontWeight.normal );
+const TextStyle kSubSubTitleMailCard = TextStyle(color: kLightSub, fontSize: 14,fontWeight: FontWeight.normal );
+const TextStyle kSubSubTagTitleMailCard = TextStyle(color: kLightSub, fontSize: 14,fontWeight: FontWeight.w600 );
