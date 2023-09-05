@@ -12,3 +12,10 @@ const TextStyle kUnSelectedButton = TextStyle(fontSize: 14, color: kDarkSub);
 //status
 const TextStyle kStatusNumberTextStyle = TextStyle(color: kDarkText, fontSize: 20,fontWeight: FontWeight.w600 );
 const TextStyle kStatusNameTextStyle = TextStyle(color: kSubText, fontSize: 18,fontWeight: FontWeight.w600 );
+
+//Tags Widgets
+const TextStyle tagTitleTextStyle = TextStyle(color: kDarkText, fontSize: 20,fontWeight: FontWeight.w600 );// also for title in expansion
+const TextStyle textInTagTextStyle = TextStyle(color: kText, fontSize: 14,fontWeight: FontWeight.w600 );
+
+//inbox button
+const TextStyle kInBoxButtonTextStyle = TextStyle(color: kLightSub, fontSize: 20,fontWeight: FontWeight.w600 );
