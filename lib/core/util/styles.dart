@@ -19,3 +19,6 @@ const TextStyle textInTagTextStyle = TextStyle(color: kText, fontSize: 14,fontWe
 
 //inbox button
 const TextStyle kInBoxButtonTextStyle = TextStyle(color: kLightSub, fontSize: 20,fontWeight: FontWeight.w600 );
+
+//Expansion tile
+const TextStyle kNumArrowInExpansion = TextStyle(fontSize:14, fontWeight: FontWeight.w600, color:kSubText );
