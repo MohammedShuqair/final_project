@@ -1,4 +1,4 @@
-import 'package:final_project/shared/widgets/alert.dart';
+import 'package:final_project/app_views/shared/alert.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:flutter/material.dart';
 

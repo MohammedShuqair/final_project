@@ -1,10 +1,9 @@
+import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/features/sender/views/sender_view.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
-import 'package:final_project/test_api_view/sender_data_view.dart';
 import 'package:final_project/test_api_view/tag_data_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
-import 'package:final_project/shared/screens/splash_view.dart';
+import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

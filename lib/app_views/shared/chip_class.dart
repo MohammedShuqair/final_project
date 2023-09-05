@@ -1,8 +1,6 @@
+import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/util/colors.dart';
-
 
 class ChipClass extends StatelessWidget {
   final String tagTitle;
@@ -17,7 +15,6 @@ class ChipClass extends StatelessWidget {
         style: textInTagTextStyle,
       ),
       backgroundColor: kUnselect,
-
     );
   }
 }
