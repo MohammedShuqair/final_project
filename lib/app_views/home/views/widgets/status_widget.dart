@@ -2,12 +2,12 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:flutter/material.dart';
 
-class StatusClass extends StatelessWidget {
+class StatusWidget extends StatelessWidget {
   final Color statusColor;
   final String statusText;
   final Widget? statusNumber;
 
-  const StatusClass({
+  const StatusWidget({
     Key? key,
     required this.statusColor,
     required this.statusText,

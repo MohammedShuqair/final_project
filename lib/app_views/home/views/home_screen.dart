@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
+import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
@@ -16,42 +17,52 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Consumer<UserProvider>(
-          builder: (context, provider, child) {
-            return IconButton(
-              onPressed: () => _logout(context, provider),
-              icon: const Icon(Icons.logout),
-            );
-          },
+        appBar: AppBar(
+          leading: Consumer<UserProvider>(
+            builder: (context, provider, child) {
+              return IconButton(
+                onPressed: () => _logout(context, provider),
+                icon: const Icon(Icons.logout),
+              );
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () {
+                // context.read<CategoryProvider>().getAllCategories();
+                // context.read<CategoryProvider>().getSingleCategory(1);
+                // context.read<CategoryProvider>().createCategory('test team 7');
+                context.read<TagProvider>().getMailTags(2);
+                context.read<TagProvider>().getTagsWithMails([1, 2, 3]);
+              },
+            ),
+            TextButton(
+              child: const Text('go to sender'),
+              onPressed: () {
+                Navigator.pushNamed(context, SenderView.id);
+              },
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              // context.read<CategoryProvider>().getAllCategories();
-              // context.read<CategoryProvider>().getSingleCategory(1);
-              // context.read<CategoryProvider>().createCategory('test team 7');
-              context.read<TagProvider>().getMailTags(2);
-              context.read<TagProvider>().getTagsWithMails([1, 2, 3]);
-            },
-          ),
-          TextButton(
-            child: const Text('go to sender'),
-            onPressed: () {
-              Navigator.pushNamed(context, SenderView.id);
-            },
-          ),
-        ],
-      ),
-      body: const SafeArea(child: StatusGridView())
-      /* Selector<CategoryProvider, ApiResponse<Category>?>(
+        body: const Padding(
+          padding: EdgeInsets.all(16),
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StatusGridView(),
+                Tags(),
+              ],
+            ),),
+        ),
+        /* Selector<CategoryProvider, ApiResponse<Category>?>(
         selector: (context, provider) => provider.createdCategoryResponse,
         builder: (context, value, child) {
           return Text('create data ${value?.data}');
         },
       )*/
-      ,
+
     );
   }
 
