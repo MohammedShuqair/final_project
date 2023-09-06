@@ -1,4 +1,5 @@
 import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 
@@ -19,7 +20,7 @@ class Mail {
   Sender? sender;
   MailStatus? status;
   List<Tag>? tags;
-  List<String>? attachments;
+  List<Attachment>? attachments;
   List<Activity>? activities;
   @override
   String toString() {
@@ -64,7 +65,12 @@ class Mail {
         tags!.add(Tag.fromMap(v));
       });
     }
-    attachments = json['attachments'].cast<String>();
+    if (json['attachments'] != null) {
+      attachments = <Attachment>[];
+      json['attachments'].forEach((v) {
+        attachments!.add(Attachment.fromMap(v));
+      });
+    }
     if (json['activities'] != null) {
       activities = <Activity>[];
       json['activities'].forEach((v) {
@@ -100,5 +106,15 @@ class Mail {
       data['activities'] = activities!.map((v) => v.toMap()).toList();
     }
     return data;
+  }
+
+  static List<Mail> mapValueToList(List? response) {
+    List<Mail> mails = [];
+    if (response != null) {
+      response.forEach((v) {
+        mails.add(Mail.fromMap(v));
+      });
+    }
+    return mails;
   }
 }
