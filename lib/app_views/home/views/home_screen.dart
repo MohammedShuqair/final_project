@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
@@ -43,7 +44,7 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: const TagDataListView()
+      body: const SafeArea(child: StatusGridView())
       /* Selector<CategoryProvider, ApiResponse<Category>?>(
         selector: (context, provider) => provider.createdCategoryResponse,
         builder: (context, value, child) {

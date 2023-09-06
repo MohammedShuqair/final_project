@@ -17,7 +17,7 @@ class StatusClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Core(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
