@@ -4,7 +4,7 @@ import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:final_project/core/util/extensions.dart';
 import '../../../shared/core_background.dart';
 import 'chip_tag_widget.dart';
 
@@ -26,7 +26,8 @@ class Tags extends StatelessWidget {
                 runSpacing: 4, //here is question
                 children: List.generate(
                   data.length,
-                  (index) => ChipWidget(tagTitle: data[index].name ?? ''),
+                  (index) => ChipWidget(
+                      tagTitle: data[index].name?.firstCapital() ?? ''),
                 ),
               );
             },

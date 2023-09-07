@@ -1,7 +1,7 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
-import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
+import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
@@ -10,12 +10,9 @@ import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
-import 'package:final_project/features/mail/repo/mail_repo.dart';
-import 'package:final_project/features/status/provider/status_provider.dart';
-import 'package:final_project/features/tag/provider/tag_provider.dart';
-import 'package:final_project/test_api_view/tag_data_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
+import 'package:final_project/features/mail/repo/mail_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,6 +30,12 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SearchView.id);
+            },
+            icon: const Icon(Icons.search),
+          ),
           PopupMenuButton(
             position: PopupMenuPosition.under,
             itemBuilder: (BuildContext context) {
@@ -61,13 +64,27 @@ class HomeView extends StatelessWidget {
                 height: 40.w,
               ),
             ),
-          )
+          ),
+          /*   IconButton(
+              onPressed: () async {
+                MailRepository().updateMail(
+                  mailId: 31,
+                  statusId: "4",
+                  decision: "",
+                  finalDecision: "",
+                  activities: [],
+                  tags: [],
+                  idAttachmentsForDelete: [],
+                  pathAttachmentsForDelete: [],
+                );
+              },
+              icon: Icon(Icons.refresh)),*/
         ],
       ),
       drawer: Drawer(
         child: ListView(
-          children: [
-            const SizedBox(
+          children: const [
+            SizedBox(
               height: 500,
             )
           ],
@@ -124,7 +141,7 @@ class HomeView extends StatelessWidget {
                               child: ExpansionWidget(
                                 title: lorem(words: 1),
                                 count: 0,
-                                mails: [],
+                                mails: const [],
                               ),
                             );
                           },

@@ -47,10 +47,10 @@ class MailRepository with ApiBaseHelper {
       "decision": decision,
       "status_id": statusId,
       "final_decision": finalDecision,
-      "tags": jsonEncode(tags ?? []),
-      "idAttachmentsForDelete": jsonEncode(idAttachmentsForDelete ?? []),
-      "pathAttachmentsForDelete": jsonEncode(pathAttachmentsForDelete ?? []),
-      "activities": jsonEncode(activities ?? []),
+      "tags": jsonEncode(tags),
+      "idAttachmentsForDelete": jsonEncode(idAttachmentsForDelete),
+      "pathAttachmentsForDelete": jsonEncode(pathAttachmentsForDelete),
+      "activities": jsonEncode(activities),
     });
     return Mail.fromMap(response['mail']);
   }

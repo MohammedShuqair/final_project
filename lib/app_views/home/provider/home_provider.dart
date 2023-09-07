@@ -39,8 +39,19 @@ class HomeProvider extends ChangeNotifier {
       final List<Mail> mails = await _mailRepository.getMails();
 
       Map<String, List<Mail>> data = filterCategoryMails(categories, mails);
-      print(data);
-      allMailsResponse = ApiResponse.completed(data,
+      data.removeWhere((key, value) => value.isEmpty);
+      //From Chat GPT
+      // Convert the map into a list of key-value pairs
+      List<MapEntry<String, List<Mail>>> entryList = data.entries.toList();
+      print(entryList);
+
+      // Sort the list in descending order based on the keys
+      entryList.sort((a, b) => b.value.length.compareTo(a.value.length));
+
+      // Create a new map from the sorted list
+      Map<String, List<Mail>> sortedMap = Map.fromEntries(entryList);
+
+      allMailsResponse = ApiResponse.completed(sortedMap,
           message: 'Mails per Category fetched successfully');
       notifyListeners();
     } catch (e, s) {
@@ -53,11 +64,10 @@ class HomeProvider extends ChangeNotifier {
       List<Category> categories, List<Mail> mails) {
     Map<String, List<Mail>> data = {};
     categories.forEach((category) {
+      data.addAll({'${category.name}': []});
       mails.forEach((mail) {
         if (mail.sender?.categoryId == category.id.toString()) {
-          data.addAll({
-            '${category.name}': [mail]
-          });
+          data['${category.name}']?.add(mail);
           print('${category.name}');
         }
       });
