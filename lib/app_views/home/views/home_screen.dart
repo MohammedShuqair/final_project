@@ -1,14 +1,21 @@
+import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
+import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/repo/mail_repo.dart';
+import 'package:final_project/features/status/provider/status_provider.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
 import 'package:final_project/test_api_view/tag_data_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -19,45 +26,104 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: Consumer<UserProvider>(
-            builder: (context, provider, child) {
-              return IconButton(
-                onPressed: () => _logout(context, provider),
-                icon: const Icon(Icons.logout),
-              );
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton(
+            position: PopupMenuPosition.under,
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuEntry<dynamic>>[
+                PopupMenuItem(
+                  child: Container(
+                    height: 200,
+                    width: 500,
+                    color: Colors.grey,
+                  ),
+                ),
+              ];
             },
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () {
-                // context.read<CategoryProvider>().getAllCategories();
-                // context.read<CategoryProvider>().getSingleCategory(1);
-                // context.read<CategoryProvider>().createCategory('test team 7');
-                context.read<TagProvider>().getMailTags(2);
-                context.read<TagProvider>().getTagsWithMails([1, 2, 3]);
-              },
+            child: Container(
+              margin: EdgeInsetsDirectional.only(end: 33.w),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: kWhite,
+                    width: 3,
+                  )),
+              child: Image.asset(
+                'assets/images/palestine_bird.png',
+                fit: BoxFit.contain,
+                width: 40.w,
+                height: 40.w,
+              ),
             ),
-            TextButton(
-              child: const Text('go to sender'),
-              onPressed: () {
-                Navigator.pushNamed(context, SenderView.id);
-              },
-            ),
+          )
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 500,
+            )
           ],
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(16),
-          child: SafeArea(
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: RefreshIndicator(
+          triggerMode: RefreshIndicatorTriggerMode.anywhere,
+          onRefresh: () async {
+            // await context.read<HomeProvider>().getAllTags();
+            // await context.read<HomeProvider>().getAllStatus(false);
+            await context.read<HomeProvider>().getAllMailsByCategories();
+          },
+          child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StatusGridView(),
-                Tags(),
+                SSizedBox(
+                  height: 14,
+                ),
+                Consumer<HomeProvider>(
+                  builder: (context, provider, child) {
+                    return ResponseBuilder(
+                      response: provider.allMailsResponse,
+                      onComplete: (_, data, message) {
+                        return Text('$data');
+                      },
+                      onLoading: (_) {
+                        return CircularProgressIndicator();
+                      },
+                      onError: (_, message) {
+                        return Text('$message');
+                      },
+                    );
+                  },
+                ),
+                SSizedBox(
+                  height: 14,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Tags",
+                      style: tagTitleTextStyle,
+                    ),
+                    SSizedBox(
+                      height: 16,
+                    ),
+                    Tags(),
+                  ],
+                ),
+                SizedBox(
+                  height: 500,
+                ),
               ],
-            ),),
+            ),
+          ),
         ),
+      ),
     );
   }
 

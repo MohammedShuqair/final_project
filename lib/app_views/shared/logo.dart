@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class Logo extends StatelessWidget {
             width: width,
             fit: BoxFit.cover,
           ),
-          SizedBox(
+          SSizedBox(
             height: margin,
           ),
           Text(

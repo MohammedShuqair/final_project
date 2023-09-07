@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/logo.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -31,13 +32,13 @@ class CurvedBackground extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
               children: [
-                const SizedBox(
+                const SSizedBox(
                   height: 68.0,
                 ),
                 Hero(
                     tag: 'logo',
                     child: Logo.small(style: kLogo.copyWith(fontSize: 22))),
-                const SizedBox(
+                const SSizedBox(
                   height: 18.0,
                 ),
                 child,

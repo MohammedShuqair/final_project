@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 
 import 'package:final_project/core/util/image_picker.dart';
 import 'package:final_project/features/current_user/repo/current_user_repo.dart';
@@ -38,7 +39,7 @@ class _PickViewState extends State<PickView> {
                     itemBuilder: (_, index) {
                       return Image.file(files[index]);
                     },
-                    separatorBuilder: (_, index) => const SizedBox(
+                    separatorBuilder: (_, index) => const SSizedBox(
                           width: 8,
                         ),
                     itemCount: files.length)),

@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
@@ -77,13 +78,13 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                   onComplete: (context, data, message) {
                     return Column(
                       children: [
-                        const SizedBox(
+                        const SSizedBox(
                           height: 38,
                         ),
                         Expanded(
                           child: ListView.separated(
                             itemCount: data?.length ?? 0,
-                            separatorBuilder: (_, index) => const SizedBox(
+                            separatorBuilder: (_, index) => const SSizedBox(
                               height: 8,
                             ),
                             itemBuilder: (_, index) => Container(
@@ -95,7 +96,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                                     style: const TextStyle(
                                         backgroundColor: kLightSub),
                                   ),
-                                  const SizedBox(
+                                  const SSizedBox(
                                     height: 8,
                                   ),
                                   Text(
@@ -103,7 +104,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                                     style: const TextStyle(
                                         backgroundColor: kLightSub),
                                   ),
-                                  const SizedBox(
+                                  const SSizedBox(
                                     height: 8,
                                   ),
                                   Text(
@@ -111,7 +112,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                                     style: const TextStyle(
                                         backgroundColor: kLightSub),
                                   ),
-                                  const SizedBox(
+                                  const SSizedBox(
                                     height: 8,
                                   ),
                                   Text(
@@ -119,7 +120,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                                     style: const TextStyle(
                                         backgroundColor: kLightSub),
                                   ),
-                                  const SizedBox(
+                                  const SSizedBox(
                                     height: 8,
                                   ),
                                   Text(
@@ -127,7 +128,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                                     style: const TextStyle(
                                         backgroundColor: kLightSub),
                                   ),
-                                  const SizedBox(
+                                  const SSizedBox(
                                     height: 8,
                                   ),
                                 ],

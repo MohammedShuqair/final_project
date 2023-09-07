@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class StatusWidget extends StatelessWidget {
               statusNumber!,
             ],
           ),
-          const SizedBox(
+          const SSizedBox(
             height: 24,
           ),
           Text(

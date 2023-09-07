@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
@@ -38,17 +39,18 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         builder: (_) => MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => StatusProvider()),
-            ChangeNotifierProvider(create: (_) => CategoryProvider()),
-            ChangeNotifierProxyProvider<CategoryProvider, MailProvider>(
-              create: (_) => MailProvider(),
-              update: (_, categoryProvider, mailProvider) {
-                mailProvider?.setData(categoryProvider.allCategory.data ?? []);
-                return mailProvider ?? MailProvider();
-              },
-            ),
-            ChangeNotifierProvider(create: (_) => TagProvider()),
+            // ChangeNotifierProvider(create: (_) => UserProvider()),
+            // ChangeNotifierProvider(create: (_) => StatusProvider()),
+            // ChangeNotifierProvider(create: (_) => CategoryProvider()),
+            // ChangeNotifierProxyProvider<CategoryProvider, MailProvider>(
+            //   create: (_) => MailProvider(),
+            //   update: (_, categoryProvider, mailProvider) {
+            //     mailProvider?.setData(categoryProvider.allCategory.data ?? []);
+            //     return mailProvider ?? MailProvider();
+            //   },
+            // ),
+            // ChangeNotifierProvider(create: (_) => TagProvider()),
+            ChangeNotifierProvider(create: (_) => HomeProvider()),
           ],
           child: const HomeView(),
         ),
