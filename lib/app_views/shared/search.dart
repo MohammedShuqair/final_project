@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../../core/util/colors.dart';
@@ -11,12 +9,18 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Core(
+    return Core(
       child: Row(
         children: [
-          Icon(Icons.search, size: 17, color:kSubText),//mistake in color
-          SizedBox(width: 8,),
-          Text("Search", style: kSearchText,)
+          const Icon(Icons.search,
+              size: 17, color: kSubText), //mistake in color
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            "Search",
+            style: kSearchText,
+          )
         ],
       ),
     );

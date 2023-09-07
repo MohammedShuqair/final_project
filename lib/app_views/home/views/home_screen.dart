@@ -2,12 +2,14 @@ import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
+import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/mail/repo/mail_repo.dart';
 import 'package:final_project/features/status/provider/status_provider.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
@@ -15,8 +17,11 @@ import 'package:final_project/test_api_view/tag_data_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import '../../shared/expansion_tile.dart';
 
 class HomeView extends StatelessWidget {
   static const String id = '/homeView';
@@ -62,26 +67,26 @@ class HomeView extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 500,
             )
           ],
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: RefreshIndicator(
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
           onRefresh: () async {
-            // await context.read<HomeProvider>().getAllTags();
-            // await context.read<HomeProvider>().getAllStatus(false);
+            await context.read<HomeProvider>().getAllTags();
+            await context.read<HomeProvider>().getAllStatus(false);
             await context.read<HomeProvider>().getAllMailsByCategories();
           },
           child: SingleChildScrollView(
             child: Column(
               children: [
-                StatusGridView(),
-                SSizedBox(
+                const StatusGridView(),
+                const SSizedBox(
                   height: 14,
                 ),
                 Consumer<HomeProvider>(
@@ -89,10 +94,47 @@ class HomeView extends StatelessWidget {
                     return ResponseBuilder(
                       response: provider.allMailsResponse,
                       onComplete: (_, data, message) {
-                        return Text('$data');
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, index) {
+                            String key = data.keys.elementAt(index);
+                            List<Mail> mails = data[key] ?? [];
+                            return ExpansionWidget(
+                              title: key,
+                              count: mails.length,
+                              mails: mails,
+                            );
+                          },
+                          separatorBuilder: (_, index) {
+                            return const SSizedBox(
+                              height: 14,
+                            );
+                          },
+                          itemCount: data.length,
+                        );
                       },
                       onLoading: (_) {
-                        return CircularProgressIndicator();
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, index) {
+                            return CustomShimmer(
+                              highlightColor: Colors.black,
+                              child: ExpansionWidget(
+                                title: lorem(words: 1),
+                                count: 0,
+                                mails: [],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (_, index) {
+                            return const SSizedBox(
+                              height: 14,
+                            );
+                          },
+                          itemCount: 2,
+                        );
                       },
                       onError: (_, message) {
                         return Text('$message');
@@ -100,24 +142,24 @@ class HomeView extends StatelessWidget {
                     );
                   },
                 ),
-                SSizedBox(
+                const SSizedBox(
                   height: 14,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Tags",
-                      style: tagTitleTextStyle,
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 16),
+                      child: Text(
+                        "Tags",
+                        style: tagTitleTextStyle,
+                      ),
                     ),
-                    SSizedBox(
+                    const SSizedBox(
                       height: 16,
                     ),
-                    Tags(),
+                    const Tags(),
                   ],
-                ),
-                SizedBox(
-                  height: 500,
                 ),
               ],
             ),

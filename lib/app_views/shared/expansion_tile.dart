@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/mail_card.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      tilePadding: EdgeInsets.zero,
       // how to animation
       shape: Border.all(color: Colors.transparent),
       onExpansionChanged: (_) {
@@ -40,20 +42,23 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
           isClose = !isClose;
         });
       },
-      title: Text(
-        widget.title,
-        style: tagTitleTextStyle,
+      title: Padding(
+        padding: const EdgeInsetsDirectional.only(start: 16),
+        child: Text(
+          widget.title,
+          style: tagTitleTextStyle,
+        ),
       ),
       trailing: isClose
-          ? const Row(
+          ? Row(
               //Question in design
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "2",
+                  '${widget.count}',
                   style: kNumArrowInExpansion,
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_forward_ios_outlined,
                   size: 16,
                   color: kSubText,
@@ -65,14 +70,15 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
               color: kLightSub,
               size: 24,
             ),
-      children: const <Widget>[
-        ListTile(
-          title: Text('stile 1'),
-        ),
-        ListTile(
-          title: Text('stile 2'),
-        ),
-      ], //here pass children
+      children: widget.mails
+          .map((e) => MailCard(
+              organizationName: e.sender?.name ?? '',
+              lastDate: e.createdAt ?? '',
+              subject: e.subject ?? '',
+              body: e.description ?? '',
+              tags: e.tags?.map((e) => e.name ?? '').toList() ?? [],
+              images: e.attachments?.map((e) => e.image ?? '').toList() ?? []))
+          .toList(), //here pass children
     );
   }
 }

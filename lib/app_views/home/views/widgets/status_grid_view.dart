@@ -60,7 +60,7 @@ class StatusGridView extends StatelessWidget {
                 );
               },
               onLoading: (_) {
-                return const CustomShimmer(
+                return CustomShimmer(
                   child: Text(
                     "5",
                     style: kStatusNumberTextStyle,

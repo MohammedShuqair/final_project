@@ -32,7 +32,7 @@ class InBoxButton extends StatelessWidget {
           const SSizedBox(
             width: 16,
           ),
-          const Text(
+          Text(
             "New Inbox",
             style: kInBoxButtonTextStyle,
           ),
