@@ -5,14 +5,12 @@ import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
-import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
-import 'package:final_project/features/mail/repo/mail_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +20,6 @@ import '../../shared/expansion_tile.dart';
 
 class HomeView extends StatelessWidget {
   static const String id = '/homeView';
-
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -90,16 +87,16 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: RefreshIndicator(
-          triggerMode: RefreshIndicatorTriggerMode.anywhere,
-          onRefresh: () async {
-            await context.read<HomeProvider>().getAllTags();
-            await context.read<HomeProvider>().getAllStatus(false);
-            await context.read<HomeProvider>().getAllMailsByCategories();
-          },
-          child: SingleChildScrollView(
+      body: RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        onRefresh: () async {
+          await context.read<HomeProvider>().getAllTags();
+          await context.read<HomeProvider>().getAllStatus(false);
+          await context.read<HomeProvider>().getAllMailsByCategories();
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 const StatusGridView(),
