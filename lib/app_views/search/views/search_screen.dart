@@ -1,10 +1,13 @@
 import 'package:final_project/app_views/search/provider/search_provider.dart';
+import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/extensions.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/search/repo/search_repo.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +15,10 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class SearchView extends StatefulWidget {
+class SearchView extends StatelessWidget {
   static const String id = '/searchView';
 
   const SearchView({Key? key}) : super(key: key);
-
-  @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
-  String? searchFor;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +61,7 @@ class _SearchViewState extends State<SearchView> {
                       provider.search(searchFor: value);
                     },
                     onCancel: () {
-                      setState(() {
-                        searchFor = null;
-                      });
+                      provider.resetResponse();
                     },
                   );
                 },
@@ -80,20 +74,49 @@ class _SearchViewState extends State<SearchView> {
                   return ResponseBuilder(
                     response: provider.searchResponse,
                     onComplete: (_, data, message) {
+                      print(data);
+                      if (data.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 38.0),
+                          child: Text(
+                            'No Mails Found',
+                            style: kLogo.copyWith(color: Colors.black),
+                          ),
+                        );
+                      }
                       return ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (_, index) {
                           String key = data.keys.elementAt(index);
                           List<Mail> mails = data[key] ?? [];
-                          return ListView.separated(
-                            itemBuilder: (_, index) => Column(
-                              children: [],
-                            ),
-                            separatorBuilder: (_, index) => const SSizedBox(
-                              height: 15,
-                            ),
-                            itemCount: mails.length,
+
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    key.firstCapital(),
+                                    style: kTitleMailCard,
+                                  ),
+                                  Text(
+                                    '${mails.length} Found',
+                                    style: kSubTitleMailCard.copyWith(
+                                        color: kSubText),
+                                  ),
+                                ],
+                              ),
+                              const SSizedBox(
+                                height: 15,
+                              ),
+                              Core(
+                                child: Column(
+                                  children: []..listMail(mails),
+                                ),
+                              ),
+                            ],
                           );
                           // return ExpansionWidget(
                           //   title: key,

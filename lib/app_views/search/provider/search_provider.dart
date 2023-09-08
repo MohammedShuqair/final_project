@@ -10,6 +10,10 @@ class SearchProvider extends ChangeNotifier {
   SearchProvider() {
     _searchRepository = SearchRepository();
   }
+  void resetResponse() {
+    searchResponse = null;
+    notifyListeners();
+  }
 
   Future<void> search({
     String? searchFor,
@@ -25,17 +29,7 @@ class SearchProvider extends ChangeNotifier {
           startDate: startDate,
           endDate: endDate,
           statusId: statusId);
-
-      //From Chat GPT
-      // Convert the map into a list of key-value pairs
-      List<MapEntry<String, List<Mail>>> entryList = searchMap.entries.toList();
-      // Sort the list in descending order based on the keys
-      entryList.sort((a, b) => b.value.length.compareTo(a.value.length));
-
-      // Create a new map from the sorted list
-      Map<String, List<Mail>> sortedMap = Map.fromEntries(entryList);
-
-      searchResponse = ApiResponse.completed(sortedMap,
+      searchResponse = ApiResponse.completed(searchMap,
           message: 'search completed successfully');
       notifyListeners();
     } catch (e, s) {

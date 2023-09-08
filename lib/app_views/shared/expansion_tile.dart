@@ -47,7 +47,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
         title: Padding(
           padding: const EdgeInsetsDirectional.only(start: 16),
           child: Text(
-            widget.title,
+            widget.title.firstCapital(),
             style: tagTitleTextStyle,
           ),
         ),

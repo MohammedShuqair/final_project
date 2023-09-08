@@ -35,7 +35,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       focusNode: focusNode,
       onSubmitted: widget.onSubmitted,
       onChanged: (v) {
-        setState(() {});
+        setState(() {
+          if (v.isEmpty) {
+            widget.onCancel();
+          }
+        });
       },
       decoration: InputDecoration(
           hintText: "Search",

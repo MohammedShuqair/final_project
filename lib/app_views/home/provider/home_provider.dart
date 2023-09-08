@@ -26,6 +26,9 @@ class HomeProvider extends ChangeNotifier {
     _categoryRepository = CategoryRepository();
     _tagRepository = TagRepository();
 
+    init();
+  }
+  void init() {
     getAllStatus(false);
     getAllMailsByCategories();
     getAllTags();

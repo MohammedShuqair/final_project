@@ -1,4 +1,5 @@
 import "package:final_project/app_views/home/views/widgets/chip_tag_widget.dart";
+import "package:final_project/app_views/shared/alert.dart";
 import "package:final_project/app_views/shared/core_background.dart";
 import "package:final_project/app_views/shared/custom_sized_box.dart";
 import "package:final_project/features/tag/models/tag.dart";
@@ -107,37 +108,14 @@ class MailCard extends StatelessWidget {
           height: 16,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 24),
+          padding: const EdgeInsets.only(left: 24),
           child: Wrap(
               spacing: 16,
               children: tags
                   .map((e) => ChipWidget(
                         tagTitle: e,
                       ))
-                  .toList() /*[
-              Chip(
-                label: Text(
-                  "#zaki",
-                  style: kSubSubTagTitleMailCard,
-                ),
-                backgroundColor: Colors.white,
-              ),
-              Chip(
-                label: Text(
-                  "#zaki",
-                  style: kSubSubTagTitleMailCard,
-                ),
-                backgroundColor: Colors.white,
-              ),
-              Chip(
-                label: Text(
-                  "#zaki",
-                  style: kSubSubTagTitleMailCard,
-                ),
-                backgroundColor: Colors.white,
-              ),
-            ],*/
-              ),
+                  .toList()),
         ),
         const SizedBox(
           height: 8,
@@ -151,26 +129,25 @@ class MailCard extends StatelessWidget {
                     (e) => Image.network(
                       imageUrl + e,
                       fit: BoxFit.fill,
-                      width: 36,
-                      height: 36,
-                      errorBuilder: (_, __, ___) {
-                        return SizedBox();
+                      width: 36.w,
+                      height: 36.w,
+                      errorBuilder: (_, e, ___) {
+                        return SizedBox(
+                          height: 36.w,
+                          width: 36.w,
+                          child: Placeholder(
+                              child: Center(
+                            child: Text(
+                              'image error',
+                              style: TextStyle(fontSize: 8.sp),
+                              textAlign: TextAlign.center,
+                            ),
+                          )),
+                        );
                       },
                     ),
                   )
-                  .toList() /*[
-              Image.asset(
-                "assets/images/palestine_bird.png",
-                width: 36,
-                height: 36,
-              ),
-              Image.asset(
-                "assets/images/palestine_bird.png",
-                width: 36,
-                height: 36,
-              ),
-            ],*/
-              ),
+                  .toList()),
         ),
       ],
     );

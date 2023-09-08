@@ -29,7 +29,8 @@ class HomeView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchView.id);
+              Navigator.pushNamed(context, SearchView.id)
+                  .then((value) => context.read<HomeProvider>().init());
             },
             icon: const Icon(Icons.search),
           ),
