@@ -75,3 +75,5 @@ TextStyle(color: kLightSub, fontSize: 16.sp, fontWeight: FontWeight.normal);
 
 TextStyle kStatusName16RegDark =
 TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
+
+TextStyle kHintTextInTagTextField = TextStyle(color: kLightGrey2, fontSize: 14.sp, fontWeight: FontWeight.normal);
