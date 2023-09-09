@@ -7,53 +7,74 @@ import 'package:final_project/features/status/models/status_response.dart';
 import 'package:final_project/features/status/repo/status_repo.dart';
 import 'package:flutter/widgets.dart';
 
-class SearchProvider extends ChangeNotifier {
-  late SearchRepository _searchRepository;
+class FilterProvider extends ChangeNotifier {
   late StatusRepository _statusRepository;
   late CategoryRepository _categoryRepository;
-  ApiResponse<Map<String, List<Mail>>>? searchResponse;
   ApiResponse<StatusResponse>? statusResponse;
   ApiResponse<List<Category>>? categoriesResponse;
-  String? searchFor;
 
   List<String> categoryNames = [];
   int? statusId;
   String? startDate;
   String? endDate;
-  void setCategories(List<String> categoriesFilter) {
-    categoryNames = categoriesFilter;
+
+  void handelCategories(String name) {
+    if (categoryNames.contains(name)) {
+      _unSelectCategory(name);
+    } else {
+      _selectCategory(name);
+    }
+  }
+
+  void handelStatus(int id) {
+    if (statusId == id) {
+      _unSetStatusId();
+    } else {
+      _setStatusId(id);
+    }
+  }
+
+  void _selectCategory(String name) {
+    categoryNames.add(name);
     notifyListeners();
   }
 
-  void setStatusId(int? id) {
+  void _unSelectCategory(String name) {
+    categoryNames.remove(name);
+    notifyListeners();
+  }
+
+  void _setStatusId(int id) {
     statusId = id;
     notifyListeners();
   }
 
-  void setStartDat(String? date) {
+  void _unSetStatusId() {
+    statusId = null;
+    notifyListeners();
+  }
+
+  void setStartDat(String date) {
     startDate = date;
     notifyListeners();
   }
 
-  void setSearchFor(String? text) {
-    searchFor = text;
-    notifyListeners();
-  }
-
-  void setEndDat(String? date) {
+  void setEndDat(String date) {
     endDate = date;
     notifyListeners();
   }
 
-  SearchProvider() {
-    _searchRepository = SearchRepository();
+  FilterProvider({
+    this.categoryNames = const [],
+    this.statusId,
+    this.startDate,
+    this.endDate,
+  }) {
     _categoryRepository = CategoryRepository();
     _statusRepository = StatusRepository();
-  }
-  void resetResponse() {
-    searchResponse = null;
-    searchFor = null;
-    notifyListeners();
+
+    getAllCategories();
+    getAllStatus();
   }
 
   Future<void> getAllCategories() async {
@@ -85,32 +106,6 @@ class SearchProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e, s) {
       statusResponse = ApiResponse.error(message: e.toString());
-      notifyListeners();
-    }
-  }
-
-  Future<void> search(
-      /*{
-     String? searchFor,
-     String? startDate,
-     String? endDate,
-     int? statusId,
-  }*/
-      ) async {
-    searchResponse = ApiResponse.loading(message: 'logging...');
-    notifyListeners();
-    try {
-      final Map<String, List<Mail>> searchMap = await _searchRepository.search(
-          searchFor: searchFor,
-          startDate: startDate,
-          endDate: endDate,
-          statusId: statusId,
-          categoriesFilter: categoryNames);
-      searchResponse = ApiResponse.completed(searchMap,
-          message: 'search completed successfully');
-      notifyListeners();
-    } catch (e, s) {
-      searchResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
   }

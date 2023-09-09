@@ -3,6 +3,7 @@ import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart' as i;
 
 extension FirstCapital on String {
   String firstCapital() {
@@ -81,5 +82,60 @@ extension ListMail on List {
       }
     }
     addAll(mailCards);
+  }
+}
+
+extension TotalLength on List<List> {
+  int totalLength2D() {
+    return fold(0, (int previousLength, List innerList) {
+      return previousLength + innerList.length;
+    });
+  }
+}
+
+extension DateFormat on String {
+  String formatArriveTime() {
+    DateTime? arriveTime = DateTime.tryParse(this);
+    if (arriveTime != null) {
+      var now = DateTime.now();
+      var formatterDate = i.DateFormat('d - M - yyyy');
+      var formatterTime = i.DateFormat.Hm();
+      if (arriveTime.year.compareTo(now.year) == 0 &&
+          arriveTime.month.compareTo(now.month) == 0) {
+        if (arriveTime.day.compareTo(now.day) == 0) {
+          if (now.hour == arriveTime.hour) {
+            if (now.minute == arriveTime.minute) {
+              return "${now.second - arriveTime.second} seconds";
+            } else {
+              return "${now.minute - arriveTime.minute} min ago";
+            }
+          } else {
+            if (now.hour - 1 == arriveTime.hour) {
+              if (now.minute + (60 - arriveTime.minute) < 60) {
+                return "${now.minute + (60 - arriveTime.minute)} min ago";
+              } else {
+                return "${((now.minute + (60 - arriveTime.minute)) / 60).floor()} hour,${(now.minute + (60 - arriveTime.minute)) % 60} min ago";
+              }
+            } else {
+              if ((now.minute - arriveTime.minute).isNegative) {
+                return "${(now.hour - 1) - arriveTime.hour} hour,${(now.minute + 60) - arriveTime.minute} min ago";
+              } else {
+                return "${now.hour - arriveTime.hour} hour,${now.minute - arriveTime.minute} min ago";
+              }
+            }
+          }
+        } else {
+          if (now.day - 1 == arriveTime.day) {
+            return "Yesterday ${formatterTime.format(arriveTime)}";
+          } else {
+            return formatterDate.format(arriveTime);
+          }
+        }
+      } else {
+        return formatterDate.format(arriveTime);
+      }
+    } else {
+      return this;
+    }
   }
 }

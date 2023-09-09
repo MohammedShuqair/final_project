@@ -52,7 +52,7 @@ TextStyle kSearchText = TextStyle(
 
 //mail Card
 TextStyle kTitleMailCard =
-    TextStyle(color: kText, fontSize: 18.sp, fontWeight: FontWeight.w600);
+    TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
 TextStyle kSubTitleMailCard =
     TextStyle(color: kDarkText, fontSize: 14.sp, fontWeight: FontWeight.normal);
 TextStyle kSubSubTitleMailCard =

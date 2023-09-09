@@ -11,6 +11,7 @@ class SearchRepository with ApiBaseHelper {
     String? startDate,
     String? endDate,
     int? statusId,
+    required List<String> categoriesFilter,
   }) async {
     String endpoint = 'search?'
         'text${searchFor != null ? '=$searchFor' : ''}'
@@ -26,6 +27,13 @@ class SearchRepository with ApiBaseHelper {
     Map<String, List<Mail>> data = {};
     data.filterMailsByCategory(categories, mails);
     data.removeWhere((key, value) => value.isEmpty);
+    print(categoriesFilter);
+    if (categoriesFilter.isNotEmpty) {
+      data.removeWhere((key, value) => !categoriesFilter
+          .map((e) => e.toLowerCase())
+          .contains(key.toLowerCase()));
+    }
+
     data.sortMailMap();
 
     return data;

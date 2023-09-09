@@ -42,6 +42,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         });
       },
       decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
           hintText: "Search",
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
@@ -58,7 +59,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                       widget.onCancel();
                     });
                   },
-                  icon: const Icon(Icons.cancel))
+                  icon: const Icon(
+                    Icons.cancel,
+                    color: Color(0xffAFAFAF),
+                  ))
               : null),
     );
   }

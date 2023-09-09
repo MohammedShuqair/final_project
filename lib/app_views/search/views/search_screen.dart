@@ -1,15 +1,22 @@
+import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
+import 'package:final_project/app_views/search/views/widgets/filter_bottom_sheet.dart';
+import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
+import 'package:final_project/app_views/shared/status_list.dart';
+import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/mail/models/mail.dart';
-import 'package:final_project/features/search/repo/search_repo.dart';
+import 'package:final_project/features/status/models/status.dart';
+import 'package:final_project/features/status/models/status_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,18 +60,74 @@ class SearchView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 12.h),
           child: Column(
             children: [
-              Consumer<SearchProvider>(
-                builder: (context, provider, child) {
-                  return CustomSearchBar(
-                    onSubmitted: (String value) {
-                      print(value);
-                      provider.search(searchFor: value);
+              Row(
+                children: [
+                  Consumer<SearchProvider>(
+                    builder: (context, provider, child) {
+                      return Expanded(
+                        child: CustomSearchBar(
+                          onSubmitted: (String value) {
+                            print(value);
+                            if (value.isNotEmpty) {
+                              provider
+                                ..setSearchFor(value)
+                                ..search();
+                            }
+                          },
+                          onCancel: () {
+                            provider.resetResponse();
+                          },
+                        ),
+                      );
                     },
-                    onCancel: () {
-                      provider.resetResponse();
-                    },
-                  );
-                },
+                  ),
+                  const SSizedBox(width: 17),
+                  IconButton(
+                      onPressed: () {
+                        showModalBottomSheet<Map>(
+                            context: context,
+                            isScrollControlled: true,
+                            constraints:
+                                BoxConstraints.tightFor(height: 1.sh - 60.h),
+                            builder: (_) {
+                              return ChangeNotifierProvider(
+                                create: (BuildContext context2) =>
+                                    FilterProvider(
+                                  categoryNames: context
+                                      .read<SearchProvider>()
+                                      .categoryNames,
+                                  statusId:
+                                      context.read<SearchProvider>().statusId,
+                                  startDate:
+                                      context.read<SearchProvider>().startDate,
+                                  endDate:
+                                      context.read<SearchProvider>().endDate,
+                                ),
+                                child: const FilterBottomSheet(),
+                              );
+                            }).then((map) {
+                          if (map != null) {
+                            context
+                                .read<SearchProvider>()
+                                .setStatusId(map['status_id']);
+                            context
+                                .read<SearchProvider>()
+                                .setCategories(map['categories']);
+                            context
+                                .read<SearchProvider>()
+                                .setEndDat(map['end']);
+                            context
+                                .read<SearchProvider>()
+                                .setStartDat(map['start']);
+                            context.read<SearchProvider>().search();
+                          }
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.filter_alt_outlined,
+                        color: kLightSub,
+                      ))
+                ],
               ),
               const SSizedBox(
                 height: 18,
@@ -84,52 +147,65 @@ class SearchView extends StatelessWidget {
                           ),
                         );
                       }
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (_, index) {
-                          String key = data.keys.elementAt(index);
-                          List<Mail> mails = data[key] ?? [];
+                      return Column(
+                        children: [
+                          const SSizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            'Total ${data.values.toList().totalLength2D()} Found',
+                            style: kSubTitleMailCard.copyWith(
+                                color: kText,
+                                decoration: TextDecoration.underline),
+                          ),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (_, index) {
+                              String key = data.keys.elementAt(index);
+                              List<Mail> mails = data[key] ?? [];
 
-                          return Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              return Column(
                                 children: [
-                                  Text(
-                                    key.firstCapital(),
-                                    style: kTitleMailCard,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        key.firstCapital(),
+                                        style: kTitleMailCard,
+                                      ),
+                                      Text(
+                                        '${mails.length} Found',
+                                        style: kSubTitleMailCard.copyWith(
+                                            color: kSubText),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    '${mails.length} Found',
-                                    style: kSubTitleMailCard.copyWith(
-                                        color: kSubText),
+                                  const SSizedBox(
+                                    height: 15,
+                                  ),
+                                  Core(
+                                    child: Column(
+                                      children: []..listMail(mails),
+                                    ),
                                   ),
                                 ],
-                              ),
-                              const SSizedBox(
-                                height: 15,
-                              ),
-                              Core(
-                                child: Column(
-                                  children: []..listMail(mails),
-                                ),
-                              ),
-                            ],
-                          );
-                          // return ExpansionWidget(
-                          //   title: key,
-                          //   count: mails.length,
-                          //   mails: mails,
-                          // );
-                        },
-                        separatorBuilder: (_, index) {
-                          return const SSizedBox(
-                            height: 14,
-                          );
-                        },
-                        itemCount: data.length,
+                              );
+                              // return ExpansionWidget(
+                              //   title: key,
+                              //   count: mails.length,
+                              //   mails: mails,
+                              // );
+                            },
+                            separatorBuilder: (_, index) {
+                              return const SSizedBox(
+                                height: 14,
+                              );
+                            },
+                            itemCount: data.length,
+                          ),
+                        ],
                       );
                     },
                     onLoading: (_) {
@@ -165,5 +241,26 @@ class SearchView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ActionButton extends StatelessWidget {
+  const ActionButton({
+    super.key,
+    required this.hint,
+    required this.onTap,
+  });
+
+  final String hint;
+  final void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: onTap,
+        child: Text(
+          hint,
+          style: kStatusNameTextStyle.copyWith(color: kLightSub),
+        ));
   }
 }

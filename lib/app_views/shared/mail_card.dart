@@ -2,6 +2,7 @@ import "package:final_project/app_views/home/views/widgets/chip_tag_widget.dart"
 import "package:final_project/app_views/shared/alert.dart";
 import "package:final_project/app_views/shared/core_background.dart";
 import "package:final_project/app_views/shared/custom_sized_box.dart";
+import "package:final_project/core/util/extensions.dart";
 import "package:final_project/features/tag/models/tag.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
@@ -55,7 +56,7 @@ class MailCard extends StatelessWidget {
                   width: 11,
                 ),
                 Text(
-                  organizationName,
+                  organizationName.firstCapital(),
                   style: kTitleMailCard,
                 ),
               ],
@@ -63,17 +64,17 @@ class MailCard extends StatelessWidget {
             Expanded(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Expanded(
                     child: Text(
-                      lastDate.substring(0, 10),
+                      lastDate.formatArriveTime(),
                       style: kSearchText,
                       textAlign: TextAlign.end,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.keyboard_arrow_right_outlined),
+                  const Icon(
+                    Icons.keyboard_arrow_right_outlined,
                     color: kSubText,
                   ),
                 ],
@@ -83,37 +84,34 @@ class MailCard extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(left: 24),
-          constraints: BoxConstraints(
-            maxWidth: deviceSize.width * 0.7,
-          ),
           child: Text(
             subject,
             style: kSubTitleMailCard,
           ),
         ),
-        const SizedBox(
-          height: 8,
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 24),
-          constraints: BoxConstraints(
-            maxWidth: deviceSize.width * 0.7,
+        if (body.isNotEmpty)
+          Container(
+            margin: EdgeInsets.only(top: 8.h),
+            padding: const EdgeInsets.only(left: 24),
+            constraints: BoxConstraints(
+              maxWidth: deviceSize.width * 0.7,
+            ),
+            child: Text(
+              body,
+              style: kSubTitleMailCard.copyWith(color: const Color(0xff898989)),
+            ),
           ),
-          child: Text(
-            body,
-            style: kSubSubTitleMailCard,
-          ),
-        ),
-        const SizedBox(
-          height: 16,
+        const SSizedBox(
+          height: 10,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 24),
           child: Wrap(
               spacing: 16,
               children: tags
-                  .map((e) => ChipWidget(
-                        tagTitle: e,
+                  .map((e) => Text(
+                        '# ${e.firstCapital()}',
+                        style: kSelectedButton.copyWith(color: kLightSub),
                       ))
                   .toList()),
         ),
