@@ -10,7 +10,7 @@ class MailRepository with ApiBaseHelper {
     required String subject,
     required String archiveNumber,
     required String archiveDate,
-    required int statusId,
+    required String statusId,
     String? description,
     String? senderId,
     String? decision,
