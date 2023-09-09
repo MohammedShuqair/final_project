@@ -1,33 +1,21 @@
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/features/tag/models/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class TagTiles extends StatefulWidget {
+class TagTiles extends StatelessWidget {
   static const String id = "/tagTiles";
+  final List<Tag> tags;
 
-  const TagTiles({super.key});
-
-  @override
-  State<TagTiles> createState() => _TagTilesState();
-}
-
-class _TagTilesState extends State<TagTiles> {
-  List<String> tags = [
-    'Urgent',
-    'Egyptian Military',
-    'Egyptian Military',
-    'Egyptian Military',
-  ];
+  const TagTiles({super.key, required this.tags});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 56,
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
-      margin: EdgeInsets.symmetric(horizontal: 24.w),
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(30))),
@@ -42,7 +30,10 @@ class _TagTilesState extends State<TagTiles> {
             child: Padding(
               padding: EdgeInsetsDirectional.only(start: 18.w, end: 10.w),
               child: Text(
-                tags.map((e) => "#${e.firstCapital()}").toList().join('  '),
+                tags
+                    .map((e) => "#${e.name?.firstCapital()}")
+                    .toList()
+                    .join('  '),
                 style: textInTagTextStyle.copyWith(color: kTag),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
