@@ -39,8 +39,6 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
-      print('post');
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -56,7 +54,6 @@ mixin class ApiBaseHelper {
     try {
       final response = await http.put(Uri.parse(baseUrl + url),
           body: body, headers: headers);
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');

@@ -1,79 +1,185 @@
-import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
-import 'package:final_project/app_views/shared/search_bar.dart';
+import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
+import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
+import 'package:final_project/app_views/search/views/search_screen.dart';
+import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/responce_builder.dart';
+import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/features/mail/repo/mail_repo.dart';
-import 'package:final_project/features/tag/provider/tag_provider.dart';
-import 'package:final_project/test_api_view/tag_data_view.dart';
+import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import '../../shared/expansion_tile.dart';
 
 class HomeView extends StatelessWidget {
   static const String id = '/homeView';
-
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Consumer<UserProvider>(
-          builder: (context, provider, child) {
-            return IconButton(
-              onPressed: () => _logout(context, provider),
-              icon: const Icon(Icons.logout),
-            );
-          },
-        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () async {
-              // context.read<CategoryProvider>().getAllCategories();
-              // context.read<CategoryProvider>().getSingleCategory(1);
-              // context.read<CategoryProvider>().createCategory('test team 7');
-              // context.read<TagProvider>().getMailTags(2);
-              // context.read<TagProvider>().getTagsWithMails([1, 2, 3]);
-              //Reloaded 1 of 1425 libraries in 1,361ms (compile: 229 ms, reload: 493 ms, reassemble: 494 ms).
-              // I/flutter ( 7209): [Mail{id: 31, subject: test2, description: first team 7 test, senderId: 1, archiveNumber: 2000, archiveDate: 2023-10-20 00:00:00, decision: null, statusId: 1, finalDecision: null, createdAt: 2023-09-05T23:23:21.000000Z, updatedAt: 2023-09-05T23:23:21.000000Z, sender: Sender {id: 1, name: mohammed shqair1, mobile: 0592020858, address: null, categoryId: 7, createdAt: 2023-08-24T12:10:41.000000Z, updatedAt: 2023-09-02T21:59:09.000000Z, mail count: null, category: Category {id: 7, name: team 7, createdAt: 2023-09-02T18:10:28.000000Z, updatedAt: 2023-09-02T18:10:28.000000Z, sendersCount: null, senders: []}}, status: Instance of 'MailStatus', tags: [Tag{id: 3, name: new tag, createdAt: 2023-09-01T07:15:38.000000Z, updatedAt: 2023-09-01T07:15:38.000000Z, mails: [], pivot: mailId: 31, tagId: 3}, Tag{id: 2, name: ahmed, createdAt: 2023-08-31T18:30:46.000000Z, updatedAt: 2023-08-31T18:30:46.000000Z, mails: [], pivot: mailId: 31, tagId: 2}], attachments: [], activities: [Activity{id: 55, body: lets do it, userId: 6, ma
-              try {
-                await MailRepository().updateMail(
-                  mailId: 31,
-                  statusId: "1",
-                  decision: '',
-                  finalDecision: '',
-                  /*     tags: [1],
-                idAttachmentsForDelete: [],
-                pathAttachmentsForDelete: [],
-                activities: [],*/
-                );
-              } catch (e, s) {
-                print(e.toString());
-                print(s.toString());
-              }
-            },
-          ),
-          TextButton(
-            child: const Text('go to sender'),
             onPressed: () {
-              Navigator.pushNamed(context, SenderView.id);
+              Navigator.pushNamed(context, SearchView.id);
             },
+            icon: const Icon(Icons.search),
           ),
+          PopupMenuButton(
+            position: PopupMenuPosition.under,
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuEntry<dynamic>>[
+                PopupMenuItem(
+                  child: Container(
+                    height: 200,
+                    width: 500,
+                    color: Colors.grey,
+                  ),
+                ),
+              ];
+            },
+            child: Container(
+              margin: EdgeInsetsDirectional.only(end: 33.w),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: kWhite,
+                    width: 3,
+                  )),
+              child: Image.asset(
+                'assets/images/palestine_bird.png',
+                fit: BoxFit.contain,
+                width: 40.w,
+                height: 40.w,
+              ),
+            ),
+          ),
+          /*   IconButton(
+              onPressed: () async {
+                MailRepository().updateMail(
+                  mailId: 31,
+                  statusId: "4",
+                  decision: "",
+                  finalDecision: "",
+                  activities: [],
+                  tags: [],
+                  idAttachmentsForDelete: [],
+                  pathAttachmentsForDelete: [],
+                );
+              },
+              icon: Icon(Icons.refresh)),*/
         ],
       ),
-      body: CustomSearchBar(
-        onSubmitted: (String value) {
-          print(value);
+      drawer: Drawer(
+        child: ListView(
+          children: const [
+            SizedBox(
+              height: 500,
+            )
+          ],
+        ),
+      ),
+      body: RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        onRefresh: () async {
+          await context.read<HomeProvider>().getAllTags();
+          await context.read<HomeProvider>().getAllStatus(false);
+          await context.read<HomeProvider>().getAllMailsByCategories();
         },
-      )
-      /* Selector<CategoryProvider, ApiResponse<Category>?>(
-        selector: (context, provider) => provider.createdCategoryResponse,
-        builder: (context, value, child) {
-          return Text('create data ${value?.data}');
-        },
-      )*/
-      ,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                const StatusGridView(),
+                const SSizedBox(
+                  height: 14,
+                ),
+                Consumer<HomeProvider>(
+                  builder: (context, provider, child) {
+                    return ResponseBuilder(
+                      response: provider.allMailsResponse,
+                      onComplete: (_, data, message) {
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, index) {
+                            String key = data.keys.elementAt(index);
+                            List<Mail> mails = data[key] ?? [];
+                            return ExpansionWidget(
+                              title: key,
+                              count: mails.length,
+                              mails: mails,
+                            );
+                          },
+                          separatorBuilder: (_, index) {
+                            return const SSizedBox(
+                              height: 14,
+                            );
+                          },
+                          itemCount: data.length,
+                        );
+                      },
+                      onLoading: (_) {
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, index) {
+                            return CustomShimmer(
+                              highlightColor: Colors.black,
+                              child: ExpansionWidget(
+                                title: lorem(words: 1),
+                                count: 0,
+                                mails: const [],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (_, index) {
+                            return const SSizedBox(
+                              height: 14,
+                            );
+                          },
+                          itemCount: 2,
+                        );
+                      },
+                      onError: (_, message) {
+                        return Text('$message');
+                      },
+                    );
+                  },
+                ),
+                const SSizedBox(
+                  height: 14,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 16),
+                      child: Text(
+                        "Tags",
+                        style: tagTitleTextStyle,
+                      ),
+                    ),
+                    const SSizedBox(
+                      height: 16,
+                    ),
+                    const Tags(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 

@@ -10,6 +10,7 @@ class StatusProvider extends ChangeNotifier {
   late ApiResponse<Status> singleStatus;
   StatusProvider() {
     _repository = StatusRepository();
+    getAllStatus(false);
   }
   Future<void> getAllStatus(bool withMails) async {
     allStatus = ApiResponse.loading(message: 'logging...');

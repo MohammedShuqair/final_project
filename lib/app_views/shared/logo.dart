@@ -1,15 +1,17 @@
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({
+  Logo({
     super.key,
     this.height = 103,
     this.width = 67,
-    this.style = kLogo,
     this.margin = 27,
-  });
-  const Logo.small({
+  }) {
+    style = kLogo;
+  }
+  Logo.small({
     super.key,
     this.height = 75,
     this.width = 56,
@@ -18,7 +20,7 @@ class Logo extends StatelessWidget {
   });
   final double height;
   final double width;
-  final TextStyle style;
+  TextStyle? style;
   final double? margin;
 
   @override
@@ -33,7 +35,7 @@ class Logo extends StatelessWidget {
             width: width,
             fit: BoxFit.cover,
           ),
-          SizedBox(
+          SSizedBox(
             height: margin,
           ),
           Text(

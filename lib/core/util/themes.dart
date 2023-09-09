@@ -5,5 +5,8 @@ ThemeData lightTheme = ThemeData(
   fontFamily: 'Poppins',
   scaffoldBackgroundColor: kBackground,
   colorScheme: ColorScheme.fromSeed(seedColor: kLightSub),
+  appBarTheme: AppBarTheme(
+    backgroundColor: kBackground,
+  ),
   useMaterial3: true,
 );

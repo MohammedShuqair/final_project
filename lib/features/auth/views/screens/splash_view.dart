@@ -50,7 +50,7 @@ class _SplashViewState extends State<SplashView> {
                 begin: AlignmentDirectional.topStart,
                 end: AlignmentDirectional.bottomEnd,
                 colors: [kDarkSub, kLightSub])),
-        child: const Hero(
+        child: Hero(
           tag: 'logo',
           child: Logo(),
         ),

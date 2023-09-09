@@ -1,4 +1,7 @@
+import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
+import 'package:final_project/app_views/search/provider/search_provider.dart';
+import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
@@ -33,22 +36,30 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         ),
       );
 
+    case SearchView.id:
+      return MaterialPageRoute(
+        builder: (_) => ChangeNotifierProvider(
+          create: (BuildContext context) => SearchProvider(),
+          child: const SearchView(),
+        ),
+      );
     case HomeView.id:
       return MaterialPageRoute(
         builder: (_) => MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => StatusProvider()),
-            ChangeNotifierProvider(create: (_) => CategoryProvider()),
-            ChangeNotifierProxyProvider<CategoryProvider, MailProvider>(
-              create: (_) => MailProvider(),
-              update: (_, categoryProvider, mailProvider) {
-                mailProvider?.setData(categoryProvider.allCategory.data ?? []);
-                return mailProvider ?? MailProvider();
-              },
-            ),
-            ChangeNotifierProvider(create: (_) => TagProvider()),
+            // ChangeNotifierProvider(create: (_) => UserProvider()),
+            // ChangeNotifierProvider(create: (_) => StatusProvider()),
+            // ChangeNotifierProvider(create: (_) => CategoryProvider()),
+            // ChangeNotifierProxyProvider<CategoryProvider, MailProvider>(
+            //   create: (_) => MailProvider(),
+            //   update: (_, categoryProvider, mailProvider) {
+            //     mailProvider?.setData(categoryProvider.allCategory.data ?? []);
+            //     return mailProvider ?? MailProvider();
+            //   },
+            // ),
+            // ChangeNotifierProvider(create: (_) => TagProvider()),
+            ChangeNotifierProvider(create: (_) => HomeProvider()),
           ],
           child: const HomeView(),
         ),

@@ -51,7 +51,6 @@ class CategoryProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final Category category = await _repository.createCategory(name);
-      print('category: ${category}');
       createdCategoryResponse = ApiResponse.completed(category,
           message: 'Category created successfully');
       notifyListeners();
