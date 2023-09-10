@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -14,11 +15,8 @@ class TagTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(30))),
+    return Core(
+      padding: EdgeInsets.symmetric(vertical: 17.h, horizontal: 18.w),
       child: Row(
         children: [
           SvgPicture.asset(
