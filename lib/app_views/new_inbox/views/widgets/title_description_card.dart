@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 
 class TitleDescriptionCard extends StatelessWidget {
   const TitleDescriptionCard({Key? key}) : super(key: key);
-  /*kHintSimi20AF
-              kHintNormal14AF*/
   @override
   Widget build(BuildContext context) {
     return Core(

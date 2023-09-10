@@ -193,6 +193,7 @@ class HomeView extends StatelessWidget {
               context: context,
               isScrollControlled: true,
               constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
+              clipBehavior: Clip.hardEdge,
               builder: (c2) {
                 return const NewInbox();
               });

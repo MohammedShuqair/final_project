@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/new_inbox/views/widgets/decision_field.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/sender_category_card.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/title_description_card.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
@@ -16,16 +17,18 @@ class NewInbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
-      child: Column(
+    return Scaffold(
+      body: ListView(
+        padding: EdgeInsets.symmetric(
+          vertical: 14.h,
+          horizontal: 20.w,
+        ),
         children: [
           SheetBar(
             onTapDone: () {
               Navigator.pop(context, {});
             },
-            hint: 'Filters',
+            hint: 'New Inbox',
           ),
           const SSizedBox(
             height: 17,
@@ -48,6 +51,10 @@ class NewInbox extends StatelessWidget {
           const SSizedBox(
             height: 12,
           ),
+          const DecisionCard(),
+          const SSizedBox(
+            height: 16,
+          ),
           ActivityCard(
             activity: Activity(
                 id: 1,
@@ -68,6 +75,6 @@ class NewInbox extends StatelessWidget {
           ),
         ],
       ),
-    ));
+    );
   }
 }

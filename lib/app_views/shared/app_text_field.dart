@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/new_inbox/views/widgets/sender_category_card.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

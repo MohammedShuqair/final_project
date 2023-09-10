@@ -2,6 +2,7 @@ import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,17 +71,3 @@ class SenderMobileCategoryCard extends StatelessWidget {
     );
   }
 }
-//styles
-
-TextStyle kHintSimi16AF = TextStyle(
-    color: const Color(0xFFAFAFAF),
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w600);
-TextStyle kHintNormal16Dark =
-    TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
-TextStyle kNormal14Color7c = TextStyle(
-    color: const Color(0xFF7C7C7C),
-    fontSize: 14.sp,
-    fontWeight: FontWeight.normal);
-TextStyle kSimi14Blue =
-    TextStyle(color: kLightSub, fontSize: 14.sp, fontWeight: FontWeight.w600);
