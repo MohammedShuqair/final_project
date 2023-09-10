@@ -5,6 +5,7 @@ import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
+import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/app_views/shared/status_list.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
@@ -29,32 +30,16 @@ class FilterBottomSheet extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ActionButton(
-                  hint: 'Cancel',
-                  onTap: () {
-                    Navigator.pop(context, {});
-                  },
-                ),
-                Text(
-                  'Filters',
-                  style: kTitleMailCard,
-                ),
-                ActionButton(
-                  hint: 'Done',
-                  onTap: () {
-                    Navigator.pop(context, {
-                      'categories':
-                          context.read<FilterProvider>().categoryNames,
-                      'status_id': context.read<FilterProvider>().statusId,
-                      'end': null,
-                      'start': null,
-                    });
-                  },
-                ),
-              ],
+            SheetBar(
+              onTapDone: () {
+                Navigator.pop(context, {
+                  'categories': context.read<FilterProvider>().categoryNames,
+                  'status_id': context.read<FilterProvider>().statusId,
+                  'end': null,
+                  'start': null,
+                });
+              },
+              hint: 'Filters',
             ),
             const SSizedBox(
               height: 57,
