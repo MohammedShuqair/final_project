@@ -243,24 +243,3 @@ class SearchView extends StatelessWidget {
     );
   }
 }
-
-class ActionButton extends StatelessWidget {
-  const ActionButton({
-    super.key,
-    required this.hint,
-    required this.onTap,
-  });
-
-  final String hint;
-  final void Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: onTap,
-        child: Text(
-          hint,
-          style: kStatusNameTextStyle.copyWith(color: kLightSub),
-        ));
-  }
-}

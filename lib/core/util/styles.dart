@@ -59,3 +59,12 @@ TextStyle kSubSubTitleMailCard =
     TextStyle(color: kLightSub, fontSize: 14.sp, fontWeight: FontWeight.normal);
 TextStyle kSubSubTagTitleMailCard =
     TextStyle(color: kLightSub, fontSize: 14.sp, fontWeight: FontWeight.w600);
+//styles
+TextStyle kHintSimi20AF = TextStyle(
+    color: const Color(0xFFAFAFAF),
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600);
+TextStyle kHintNormal14AF = TextStyle(
+    color: const Color(0xFFAFAFAF),
+    fontSize: 14.sp,
+    fontWeight: FontWeight.normal);

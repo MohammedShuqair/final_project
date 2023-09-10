@@ -77,6 +77,9 @@ class MailCard extends StatelessWidget {
                     Icons.keyboard_arrow_right_outlined,
                     color: kSubText,
                   ),
+                  const SSizedBox(
+                    width: 5,
+                  ),
                 ],
               ),
             ),
