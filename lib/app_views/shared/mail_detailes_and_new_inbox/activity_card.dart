@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/CircleImage.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -14,11 +15,9 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(30))),
+    return Core(
+      padding: EdgeInsetsDirectional.only(
+          start: 16.w, top: 19.h, bottom: 14.h, end: 16.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

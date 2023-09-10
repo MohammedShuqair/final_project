@@ -12,8 +12,8 @@ class Core extends StatelessWidget {
       this.noShadow = false})
       : super(key: key);
   final Widget child;
-  final EdgeInsets? margin;
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
   final double? width;
   final double? height;
   final bool noShadow;
@@ -24,7 +24,8 @@ class Core extends StatelessWidget {
       margin: margin,
       height: height?.h,
       width: width?.w,
-      padding: padding ?? const EdgeInsets.all(16),
+      padding: padding ??
+          EdgeInsetsDirectional.only(start: 16.w, top: 16.h, bottom: 16.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
