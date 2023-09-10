@@ -1,3 +1,4 @@
+import 'package:final_project/core/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,7 @@ class _StatusTileState extends State<StatusTile> {
                 padding: EdgeInsetsDirectional.only(start: 18.w, end: 10.w),
                 child: Container(
                   decoration: const BoxDecoration(
-                      color: Colors.red,
+                      color: kInbox,
                       borderRadius: BorderRadius.all(Radius.circular(30))),
                   child: Text(
                     'Inbox',

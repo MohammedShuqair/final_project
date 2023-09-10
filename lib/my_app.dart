@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/router.dart';
 import 'package:final_project/core/util/themes.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Final Project',
         theme: lightTheme,
-        initialRoute: SplashView.id,
+        initialRoute: MailDetailsScreen.id,
         // home: PickView(),
         onGenerateRoute: generateRoute,
       ),
