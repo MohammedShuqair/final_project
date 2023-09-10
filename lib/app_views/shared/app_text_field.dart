@@ -24,6 +24,9 @@ class AppTextField extends StatelessWidget {
       );
     }
     return TextField(
+      style: hintStyle != null
+          ? hintStyle!.copyWith(color: Colors.black)
+          : kHintSimi16AF.copyWith(color: Colors.black),
       decoration: InputDecoration(
         border: const UnderlineInputBorder(
           borderSide: BorderSide

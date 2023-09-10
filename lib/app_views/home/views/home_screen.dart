@@ -12,6 +12,7 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
+import 'package:final_project/features/mail/repo/mail_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,20 +66,22 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-          /*   IconButton(
+          IconButton(
               onPressed: () async {
-                MailRepository().updateMail(
-                  mailId: 31,
-                  statusId: "4",
-                  decision: "",
+                MailRepository().createMail(
+                  statusId: '4',
+                  decision: "not yet",
+                  senderId: '81',
                   finalDecision: "",
                   activities: [],
-                  tags: [],
-                  idAttachmentsForDelete: [],
-                  pathAttachmentsForDelete: [],
+                  tags: [1],
+                  subject: 'test create email',
+                  description: "I hate my self",
+                  archiveNumber: '/2000',
+                  archiveDate: DateTime.now().toString(),
                 );
               },
-              icon: Icon(Icons.refresh)),*/
+              icon: Icon(Icons.refresh)),
         ],
       ),
       drawer: Drawer(

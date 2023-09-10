@@ -49,7 +49,14 @@ extension SortCategoryMails on Map<String, List<Mail>> {
 extension ListMail on List {
   void listMail(List<Mail> mails) {
     List<Widget> mailCards = [];
+
     for (int i = 0; i < mails.length; i++) {
+      if (mails[i].id == 67) {
+        print(mails[i].createdAt);
+        print('createdAt ${DateTime.tryParse(mails[i].createdAt ?? "")}');
+        print('archiveDate ${DateTime.tryParse(mails[i].archiveDate ?? "")}');
+        print('now ${DateTime.now()}');
+      }
       if (i == mails.length - 1) {
         mailCards.add(MailCard(
             status: mails[i].status?.color ?? '',
@@ -98,6 +105,7 @@ extension DateFormat on String {
   String formatArriveTime() {
     DateTime? arriveTime = DateTime.tryParse(this);
     if (arriveTime != null) {
+      arriveTime = arriveTime.add(const Duration(hours: 3));
       var now = DateTime.now();
       var formatterDate = i.DateFormat('d - M - yyyy');
       var formatterTime = i.DateFormat.Hm();

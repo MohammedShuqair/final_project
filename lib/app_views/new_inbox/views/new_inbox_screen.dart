@@ -31,31 +31,41 @@ class NewInbox extends StatelessWidget {
             height: 17,
           ),
           const SenderMobileCategoryCard(),
+          const SSizedBox(
+            height: 16,
+          ),
           const TitleDescriptionCard(),
-          /*kHintSimi20AF
-              kHintNormal14AF*/
+          const SSizedBox(
+            height: 15,
+          ),
           TagTiles(
-              tags: [
-                Tag(id: 1, name: "Gaza"),
-                Tag(id: 2, name: "Khan"),
-                Tag(id: 3, name: "Mo"),
-              ],
-            ),
-            ActivityCard(
-              activity: Activity(
-                  id: 1,
-                  sendDate: DateTime.now().toString(),
-                  body: "This is Body",
-                  user: User(
-                      id: 1,
-                      name: "Name",
-                      image: "assets/images/palestine_bird.png")),
-            ),
-            SendActivityBar(
-              onSubmitted: (String value) {
-                print(value);
-              },
-            ),
+            tags: [
+              Tag(id: 1, name: "Gaza"),
+              Tag(id: 2, name: "Khan"),
+              Tag(id: 3, name: "Mo"),
+            ],
+          ),
+          const SSizedBox(
+            height: 12,
+          ),
+          ActivityCard(
+            activity: Activity(
+                id: 1,
+                sendDate: DateTime.now().toString(),
+                body: "This is Body",
+                user: User(
+                    id: 1,
+                    name: "Name",
+                    image: "assets/images/palestine_bird.png")),
+          ),
+          const SSizedBox(
+            height: 12,
+          ),
+          SendActivityBar(
+            onSubmitted: (String value) {
+              print(value);
+            },
+          ),
         ],
       ),
     ));

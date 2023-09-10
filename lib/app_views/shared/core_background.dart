@@ -12,8 +12,8 @@ class Core extends StatelessWidget {
       this.noShadow = false})
       : super(key: key);
   final Widget child;
-  final EdgeInsets? margin;
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
   final double? width;
   final double? height;
   final bool noShadow;
