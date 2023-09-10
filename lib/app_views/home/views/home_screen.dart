@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../new_inbox/views/new_inbox_screen.dart';
 import '../../shared/expansion_tile.dart';
 
 class HomeView extends StatelessWidget {
@@ -84,7 +86,7 @@ class HomeView extends StatelessWidget {
           children: const [
             SizedBox(
               height: 500,
-            )
+            ),
           ],
         ),
       ),
@@ -97,7 +99,8 @@ class HomeView extends StatelessWidget {
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.only(
+                top: 20.h, left: 20.w, right: 20.w, bottom: 90.h),
             child: Column(
               children: [
                 const StatusGridView(),
@@ -180,6 +183,18 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomSheet: GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
+              builder: (c2) {
+                return const NewInbox();
+              });
+        },
+        child: const InBoxButton(),
       ),
     );
   }
