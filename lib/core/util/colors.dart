@@ -10,7 +10,10 @@ const kSubText = Color(0xFFB2B2B2);
 const kUnselect = Color(0xFFE6E6E6);
 const kBorder = Color(0xFFEAEAF5);
 const kTag = Color(0xFF959595);
-const kLine = Color(0xD0D0D0D0);
+const kLine = Color(0xFFD0D0D0);
+const kDeleteText = Color(0xFFE62929);
+const kShareText = Color(0xFF6589FF);
+
 
 const kBackground = Color(0xFFF7F6FF);
 const kWhite = Color(0xffffffff);
