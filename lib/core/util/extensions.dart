@@ -75,6 +75,7 @@ extension ListMail on List {
                     mails[i].attachments?.map((e) => e.image ?? '').toList() ??
                         []),
             Divider(
+              height: 22.h,
               indent: 23.w,
             ),
           ],
