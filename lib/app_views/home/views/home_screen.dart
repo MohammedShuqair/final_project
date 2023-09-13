@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
@@ -11,11 +12,13 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
+import 'package:final_project/features/mail/repo/mail_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../new_inbox/views/new_inbox_screen.dart';
 import '../../shared/expansion_tile.dart';
 
 class HomeView extends StatelessWidget {
@@ -63,20 +66,22 @@ class HomeView extends StatelessWidget {
               ),
             ),
           ),
-          /*   IconButton(
+          IconButton(
               onPressed: () async {
-                MailRepository().updateMail(
-                  mailId: 31,
-                  statusId: "4",
-                  decision: "",
+                MailRepository().createMail(
+                  statusId: '4',
+                  decision: "not yet",
+                  senderId: '81',
                   finalDecision: "",
                   activities: [],
-                  tags: [],
-                  idAttachmentsForDelete: [],
-                  pathAttachmentsForDelete: [],
+                  tags: [1],
+                  subject: 'test create email',
+                  description: "I hate my self",
+                  archiveNumber: '/2000',
+                  archiveDate: DateTime.now().toString(),
                 );
               },
-              icon: Icon(Icons.refresh)),*/
+              icon: Icon(Icons.refresh)),
         ],
       ),
       drawer: Drawer(
@@ -84,7 +89,7 @@ class HomeView extends StatelessWidget {
           children: const [
             SizedBox(
               height: 500,
-            )
+            ),
           ],
         ),
       ),
@@ -97,7 +102,8 @@ class HomeView extends StatelessWidget {
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.only(
+                top: 20.h, left: 20.w, right: 20.w, bottom: 90.h),
             child: Column(
               children: [
                 const StatusGridView(),
@@ -180,6 +186,19 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
+              clipBehavior: Clip.hardEdge,
+              builder: (c2) {
+                return const NewInbox();
+              });
+        },
+        child: const InBoxButton(),
       ),
     );
   }

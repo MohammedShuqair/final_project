@@ -6,17 +6,20 @@ import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({
     super.key,
     required this.categories,
     required this.onTap,
-    required this.selectedNames,
+    this.selectedCategories,
+    this.selectedCategory,
   });
-  final List<String> selectedNames;
+  final List<Category>? selectedCategories;
+  final Category? selectedCategory;
   final List<Category> categories;
-  final void Function(String name) onTap;
+  final void Function(Category category) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +27,41 @@ class CategoryList extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (_, index) {
-          if (categories[index].name != null) {
-            return InkWell(
-              onTap: () => onTap(categories[index].name!),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 14.0.h),
-                child: Row(
-                  children: [
-                    Text(
-                      categories[index].name!.firstCapital(),
-                      style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
-                    ),
-                    Spacer(),
-                    if (selectedNames.contains(categories[index].name)) ...[
-                      Icon(
-                        Icons.check,
-                        size: 18.sp,
-                        color: kLightSub,
-                      )
-                    ]
-                  ],
+          return InkWell(
+            onTap: () => onTap(categories[index]),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 14.0.h),
+              child: Row(children: [
+                Text(
+                  categories[index].name!.firstCapital(),
+                  style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
                 ),
-              ),
-            );
-          } else {
-            return const SSizedBox();
-          }
+                Spacer(),
+                if (selectedCategories != null &&
+                    selectedCategories!
+                        .map((e) => e.id)
+                        .toList()
+                        .contains(categories[index].id)) ...[
+                  Icon(
+                    Icons.check,
+                    size: 18.sp,
+                    color: kLightSub,
+                  ),
+                ],
+                if (selectedCategory != null &&
+                    selectedCategory!.id == categories[index].id) ...[
+                  SvgPicture.asset(
+                    'assets/icons/selected.svg',
+                    width: 18.sp,
+                    height: 18.sp,
+                  ),
+                  SSizedBox(
+                    width: 10,
+                  ),
+                ],
+              ]),
+            ),
+          );
         },
         separatorBuilder: (_, index) {
           return const Divider();

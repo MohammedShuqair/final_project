@@ -51,6 +51,9 @@ TextStyle kSearchText = TextStyle(
     color: kSubText); //font weight
 
 //mail Card
+
+const TextStyle textInUserInformation = TextStyle(color: kText, fontSize: 18,fontWeight: FontWeight.w600 );
+
 TextStyle kTitleMailCard =
     TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
 TextStyle kSubTitleMailCard =
@@ -75,3 +78,25 @@ TextStyle(color: kLightSub, fontSize: 16.sp, fontWeight: FontWeight.normal);
 
 TextStyle kStatusName16RegDark =
 TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
+
+//styles
+TextStyle kHintSimi20AF = TextStyle(
+    color: const Color(0xFFAFAFAF),
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w600);
+TextStyle kHintNormal14AF = TextStyle(
+    color: const Color(0xFFAFAFAF),
+    fontSize: 14.sp,
+    fontWeight: FontWeight.normal);
+TextStyle kHintSimi16AF = TextStyle(
+    color: const Color(0xFFAFAFAF),
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600);
+TextStyle kHintNormal16Dark =
+    TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
+TextStyle kNormal14Color7c = TextStyle(
+    color: const Color(0xFF7C7C7C),
+    fontSize: 14.sp,
+    fontWeight: FontWeight.normal);
+TextStyle kSimi14Blue =
+    TextStyle(color: kLightSub, fontSize: 14.sp, fontWeight: FontWeight.w600);

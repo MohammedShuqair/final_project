@@ -16,12 +16,12 @@ class SearchProvider extends ChangeNotifier {
   ApiResponse<List<Category>>? categoriesResponse;
   String? searchFor;
 
-  List<String> categoryNames = [];
+  List<Category> categories = [];
   int? statusId;
   String? startDate;
   String? endDate;
-  void setCategories(List<String> categoriesFilter) {
-    categoryNames = categoriesFilter;
+  void setCategories(List<Category> categoriesFilter) {
+    categories = categoriesFilter;
     notifyListeners();
   }
 
@@ -105,7 +105,7 @@ class SearchProvider extends ChangeNotifier {
           startDate: startDate,
           endDate: endDate,
           statusId: statusId,
-          categoriesFilter: categoryNames);
+          categoriesFilter: categories.map((e) => e.name!).toList());
       searchResponse = ApiResponse.completed(searchMap,
           message: 'search completed successfully');
       notifyListeners();

@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:final_project/features/category/models/pivot.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 
-class Tag {
+class Tag extends Equatable {
   int? id;
   String? name;
   String? createdAt;
@@ -13,6 +14,8 @@ class Tag {
     return 'Tag{id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, mails: $mails, pivot: $pivot}';
   }
 
+  @override
+  List<Object?> get props => [id, name, createdAt, updatedAt, mails, pivot];
   Tag(
       {this.id,
       this.name,

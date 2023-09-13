@@ -5,9 +5,8 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DecisionCard extends StatelessWidget {
-  const DecisionCard({Key? key}) : super(key: key);
-
+class TitleDescriptionCard extends StatelessWidget {
+  const TitleDescriptionCard({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Core(
@@ -15,14 +14,18 @@ class DecisionCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Decision",
-            style: kTitleMailCard,
+          AppTextField(
+            controller: context.watch<NewInboxProvider>().subject,
+            hintText: "Title of mail",
+            hintStyle: kHintSimi20AF,
+          ),
+          const Divider(
+            color: Color(0xFFD0D0D0),
           ),
           AppTextField(
-            controller: context.watch<NewInboxProvider>().decision,
-            hintText: "Decision",
-            hintStyle: kHintNormal14AF.copyWith(color: Color(0xff898989)),
+            controller: context.watch<NewInboxProvider>().description,
+            hintText: "Description",
+            hintStyle: kHintNormal14AF,
           ),
         ],
       ),

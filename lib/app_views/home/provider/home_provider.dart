@@ -17,9 +17,9 @@ class HomeProvider extends ChangeNotifier {
   late MailRepository _mailRepository;
 
   late ApiResponse<StatusResponse> allStatus;
-  late ApiResponse<List<Tag>> allTagResponse;
+  late ApiResponse<Set<Tag>> allTagResponse;
   late ApiResponse<Map<String, List<Mail>>> allMailsResponse;
-
+  Set<Tag> selectedTag = {};
   HomeProvider() {
     _statusRepository = StatusRepository();
     _mailRepository = MailRepository();
@@ -28,6 +28,12 @@ class HomeProvider extends ChangeNotifier {
 
     init();
   }
+
+  void addTag(Tag tag) {
+    selectedTag.add(tag);
+    notifyListeners();
+  }
+
   void init() {
     getAllStatus(false);
     getAllMailsByCategories();
@@ -83,8 +89,8 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final List<Tag> tags = await _tagRepository.getAllTag();
-      allTagResponse =
-          ApiResponse.completed(tags, message: 'Tags fetched successfully');
+      allTagResponse = ApiResponse.completed(tags.toSet(),
+          message: 'Tags fetched successfully');
       notifyListeners();
     } catch (e, s) {
       allTagResponse = ApiResponse.error(message: e.toString());

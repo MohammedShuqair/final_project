@@ -93,9 +93,8 @@ class SearchView extends StatelessWidget {
                               return ChangeNotifierProvider(
                                 create: (BuildContext context2) =>
                                     FilterProvider(
-                                  categoryNames: context
-                                      .read<SearchProvider>()
-                                      .categoryNames,
+                                  categories:
+                                      context.read<SearchProvider>().categories,
                                   statusId:
                                       context.read<SearchProvider>().statusId,
                                   startDate:
@@ -241,26 +240,5 @@ class SearchView extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class ActionButton extends StatelessWidget {
-  const ActionButton({
-    super.key,
-    required this.hint,
-    required this.onTap,
-  });
-
-  final String hint;
-  final void Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: onTap,
-        child: Text(
-          hint,
-          style: kStatusNameTextStyle.copyWith(color: kLightSub),
-        ));
   }
 }

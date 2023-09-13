@@ -24,4 +24,9 @@ class TagRepository with ApiBaseHelper {
     );
     return Tag.mapValueToList(response['tags']);
   }
+
+  Future<Tag> createTag(String name) async {
+    final response = await post('tags', {'name': name});
+    return Tag.fromMap(response['tag']);
+  }
 }
