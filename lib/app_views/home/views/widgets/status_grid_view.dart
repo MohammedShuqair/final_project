@@ -32,45 +32,120 @@ class StatusGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 4,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        childAspectRatio: deviceSize.width > 400 ? 1.5 / 0.5 : 1.5 / 1,
-      ),
-      itemBuilder: (BuildContext context, int index) {
-        return StatusWidget(
-          statusColor: statusColorsList[
-              index] /*Color(int.parse(data.statuses![index].color ?? ""))*/,
-          statusText: /*data.statuses![index].name ?? ""*/
-              statusTextsList[index],
-          statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
-            return ResponseBuilder(
-              response: provider.allStatus,
-              onComplete: (_, data, message) {
-                String? mailCount = getCurrentMailCount(data, index);
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(child: StatusWidget(
+              statusColor: statusColorsList[0],
+              statusText: statusTextsList[0],
+              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+                return ResponseBuilder(
+                  response: provider.allStatus,
+                  onComplete: (_, data, message) {
+                    String? mailCount = getCurrentMailCount(data, 0);
 
-                return Text(
-                  "${/*data.statuses![index].mailsCount*/ mailCount}",
-                  style: kStatusNumberTextStyle,
+                    return Text(
+                      "${/*data.statuses![index].mailsCount*/ mailCount}",
+                      style: kStatusNumberTextStyle,
+                    );
+                  },
+                  onLoading: (_) {
+                    return CustomShimmer(
+                      child: Text(
+                        "5",
+                        style: kStatusNumberTextStyle,
+                      ),
+                    );
+                  },
                 );
-              },
-              onLoading: (_) {
-                return CustomShimmer(
-                  child: Text(
-                    "5",
-                    style: kStatusNumberTextStyle,
-                  ),
+              }),
+            )),
+            SizedBox(width: 16.0),
+            Expanded(child: StatusWidget(
+              statusColor: statusColorsList[1],
+              statusText: statusTextsList[1],
+              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+                return ResponseBuilder(
+                  response: provider.allStatus,
+                  onComplete: (_, data, message) {
+                    String? mailCount = getCurrentMailCount(data, 1);
+
+                    return Text(
+                      "${/*data.statuses![index].mailsCount*/ mailCount}",
+                      style: kStatusNumberTextStyle,
+                    );
+                  },
+                  onLoading: (_) {
+                    return CustomShimmer(
+                      child: Text(
+                        "5",
+                        style: kStatusNumberTextStyle,
+                      ),
+                    );
+                  },
                 );
-              },
-            );
-          }),
-        );
-      },
+              }),
+            )),
+          ],
+        ),
+        SizedBox(height: 16.0),
+        Row(
+          children: [
+            Expanded(child: StatusWidget(
+              statusColor: statusColorsList[2],
+              statusText: statusTextsList[2],
+              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+                return ResponseBuilder(
+                  response: provider.allStatus,
+                  onComplete: (_, data, message) {
+                    String? mailCount = getCurrentMailCount(data, 2);
+
+                    return Text(
+                      "${/*data.statuses![index].mailsCount*/ mailCount}",
+                      style: kStatusNumberTextStyle,
+                    );
+                  },
+                  onLoading: (_) {
+                    return CustomShimmer(
+                      child: Text(
+                        "5",
+                        style: kStatusNumberTextStyle,
+                      ),
+                    );
+                  },
+                );
+              }),
+            )),
+            SizedBox(width: 16.0),
+            Expanded(child: StatusWidget(
+              statusColor: statusColorsList[3],
+              statusText: statusTextsList[3],
+              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+                return ResponseBuilder(
+                  response: provider.allStatus,
+                  onComplete: (_, data, message) {
+                    String? mailCount = getCurrentMailCount(data, 3);
+
+                    return Text(
+                      "${/*data.statuses![index].mailsCount*/ mailCount}",
+                      style: kStatusNumberTextStyle,
+                    );
+                  },
+                  onLoading: (_) {
+                    return CustomShimmer(
+                      child: Text(
+                        "5",
+                        style: kStatusNumberTextStyle,
+                      ),
+                    );
+                  },
+                );
+              }),
+            )),
+          ],
+        ),
+      ],
     );
   }
 
