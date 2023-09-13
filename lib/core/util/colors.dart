@@ -23,3 +23,4 @@ const kCompleted = Color(0xFF77D16F);
 //select item->kLightSub
 //gradient lite ->kLightSub
 const kLightGrey = Color(0xFFAFAFAF);
+const kLightGrey2 = Color(0xFFC4C4C4);
