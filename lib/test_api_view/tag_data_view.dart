@@ -1,11 +1,11 @@
+import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/features/category/models/category.dart';
-import 'package:final_project/features/category/provider/category_provider.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
+
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
 import 'package:final_project/test_api_view/test_shimmer.dart';
-import 'package:final_project/shared/widgets/responce_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -49,14 +49,14 @@ class _TagDataListViewState extends State<TagDataListView> {
                           onComplete: (context, data, message) {
                             return Column(
                               children: [
-                                const SizedBox(
+                                const SSizedBox(
                                   height: 38,
                                 ),
                                 Expanded(
                                   child: ListView.separated(
                                     itemCount: data?.length ?? 0,
                                     separatorBuilder: (_, index) =>
-                                        const SizedBox(
+                                        const SSizedBox(
                                       height: 8,
                                     ),
                                     itemBuilder: (_, index) => Container(
@@ -68,7 +68,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -76,7 +76,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -84,7 +84,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -92,7 +92,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -100,7 +100,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                         ],
@@ -113,7 +113,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                           }),
                     );
                   }
-                  return SizedBox();
+                  return SSizedBox();
                 },
                 child: const Divider(),
               ),
@@ -148,14 +148,14 @@ class _TagDataListViewState extends State<TagDataListView> {
                           onComplete: (context, data, message) {
                             return Column(
                               children: [
-                                const SizedBox(
+                                const SSizedBox(
                                   height: 38,
                                 ),
                                 Expanded(
                                   child: ListView.separated(
                                     itemCount: data?.length ?? 0,
                                     separatorBuilder: (_, index) =>
-                                        const SizedBox(
+                                        const SSizedBox(
                                       height: 8,
                                     ),
                                     itemBuilder: (_, index) => Container(
@@ -167,7 +167,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -175,7 +175,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -183,7 +183,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -191,7 +191,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -199,7 +199,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                         ],
@@ -212,7 +212,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                           }),
                     );
                   }
-                  return SizedBox();
+                  return SSizedBox();
                 },
                 child: const Divider(),
               ),
@@ -246,14 +246,14 @@ class _TagDataListViewState extends State<TagDataListView> {
                         onComplete: (context, data, message) {
                           return Column(
                             children: [
-                              const SizedBox(
+                              const SSizedBox(
                                 height: 38,
                               ),
                               Expanded(
                                 child: ListView.separated(
                                   itemCount: data?.length ?? 0,
                                   separatorBuilder: (_, index) =>
-                                      const SizedBox(
+                                      const SSizedBox(
                                     height: 8,
                                   ),
                                   itemBuilder: (_, index) => Container(
@@ -265,7 +265,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                           style: const TextStyle(
                                               backgroundColor: kLightSub),
                                         ),
-                                        const SizedBox(
+                                        const SSizedBox(
                                           height: 8,
                                         ),
                                         Text(
@@ -273,7 +273,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                           style: const TextStyle(
                                               backgroundColor: kLightSub),
                                         ),
-                                        const SizedBox(
+                                        const SSizedBox(
                                           height: 8,
                                         ),
                                         Text(
@@ -281,7 +281,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                           style: const TextStyle(
                                               backgroundColor: kLightSub),
                                         ),
-                                        const SizedBox(
+                                        const SSizedBox(
                                           height: 8,
                                         ),
                                         Text(
@@ -289,7 +289,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                           style: const TextStyle(
                                               backgroundColor: kLightSub),
                                         ),
-                                        const SizedBox(
+                                        const SSizedBox(
                                           height: 8,
                                         ),
                                         Text(
@@ -297,7 +297,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                           style: const TextStyle(
                                               backgroundColor: kLightSub),
                                         ),
-                                        const SizedBox(
+                                        const SSizedBox(
                                           height: 8,
                                         ),
                                       ],

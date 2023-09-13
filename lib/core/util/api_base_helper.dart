@@ -39,8 +39,6 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
-      print('post');
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -51,7 +49,7 @@ mixin class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> put(String url, Map<String, dynamic> body) async {
+  Future<dynamic> put(String url, Map<String, dynamic>? body) async {
     var responseJson;
     try {
       final response = await http.put(Uri.parse(baseUrl + url),

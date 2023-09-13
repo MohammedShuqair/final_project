@@ -1,14 +1,12 @@
+import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/features/category/models/category.dart';
-import 'package:final_project/features/category/provider/category_provider.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/sender/models/sender_response.dart';
 import 'package:final_project/features/sender/provider/sender_provider.dart';
-import 'package:final_project/features/tag/models/tag.dart';
-import 'package:final_project/features/tag/provider/tag_provider.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
+
 import 'package:final_project/test_api_view/test_shimmer.dart';
-import 'package:final_project/shared/widgets/responce_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,14 +51,14 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                             List<Sender> senders = data?.senders ?? [];
                             return Column(
                               children: [
-                                const SizedBox(
+                                const SSizedBox(
                                   height: 38,
                                 ),
                                 Expanded(
                                   child: ListView.separated(
                                     itemCount: senders.length,
                                     separatorBuilder: (_, index) =>
-                                        const SizedBox(
+                                        const SSizedBox(
                                       height: 8,
                                     ),
                                     itemBuilder: (_, index) => Container(
@@ -72,7 +70,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -80,7 +78,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -88,7 +86,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -96,7 +94,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                           Text(
@@ -104,7 +102,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
-                                          const SizedBox(
+                                          const SSizedBox(
                                             height: 8,
                                           ),
                                         ],
@@ -117,7 +115,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                           }),
                     );
                   }
-                  return const SizedBox();
+                  return const SSizedBox();
                 },
                 child: const Divider(),
               ),
@@ -154,7 +152,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                           }),
                     );
                   }
-                  return const SizedBox();
+                  return const SSizedBox();
                 },
                 child: const Divider(),
               ),
@@ -191,7 +189,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                           }),
                     );
                   }
-                  return const SizedBox();
+                  return const SSizedBox();
                 },
                 child: const Divider(),
               ),

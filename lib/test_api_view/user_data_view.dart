@@ -1,7 +1,7 @@
+import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/test_api_view/test_shimmer.dart';
-import 'package:final_project/shared/widgets/responce_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

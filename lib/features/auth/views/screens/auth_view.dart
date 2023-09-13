@@ -1,9 +1,10 @@
+import 'package:final_project/app_views/home/views/home_screen.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/assets.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/widgets/auth_button.dart';
 import 'package:final_project/features/auth/views/widgets/auth_option_button.dart';
-import 'package:final_project/shared/screens/home_screen.dart';
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/auth/views/widgets/curved_bacground.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +131,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 },
               ),
             ),
-          const SizedBox(
+          const SSizedBox(
             height: 14,
           ),
           CustomTextFormField.email(
@@ -147,7 +148,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               return null;
             },
           ),
-          const SizedBox(
+          const SSizedBox(
             height: 14,
           ),
           CustomTextFormField.password(
@@ -189,7 +190,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 },
               ),
             ),
-          const SizedBox(
+          const SSizedBox(
             height: 24,
           ),
           Consumer<AuthProvider>(
