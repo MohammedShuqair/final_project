@@ -51,6 +51,9 @@ TextStyle kSearchText = TextStyle(
     color: kSubText); //font weight
 
 //mail Card
+
+const TextStyle textInUserInformation = TextStyle(color: kText, fontSize: 18,fontWeight: FontWeight.w600 );
+
 TextStyle kTitleMailCard =
     TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
 TextStyle kSubTitleMailCard =
