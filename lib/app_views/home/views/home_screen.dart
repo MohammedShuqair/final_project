@@ -187,7 +187,7 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-      bottomSheet: GestureDetector(
+      bottomNavigationBar: GestureDetector(
         onTap: () {
           showModalBottomSheet(
               context: context,

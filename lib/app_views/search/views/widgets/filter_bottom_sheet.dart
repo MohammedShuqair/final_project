@@ -33,7 +33,7 @@ class FilterBottomSheet extends StatelessWidget {
             SheetBar(
               onTapDone: () {
                 Navigator.pop(context, {
-                  'categories': context.read<FilterProvider>().categoryNames,
+                  'categories': context.read<FilterProvider>().categories,
                   'status_id': context.read<FilterProvider>().statusId,
                   'end': null,
                   'start': null,
@@ -55,9 +55,9 @@ class FilterBottomSheet extends StatelessWidget {
                         builder: (context, provider, child) {
                           return CategoryList(
                             categories: data,
-                            selectedNames: provider.categoryNames,
-                            onTap: (String name) {
-                              provider.handelCategories(name);
+                            selectedCategories: provider.categories,
+                            onTap: (Category category) {
+                              provider.handelCategories(category);
                             },
                           );
                         },
@@ -73,8 +73,8 @@ class FilterBottomSheet extends StatelessWidget {
                                       name: lorem(
                                     words: 1,
                                   ))),
-                          selectedNames: [],
-                          onTap: (String name) {},
+                          selectedCategories: [],
+                          onTap: (Category c) {},
                         ),
                       );
                     },
