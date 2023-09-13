@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
@@ -9,8 +7,6 @@ import 'package:final_project/features/status/models/status_response.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../features/status/provider/status_provider.dart';
 
 class StatusGridView extends StatelessWidget {
   const StatusGridView({

@@ -10,6 +10,7 @@ class InBoxButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: EdgeInsets.symmetric(
         vertical: 16.0.h,
         horizontal: 20.w,

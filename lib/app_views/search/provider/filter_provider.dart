@@ -13,16 +13,16 @@ class FilterProvider extends ChangeNotifier {
   ApiResponse<StatusResponse>? statusResponse;
   ApiResponse<List<Category>>? categoriesResponse;
 
-  List<String> categoryNames = [];
+  List<Category> categories = [];
   int? statusId;
   String? startDate;
   String? endDate;
 
-  void handelCategories(String name) {
-    if (categoryNames.contains(name)) {
-      _unSelectCategory(name);
+  void handelCategories(Category category) {
+    if (categories.contains(category)) {
+      _unSelectCategory(category);
     } else {
-      _selectCategory(name);
+      _selectCategory(category);
     }
   }
 
@@ -34,13 +34,13 @@ class FilterProvider extends ChangeNotifier {
     }
   }
 
-  void _selectCategory(String name) {
-    categoryNames.add(name);
+  void _selectCategory(Category category) {
+    categories.add(category);
     notifyListeners();
   }
 
-  void _unSelectCategory(String name) {
-    categoryNames.remove(name);
+  void _unSelectCategory(Category category) {
+    categories.remove(category);
     notifyListeners();
   }
 
@@ -65,7 +65,7 @@ class FilterProvider extends ChangeNotifier {
   }
 
   FilterProvider({
-    this.categoryNames = const [],
+    this.categories = const [],
     this.statusId,
     this.startDate,
     this.endDate,
