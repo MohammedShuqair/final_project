@@ -10,11 +10,17 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     required this.hintText,
     this.hintStyle,
+    this.controller,
+    this.onSubmitted,
+    this.validator,
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String hintText;
   final TextStyle? hintStyle;
+  final TextEditingController? controller;
+  final void Function(String value)? onSubmitted;
+  final String? Function(String? value)? validator;
   @override
   Widget build(BuildContext context) {
     Widget? suffixIcon2;
@@ -24,23 +30,17 @@ class AppTextField extends StatelessWidget {
         child: suffixIcon,
       );
     }
-    return TextField(
+    return TextFormField(
+      onFieldSubmitted: onSubmitted,
+      validator: validator,
       style: hintStyle != null
           ? hintStyle!.copyWith(color: Colors.black)
           : kHintSimi16AF.copyWith(color: Colors.black),
+      controller: controller,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(
-          borderSide: BorderSide
-              .none /*(
-            color: Color(0xFFD0D0D0),
-          )*/
-          ,
+          borderSide: BorderSide.none,
         ),
-        /*focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFFD0D0D0),
-          ),
-        ),*/
         hintStyle: hintStyle ?? kHintSimi16AF,
         hintText: hintText,
         prefixIconConstraints: prefixIcon != null

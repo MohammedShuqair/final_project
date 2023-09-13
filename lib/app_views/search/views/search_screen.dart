@@ -93,9 +93,8 @@ class SearchView extends StatelessWidget {
                               return ChangeNotifierProvider(
                                 create: (BuildContext context2) =>
                                     FilterProvider(
-                                  categoryNames: context
-                                      .read<SearchProvider>()
-                                      .categoryNames,
+                                  categories:
+                                      context.read<SearchProvider>().categories,
                                   statusId:
                                       context.read<SearchProvider>().statusId,
                                   startDate:

@@ -1,6 +1,8 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
+import 'package:final_project/app_views/shared/tags_wrap.dart';
+import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/provider/tag_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +23,13 @@ class Tags extends StatelessWidget {
           return ResponseBuilder(
             response: provider.allTagResponse,
             onComplete: (_, data, message) {
-              return Wrap(
-                spacing: 8,
-                runSpacing: 4, //here is question
-                children: List.generate(
-                  data.length,
-                  (index) => ChipWidget(
-                      tagTitle: data[index].name?.firstCapital() ?? ''),
-                ),
+              return TagWrap(
+                onTap: (Tag tag) {
+                  Scaffold.of(context)
+                      .showBottomSheet((context) => Container());
+                },
+                tags: data,
+                selectedTags: {},
               );
             },
             onLoading: (_) {
