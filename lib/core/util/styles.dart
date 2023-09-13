@@ -62,6 +62,23 @@ TextStyle kSubSubTitleMailCard =
     TextStyle(color: kLightSub, fontSize: 14.sp, fontWeight: FontWeight.normal);
 TextStyle kSubSubTagTitleMailCard =
     TextStyle(color: kLightSub, fontSize: 14.sp, fontWeight: FontWeight.w600);
+
+//status sheet and tag sheet
+TextStyle kCancel18RegLightBlue =
+TextStyle(color: kLightSub, fontSize: 18.sp, fontWeight: FontWeight.normal);
+
+TextStyle kStatusWord18SimiDark =
+TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
+
+TextStyle kDone18SimiLightBlue =
+TextStyle(color: kLightSub, fontSize: 18.sp, fontWeight: FontWeight.w600);
+
+TextStyle kAddStatus16RegLightBlue =
+TextStyle(color: kLightSub, fontSize: 16.sp, fontWeight: FontWeight.normal);
+
+TextStyle kStatusName16RegDark =
+TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
+
 //styles
 TextStyle kHintSimi20AF = TextStyle(
     color: const Color(0xFFAFAFAF),
