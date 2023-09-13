@@ -1,6 +1,8 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
+import 'package:final_project/app_views/home/views/widgets/app_drawer.dart';
 import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
+import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
@@ -61,10 +63,20 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           child: const HomeView(),
         ),
       );
-
-    case MailDetailsScreen.id:
+    case MailOptionsSheet.id:
       return MaterialPageRoute(
-        builder: (_) => const MailDetailsScreen(),
+        builder: (_) => ChangeNotifierProvider(
+          create: (BuildContext context) => SearchProvider(),
+          child: const MailOptionsSheet(),
+        ),
+      );
+
+    case AppDrawer.id:
+      return MaterialPageRoute(
+        builder: (_) => ChangeNotifierProvider(
+          create: (BuildContext context) => SearchProvider(),
+          child: const AppDrawer(),
+        ),
       );
 
     default:
