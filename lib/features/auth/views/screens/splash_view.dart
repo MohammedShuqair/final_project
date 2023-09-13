@@ -25,10 +25,7 @@ class _SplashViewState extends State<SplashView> {
     }
 
     if (mounted) {
-      Navigator.pushReplacementNamed(
-        context,
-        path,
-      );
+      Navigator.pushNamedAndRemoveUntil(context, path, (r) => false);
     }
   }
 
