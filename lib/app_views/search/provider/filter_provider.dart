@@ -3,6 +3,7 @@ import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/search/repo/search_repo.dart';
+import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/status/models/status_response.dart';
 import 'package:final_project/features/status/repo/status_repo.dart';
 import 'package:flutter/widgets.dart';
@@ -14,7 +15,7 @@ class FilterProvider extends ChangeNotifier {
   ApiResponse<List<Category>>? categoriesResponse;
 
   List<Category> categories = [];
-  int? statusId;
+  Status? status;
   String? startDate;
   String? endDate;
 
@@ -26,11 +27,14 @@ class FilterProvider extends ChangeNotifier {
     }
   }
 
-  void handelStatus(int id) {
-    if (statusId == id) {
+  void handelStatus(Status? selected) {
+    if (status?.id == selected?.id || selected == null) {
+      print(status?.id);
+      print(selected?.id);
+
       _unSetStatusId();
     } else {
-      _setStatusId(id);
+      _setStatusId(selected);
     }
   }
 
@@ -44,13 +48,13 @@ class FilterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _setStatusId(int id) {
-    statusId = id;
+  void _setStatusId(Status selected) {
+    status = selected;
     notifyListeners();
   }
 
   void _unSetStatusId() {
-    statusId = null;
+    status = null;
     notifyListeners();
   }
 
@@ -66,7 +70,7 @@ class FilterProvider extends ChangeNotifier {
 
   FilterProvider({
     this.categories = const [],
-    this.statusId,
+    this.status,
     this.startDate,
     this.endDate,
   }) {
@@ -85,9 +89,6 @@ class FilterProvider extends ChangeNotifier {
           await _categoryRepository.getAllCategory();
       categoriesResponse = ApiResponse.completed(categories,
           message: 'Categories fetched successfully');
-      print("here");
-      print(categories);
-
       notifyListeners();
     } catch (e, s) {
       categoriesResponse = ApiResponse.error(message: e.toString());

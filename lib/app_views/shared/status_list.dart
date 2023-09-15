@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/select_icon.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -11,11 +12,11 @@ class StatusList extends StatelessWidget {
     super.key,
     required this.statuses,
     required this.onTap,
-    this.selectedID,
+    this.selectedStatus,
   });
-  final int? selectedID;
+  final Status? selectedStatus;
   final List<Status> statuses;
-  final void Function(int id) onTap;
+  final void Function(Status? id) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class StatusList extends StatelessWidget {
         itemBuilder: (_, index) {
           if (statuses[index].name != null) {
             return InkWell(
-              onTap: () => onTap(statuses[index].id!),
+              onTap: () => onTap(statuses[index]),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 14.0.h),
                 child: Row(
@@ -46,14 +47,13 @@ class StatusList extends StatelessWidget {
                       style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
                     ),
                     Spacer(),
-                    if (selectedID != null &&
-                        selectedID == statuses[index].id) ...[
-                      Icon(
-                        Icons.check,
-                        size: 18.sp,
-                        color: kLightSub,
-                      )
-                    ]
+                    if (selectedStatus != null &&
+                        selectedStatus?.id == statuses[index].id) ...[
+                      const SelectIcon()
+                    ],
+                    const SSizedBox(
+                      width: 10,
+                    ),
                   ],
                 ),
               ),

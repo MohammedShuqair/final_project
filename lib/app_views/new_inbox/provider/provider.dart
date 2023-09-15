@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:final_project/core/util/api_response.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/data/local/local_pref.dart';
 import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/auth/model/user.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
+import 'package:final_project/features/sender/models/sender.dart';
+import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
 import 'package:flutter/widgets.dart';
@@ -17,18 +24,19 @@ class NewInboxProvider extends ChangeNotifier {
   static NewInboxProvider get(context) => Provider.of(context);
   late TextEditingController senderName;
   late TextEditingController senderMobile;
-  late TextEditingController senderCategory;
   late TextEditingController subject;
   late TextEditingController description;
   late TextEditingController decision;
   late TextEditingController archiveNumber;
   String? archiveDate;
-  String? statusId;
+  Status? selectedStatus;
   String? senderId;
   // String? decision;
   String? finalDecision;
   Set<Tag> selectedTags = {};
   List<Activity> activities = [];
+  List<Activity> editingActivities = [];
+  Sender? pickedSender;
 
   NewInboxProvider() {
     categoryRepository = CategoryRepository();
@@ -37,13 +45,77 @@ class NewInboxProvider extends ChangeNotifier {
 
     senderName = TextEditingController();
     senderMobile = TextEditingController();
-    senderCategory = TextEditingController();
     subject = TextEditingController();
     description = TextEditingController();
     decision = TextEditingController();
     archiveNumber = TextEditingController();
     // getAllCategories();
   }
+  void addSenderName(String name) {
+    pickedSender = null;
+    _removeSenderData();
+    senderName.text = name;
+    notifyListeners();
+  }
+
+  void _setSenderData(Sender sender) {
+    senderName.text = sender.name ?? '';
+    senderMobile.text = sender.mobile ?? '';
+    selectedCategory = sender.category!;
+  }
+
+  void _removeSenderData() {
+    senderName.text = '';
+    senderMobile.text = '';
+    selectedCategory = Category(id: 1, name: 'Other');
+  }
+
+  void setSender(Sender sender) {
+    pickedSender = sender;
+    _setSenderData(sender);
+    notifyListeners();
+  }
+
+  void addActivity(
+    String body,
+  ) {
+    User user = getUser();
+    activities.add(Activity(
+        body: body,
+        user: user,
+        userId: user.id.toString(),
+        createdAt: DateTime.now().toString()));
+    print(activities);
+    notifyListeners();
+  }
+
+  void addEditingActivity(Activity activity) {
+    editingActivities.add(activity);
+    notifyListeners();
+  }
+
+  void editActivityBody(String body, Activity activity) {
+    activity.body = body;
+    editingActivities.remove(activity);
+    notifyListeners();
+  }
+
+  void removeEditingActivity(Activity activity) {
+    editingActivities.remove(activity);
+    notifyListeners();
+  }
+
+  void removeActivity(Activity activity) {
+    bool x = activities.remove(activity);
+    print(x);
+    notifyListeners();
+  }
+
+  void setStatus(Status? status) {
+    selectedStatus = status;
+    notifyListeners();
+  }
+
   void setTags(Set<Tag> list) {
     selectedTags = list;
     notifyListeners();
@@ -101,7 +173,6 @@ class NewInboxProvider extends ChangeNotifier {
   void dispose() {
     senderName.dispose();
     senderMobile.dispose();
-    senderCategory.dispose();
     subject.dispose();
     description.dispose();
     decision.dispose();

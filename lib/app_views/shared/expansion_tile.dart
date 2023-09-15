@@ -9,11 +9,10 @@ import '../../core/util/styles.dart';
 
 class ExpansionWidget extends StatefulWidget {
   const ExpansionWidget(
-      {Key? key, required this.title, required this.count, required this.mails})
+      {Key? key, required this.title, required this.mailsCards})
       : super(key: key);
   final String title;
-  final int count;
-  final List<Mail> mails;
+  final List<Widget> mailsCards;
 
   @override
   State<ExpansionWidget> createState() => _ExpansionWidgetState();
@@ -21,17 +20,6 @@ class ExpansionWidget extends StatefulWidget {
 
 class _ExpansionWidgetState extends State<ExpansionWidget> {
   bool isClose = true;
-
-  @override
-  void initState() {
-    getData();
-    // TODO: implement initState
-    super.initState();
-  }
-
-  getData() {
-    //get on children
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +45,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${widget.count}',
+                    '${widget.mailsCards.length}',
                     style: kNumArrowInExpansion,
                   ),
                   const Icon(
@@ -72,7 +60,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
                 color: kLightSub,
                 size: 24,
               ),
-        children: []..listMail(widget.mails) //here pass children
+        children: widget.mailsCards //here pass children
         );
   }
 }

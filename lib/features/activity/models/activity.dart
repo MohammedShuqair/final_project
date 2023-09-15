@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:final_project/features/auth/model/user.dart';
 
-class Activity {
+class Activity extends Equatable {
   int? id;
   String? body;
   String? userId;
@@ -12,17 +13,18 @@ class Activity {
   String? updatedAt;
   User? user;
 
-  Activity(
-      {this.id,
-      this.body,
-      this.userId,
-      this.mailId,
-      this.sendNumber,
-      this.sendDate,
-      this.sendDestination,
-      this.createdAt,
-      this.updatedAt,
-      this.user});
+  Activity({
+    this.id,
+    this.body,
+    this.userId,
+    this.mailId,
+    this.sendNumber,
+    this.sendDate,
+    this.sendDestination,
+    this.createdAt,
+    this.updatedAt,
+    this.user,
+  });
   @override
   String toString() {
     return 'Activity{id: $id, body: $body, userId: $userId, mailId: $mailId, sendNumber: $sendNumber, sendDate: $sendDate, sendDestination: $sendDestination, createdAt: $createdAt, updatedAt: $updatedAt, user: $user}';
@@ -57,4 +59,19 @@ class Activity {
     }
     return data;
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        id,
+        body,
+        userId,
+        mailId,
+        sendNumber,
+        sendDate,
+        sendDestination,
+        createdAt,
+        updatedAt,
+        user,
+      ];
 }

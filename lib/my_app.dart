@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Final Project',
         theme: lightTheme,
-        initialRoute: AppDrawer.id,
+        initialRoute: SplashView.id,
         // home: PickView(),
         onGenerateRoute: generateRoute,
       ),

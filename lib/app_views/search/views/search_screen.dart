@@ -95,8 +95,7 @@ class SearchView extends StatelessWidget {
                                     FilterProvider(
                                   categories:
                                       context.read<SearchProvider>().categories,
-                                  statusId:
-                                      context.read<SearchProvider>().statusId,
+                                  status: context.read<SearchProvider>().status,
                                   startDate:
                                       context.read<SearchProvider>().startDate,
                                   endDate:
@@ -216,8 +215,7 @@ class SearchView extends StatelessWidget {
                             highlightColor: Colors.black,
                             child: ExpansionWidget(
                               title: lorem(words: 1),
-                              count: 0,
-                              mails: const [],
+                              mailsCards: const [],
                             ),
                           );
                         },

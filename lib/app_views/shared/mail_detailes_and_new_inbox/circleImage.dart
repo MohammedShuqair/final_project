@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/mail_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,8 +15,8 @@ class CircleImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
         borderRadius: BorderRadius.circular(50),
-        child: Image.asset(
-          imagePath,
+        child: Image.network(
+          imageUrl + imagePath,
           width: size,
           height: size,
           fit: BoxFit.contain,

@@ -13,6 +13,8 @@ class AppTextField extends StatelessWidget {
     this.controller,
     this.onSubmitted,
     this.validator,
+    this.enabled = true,
+    this.focusNode,
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -21,6 +23,8 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String value)? onSubmitted;
   final String? Function(String? value)? validator;
+  final bool enabled;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     Widget? suffixIcon2;
@@ -30,28 +34,36 @@ class AppTextField extends StatelessWidget {
         child: suffixIcon,
       );
     }
-    return TextFormField(
-      onFieldSubmitted: onSubmitted,
-      validator: validator,
-      style: hintStyle != null
-          ? hintStyle!.copyWith(color: Colors.black)
-          : kHintSimi16AF.copyWith(color: Colors.black),
-      controller: controller,
-      decoration: InputDecoration(
-        border: const UnderlineInputBorder(
-          borderSide: BorderSide.none,
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            focusNode: focusNode,
+            enabled: enabled,
+            onFieldSubmitted: onSubmitted,
+            validator: validator,
+            style: hintStyle != null
+                ? hintStyle!.copyWith(color: Colors.black)
+                : kHintSimi16AF.copyWith(color: Colors.black),
+            controller: controller,
+            decoration: InputDecoration(
+              border: const UnderlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              hintStyle: hintStyle ?? kHintSimi16AF,
+              hintText: hintText,
+              prefixIconConstraints: prefixIcon != null
+                  ? BoxConstraints.tightFor(width: 24.w + 6.w, height: 24.h)
+                  : BoxConstraints.tight(const Size(0, 0)),
+              prefixIcon: Padding(
+                padding: EdgeInsetsDirectional.only(end: 6.w),
+                child: prefixIcon,
+              ),
+            ),
+          ),
         ),
-        hintStyle: hintStyle ?? kHintSimi16AF,
-        hintText: hintText,
-        prefixIconConstraints: prefixIcon != null
-            ? BoxConstraints.tightFor(width: 24.w + 6.w, height: 24.h)
-            : BoxConstraints.tight(const Size(0, 0)),
-        prefixIcon: Padding(
-          padding: EdgeInsetsDirectional.only(end: 6.w),
-          child: prefixIcon,
-        ),
-        suffixIcon: suffixIcon2,
-      ),
+        suffixIcon2 ?? const SizedBox(),
+      ],
     );
   }
 }

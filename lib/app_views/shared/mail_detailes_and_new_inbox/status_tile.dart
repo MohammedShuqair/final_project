@@ -1,25 +1,23 @@
-
+import 'package:final_project/app_views/shared/core_background.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/status_tile_item.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/features/status/models/status.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class StatusTile extends StatefulWidget {
-  const StatusTile({super.key});
+class StatusTile extends StatelessWidget {
+  const StatusTile({super.key, required this.selectedStatus});
+  final Status? selectedStatus;
 
-  @override
-  State<StatusTile> createState() => _StatusTileState();
-}
-
-class _StatusTileState extends State<StatusTile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(30))),
+    return Core(
+      padding: EdgeInsets.symmetric(
+          horizontal: 17.w, vertical: selectedStatus == null ? 18.h : 12.h),
       child: Row(
         children: [
           SvgPicture.asset(
@@ -27,22 +25,19 @@ class _StatusTileState extends State<StatusTile> {
             width: 19.0.w,
             height: 14.0.h,
           ),
-          Expanded(
-            child: Padding(
-                padding: EdgeInsetsDirectional.only(start: 18.w, end: 10.w),
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: kInbox,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
-                  child: Text(
-                    'Inbox',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                )),
+          const SSizedBox(
+            width: 10,
           ),
+          if (selectedStatus != null)
+            StatusTileItem(
+              status: selectedStatus!,
+            ),
+          if (selectedStatus == null)
+            Text(
+              "Status",
+              style: kHintNormal16Dark,
+            ),
+          Spacer(),
           SvgPicture.asset(
             'assets/icons/arrow_gray.svg',
             width: 18.0,

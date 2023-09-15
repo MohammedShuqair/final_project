@@ -2,11 +2,17 @@ import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
+import 'package:final_project/app_views/home/views/widgets/user_Information.dart';
+import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
+import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/mail_card.dart';
+import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/circleImage.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
@@ -23,6 +29,7 @@ import '../../shared/expansion_tile.dart';
 
 class HomeView extends StatelessWidget {
   static const String id = '/homeView';
+
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -37,36 +44,33 @@ class HomeView extends StatelessWidget {
             },
             icon: const Icon(Icons.search),
           ),
-          PopupMenuButton(
-            position: PopupMenuPosition.under,
-            itemBuilder: (BuildContext context) {
-              return <PopupMenuEntry<dynamic>>[
-                PopupMenuItem(
-                  child: Container(
-                    height: 200,
-                    width: 500,
-                    color: Colors.grey,
-                  ),
-                ),
-              ];
+          Consumer<UserProvider>(
+            builder: (context, provider, child) {
+              return ResponseBuilder(
+                  response: provider.currentUserResponse,
+                  onComplete: (_, user, __) {
+                    return PopupMenuButton(
+                      position: PopupMenuPosition.under,
+                      itemBuilder: (BuildContext context2) {
+                        return <PopupMenuEntry<dynamic>>[
+                          PopupMenuItem(
+                            child: UserInformationDialog(
+                              user: user,
+                              onTapLogout: () {
+                                _logout(context, provider);
+                              },
+                            ),
+                          ),
+                        ];
+                      },
+                      child: UserAccountImage(
+                        imagePath: user.image ?? '',
+                      ),
+                    );
+                  });
             },
-            child: Container(
-              margin: EdgeInsetsDirectional.only(end: 33.w),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: kWhite,
-                    width: 3,
-                  )),
-              child: Image.asset(
-                'assets/images/palestine_bird.png',
-                fit: BoxFit.contain,
-                width: 40.w,
-                height: 40.w,
-              ),
-            ),
           ),
-          IconButton(
+          /* IconButton(
               onPressed: () async {
                 MailRepository().createMail(
                   statusId: '4',
@@ -81,7 +85,7 @@ class HomeView extends StatelessWidget {
                   archiveDate: DateTime.now().toString(),
                 );
               },
-              icon: Icon(Icons.refresh)),
+              icon: Icon(Icons.refresh)),*/
         ],
       ),
       drawer: Drawer(
@@ -123,8 +127,7 @@ class HomeView extends StatelessWidget {
                             List<Mail> mails = data[key] ?? [];
                             return ExpansionWidget(
                               title: key,
-                              count: mails.length,
-                              mails: mails,
+                              mailsCards: []..listMail(mails),
                             );
                           },
                           separatorBuilder: (_, index) {
@@ -144,8 +147,7 @@ class HomeView extends StatelessWidget {
                               highlightColor: Colors.black,
                               child: ExpansionWidget(
                                 title: lorem(words: 1),
-                                count: 0,
-                                mails: const [],
+                                mailsCards: const [],
                               ),
                             );
                           },
@@ -195,7 +197,10 @@ class HomeView extends StatelessWidget {
               constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
               clipBehavior: Clip.hardEdge,
               builder: (c2) {
-                return const NewInbox();
+                return ChangeNotifierProvider(
+                  create: (context) => NewInboxProvider(),
+                  child: const NewInbox(),
+                );
               });
         },
         child: const InBoxButton(),
@@ -213,6 +218,30 @@ class HomeView extends StatelessWidget {
         Navigator.pushNamedAndRemoveUntil(
             context, SplashView.id, (route) => false);
       },
+    );
+  }
+}
+
+class UserAccountImage extends StatelessWidget {
+  const UserAccountImage({
+    super.key,
+    required this.imagePath,
+  });
+  final String imagePath;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsetsDirectional.only(end: 33.w),
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: kWhite,
+            width: 3,
+          )),
+      child: CircleImage(
+        imagePath: imagePath,
+        size: 40,
+      ),
     );
   }
 }

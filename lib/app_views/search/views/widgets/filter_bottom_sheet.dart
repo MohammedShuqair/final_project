@@ -34,7 +34,7 @@ class FilterBottomSheet extends StatelessWidget {
               onTapDone: () {
                 Navigator.pop(context, {
                   'categories': context.read<FilterProvider>().categories,
-                  'status_id': context.read<FilterProvider>().statusId,
+                  'status_id': context.read<FilterProvider>().status,
                   'end': null,
                   'start': null,
                 });
@@ -99,9 +99,9 @@ class FilterBottomSheet extends StatelessWidget {
                         builder: (context, provider, child) {
                           return StatusList(
                             statuses: data.statuses ?? [],
-                            selectedID: provider.statusId,
-                            onTap: (int id) {
-                              provider.handelStatus(id);
+                            selectedStatus: provider.status,
+                            onTap: (Status? status) {
+                              provider.handelStatus(status);
                             },
                           );
                         },
@@ -113,8 +113,8 @@ class FilterBottomSheet extends StatelessWidget {
                         child: StatusList(
                           statuses: List.generate(
                               4, (index) => Status(name: lorem(words: 1))),
-                          selectedID: null,
-                          onTap: (int id) {},
+                          selectedStatus: null,
+                          onTap: (Status? s) {},
                         ),
                       );
                     },

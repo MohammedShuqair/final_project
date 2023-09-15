@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/home/views/widgets/chip_tag_widget.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -17,23 +18,30 @@ class TagWrap extends StatelessWidget {
   final bool leading;
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 4, //here is question
-      children: List.generate(
-        tags.length,
-        (index) => GestureDetector(
-          onTap: () => onTap(tags.elementAt(index)),
-          child: ChipWidget(
-            tagTitle:
-                '${leading ? "#" : ''}${tags.elementAt(index).name?.firstCapital()}',
-            isSelected: selectedTags
-                .map((e) => e.id)
-                .toList()
-                .contains(tags.elementAt(index).id),
+    if (tags.isNotEmpty) {
+      return Wrap(
+        spacing: 8,
+        runSpacing: 4, //here is question
+        children: List.generate(
+          tags.length,
+          (index) => GestureDetector(
+            onTap: () => onTap(tags.elementAt(index)),
+            child: ChipWidget(
+              tagTitle:
+                  '${leading ? "#" : ''}${tags.elementAt(index).name?.firstCapital()}',
+              isSelected: selectedTags
+                  .map((e) => e.id)
+                  .toList()
+                  .contains(tags.elementAt(index).id),
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Text(
+        "No Tags Found",
+        style: kTitleMailCard,
+      );
+    }
   }
 }

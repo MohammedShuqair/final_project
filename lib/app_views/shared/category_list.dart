@@ -1,9 +1,8 @@
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/app_views/shared/select_icon.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/category/models/category.dart';
-import 'package:final_project/features/status/models/status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,29 +35,21 @@ class CategoryList extends StatelessWidget {
                   categories[index].name!.firstCapital(),
                   style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
                 ),
-                Spacer(),
+                const Spacer(),
                 if (selectedCategories != null &&
                     selectedCategories!
                         .map((e) => e.id)
                         .toList()
                         .contains(categories[index].id)) ...[
-                  Icon(
-                    Icons.check,
-                    size: 18.sp,
-                    color: kLightSub,
-                  ),
+                  const SelectIcon(),
                 ],
                 if (selectedCategory != null &&
                     selectedCategory!.id == categories[index].id) ...[
-                  SvgPicture.asset(
-                    'assets/icons/selected.svg',
-                    width: 18.sp,
-                    height: 18.sp,
-                  ),
-                  SSizedBox(
-                    width: 10,
-                  ),
+                  const SelectIcon(),
                 ],
+                const SSizedBox(
+                  width: 10,
+                ),
               ]),
             ),
           );

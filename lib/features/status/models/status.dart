@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 
-class Status {
+class Status extends Equatable {
   int? id;
   String? name;
   String? color;
@@ -48,4 +49,11 @@ class Status {
     }
     return data;
   }
+
+  @override
+  List<Object?> get props =>
+      [id, name, color, createdAt, updatedAt, mailsCount, mails];
+
+  @override
+  bool? get stringify => true;
 }

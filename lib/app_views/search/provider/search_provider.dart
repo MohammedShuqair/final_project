@@ -3,6 +3,7 @@ import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/search/repo/search_repo.dart';
+import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/status/models/status_response.dart';
 import 'package:final_project/features/status/repo/status_repo.dart';
 import 'package:flutter/widgets.dart';
@@ -17,7 +18,7 @@ class SearchProvider extends ChangeNotifier {
   String? searchFor;
 
   List<Category> categories = [];
-  int? statusId;
+  Status? status;
   String? startDate;
   String? endDate;
   void setCategories(List<Category> categoriesFilter) {
@@ -25,8 +26,8 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setStatusId(int? id) {
-    statusId = id;
+  void setStatusId(Status? selected) {
+    status = selected;
     notifyListeners();
   }
 
@@ -104,7 +105,7 @@ class SearchProvider extends ChangeNotifier {
           searchFor: searchFor,
           startDate: startDate,
           endDate: endDate,
-          statusId: statusId,
+          statusId: status?.id,
           categoriesFilter: categories.map((e) => e.name!).toList());
       searchResponse = ApiResponse.completed(searchMap,
           message: 'search completed successfully');

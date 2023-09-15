@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:final_project/app_views/shared/alert.dart';
 import 'package:final_project/core/util/api_response.dart';
+import 'package:final_project/data/local/local_pref.dart';
+import 'package:final_project/features/auth/model/user.dart';
 import 'package:flutter/material.dart';
 
 void handelResponseStatus(ApiStatus status, BuildContext context,
@@ -23,3 +27,7 @@ bool testEmailValidation(String? value) => value?.contains('@') ?? true;
 bool testEmpty(String? value) => value?.isEmpty ?? true;
 
 bool testNull(String? value) => value == null;
+
+User getUser() {
+  return User.fromMap(jsonDecode(SharedHelper().getData(key: 'user')));
+}

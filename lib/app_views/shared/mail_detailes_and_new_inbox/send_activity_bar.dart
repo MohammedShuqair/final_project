@@ -1,6 +1,7 @@
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/CircleImage.dart';
+import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/circleImage.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,10 +56,10 @@ class _SendActivityBarState extends State<SendActivityBar> {
           filled: true,
           prefixIconConstraints:
               const BoxConstraints.tightFor(height: 24, width: 24 + 16 + 9),
-          prefixIcon: const Padding(
-            padding: EdgeInsetsDirectional.only(start: 16, end: 9),
+          prefixIcon: Padding(
+            padding: const EdgeInsetsDirectional.only(start: 16, end: 9),
             child: CircleImage(
-              imagePath: "assets/images/palestine_bird.png",
+              imagePath: getUser().image ?? '',
             ),
           ),
           suffixIcon: IconButton(
