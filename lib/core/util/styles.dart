@@ -1,19 +1,6 @@
 import 'package:final_project/core/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 TextStyle kLogo = TextStyle(fontSize: 31.sp, color: kWhite);
 TextStyle kSelectedButton =
@@ -52,7 +39,8 @@ TextStyle kSearchText = TextStyle(
 
 //mail Card
 
-const TextStyle textInUserInformation = TextStyle(color: kText, fontSize: 18,fontWeight: FontWeight.w600 );
+const TextStyle textInUserInformation =
+    TextStyle(color: kText, fontSize: 18, fontWeight: FontWeight.w600);
 
 TextStyle kTitleMailCard =
     TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
@@ -65,21 +53,22 @@ TextStyle kSubSubTagTitleMailCard =
 
 //status sheet and tag sheet
 TextStyle kCancel18RegLightBlue =
-TextStyle(color: kLightSub, fontSize: 18.sp, fontWeight: FontWeight.normal);
+    TextStyle(color: kLightSub, fontSize: 18.sp, fontWeight: FontWeight.normal);
 
 TextStyle kStatusWord18SimiDark =
-TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
+    TextStyle(color: kDarkText, fontSize: 18.sp, fontWeight: FontWeight.w600);
 
 TextStyle kDone18SimiLightBlue =
-TextStyle(color: kLightSub, fontSize: 18.sp, fontWeight: FontWeight.w600);
+    TextStyle(color: kLightSub, fontSize: 18.sp, fontWeight: FontWeight.w600);
 
 TextStyle kAddStatus16RegLightBlue =
-TextStyle(color: kLightSub, fontSize: 16.sp, fontWeight: FontWeight.normal);
+    TextStyle(color: kLightSub, fontSize: 16.sp, fontWeight: FontWeight.normal);
 
 TextStyle kStatusName16RegDark =
-TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
+    TextStyle(color: kDarkText, fontSize: 16.sp, fontWeight: FontWeight.normal);
 
-TextStyle kHintTextInTagTextField = TextStyle(color: kLightGrey2, fontSize: 14.sp, fontWeight: FontWeight.normal);
+TextStyle kHintTextInTagTextField = TextStyle(
+    color: kLightGrey2, fontSize: 14.sp, fontWeight: FontWeight.normal);
 
 //styles
 TextStyle kHintSimi20AF = TextStyle(

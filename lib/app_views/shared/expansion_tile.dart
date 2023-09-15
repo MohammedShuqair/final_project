@@ -1,8 +1,5 @@
-import 'package:final_project/app_views/shared/mail_card.dart';
 import 'package:final_project/core/util/edited_expansion_tile.dart' as ed;
-import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:final_project/core/util/extensions.dart';
 import '../../core/util/colors.dart';
 import '../../core/util/styles.dart';

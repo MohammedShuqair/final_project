@@ -1,6 +1,5 @@
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/select_icon.dart';
-import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/status/models/status.dart';
@@ -46,7 +45,7 @@ class StatusList extends StatelessWidget {
                       statuses[index].name!.firstCapital(),
                       style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     if (selectedStatus != null &&
                         selectedStatus?.id == statuses[index].id) ...[
                       const SelectIcon()

@@ -3,7 +3,6 @@ import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
 import 'package:final_project/features/mail/models/mail.dart';
-import 'package:final_project/features/mail/repo/mail_repo.dart';
 
 class SearchRepository with ApiBaseHelper {
   Future<Map<String, List<Mail>>> search({

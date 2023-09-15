@@ -1,6 +1,5 @@
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/features/sender/models/sender.dart';
-import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/sender/models/sender_response.dart';
 import 'package:final_project/features/sender/repo/sender_repo.dart';
 import 'package:flutter/foundation.dart';

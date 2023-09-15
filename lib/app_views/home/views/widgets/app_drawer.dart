@@ -11,7 +11,6 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,25 +18,30 @@ class _AppDrawerState extends State<AppDrawer> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 64,),
+            const SizedBox(
+              height: 64,
+            ),
             Image.asset(
               'assets/images/palestine_bird.png',
               height: 103,
               width: 67,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 64,),
+            const SizedBox(
+              height: 64,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Spacer(),
-                  Text('الرئيسة',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: kWhite
-                  ),),
-                  SizedBox(width: 28,),
+                  const Spacer(),
+                  const Text(
+                    'الرئيسة',
+                    style: TextStyle(fontSize: 18, color: kWhite),
+                  ),
+                  const SizedBox(
+                    width: 28,
+                  ),
                   Image.asset(
                     'assets/icons/home.png',
                     height: 20,
@@ -47,18 +51,21 @@ class _AppDrawerState extends State<AppDrawer> {
                 ],
               ),
             ),
-            SizedBox(height: 32,),
+            const SizedBox(
+              height: 32,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Spacer(),
-                  Text('الملف الشخصي',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: kWhite
-                    ),),
-                  SizedBox(width: 28,),
+                  const Spacer(),
+                  const Text(
+                    'الملف الشخصي',
+                    style: TextStyle(fontSize: 18, color: kWhite),
+                  ),
+                  const SizedBox(
+                    width: 28,
+                  ),
                   Image.asset(
                     'assets/icons/profile_user.png',
                     height: 20,
@@ -68,18 +75,21 @@ class _AppDrawerState extends State<AppDrawer> {
                 ],
               ),
             ),
-            SizedBox(height: 32,),
+            const SizedBox(
+              height: 32,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Spacer(),
-                  Text('المرسلين',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: kWhite
-                    ),),
-                  SizedBox(width: 28,),
+                  const Spacer(),
+                  const Text(
+                    'المرسلين',
+                    style: TextStyle(fontSize: 18, color: kWhite),
+                  ),
+                  const SizedBox(
+                    width: 28,
+                  ),
                   Image.asset(
                     'assets/icons/senders.png',
                     height: 20,
@@ -89,18 +99,21 @@ class _AppDrawerState extends State<AppDrawer> {
                 ],
               ),
             ),
-            SizedBox(height: 32,),
+            const SizedBox(
+              height: 32,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  Spacer(),
-                  Text('إدارة المستخدمين',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: kWhite
-                    ),),
-                  SizedBox(width: 28,),
+                  const Spacer(),
+                  const Text(
+                    'إدارة المستخدمين',
+                    style: TextStyle(fontSize: 18, color: kWhite),
+                  ),
+                  const SizedBox(
+                    width: 28,
+                  ),
                   Image.asset(
                     'assets/icons/settings.png',
                     height: 20,

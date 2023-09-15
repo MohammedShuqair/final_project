@@ -238,7 +238,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
           message: provider.loginResponse.message,
           onComplete: () async {
             if (mounted) {
-              Navigator.pushReplacementNamed(context, HomeView.id);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeView.id, (p) => false);
             }
           },
         );
@@ -257,7 +258,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
           message: provider.registerResponse.message,
           onComplete: () async {
             if (mounted) {
-              Navigator.pushReplacementNamed(context, HomeView.id);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeView.id, (p) => false);
             }
           },
         );

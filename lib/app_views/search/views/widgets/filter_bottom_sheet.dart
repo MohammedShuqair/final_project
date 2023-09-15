@@ -1,5 +1,4 @@
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
-import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
@@ -9,7 +8,6 @@ import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/app_views/shared/status_list.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/status/models/status_response.dart';

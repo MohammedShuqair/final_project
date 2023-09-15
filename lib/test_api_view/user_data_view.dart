@@ -57,11 +57,11 @@ class _DataListViewState extends State<DataListView> {
                           icon: const Icon(Icons.send))
                     ],
                   ),
-                  Text("id :${data?.id}"),
-                  Text("name :${data?.name}"),
-                  Text("email :${data?.email}"),
-                  Text("image link :${data?.image}"),
-                  Text("role :${data?.role?.name}"),
+                  Text("id :${data.id}"),
+                  Text("name :${data.name}"),
+                  Text("email :${data.email}"),
+                  Text("image link :${data.image}"),
+                  Text("role :${data.role?.name}"),
                 ],
               );
             });

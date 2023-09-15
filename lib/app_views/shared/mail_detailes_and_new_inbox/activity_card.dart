@@ -1,12 +1,10 @@
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/circleImage.dart';
-import 'package:final_project/app_views/shared/select_icon.dart';
+import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ActivityCard extends StatefulWidget {

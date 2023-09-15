@@ -5,7 +5,6 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({

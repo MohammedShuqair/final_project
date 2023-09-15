@@ -1,4 +1,3 @@
-import 'package:final_project/app_views/new_inbox/views/widgets/sender_category_card.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +14,7 @@ class AppTextField extends StatelessWidget {
     this.validator,
     this.enabled = true,
     this.focusNode,
+    this.maxLines = 1,
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -25,6 +25,7 @@ class AppTextField extends StatelessWidget {
   final String? Function(String? value)? validator;
   final bool enabled;
   final FocusNode? focusNode;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     Widget? suffixIcon2;
@@ -38,6 +39,10 @@ class AppTextField extends StatelessWidget {
       children: [
         Expanded(
           child: TextFormField(
+            onTapOutside: (s) {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            maxLines: maxLines,
             focusNode: focusNode,
             enabled: enabled,
             onFieldSubmitted: onSubmitted,

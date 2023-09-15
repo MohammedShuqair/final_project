@@ -1,21 +1,15 @@
 import 'package:final_project/app_views/home/views/widgets/chip_tag_widget.dart';
-import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
-import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/app_views/shared/tags_wrap.dart';
 import 'package:final_project/core/util/api_response.dart';
-import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 class TagSheet extends StatefulWidget {
   const TagSheet({Key? key, required this.onTapDone, required this.selected})
@@ -135,6 +129,7 @@ class _TagSheetState extends State<TagSheet> {
                     if (value == null || value.isEmpty) {
                       return "Please Enter Tag Name";
                     }
+                    return null;
                   },
                   onSubmitted: (value) {
                     if (key.currentState?.validate() ?? false) {

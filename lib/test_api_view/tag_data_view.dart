@@ -24,7 +24,7 @@ class _TagDataListViewState extends State<TagDataListView> {
         Expanded(
           child: Column(
             children: [
-              Text('getMailTagsResponse'),
+              const Text('getMailTagsResponse'),
               Selector<TagProvider, ApiResponse<List<Tag>>?>(
                 selector: (_, provider) => provider.getMailTagsResponse,
                 builder: (context, response, child) {
@@ -54,7 +54,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                 ),
                                 Expanded(
                                   child: ListView.separated(
-                                    itemCount: data?.length ?? 0,
+                                    itemCount: data.length,
                                     separatorBuilder: (_, index) =>
                                         const SSizedBox(
                                       height: 8,
@@ -64,7 +64,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            "id :${data![index].id}",
+                                            "id :${data[index].id}",
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
@@ -113,7 +113,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                           }),
                     );
                   }
-                  return SSizedBox();
+                  return const SSizedBox();
                 },
                 child: const Divider(),
               ),
@@ -123,7 +123,7 @@ class _TagDataListViewState extends State<TagDataListView> {
         Expanded(
           child: Column(
             children: [
-              Text('tagsWithMailsResponse'),
+              const Text('tagsWithMailsResponse'),
               Selector<TagProvider, ApiResponse<List<Tag>>?>(
                 selector: (_, provider) => provider.tagsWithMailsResponse,
                 builder: (context, response, child) {
@@ -153,7 +153,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                 ),
                                 Expanded(
                                   child: ListView.separated(
-                                    itemCount: data?.length ?? 0,
+                                    itemCount: data.length,
                                     separatorBuilder: (_, index) =>
                                         const SSizedBox(
                                       height: 8,
@@ -163,7 +163,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            "id :${data![index].id}",
+                                            "id :${data[index].id}",
                                             style: const TextStyle(
                                                 backgroundColor: kLightSub),
                                           ),
@@ -212,7 +212,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                           }),
                     );
                   }
-                  return SSizedBox();
+                  return const SSizedBox();
                 },
                 child: const Divider(),
               ),
@@ -222,7 +222,7 @@ class _TagDataListViewState extends State<TagDataListView> {
         Expanded(
           child: Column(
             children: [
-              Text('allTagResponse'),
+              const Text('allTagResponse'),
               Selector<TagProvider, ApiResponse<List<Tag>>>(
                 selector: (_, provider) => provider.allTagResponse,
                 builder: (context, response, child) {
@@ -251,7 +251,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                               ),
                               Expanded(
                                 child: ListView.separated(
-                                  itemCount: data?.length ?? 0,
+                                  itemCount: data.length,
                                   separatorBuilder: (_, index) =>
                                       const SSizedBox(
                                     height: 8,
@@ -261,7 +261,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          "id :${data![index].id}",
+                                          "id :${data[index].id}",
                                           style: const TextStyle(
                                               backgroundColor: kLightSub),
                                         ),

@@ -25,12 +25,12 @@ class _MailOptionsSheetState extends State<MailOptionsSheet> {
           children: [
             Row(
               children: [
-                Text('Title of Mail',
+                const Text('Title of Mail',
                     style: TextStyle(
                         color: kDarkText,
                         fontSize: 14,
                         fontWeight: FontWeight.bold)),
-                Spacer(),
+                const Spacer(),
                 SvgPicture.asset(
                   'assets/icons/exit.svg',
                   width: 24.0.w,
@@ -38,15 +38,15 @@ class _MailOptionsSheetState extends State<MailOptionsSheet> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 34,
             ),
             Row(
               children: [
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(left: 24,right: 24,top: 30,bottom: 18),
-
+                    padding: const EdgeInsets.only(
+                        left: 24, right: 24, top: 30, bottom: 18),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -57,21 +57,25 @@ class _MailOptionsSheetState extends State<MailOptionsSheet> {
                           width: 24.0.w,
                           height: 24.0.h,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Text('Archive',
+                        const Text('Archive',
                             style: TextStyle(
-                                color: kText,
-                                fontSize: 14,)),
+                              color: kText,
+                              fontSize: 14,
+                            )),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(width: 14,),
+                const SizedBox(
+                  width: 14,
+                ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(left: 24,right: 24,top: 30,bottom: 18),
+                    padding: const EdgeInsets.only(
+                        left: 24, right: 24, top: 30, bottom: 18),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -82,21 +86,25 @@ class _MailOptionsSheetState extends State<MailOptionsSheet> {
                           width: 24.0.w,
                           height: 24.0.h,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Text('Share',
+                        const Text('Share',
                             style: TextStyle(
-                                color: kShareText,
-                                fontSize: 14,)),
+                              color: kShareText,
+                              fontSize: 14,
+                            )),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(width: 14,),
+                const SizedBox(
+                  width: 14,
+                ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(left: 24,right: 24,top: 30,bottom: 18),
+                    padding: const EdgeInsets.only(
+                        left: 24, right: 24, top: 30, bottom: 18),
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -107,13 +115,14 @@ class _MailOptionsSheetState extends State<MailOptionsSheet> {
                           width: 24.0.w,
                           height: 24.0.h,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Text('Delete',
+                        const Text('Delete',
                             style: TextStyle(
-                                color: kDeleteText,
-                                fontSize: 14,)),
+                              color: kDeleteText,
+                              fontSize: 14,
+                            )),
                       ],
                     ),
                   ),

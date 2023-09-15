@@ -18,21 +18,21 @@ class SenderView extends StatelessWidget {
               onPressed: () {
                 context.read<SenderProvider>().getAllSenders(1, false);
               },
-              child: Text('all ')),
+              child: const Text('all ')),
           TextButton(
               onPressed: () {
                 context
                     .read<SenderProvider>()
                     .createSender('shuqair', '0592509703', 'khanyounes', "7");
               },
-              child: Text('create ')),
+              child: const Text('create ')),
           TextButton(
               onPressed: () {
                 context
                     .read<SenderProvider>()
                     .updateSender(33, 'abu shuqair', '0', 'gaza', "7");
               },
-              child: Text('update ')),
+              child: const Text('update ')),
           TextButton(
               onPressed: () async {
                 await context.read<SenderProvider>().deleteSenders(33);
@@ -46,7 +46,7 @@ class SenderView extends StatelessWidget {
                     context,
                     onComplete: () {});
               },
-              child: Text('delete')),
+              child: const Text('delete')),
         ],
       ),
       body: const SenderDataListView(),

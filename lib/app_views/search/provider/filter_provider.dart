@@ -1,8 +1,6 @@
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
-import 'package:final_project/features/mail/models/mail.dart';
-import 'package:final_project/features/search/repo/search_repo.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/status/models/status_response.dart';
 import 'package:final_project/features/status/repo/status_repo.dart';

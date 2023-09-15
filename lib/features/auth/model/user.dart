@@ -6,7 +6,7 @@ class User {
   String? email;
   String? image;
   String? emailVerifiedAt;
-  String? roleId;
+  dynamic roleId;
   String? createdAt;
   String? updatedAt;
   Role? role;

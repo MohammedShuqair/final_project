@@ -2,7 +2,6 @@ import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 
 class CategoryProvider extends ChangeNotifier {
   late CategoryRepository _repository;

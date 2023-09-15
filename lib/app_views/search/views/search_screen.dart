@@ -1,22 +1,16 @@
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/widgets/filter_bottom_sheet.dart';
-import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
-import 'package:final_project/app_views/shared/status_list.dart';
-import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
-import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/mail/models/mail.dart';
-import 'package:final_project/features/status/models/status.dart';
-import 'package:final_project/features/status/models/status_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +47,6 @@ class SearchView extends StatelessWidget {
             ),
           ),
         ),
-        actions: [],
       ),
       body: SingleChildScrollView(
         child: Padding(

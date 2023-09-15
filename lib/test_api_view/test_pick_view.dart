@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 
 import 'package:final_project/core/util/image_picker.dart';
 import 'package:final_project/features/current_user/repo/current_user_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PickView extends StatefulWidget {
   const PickView({Key? key}) : super(key: key);

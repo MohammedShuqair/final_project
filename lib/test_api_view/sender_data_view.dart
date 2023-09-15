@@ -48,7 +48,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                             );
                           },
                           onComplete: (context, data, message) {
-                            List<Sender> senders = data?.senders ?? [];
+                            List<Sender> senders = data.senders ?? [];
                             return Column(
                               children: [
                                 const SSizedBox(

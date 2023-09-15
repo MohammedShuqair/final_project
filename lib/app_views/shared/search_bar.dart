@@ -49,7 +49,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               borderSide: BorderSide.none),
           fillColor: controller.text.isNotEmpty ? kUnselect : kWhite,
           filled: true,
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           suffixIcon: controller.text.isNotEmpty
               ? IconButton(
                   onPressed: () {

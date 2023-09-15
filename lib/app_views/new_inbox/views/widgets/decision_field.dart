@@ -22,7 +22,7 @@ class DecisionCard extends StatelessWidget {
           AppTextField(
             controller: context.watch<NewInboxProvider>().decision,
             hintText: "Decision",
-            hintStyle: kHintNormal14AF.copyWith(color: Color(0xff898989)),
+            hintStyle: kHintNormal14AF.copyWith(color: const Color(0xff898989)),
           ),
         ],
       ),

@@ -7,13 +7,15 @@ class SenderDataTitleDescreption extends StatefulWidget {
   const SenderDataTitleDescreption({super.key});
 
   @override
-  State<SenderDataTitleDescreption> createState() => _SenderDataTitleDescreptionState();
+  State<SenderDataTitleDescreption> createState() =>
+      _SenderDataTitleDescreptionState();
 }
 
-class _SenderDataTitleDescreptionState extends State<SenderDataTitleDescreption> {
+class _SenderDataTitleDescreptionState
+    extends State<SenderDataTitleDescreption> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 218,
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
       decoration: const BoxDecoration(
@@ -28,26 +30,26 @@ class _SenderDataTitleDescreptionState extends State<SenderDataTitleDescreption>
                 width: 16.0.w,
                 height: 15.0.h,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 6,
               ),
-              Text('Sport Ministry',
+              const Text('Sport Ministry',
                   style: TextStyle(
                       color: kDarkText,
                       fontSize: 16,
                       fontWeight: FontWeight.bold)),
-              Spacer(),
-              Text('Today, 11:00 AM',
+              const Spacer(),
+              const Text('Today, 11:00 AM',
                   style: TextStyle(
                       color: kSubText,
                       fontSize: 12,
                       fontWeight: FontWeight.bold)),
             ],
           ),
-          Row(
+          const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   'Official organization',
                   style: TextStyle(color: kSubText, fontSize: 12),
@@ -60,21 +62,21 @@ class _SenderDataTitleDescreptionState extends State<SenderDataTitleDescreption>
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16),
             child: Divider(color: kLine),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           Row(
             children: [
-              Text('Title of mail',
+              const Text('Title of mail',
                   style: TextStyle(
                       color: kDarkText,
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
-              Spacer(),
+              const Spacer(),
               SvgPicture.asset(
                 'assets/icons/arrow_down.svg',
                 width: 18.0.w,
@@ -82,12 +84,15 @@ class _SenderDataTitleDescreptionState extends State<SenderDataTitleDescreption>
               ),
             ],
           ),
-          Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+          const Text(
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             style: TextStyle(
               color: kTag,
-              fontSize: 14,),
+              fontSize: 14,
+            ),
             maxLines: 5,
-            overflow: TextOverflow.ellipsis,),
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );

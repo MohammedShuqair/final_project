@@ -47,8 +47,10 @@ class AuthProvider extends ChangeNotifier {
       registerResponse = ApiResponse.completed(user,
           message: 'register completed successfully');
       notifyListeners();
-    } catch (e) {
+    } catch (e, s) {
       registerResponse = ApiResponse.error(message: e.toString());
+      print(e);
+      print(s);
       notifyListeners();
     }
   }

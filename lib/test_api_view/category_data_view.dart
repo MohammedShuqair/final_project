@@ -83,7 +83,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                         ),
                         Expanded(
                           child: ListView.separated(
-                            itemCount: data?.length ?? 0,
+                            itemCount: data.length,
                             separatorBuilder: (_, index) => const SSizedBox(
                               height: 8,
                             ),
@@ -92,7 +92,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                               child: Column(
                                 children: [
                                   Text(
-                                    "id :${data![index].id}",
+                                    "id :${data[index].id}",
                                     style: const TextStyle(
                                         backgroundColor: kLightSub),
                                   ),

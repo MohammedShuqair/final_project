@@ -1,16 +1,9 @@
-import 'dart:convert';
-
+import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/mail_card.dart';
-import 'package:final_project/app_views/shared/responce_builder.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/data/local/local_pref.dart';
 import 'package:final_project/features/auth/model/user.dart';
-import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../../../core/util/colors.dart';
 import '../../../../core/util/styles.dart';
 
@@ -36,13 +29,10 @@ class UserInformationDialog extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                      '$imageUrl${user.image}',
-                      width: 100,
-                      height: 100,
-                    )),
+                child: CircleImage(
+                  imagePath: '$imageUrl${user.image}',
+                  size: 100,
+                ),
               ),
               const SSizedBox(
                 height: 16,

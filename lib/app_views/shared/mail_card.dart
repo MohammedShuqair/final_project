@@ -1,16 +1,11 @@
-import "package:final_project/app_views/home/views/widgets/chip_tag_widget.dart";
-import "package:final_project/app_views/shared/alert.dart";
-import "package:final_project/app_views/shared/core_background.dart";
 import "package:final_project/app_views/shared/custom_sized_box.dart";
+import "package:final_project/app_views/shared/mail_image.dart";
+import "package:final_project/core/util/constants.dart";
 import "package:final_project/core/util/extensions.dart";
-import "package:final_project/features/tag/models/tag.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-
 import "../../../core/util/colors.dart";
 import "../../../core/util/styles.dart";
-
-const String imageUrl = "https://palmail.gsgtt.tech/storage/";
 
 class MailCard extends StatelessWidget {
   const MailCard(
@@ -127,25 +122,8 @@ class MailCard extends StatelessWidget {
               spacing: 16,
               children: images
                   .map(
-                    (e) => Image.network(
-                      imageUrl + e,
-                      fit: BoxFit.fill,
-                      width: 36.w,
-                      height: 36.w,
-                      errorBuilder: (_, e, ___) {
-                        return SizedBox(
-                          height: 36.w,
-                          width: 36.w,
-                          child: Placeholder(
-                              child: Center(
-                            child: Text(
-                              'image error',
-                              style: TextStyle(fontSize: 8.sp),
-                              textAlign: TextAlign.center,
-                            ),
-                          )),
-                        );
-                      },
+                    (e) => MailImage(
+                      path: imageUrl + e,
                     ),
                   )
                   .toList()),

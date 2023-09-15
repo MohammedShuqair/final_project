@@ -39,6 +39,7 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
+      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -104,23 +105,25 @@ mixin class ApiBaseHelper {
   }
 
   dynamic _returnResponse(String body, int statusCode) {
+    var responseJson;
     try {
-      var responseJson = json.decode(body);
-      switch (statusCode) {
-        case 200:
-          return responseJson;
-        case 400:
-          throw BadRequestException(responseJson['message']);
-        case 401:
-        case 403:
-          throw UnauthorisedException(responseJson['message']);
-        case 500:
-        default:
-          throw FetchDataException(
-              'Error occurred while Communication with Server with StatusCode : ${statusCode}');
-      }
+      responseJson = json.decode(body);
     } catch (e) {
       throw UnExpectedResponseFormatException('not json format');
+    }
+    switch (statusCode) {
+      case 200:
+      case 201:
+        return responseJson;
+      case 400:
+        throw BadRequestException(responseJson['message']);
+      case 401:
+      case 403:
+        throw UnauthorisedException(responseJson['message']);
+      case 500:
+      default:
+        throw FetchDataException(
+            'Error occurred while Communication with Server with StatusCode : ${statusCode}');
     }
   }
 }

@@ -15,6 +15,12 @@ class TitleDescriptionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter email title.';
+              }
+              return null;
+            },
             controller: context.watch<NewInboxProvider>().subject,
             hintText: "Title of mail",
             hintStyle: kHintSimi20AF,
@@ -23,6 +29,12 @@ class TitleDescriptionCard extends StatelessWidget {
             color: Color(0xFFD0D0D0),
           ),
           AppTextField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter email description.';
+              }
+              return null;
+            },
             controller: context.watch<NewInboxProvider>().description,
             hintText: "Description",
             hintStyle: kHintNormal14AF,

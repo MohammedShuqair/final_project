@@ -1,8 +1,7 @@
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/data/local/local_pref.dart';
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/auth/model/user.dart';
 import 'package:final_project/features/category/models/category.dart';
@@ -11,7 +10,9 @@ import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class NewInboxProvider extends ChangeNotifier {
@@ -28,17 +29,20 @@ class NewInboxProvider extends ChangeNotifier {
   late TextEditingController description;
   late TextEditingController decision;
   late TextEditingController archiveNumber;
-  String? archiveDate;
+  late DateTime archiveDate;
   Status? selectedStatus;
-  String? senderId;
-  // String? decision;
   String? finalDecision;
   Set<Tag> selectedTags = {};
   List<Activity> activities = [];
   List<Activity> editingActivities = [];
+  List<XFile> attachments = [];
   Sender? pickedSender;
+  late GlobalKey<FormState> formKey;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   NewInboxProvider() {
+    archiveDate = DateTime.now();
+    formKey = GlobalKey<FormState>();
     categoryRepository = CategoryRepository();
     tagRepository = TagRepository();
     selectedCategory = Category(id: 1, name: 'Other');
@@ -51,6 +55,28 @@ class NewInboxProvider extends ChangeNotifier {
     archiveNumber = TextEditingController();
     // getAllCategories();
   }
+  void addAttachment(List<XFile> xFiles) {
+    attachments.addAll(xFiles);
+    notifyListeners();
+  }
+
+  void removeAttachment(String path) {
+    for (int i = 0; i < attachments.length; i++) {
+      if (attachments[i].path == path) {
+        File(path).delete().then((value) {
+          attachments.remove(attachments[i]);
+          notifyListeners();
+        });
+        break;
+      }
+    }
+  }
+
+  void setArchiveDate(DateTime dateTime) {
+    archiveDate = dateTime;
+    notifyListeners();
+  }
+
   void addSenderName(String name) {
     pickedSender = null;
     _removeSenderData();

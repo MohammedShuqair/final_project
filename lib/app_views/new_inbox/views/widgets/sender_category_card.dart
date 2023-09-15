@@ -6,13 +6,10 @@ import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
-import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
-import 'package:final_project/features/category/models/category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class SenderMobileCategoryCard extends StatelessWidget {
@@ -30,6 +27,12 @@ class SenderMobileCategoryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppTextField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter sender name.';
+                  }
+                  return null;
+                },
                 enabled: provider.pickedSender == null,
                 prefixIcon: const Icon(
                   Icons.person_2_outlined,
@@ -65,6 +68,12 @@ class SenderMobileCategoryCard extends StatelessWidget {
                 color: Color(0xFFD0D0D0),
               ),
               AppTextField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter sender mobile number.';
+                  }
+                  return null;
+                },
                 enabled: provider.pickedSender == null,
                 controller: context.watch<NewInboxProvider>().senderMobile,
                 prefixIcon: const Icon(
