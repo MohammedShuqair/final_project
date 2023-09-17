@@ -12,8 +12,8 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SenderMobileCategoryCard extends StatelessWidget {
-  const SenderMobileCategoryCard({Key? key}) : super(key: key);
+class SenderCard extends StatelessWidget {
+  const SenderCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +71,8 @@ class SenderMobileCategoryCard extends StatelessWidget {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter sender mobile number.';
+                  } else if (value.length < 10) {
+                    return 'Please enter valid mobile number.';
                   }
                   return null;
                 },
@@ -81,6 +83,18 @@ class SenderMobileCategoryCard extends StatelessWidget {
                   color: Color(0xFF707070),
                 ),
                 hintText: "Mobile",
+              ),
+              const Divider(
+                color: Color(0xFFD0D0D0),
+              ),
+              AppTextField(
+                enabled: provider.pickedSender == null,
+                controller: context.watch<NewInboxProvider>().senderAddress,
+                prefixIcon: const Icon(
+                  Icons.location_city,
+                  color: Color(0xFF707070),
+                ),
+                hintText: "Address",
               ),
               const Divider(
                 color: Color(0xFFD0D0D0),

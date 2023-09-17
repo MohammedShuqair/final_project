@@ -34,6 +34,11 @@ class ArchiveWidget extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return 'Please enter archive number.';
                   }
+                  final regex = RegExp(r'^\d+/\d+$');
+                  if (!regex.hasMatch(value)) {
+                    return 'Please enter valid archive number.';
+                  }
+
                   return null;
                 },
                 controller: context.watch<NewInboxProvider>().archiveNumber,

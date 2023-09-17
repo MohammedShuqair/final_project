@@ -80,7 +80,7 @@ mixin class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> postWithImage(String url, Map<String, dynamic> body,
+  Future<dynamic> postWithImage(String url, Map<String, String> body,
       {String? filePath}) async {
     if (filePath != null) {
       var request = http.MultipartRequest("POST", Uri.parse(baseUrl + url));
@@ -99,7 +99,7 @@ mixin class ApiBaseHelper {
 
       return _returnResponse(responseString, response.statusCode);
     } else {
-      body.addAll({'image': null});
+      body.addAll({'image': ''});
       return await post(url, body);
     }
   }

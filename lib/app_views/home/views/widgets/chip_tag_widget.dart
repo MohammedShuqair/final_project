@@ -23,7 +23,6 @@ class ChipWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 8, bottom: 8, left: 12, right: 19),
-      margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: /*isShimmer ? null : */ isSelected ? kLightSub : kUnselect,
         borderRadius: BorderRadius.circular(15),

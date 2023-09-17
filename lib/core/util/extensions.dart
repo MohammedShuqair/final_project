@@ -4,10 +4,11 @@ import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart' as i;
+import 'package:http/http.dart' as http;
 
 extension FirstCapital on String {
   String firstCapital() {
-    List<String> words = split(' ');
+    List<String> words = trim().split(' ');
     List<String> result = [];
     words.forEach((word) {
       result.add(word[0].toUpperCase() + word.substring(1));
@@ -59,28 +60,15 @@ extension ListMail on List {
       }
       if (i == mails.length - 1) {
         mailCards.add(MailCard(
-            status: mails[i].status?.color ?? '',
-            organizationName: mails[i].sender?.name ?? '',
-            lastDate: mails[i].createdAt ?? '',
-            subject: mails[i].subject ?? '',
-            body: mails[i].description ?? '',
-            tags: mails[i].tags?.map((e) => e.name ?? '').toList() ?? [],
-            images: mails[i].attachments?.map((e) => e.image ?? '').toList() ??
-                []));
+          mail: mails[i],
+        ));
       } else {
         mailCards.add(Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             MailCard(
-                status: mails[i].status?.color ?? '',
-                organizationName: mails[i].sender?.name ?? '',
-                lastDate: mails[i].createdAt ?? '',
-                subject: mails[i].subject ?? '',
-                body: mails[i].description ?? '',
-                tags: mails[i].tags?.map((e) => e.name ?? '').toList() ?? [],
-                images:
-                    mails[i].attachments?.map((e) => e.image ?? '').toList() ??
-                        []),
+              mail: mails[i],
+            ),
             Divider(
               height: 22.h,
               indent: 23.w,
@@ -98,6 +86,18 @@ extension TotalLength on List<List> {
     return fold(0, (int previousLength, List innerList) {
       return previousLength + innerList.length;
     });
+  }
+}
+
+extension IsValidUrl on String {
+  Future<bool> isImageValid() async {
+    try {
+      final response = await http.head(Uri.parse(this));
+      return response.statusCode == 200;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }
 

@@ -103,8 +103,10 @@ class HomeView extends StatelessWidget {
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
-                top: 20.h, left: 20.w, right: 20.w, bottom: 90.h),
+            padding: EdgeInsets.symmetric(
+              vertical: 20.h,
+              horizontal: 20.w,
+            ),
             child: Column(
               children: [
                 const StatusGridView(),
@@ -198,7 +200,7 @@ class HomeView extends StatelessWidget {
                   create: (context) => NewInboxProvider(),
                   child: const NewInbox(),
                 );
-              });
+              }).then((value) => context.read<HomeProvider>().init());
         },
         child: const InBoxButton(),
       ),
@@ -228,7 +230,7 @@ class UserAccountImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsetsDirectional.only(end: 33.w),
+      margin: EdgeInsetsDirectional.only(end: 20.w),
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(

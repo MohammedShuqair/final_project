@@ -22,7 +22,6 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
   Widget build(BuildContext context) {
     return ed.ExpansionTile(
         tilePadding: EdgeInsets.zero,
-        // how to animation
         shape: Border.all(color: Colors.transparent),
         onExpansionChanged: (_) {
           setState(() {

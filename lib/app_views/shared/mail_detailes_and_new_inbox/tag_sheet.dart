@@ -106,7 +106,7 @@ class _TagSheetState extends State<TagSheet> {
                 return Wrap(
                   //Shimmer
                   spacing: 8,
-                  runSpacing: 4, //here is question
+                  runSpacing: 8, //here is question
                   children: List.generate(
                     4,
                     (index) => const ChipWidget.shimmer(),

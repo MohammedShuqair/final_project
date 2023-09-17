@@ -46,13 +46,9 @@ class NewInbox extends StatelessWidget {
             Consumer<NewInboxProvider>(
               builder: (context, provider, child) {
                 return SheetBar(
-                  onTapDone: () {
-                    print(provider.archiveDate);
-
-                    if (provider.formKey.currentState?.validate() ?? false) {
-                      print(provider.archiveDate);
-                      // Navigator.pop(context, {});
-                    }
+                  onTapDone: () async {
+                    await provider.createEmail();
+                    Navigator.pop(context);
                   },
                   hint: 'New Inbox',
                 );
@@ -61,7 +57,7 @@ class NewInbox extends StatelessWidget {
             const SSizedBox(
               height: 17,
             ),
-            const SenderMobileCategoryCard(),
+            const SenderCard(),
             const SSizedBox(
               height: 16,
             ),

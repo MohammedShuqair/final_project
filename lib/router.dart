@@ -1,6 +1,8 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
 import 'package:final_project/app_views/home/views/widgets/app_drawer.dart';
+import 'package:final_project/app_views/home/views/widgets/tag_view.dart';
+import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
@@ -8,8 +10,10 @@ import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
+import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/sender/provider/sender_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
+import 'package:final_project/features/tag/models/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -78,6 +82,20 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         ),
       );
 
+    case TagsView.id:
+      Map<String, dynamic> map = settings.arguments as Map<String, dynamic>;
+      return MaterialPageRoute(
+        builder: (_) => TagsView(
+          selected: map['selected'],
+          tags: map['tags'],
+        ),
+      );
+    case MailDetailsView.id:
+      return MaterialPageRoute(
+        builder: (_) => MailDetailsView(
+          mail: settings.arguments as Mail,
+        ),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

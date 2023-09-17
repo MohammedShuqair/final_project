@@ -16,7 +16,7 @@ class MailRepository with ApiBaseHelper {
     String? decision,
     String? finalDecision,
     List<int>? tags,
-    List<Activity>? activities,
+    List<Map<String, dynamic>>? activities,
   }) async {
     final response = await post('mails', {
       "subject": subject,
@@ -69,7 +69,7 @@ class MailRepository with ApiBaseHelper {
         'attachments',
         {
           'title': title,
-          'mail_id': id,
+          'mail_id': id.toString(),
         },
         filePath: imagePath);
     return Attachment.fromMap(response['attachment']);

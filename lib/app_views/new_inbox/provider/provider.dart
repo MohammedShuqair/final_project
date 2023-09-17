@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:final_project/core/util/api_response.dart';
@@ -6,7 +7,11 @@ import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/auth/model/user.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/category/repo/category_repo.dart';
+import 'package:final_project/features/mail/models/attachment.dart';
+import 'package:final_project/features/mail/models/mail.dart';
+import 'package:final_project/features/mail/repo/mail_repo.dart';
 import 'package:final_project/features/sender/models/sender.dart';
+import 'package:final_project/features/sender/repo/sender_repo.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
@@ -18,6 +23,8 @@ import 'package:provider/provider.dart';
 class NewInboxProvider extends ChangeNotifier {
   late CategoryRepository categoryRepository;
   late TagRepository tagRepository;
+  late MailRepository mailRepository;
+  late SenderRepository senderRepository;
   ApiResponse<List<Category>>? allCategoryResponse;
   ApiResponse<Set<Tag>>? allTagResponse;
 
@@ -25,6 +32,7 @@ class NewInboxProvider extends ChangeNotifier {
   static NewInboxProvider get(context) => Provider.of(context);
   late TextEditingController senderName;
   late TextEditingController senderMobile;
+  late TextEditingController senderAddress;
   late TextEditingController subject;
   late TextEditingController description;
   late TextEditingController decision;
@@ -41,6 +49,8 @@ class NewInboxProvider extends ChangeNotifier {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   NewInboxProvider() {
+    senderRepository = SenderRepository();
+    mailRepository = MailRepository();
     archiveDate = DateTime.now();
     formKey = GlobalKey<FormState>();
     categoryRepository = CategoryRepository();
@@ -49,12 +59,79 @@ class NewInboxProvider extends ChangeNotifier {
 
     senderName = TextEditingController();
     senderMobile = TextEditingController();
+    senderAddress = TextEditingController();
     subject = TextEditingController();
     description = TextEditingController();
     decision = TextEditingController();
     archiveNumber = TextEditingController();
     // getAllCategories();
   }
+  Future<void> createEmail() async {
+    if (formKey.currentState?.validate() ?? false) {
+      String senderId = await getSenderId();
+      print("senderId");
+      print(senderId);
+      print(
+          "activities${jsonEncode(activities.map((e) => e.toMap()).toList())}");
+      List<int> tags = await getTagsIdList();
+      print("tags");
+      print(jsonEncode(tags));
+      Mail mail = await mailRepository.createMail(
+        subject: subject.text,
+        archiveNumber: archiveNumber.text,
+        archiveDate: archiveDate.toString(),
+        statusId: selectedStatus!.id.toString(),
+        description: description.text,
+        senderId: senderId,
+        decision: decision.text,
+        finalDecision: '',
+        tags: tags,
+        activities: activities.map((e) => e.toMap()).toList(),
+      );
+      print("mail \n$mail}");
+      List<Attachment> attachments = await uploadAttachment(mail);
+      print(attachments);
+    }
+  }
+
+  Future<List<Attachment>> uploadAttachment(Mail mail) async {
+    List<Attachment> a = [];
+    if (attachments.isNotEmpty) {
+      attachments.forEach((attachment) async {
+        a.add(await mailRepository.uploadAttachment(
+            mail.id!, mail.subject ?? '', attachment.path));
+      });
+    }
+    return a;
+  }
+
+  Future<List<int>> getTagsIdList() async {
+    List<int> ides = [];
+    for (int i = 0; i < selectedTags.length; i++) {
+      if (selectedTags.elementAt(i).id == null) {
+        Tag tag =
+            await tagRepository.createTag(selectedTags.elementAt(i).name!);
+        ides.add(tag.id!);
+      } else {
+        ides.add(selectedTags.elementAt(i).id!);
+      }
+    }
+    return ides;
+  }
+
+  Future<String> getSenderId() async {
+    if (pickedSender != null && pickedSender?.id != null) {
+      return pickedSender!.id!.toString();
+    } else {
+      Sender? sender = await senderRepository.createSender(
+          name: senderName.text,
+          mobile: senderMobile.text,
+          address: senderAddress.text,
+          categoryId: selectedCategory.id.toString());
+      return sender!.id!.toString();
+    }
+  }
+
   void addAttachment(List<XFile> xFiles) {
     attachments.addAll(xFiles);
     notifyListeners();
@@ -87,12 +164,14 @@ class NewInboxProvider extends ChangeNotifier {
   void _setSenderData(Sender sender) {
     senderName.text = sender.name ?? '';
     senderMobile.text = sender.mobile ?? '';
+    senderAddress.text = sender.address ?? '';
     selectedCategory = sender.category!;
   }
 
   void _removeSenderData() {
     senderName.text = '';
     senderMobile.text = '';
+    senderAddress.text = '';
     selectedCategory = Category(id: 1, name: 'Other');
   }
 
@@ -199,6 +278,7 @@ class NewInboxProvider extends ChangeNotifier {
   void dispose() {
     senderName.dispose();
     senderMobile.dispose();
+    senderAddress.dispose();
     subject.dispose();
     description.dispose();
     decision.dispose();

@@ -1,134 +1,125 @@
+import "package:final_project/app_views/mail_details/views/mail_details_screen.dart";
 import "package:final_project/app_views/shared/custom_sized_box.dart";
 import "package:final_project/app_views/shared/mail_image.dart";
 import "package:final_project/core/util/constants.dart";
 import "package:final_project/core/util/extensions.dart";
+import "package:final_project/features/mail/models/mail.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "../../../core/util/colors.dart";
 import "../../../core/util/styles.dart";
 
 class MailCard extends StatelessWidget {
-  const MailCard(
-      {Key? key,
-      required this.organizationName,
-      required this.lastDate,
-      required this.subject,
-      required this.body,
-      required this.tags,
-      required this.images,
-      required this.status})
-      : super(key: key);
-  final String organizationName;
-  final String lastDate;
-  final String subject;
-  final String body;
-  final String status;
-  final List<String> tags;
-  final List<String> images;
+  const MailCard({Key? key, required this.mail}) : super(key: key);
+  final Mail mail;
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        //Row1
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 12.w,
-                  height: 12.w,
-                  decoration: BoxDecoration(
-                    color: Color(int.tryParse(status) ?? 0xFFB2B2B2),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SSizedBox(
-                  width: 11,
-                ),
-                Text(
-                  organizationName.firstCapital(),
-                  style: kTitleMailCard,
-                ),
-              ],
-            ),
-            Expanded(
-              child: Row(
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, MailDetailsView.id, arguments: mail);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //Row1
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: Text(
-                      lastDate.formatArriveTime(),
-                      style: kSearchText,
-                      textAlign: TextAlign.end,
+                  Container(
+                    width: 12.w,
+                    height: 12.w,
+                    decoration: BoxDecoration(
+                      color: Color(
+                          int.tryParse(mail.status!.color ?? "0xFFB2B2B2")!),
+                      shape: BoxShape.circle,
                     ),
                   ),
-                  const Icon(
-                    Icons.keyboard_arrow_right_outlined,
-                    color: kSubText,
-                  ),
                   const SSizedBox(
-                    width: 5,
+                    width: 11,
+                  ),
+                  Text(
+                    mail.sender?.name?.firstCapital() ?? 'Name',
+                    style: kTitleMailCard,
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 24),
-          child: Text(
-            subject,
-            style: kSubTitleMailCard,
-          ),
-        ),
-        if (body.isNotEmpty)
-          Container(
-            margin: EdgeInsets.only(top: 8.h),
-            padding: const EdgeInsets.only(left: 24),
-            constraints: BoxConstraints(
-              maxWidth: deviceSize.width * 0.7,
-            ),
-            child: Text(
-              body,
-              style: kSubTitleMailCard.copyWith(color: const Color(0xff898989)),
-            ),
-          ),
-        const SSizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: Wrap(
-              spacing: 16,
-              children: tags
-                  .map((e) => Text(
-                        '# ${e.firstCapital()}',
-                        style: kSelectedButton.copyWith(color: kLightSub),
-                      ))
-                  .toList()),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: Wrap(
-              spacing: 16,
-              children: images
-                  .map(
-                    (e) => MailImage(
-                      path: imageUrl + e,
+              Expanded(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        mail.archiveDate?.formatArriveTime() ?? '',
+                        style: kSearchText,
+                        textAlign: TextAlign.end,
+                      ),
                     ),
-                  )
-                  .toList()),
-        ),
-      ],
+                    const Icon(
+                      Icons.keyboard_arrow_right_outlined,
+                      color: kSubText,
+                    ),
+                    const SSizedBox(
+                      width: 5,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.only(start: 24.w),
+            child: Text(
+              mail.subject ?? '',
+              style: kSubTitleMailCard,
+            ),
+          ),
+          if (mail.description?.isNotEmpty ?? false)
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                  start: 24.w, end: 10.w, bottom: 10.h, top: 8.h),
+              child: Text(
+                mail.description!,
+                style:
+                    kSubTitleMailCard.copyWith(color: const Color(0xff898989)),
+              ),
+            ),
+          if (mail.tags != null)
+            Padding(
+              padding: EdgeInsetsDirectional.only(start: 24.w),
+              child: Wrap(
+                  spacing: 16,
+                  children: mail.tags!
+                      .map((e) => Text(
+                            '# ${e.name?.firstCapital() ?? ''}',
+                            style: kSelectedButton.copyWith(color: kLightSub),
+                          ))
+                      .toList()),
+            ),
+          const SSizedBox(
+            height: 8,
+          ),
+          if (mail.attachments != null)
+            Padding(
+              padding: EdgeInsetsDirectional.only(start: 24.w),
+              child: Wrap(
+                  spacing: 16,
+                  children: mail.attachments!
+                      .map(
+                        (e) => e.image == null
+                            ? SizedBox()
+                            : MailImage(
+                                path: imageUrl + e.image!,
+                              ),
+                      )
+                      .toList()),
+            ),
+        ],
+      ),
     );
   }
 }

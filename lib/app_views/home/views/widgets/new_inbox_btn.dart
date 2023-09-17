@@ -11,11 +11,17 @@ class InBoxButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(
+            color: Color(0xffEDECFC),
+            spreadRadius: 5,
+            blurRadius: 5,
+            offset: Offset(0, 0))
+      ]),
       padding: EdgeInsets.symmetric(
         vertical: 16.0.h,
         horizontal: 20.w,
       ),
-      color: Colors.white,
       child: Row(
         children: [
           Container(

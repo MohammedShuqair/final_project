@@ -29,12 +29,6 @@ class TitleDescriptionCard extends StatelessWidget {
             color: Color(0xFFD0D0D0),
           ),
           AppTextField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter email description.';
-              }
-              return null;
-            },
             controller: context.watch<NewInboxProvider>().description,
             hintText: "Description",
             hintStyle: kHintNormal14AF,

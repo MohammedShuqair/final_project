@@ -23,7 +23,6 @@ class StatusTile extends StatelessWidget {
       }
       return null;
     }, builder: (FormFieldState state) {
-      print(state.hasError);
       return Core(
         padding: EdgeInsets.symmetric(
             horizontal: 17.w, vertical: selectedStatus == null ? 18.h : 12.h),

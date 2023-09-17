@@ -22,7 +22,7 @@ class _PickSenderViewState extends State<PickSenderView> {
   late ApiResponse<SenderResponse> allSenderResponse;
   @override
   void initState() {
-    getAllSenders(2);
+    getAllSenders(1);
     super.initState();
   }
 
@@ -60,7 +60,7 @@ class _PickSenderViewState extends State<PickSenderView> {
                 child: CustomSearchBar(
                   onSubmitted: (String value) {
                     senderName = value;
-                    getAllSenders(2);
+                    getAllSenders(1);
                   },
                   onCancel: () {},
                 ),
@@ -98,7 +98,7 @@ class _PickSenderViewState extends State<PickSenderView> {
                       onTap: () {
                         Navigator.pop(context, {'name': senderName});
                       },
-                      child: Text('create Sender with name of $senderName'),
+                      child: Text('create $senderName Sender'),
                     );
                   } else {
                     return const SizedBox();

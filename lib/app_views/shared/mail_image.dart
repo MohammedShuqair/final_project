@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MailImage extends StatelessWidget {
+class MailImage extends StatefulWidget {
   const MailImage({
     super.key,
     required this.path,
@@ -13,39 +16,69 @@ class MailImage extends StatelessWidget {
   final bool fromNetwork;
 
   @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Image(
-        image: getImageProvider(),
-        fit: BoxFit.fill,
-        width: 36.w,
-        height: 36.w,
-        errorBuilder: (_, e, ___) {
-          print(e);
-          print(___);
-          return SizedBox(
-            height: 36.w,
-            width: 36.w,
-            child: Placeholder(
-                child: Center(
-              child: Text(
-                'image error',
-                style: TextStyle(fontSize: 8.sp),
-                textAlign: TextAlign.center,
-              ),
-            )),
-          );
-        },
-      ),
-    );
+  State<MailImage> createState() => _MailImageState();
+}
+
+class _MailImageState extends State<MailImage> {
+  ImageProvider? imageProvider;
+  @override
+  void initState() {
+    if (widget.fromNetwork) {
+      widget.path.isImageValid().then((value) {
+        if (value) {
+          setState(() {
+            imageProvider = NetworkImage(widget.path);
+          });
+        }
+      });
+    } else {
+      if (File(widget.path).existsSync()) {
+        setState(() {
+          imageProvider = FileImage(File(widget.path));
+        });
+      }
+    }
+    super.initState();
   }
 
-  ImageProvider<Object> getImageProvider() {
-    if (fromNetwork) {
-      return NetworkImage(path);
+  @override
+  Widget build(BuildContext context) {
+    Widget fallBack = SizedBox(
+      height: 36.w,
+      width: 36.w,
+      child: Placeholder(
+          child: Center(
+        child: Text(
+          'image error',
+          style: TextStyle(fontSize: 8.sp),
+          textAlign: TextAlign.center,
+        ),
+      )),
+    );
+    if (imageProvider == null) {
+      return CustomShimmer(
+        child: Container(
+          width: 36.w,
+          height: 36.w,
+          decoration: BoxDecoration(
+              color: kUnselect, borderRadius: BorderRadius.circular(10)),
+        ),
+      );
     } else {
-      return FileImage(File(path));
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image(
+          image: imageProvider!,
+          fit: BoxFit.fill,
+          width: 36.w,
+          height: 36.w,
+          errorBuilder: (_, e, ___) {
+            print(e);
+            print(___);
+            return fallBack;
+          },
+        ),
+      );
     }
   }
 }

@@ -21,7 +21,7 @@ class TagWrap extends StatelessWidget {
     if (tags.isNotEmpty) {
       return Wrap(
         spacing: 8,
-        runSpacing: 4, //here is question
+        runSpacing: 8, //here is question
         children: List.generate(
           tags.length,
           (index) => GestureDetector(
