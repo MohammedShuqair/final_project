@@ -1,9 +1,8 @@
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:final_project/features/sender/models/sender.dart';
+import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/tag/models/tag.dart';
-
-import 'mail_status.dart';
 
 class Mail {
   int? id;
@@ -18,7 +17,7 @@ class Mail {
   String? createdAt;
   String? updatedAt;
   Sender? sender;
-  MailStatus? status;
+  Status? status;
   List<Tag>? tags;
   List<Attachment>? attachments;
   List<Activity>? activities;
@@ -58,7 +57,7 @@ class Mail {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     sender = json['sender'] != null ? Sender.fromMap(json['sender']) : null;
-    status = json['status'] != null ? MailStatus.fromMap(json['status']) : null;
+    status = json['status'] != null ? Status.fromMap(json['status']) : null;
     if (json['tags'] != null) {
       tags = <Tag>[];
       json['tags'].forEach((v) {

@@ -5,11 +5,10 @@ import '../../core/util/colors.dart';
 import '../../core/util/styles.dart';
 
 class ExpansionWidget extends StatefulWidget {
-  const ExpansionWidget(
-      {Key? key, required this.title, required this.mailsCards})
+  const ExpansionWidget({Key? key, required this.title, required this.cards})
       : super(key: key);
   final String title;
-  final List<Widget> mailsCards;
+  final List<Widget> cards;
 
   @override
   State<ExpansionWidget> createState() => _ExpansionWidgetState();
@@ -41,7 +40,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${widget.mailsCards.length}',
+                    '${widget.cards.length}',
                     style: kNumArrowInExpansion,
                   ),
                   const Icon(
@@ -56,7 +55,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
                 color: kLightSub,
                 size: 24,
               ),
-        children: widget.mailsCards //here pass children
+        children: widget.cards //here pass children
         );
   }
 }

@@ -92,16 +92,10 @@ class _ActivityCardState extends State<ActivityCard> {
                     hintStyle: textInTagTextStyle.copyWith(
                         fontWeight: FontWeight.normal),
                   )
-                  // Text(
-                  //   activity.body ?? '',
-                  //   style: textInTagTextStyle.copyWith(
-                  //       fontWeight: FontWeight.normal),
-                  //   textAlign: TextAlign.start,
-                  // ),
                 ],
               ),
             ),
-            if (widget.editingMode) ...[
+            if (widget.editingMode && widget.activity.id == null) ...[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -122,7 +116,7 @@ class _ActivityCardState extends State<ActivityCard> {
                 ],
               )
             ],
-            if (!widget.editingMode)
+            if (!widget.editingMode && widget.activity.id == null)
               PopupMenuButton(
                   position: PopupMenuPosition.under,
                   itemBuilder: (_) => [

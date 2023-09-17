@@ -18,9 +18,7 @@ class SearchRepository with ApiBaseHelper {
         '&end${endDate != null ? '=$endDate' : ''}'
         '&status_id${statusId != null ? '=$statusId' : ''}';
     final response = await get(endpoint);
-    print(endpoint);
     final List<Mail> mails = Mail.mapValueToList(response['mails']);
-    print('search lenght ${mails.length}');
     final List<Category> categories =
         await CategoryRepository().getAllCategory();
     Map<String, List<Mail>> data = {};

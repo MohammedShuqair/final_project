@@ -3,13 +3,17 @@ import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/home/views/widgets/user_Information.dart';
+import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
+import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
+import 'package:final_project/app_views/shared/mails_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -67,22 +71,6 @@ class HomeView extends StatelessWidget {
                   });
             },
           ),
-          /* IconButton(
-              onPressed: () async {
-                MailRepository().createMail(
-                  statusId: '4',
-                  decision: "not yet",
-                  senderId: '81',
-                  finalDecision: "",
-                  activities: [],
-                  tags: [1],
-                  subject: 'test create email',
-                  description: "I hate my self",
-                  archiveNumber: '/2000',
-                  archiveDate: DateTime.now().toString(),
-                );
-              },
-              icon: Icon(Icons.refresh)),*/
         ],
       ),
       drawer: Drawer(
@@ -126,7 +114,13 @@ class HomeView extends StatelessWidget {
                             List<Mail> mails = data[key] ?? [];
                             return ExpansionWidget(
                               title: key,
-                              mailsCards: []..listMail(mails),
+                              cards: []..listMail(mails, (mail) {
+                                  showMailDetailsSheet(
+                                      context,
+                                      mail,
+                                      () async =>
+                                          context.read<HomeProvider>().init());
+                                }),
                             );
                           },
                           separatorBuilder: (_, index) {
@@ -138,25 +132,7 @@ class HomeView extends StatelessWidget {
                         );
                       },
                       onLoading: (_) {
-                        return ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (_, index) {
-                            return CustomShimmer(
-                              highlightColor: Colors.black,
-                              child: ExpansionWidget(
-                                title: lorem(words: 1),
-                                mailsCards: const [],
-                              ),
-                            );
-                          },
-                          separatorBuilder: (_, index) {
-                            return const SSizedBox(
-                              height: 14,
-                            );
-                          },
-                          itemCount: 2,
-                        );
+                        return const MailsShimmer();
                       },
                       onError: (_, message) {
                         return Text('$message');

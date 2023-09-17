@@ -39,7 +39,7 @@ class _CircleImageState extends State<CircleImage> {
         color: kWhite,
       ),
     );
-    if (isValid != null && isValid != true) {
+    if (isValid != null && isValid == true) {
       return ClipRRect(
           borderRadius: BorderRadius.circular(50),
           child: Image.network(
@@ -47,7 +47,8 @@ class _CircleImageState extends State<CircleImage> {
             width: widget.size,
             height: widget.size,
             fit: BoxFit.contain,
-            errorBuilder: (_, __, ___) {
+            errorBuilder: (_, e, ___) {
+              print(e);
               return fallBack;
             },
           ));

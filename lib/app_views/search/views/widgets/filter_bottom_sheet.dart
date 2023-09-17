@@ -8,11 +8,11 @@ import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/app_views/shared/status_list.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/status/models/status_response.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -66,11 +66,9 @@ class FilterBottomSheet extends StatelessWidget {
                         highlightColor: kUnselect,
                         child: CategoryList(
                           categories: List.generate(
-                              5,
+                              defaultCategories.length,
                               (index) => Category(
-                                      name: lorem(
-                                    words: 1,
-                                  ))),
+                                  name: defaultCategories[index].name)),
                           selectedCategories: [],
                           onTap: (Category c) {},
                         ),
@@ -109,8 +107,8 @@ class FilterBottomSheet extends StatelessWidget {
                       return CustomShimmer(
                         highlightColor: kUnselect,
                         child: StatusList(
-                          statuses: List.generate(
-                              4, (index) => Status(name: lorem(words: 1))),
+                          statuses: List.generate(defaultStatues.length,
+                              (index) => defaultStatues[index]),
                           selectedStatus: null,
                           onTap: (Status? s) {},
                         ),

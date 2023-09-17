@@ -1,6 +1,6 @@
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/archive_number.dart';
-import 'package:final_project/app_views/new_inbox/views/widgets/decision_field.dart';
+import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/decision_field.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/sender_category_card.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/title_description_card.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
@@ -13,9 +13,8 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/statu
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_sheet.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/image_picker.dart';
-import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
-import 'package:final_project/features/status/models/status.dart';
+import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/activity_card.dart';
@@ -90,7 +89,6 @@ class NewInbox extends StatelessWidget {
                 return TagTiles(
                   tags: provider.selectedTags,
                   onTap: () {
-                    provider.getAllTags();
                     provider.scaffoldKey.currentState
                         ?.showBottomSheet((context) => TagSheet(
                               onTapDone: (selected) {
@@ -131,15 +129,23 @@ class NewInbox extends StatelessWidget {
             const SSizedBox(
               height: 12,
             ),
-            const DecisionCard(),
+            Selector<NewInboxProvider, TextEditingController>(
+              selector: (_, provider) => provider.decision,
+              builder: (context, value, child) {
+                return DecisionCard(
+                  controller: value,
+                );
+              },
+            ),
             const SSizedBox(
               height: 16,
             ),
             Consumer<NewInboxProvider>(
               builder: (context, provider, child) {
                 return PickImageView(
-                  fromNetwork: false,
-                  images: provider.attachments.map((e) => e.path).toList(),
+                  images: provider.attachments
+                      .map((e) => Attachment(image: e.path))
+                      .toList(),
                   onTapAddImage: () {
                     provider.scaffoldKey.currentState?.showBottomSheet(
                       (context) => PickImageSheet(
@@ -173,7 +179,7 @@ class NewInbox extends StatelessWidget {
               builder: (context, provider, child) {
                 return ExpansionWidget(
                   title: 'Activities',
-                  mailsCards: provider.activities.map(
+                  cards: provider.activities.map(
                     (activity) {
                       return ActivityCard(
                         key: ValueKey(activity.toString()),

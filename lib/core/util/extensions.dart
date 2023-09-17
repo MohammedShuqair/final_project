@@ -48,25 +48,25 @@ extension SortCategoryMails on Map<String, List<Mail>> {
 }
 
 extension ListMail on List {
-  void listMail(List<Mail> mails) {
+  void listMail(List<Mail> mails, void Function(Mail mail) onTap) {
     List<Widget> mailCards = [];
 
     for (int i = 0; i < mails.length; i++) {
-      if (mails[i].id == 67) {
-        print(mails[i].createdAt);
-        print('createdAt ${DateTime.tryParse(mails[i].createdAt ?? "")}');
-        print('archiveDate ${DateTime.tryParse(mails[i].archiveDate ?? "")}');
-        print('now ${DateTime.now()}');
-      }
       if (i == mails.length - 1) {
         mailCards.add(MailCard(
           mail: mails[i],
+          onTap: () {
+            onTap(mails[i]);
+          },
         ));
       } else {
         mailCards.add(Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             MailCard(
+              onTap: () {
+                onTap(mails[i]);
+              },
               mail: mails[i],
             ),
             Divider(
@@ -94,8 +94,8 @@ extension IsValidUrl on String {
     try {
       final response = await http.head(Uri.parse(this));
       return response.statusCode == 200;
-    } catch (e) {
-      print(e);
+    } catch (s) {
+      print('IsValidUrl extension :$s');
       return false;
     }
   }
@@ -105,7 +105,7 @@ extension DateFormat on String {
   String formatArriveTime() {
     DateTime? arriveTime = DateTime.tryParse(this);
     if (arriveTime != null) {
-      arriveTime = arriveTime.add(const Duration(hours: 3));
+      // arriveTime = arriveTime.add(const Duration(hours: 3));
       var now = DateTime.now();
       var formatterDate = i.DateFormat('d - M - yyyy');
       var formatterTime = i.DateFormat.Hm();

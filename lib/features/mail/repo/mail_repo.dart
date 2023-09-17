@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:final_project/core/util/api_base_helper.dart';
-import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 
@@ -41,7 +40,7 @@ class MailRepository with ApiBaseHelper {
     List<int>? tags,
     List<int>? idAttachmentsForDelete,
     List<String>? pathAttachmentsForDelete,
-    List<Activity>? activities,
+    List<Map<String, dynamic>>? activities,
   }) async {
     final response = await put('mails/$mailId', {
       "decision": decision,

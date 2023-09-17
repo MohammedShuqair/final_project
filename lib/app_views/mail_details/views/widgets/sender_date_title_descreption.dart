@@ -1,98 +1,138 @@
+import 'package:final_project/app_views/shared/core_background.dart';
+import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SenderDataTitleDescreption extends StatefulWidget {
-  const SenderDataTitleDescreption({super.key});
+class SenderDataTitleDescription extends StatefulWidget {
+  const SenderDataTitleDescription(
+      {super.key,
+      required this.senderName,
+      required this.categoryName,
+      required this.date,
+      required this.archiveNumber,
+      required this.title,
+      required this.description});
+  final String senderName;
+  final String categoryName;
+  final String date;
+  final String archiveNumber;
+  final String title;
+  final String? description;
 
   @override
-  State<SenderDataTitleDescreption> createState() =>
-      _SenderDataTitleDescreptionState();
+  State<SenderDataTitleDescription> createState() =>
+      _SenderDataTitleDescriptionState();
 }
 
-class _SenderDataTitleDescreptionState
-    extends State<SenderDataTitleDescreption> {
+class _SenderDataTitleDescriptionState
+    extends State<SenderDataTitleDescription> {
+  bool open = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 218,
-      padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 18.w),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(30))),
+    return Core(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              SvgPicture.asset(
-                'assets/icons/user.svg',
-                width: 16.0.w,
-                height: 15.0.h,
+          IntrinsicHeight(
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(end: 19.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/user.svg',
+                        width: 16.0.w,
+                        height: 15.0.h,
+                      ),
+                      const SSizedBox(
+                        width: 6,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(widget.senderName,
+                              style: kStatusName16RegDark.copyWith(
+                                  fontWeight: FontWeight.w600)),
+                          const SSizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            widget.categoryName,
+                            style: kSearchText,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        widget.date,
+                        style:
+                            kSearchText.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Text('Arch ${widget.archiveNumber}', style: kSearchText),
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(
-                width: 6,
-              ),
-              const Text('Sport Ministry',
-                  style: TextStyle(
-                      color: kDarkText,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
-              const Spacer(),
-              const Text('Today, 11:00 AM',
-                  style: TextStyle(
-                      color: kSubText,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold)),
-            ],
-          ),
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Official organization',
-                  style: TextStyle(color: kSubText, fontSize: 12),
-                ),
-              ),
-              Spacer(),
-              Text(
-                'Arch 2022/1032',
-                style: TextStyle(color: kSubText, fontSize: 12),
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Divider(color: kLine),
-          ),
-          const SizedBox(
-            height: 6,
-          ),
-          Row(
-            children: [
-              const Text('Title of mail',
-                  style: TextStyle(
-                      color: kDarkText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-              const Spacer(),
-              SvgPicture.asset(
-                'assets/icons/arrow_down.svg',
-                width: 18.0.w,
-                height: 12.0.h,
-              ),
-            ],
-          ),
-          const Text(
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-            style: TextStyle(
-              color: kTag,
-              fontSize: 14,
             ),
-            maxLines: 5,
-            overflow: TextOverflow.ellipsis,
           ),
+          const Divider(color: kLine),
+          const SSizedBox(
+            height: 4,
+          ),
+          if (widget.description != null && widget.description!.isNotEmpty) ...[
+            ExpansionTile(
+              tilePadding: EdgeInsetsDirectional.only(end: 19.w),
+              shape: LinearBorder.none,
+              title: Text(
+                widget.title,
+                style: kStatusNumberTextStyle,
+              ),
+              onExpansionChanged: (bool opened) => setState(
+                () {
+                  open = opened;
+                },
+              ),
+              trailing: open
+                  ? const Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: kLightSub,
+                    )
+                  : const Icon(
+                      Icons.keyboard_arrow_right,
+                      color: kSubText,
+                    ),
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.description!,
+                        style: kSubTitleMailCard.copyWith(color: kText2),
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ] else ...[
+            Text(
+              widget.title,
+              style: kStatusNumberTextStyle,
+            )
+          ]
         ],
       ),
     );

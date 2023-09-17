@@ -1,4 +1,5 @@
-import 'package:final_project/app_views/home/views/widgets/chip_tag_widget.dart';
+import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
+import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
@@ -7,12 +8,14 @@ import 'package:final_project/app_views/shared/tags_wrap.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class TagsView extends StatefulWidget {
   const TagsView({Key? key, required this.selected, required this.tags})
@@ -38,6 +41,7 @@ class _TagsViewState extends State<TagsView> {
     try {
       final List<Tag> tags = await _repository
           .getTagsWithMails(selected.map((e) => e.id!).toList());
+      body.clear();
       tags.forEach((tag) {
         body.addAll({tag.name ?? '': tag.mails ?? []});
       });
@@ -114,7 +118,9 @@ class _TagsViewState extends State<TagsView> {
                   List<Mail> mails = body[key] ?? [];
                   return ExpansionWidget(
                     title: key,
-                    mailsCards: []..listMail(mails),
+                    cards: []..listMail(mails, (mail) {
+                        showMailDetailsSheet(context, mail, getTagsWithMails);
+                      }),
                   );
                 },
                 separatorBuilder: (_, index) {

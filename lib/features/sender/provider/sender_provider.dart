@@ -78,7 +78,6 @@ class SenderProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e, s) {
       updateSenderResponse = ApiResponse.error(message: e.toString());
-      print(s.toString());
       notifyListeners();
     }
   }

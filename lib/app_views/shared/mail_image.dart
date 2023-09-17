@@ -25,14 +25,14 @@ class _MailImageState extends State<MailImage> {
   void initState() {
     if (widget.fromNetwork) {
       widget.path.isImageValid().then((value) {
-        if (value) {
+        if (value && mounted) {
           setState(() {
             imageProvider = NetworkImage(widget.path);
           });
         }
       });
     } else {
-      if (File(widget.path).existsSync()) {
+      if (File(widget.path).existsSync() && mounted) {
         setState(() {
           imageProvider = FileImage(File(widget.path));
         });
@@ -65,11 +65,11 @@ class _MailImageState extends State<MailImage> {
         ),
       );
     } else {
-      return ClipRRect(
+      Widget child = ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image(
           image: imageProvider!,
-          fit: BoxFit.fill,
+          fit: BoxFit.contain,
           width: 36.w,
           height: 36.w,
           errorBuilder: (_, e, ___) {
@@ -78,6 +78,15 @@ class _MailImageState extends State<MailImage> {
             return fallBack;
           },
         ),
+      );
+      return GestureDetector(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (_) => Center(
+                  child: SizedBox.square(dimension: 0.7.sw, child: child)));
+        },
+        child: child,
       );
     }
   }

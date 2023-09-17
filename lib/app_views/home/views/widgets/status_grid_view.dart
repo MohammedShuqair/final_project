@@ -1,8 +1,10 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/views/widgets/status_view.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/app_views/home/views/widgets/status_widget.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/features/status/models/status_response.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -31,7 +33,7 @@ class StatusGridView extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 4,
+      itemCount: defaultStatues.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 16,
@@ -39,32 +41,37 @@ class StatusGridView extends StatelessWidget {
         childAspectRatio: deviceSize.width > 400 ? 1.5 / 0.5 : 1.5 / 1,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return StatusWidget(
-          statusColor: statusColorsList[
-              index] /*Color(int.parse(data.statuses![index].color ?? ""))*/,
-          statusText: /*data.statuses![index].name ?? ""*/
-              statusTextsList[index],
-          statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
-            return ResponseBuilder(
-              response: provider.allStatus,
-              onComplete: (_, data, message) {
-                String? mailCount = getCurrentMailCount(data, index);
+        return InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, StatusMailsView.id,
+                arguments: defaultStatues[index]);
+          },
+          child: StatusWidget(
+            statusColor: Color(int.parse(defaultStatues[index].color!)),
+            statusText: /*data.statuses![index].name ?? ""*/
+                defaultStatues[index].name!,
+            statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+              return ResponseBuilder(
+                response: provider.allStatus,
+                onComplete: (_, data, message) {
+                  String? mailCount = getCurrentMailCount(data, index);
 
-                return Text(
-                  "${/*data.statuses![index].mailsCount*/ mailCount}",
-                  style: kStatusNumberTextStyle,
-                );
-              },
-              onLoading: (_) {
-                return CustomShimmer(
-                  child: Text(
-                    "5",
+                  return Text(
+                    "${/*data.statuses![index].mailsCount*/ mailCount}",
                     style: kStatusNumberTextStyle,
-                  ),
-                );
-              },
-            );
-          }),
+                  );
+                },
+                onLoading: (_) {
+                  return CustomShimmer(
+                    child: Text(
+                      "5",
+                      style: kStatusNumberTextStyle,
+                    ),
+                  );
+                },
+              );
+            }),
+          ),
         );
       },
     );

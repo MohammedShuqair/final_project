@@ -27,9 +27,6 @@ class FilterProvider extends ChangeNotifier {
 
   void handelStatus(Status? selected) {
     if (status?.id == selected?.id || selected == null) {
-      print(status?.id);
-      print(selected?.id);
-
       _unSetStatusId();
     } else {
       _setStatusId(selected);

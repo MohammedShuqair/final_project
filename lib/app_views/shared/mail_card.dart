@@ -1,4 +1,3 @@
-import "package:final_project/app_views/mail_details/views/mail_details_screen.dart";
 import "package:final_project/app_views/shared/custom_sized_box.dart";
 import "package:final_project/app_views/shared/mail_image.dart";
 import "package:final_project/core/util/constants.dart";
@@ -10,15 +9,15 @@ import "../../../core/util/colors.dart";
 import "../../../core/util/styles.dart";
 
 class MailCard extends StatelessWidget {
-  const MailCard({Key? key, required this.mail}) : super(key: key);
+  const MailCard({Key? key, required this.mail, required this.onTap})
+      : super(key: key);
   final Mail mail;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, MailDetailsView.id, arguments: mail);
-      },
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +33,7 @@ class MailCard extends StatelessWidget {
                     height: 12.w,
                     decoration: BoxDecoration(
                       color: Color(
-                          int.tryParse(mail.status!.color ?? "0xFFB2B2B2")!),
+                          int.tryParse(mail.status?.color ?? "0xFFB2B2B2")!),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -110,7 +109,7 @@ class MailCard extends StatelessWidget {
                   spacing: 16,
                   children: mail.attachments!
                       .map(
-                        (e) => e.image == null
+                        (e) => e.image == null || e.image!.isEmpty
                             ? SizedBox()
                             : MailImage(
                                 path: imageUrl + e.image!,

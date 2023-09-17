@@ -1,8 +1,9 @@
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/mail_card.dart';
 import 'package:final_project/app_views/shared/mail_image.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/styles.dart';
+import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:flutter/material.dart';
 
 class PickImageView extends StatelessWidget {
@@ -10,16 +11,15 @@ class PickImageView extends StatelessWidget {
       {Key? key,
       required this.images,
       required this.onTapAddImage,
-      this.fromNetwork = true,
       required this.onTapDelete})
       : super(key: key);
-  final List<String> images;
-  final bool fromNetwork;
+  final List<Attachment> images;
   final void Function() onTapAddImage;
   final void Function(String path) onTapDelete;
 
   @override
   Widget build(BuildContext context) {
+    print(images);
     return Core(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,10 +39,15 @@ class PickImageView extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (_, index) => ImageTile(
-                    image: images[index],
-                    fromNetwork: fromNetwork,
+                    image: images[index].id != null
+                        ? images[index].image != null &&
+                                images[index].image!.isNotEmpty
+                            ? '$imageUrl${images[index].image}'
+                            : ''
+                        : images[index].image ?? '',
+                    fromNetwork: images[index].id != null,
                     onTapDelete: () {
-                      onTapDelete(images[index]);
+                      onTapDelete(images[index].image ?? '');
                     },
                   ),
               separatorBuilder: (_, index) => const Divider(),

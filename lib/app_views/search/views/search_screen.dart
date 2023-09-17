@@ -1,3 +1,5 @@
+import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
+import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/widgets/filter_bottom_sheet.dart';
@@ -5,10 +7,13 @@ import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
+import 'package:final_project/app_views/shared/mails_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
@@ -178,16 +183,18 @@ class SearchView extends StatelessWidget {
                                   ),
                                   Core(
                                     child: Column(
-                                      children: []..listMail(mails),
+                                      children: []..listMail(
+                                          mails,
+                                          (mail) => showMailDetailsSheet(
+                                              context,
+                                              mail,
+                                              context
+                                                  .read<SearchProvider>()
+                                                  .search)),
                                     ),
                                   ),
                                 ],
                               );
-                              // return ExpansionWidget(
-                              //   title: key,
-                              //   count: mails.length,
-                              //   mails: mails,
-                              // );
                             },
                             separatorBuilder: (_, index) {
                               return const SSizedBox(
@@ -200,25 +207,7 @@ class SearchView extends StatelessWidget {
                       );
                     },
                     onLoading: (_) {
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (_, index) {
-                          return CustomShimmer(
-                            highlightColor: Colors.black,
-                            child: ExpansionWidget(
-                              title: lorem(words: 1),
-                              mailsCards: const [],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (_, index) {
-                          return const SSizedBox(
-                            height: 14,
-                          );
-                        },
-                        itemCount: 3,
-                      );
+                      return const MailsShimmer();
                     },
                     onError: (_, message) {
                       return Text('$message');

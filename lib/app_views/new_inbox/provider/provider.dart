@@ -69,13 +69,7 @@ class NewInboxProvider extends ChangeNotifier {
   Future<void> createEmail() async {
     if (formKey.currentState?.validate() ?? false) {
       String senderId = await getSenderId();
-      print("senderId");
-      print(senderId);
-      print(
-          "activities${jsonEncode(activities.map((e) => e.toMap()).toList())}");
       List<int> tags = await getTagsIdList();
-      print("tags");
-      print(jsonEncode(tags));
       Mail mail = await mailRepository.createMail(
         subject: subject.text,
         archiveNumber: archiveNumber.text,
@@ -84,13 +78,11 @@ class NewInboxProvider extends ChangeNotifier {
         description: description.text,
         senderId: senderId,
         decision: decision.text,
-        finalDecision: '',
+        finalDecision: selectedStatus!.id == 4 ? decision.text : '',
         tags: tags,
         activities: activities.map((e) => e.toMap()).toList(),
       );
-      print("mail \n$mail}");
       List<Attachment> attachments = await uploadAttachment(mail);
-      print(attachments);
     }
   }
 
@@ -190,7 +182,6 @@ class NewInboxProvider extends ChangeNotifier {
         user: user,
         userId: user.id.toString(),
         createdAt: DateTime.now().toString()));
-    print(activities);
     notifyListeners();
   }
 
@@ -212,7 +203,6 @@ class NewInboxProvider extends ChangeNotifier {
 
   void removeActivity(Activity activity) {
     bool x = activities.remove(activity);
-    print(x);
     notifyListeners();
   }
 
@@ -228,23 +218,7 @@ class NewInboxProvider extends ChangeNotifier {
 
   void setCategory(Category category) {
     selectedCategory = category;
-    print(category);
     notifyListeners();
-  }
-
-  Future<void> getAllTags() async {
-    allTagResponse = ApiResponse.loading(message: 'logging...');
-    notifyListeners();
-    try {
-      final List<Tag> tags = await tagRepository.getAllTag();
-      allTagResponse = ApiResponse.completed(tags.toSet(),
-          message: 'Tags fetched successfully');
-      notifyListeners();
-    } catch (e, s) {
-      allTagResponse = ApiResponse.error(message: e.toString());
-      print(s);
-      notifyListeners();
-    }
   }
 
   Future<void> getAllCategories() async {
@@ -283,7 +257,6 @@ class NewInboxProvider extends ChangeNotifier {
     description.dispose();
     decision.dispose();
     archiveNumber.dispose();
-    print('new Inbox desposed');
     super.dispose();
   }
 }

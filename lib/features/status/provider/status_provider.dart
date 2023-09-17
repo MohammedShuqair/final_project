@@ -26,11 +26,11 @@ class StatusProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getSingleStatus(int id, bool withMails) async {
+  Future<void> getSingleStatus(int id) async {
     singleStatus = ApiResponse.loading(message: 'logging...');
     notifyListeners();
     try {
-      final Status status = await _repository.getSingleStatus(id, withMails);
+      final Status status = await _repository.getSingleStatus(id, true);
       singleStatus =
           ApiResponse.completed(status, message: 'Status fetched successfully');
       notifyListeners();
