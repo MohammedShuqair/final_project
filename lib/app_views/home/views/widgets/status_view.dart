@@ -26,7 +26,9 @@ class StatusMailsView extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back_ios_new,
               color: kLightSub,
@@ -66,7 +68,10 @@ class StatusMailsView extends StatelessWidget {
                 itemCount: data.length,
               );
             },
-            onLoading: (_) => MailsShimmer(),
+            onLoading: (_) => Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
+              child: MailsShimmer(),
+            ),
           );
         },
       ),
