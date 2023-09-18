@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/views/widgets/chip_tag_widget.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
@@ -75,7 +76,7 @@ class _TagSheetState extends State<TagSheet> {
           Padding(
             padding: EdgeInsets.only(top: 14.0.h, bottom: 57.h),
             child: SheetBar(
-                onTapDone: () => widget.onTapDone(selected), hint: 'Tags'),
+                onTapDone: () => widget.onTapDone(selected), hint: context.tr('tags')),
           ),
           Core(
             child: ResponseBuilder<Set<Tag>>(
@@ -123,7 +124,7 @@ class _TagSheetState extends State<TagSheet> {
               child: Form(
                 key: key,
                 child: AppTextField(
-                  hintText: 'Add New Tag…',
+                  hintText: context.tr('add_new_tags'),
                   controller: controller,
                   validator: (value) {
                     if (value == null || value.isEmpty) {

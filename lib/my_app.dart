@@ -3,6 +3,7 @@ import 'package:final_project/core/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'features/auth/views/screens/splash_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         title: 'Final Project',
         theme: lightTheme,
         initialRoute: SplashView.id,

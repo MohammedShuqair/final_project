@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
@@ -41,7 +42,7 @@ class StatusWidget extends StatelessWidget {
             height: 24,
           ),
           Text(
-            statusText,
+           context.tr(statusText),
             style: kStatusNameTextStyle,
           )
         ],

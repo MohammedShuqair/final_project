@@ -113,7 +113,6 @@ class HomeView extends StatelessWidget {
                             String key = data.keys.elementAt(index);
                             List<Mail> mails = data[key] ?? [];
                             return ExpansionWidget(
-                              title: key,
                               cards: []..listMail(mails, (mail) {
                                   showMailDetailsSheet(
                                       context,
@@ -121,6 +120,7 @@ class HomeView extends StatelessWidget {
                                       () async =>
                                           context.read<HomeProvider>().init());
                                 }),
+                              title: context.tr(key),
                             );
                           },
                           separatorBuilder: (_, index) {
@@ -149,7 +149,7 @@ class HomeView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 16),
                       child: Text(
-                        "Tags",
+                        context.tr("tags"),
                         style: tagTitleTextStyle,
                       ),
                     ),

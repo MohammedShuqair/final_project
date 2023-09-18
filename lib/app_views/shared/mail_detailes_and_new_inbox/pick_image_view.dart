@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/mail_image.dart';
@@ -27,7 +28,7 @@ class PickImageView extends StatelessWidget {
         InkWell(
           onTap: onTapAddImage,
           child: Text(
-            "Add New Image",
+            context.tr("add_image"),
             style: kAddStatus16RegLightBlue,
           ),
         ),

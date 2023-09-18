@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -41,7 +42,7 @@ class InBoxButton extends StatelessWidget {
             width: 16,
           ),
           Text(
-            "New Inbox",
+            context.tr("new_inbox"),
             style: kInBoxButtonTextStyle,
           ),
         ],

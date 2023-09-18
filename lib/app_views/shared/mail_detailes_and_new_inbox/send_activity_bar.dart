@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
@@ -47,7 +48,7 @@ class _SendActivityBarState extends State<SendActivityBar> {
       style: textInTagTextStyle.copyWith(fontWeight: FontWeight.normal),
       decoration: InputDecoration(
           contentPadding: EdgeInsets.zero,
-          hintText: "Add new Activity …",
+          hintText: context.tr("add_new_activity"),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide.none),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_list.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
@@ -69,7 +70,7 @@ class _PickSenderViewState extends State<PickSenderView> {
                 width: 8,
               ),
               ActionButton(
-                  hint: 'Cancel',
+                  hint: context.tr('cancel'),
                   onTap: () {
                     Navigator.pop(context, {});
                   })

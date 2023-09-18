@@ -9,13 +9,13 @@
   "confirm_password": "تأكيد كلمة المرور",
   "inbox": "واردة",
   "pending": "معلقة",
-  "in_progress": "جاري المعالجة",
+  "In Progress": "جاري المعالجة",
   "completed": "مكتملة",
-  "foreign": "مؤسسات اجنبية",
-  "official_organization": "مؤسسات حكومية",
-  "ngo": "مؤسسات مجتمع مدني",
+  "Foreign": "مؤسسات اجنبية",
+  "Official Organizations": "مؤسسات حكومية",
+  "NGOs": "مؤسسات مجتمع مدني",
   "others": "غيرها",
-  "other": "آخرين",
+  "Other": "آخرين",
   "tags": "الوسوم",
   "new_inbox": "بريد جديد",
   "search": "بحث",
@@ -57,7 +57,21 @@
   "mail_details": "تفاصيل البريد",
   "users_management": "إدارة المستخدمين",
   "profile": "الملف الشخصي",
-  "delete_inbox": "حذف بريد"
+  "delete_inbox": "حذف بريد",
+  "localization": "English",
+  "logout": "تسجيل الخروج",
+  "address": "العنوان",
+  "enter_sender": "الرجاء ادخال المرسل",
+  "enter_mobile":"الرجاء ادخال رقم الجوال",
+  "enter_valid_mobile":"الرجاء ادخال رقم جوال صحيح",
+  "enter_address": "الرجاء ادخال العنوان",
+  "Please enter email title.": "الرجاء ادخال عنوان الايميل",
+  "Please Select Status": "رجاءا اختر حالة",
+  "Please Enter Tag Name": "رجاءا ادخل اسم الوسم"
+
+
+
+
 
 
 

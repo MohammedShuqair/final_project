@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -32,7 +33,7 @@ class TagTiles extends StatelessWidget {
                 padding: EdgeInsetsDirectional.only(start: 18.w, end: 10.w),
                 child: Text(
                   tags.isEmpty
-                      ? "Tags"
+                      ? context.tr("tags")
                       : tags
                           .map((e) => "#${e.name?.firstCapital()}")
                           .toList()

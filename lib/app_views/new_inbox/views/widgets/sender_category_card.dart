@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/category_sheet.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/pick_sender.dart';
@@ -29,7 +30,7 @@ class SenderCard extends StatelessWidget {
               AppTextField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter sender name.';
+                    return context.tr("enter_sender");
                   }
                   return null;
                 },
@@ -61,7 +62,7 @@ class SenderCard extends StatelessWidget {
                     color: kLightSub,
                   ),
                 ),
-                hintText: "Sender",
+                hintText: context.tr("sender"),
                 controller: context.watch<NewInboxProvider>().senderName,
               ),
               const Divider(
@@ -70,9 +71,9 @@ class SenderCard extends StatelessWidget {
               AppTextField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter sender mobile number.';
+                    return context.tr('enter_mobile');
                   } else if (value.length < 10) {
-                    return 'Please enter valid mobile number.';
+                    return context.tr('enter_valid_mobile');
                   }
                   return null;
                 },
@@ -82,7 +83,7 @@ class SenderCard extends StatelessWidget {
                   Icons.phone_android,
                   color: Color(0xFF707070),
                 ),
-                hintText: "Mobile",
+                hintText: context.tr("mobile"),
               ),
               const Divider(
                 color: Color(0xFFD0D0D0),
@@ -94,7 +95,7 @@ class SenderCard extends StatelessWidget {
                   Icons.location_city,
                   color: Color(0xFF707070),
                 ),
-                hintText: "Address",
+                hintText: context.tr("address"),
               ),
               const Divider(
                 color: Color(0xFFD0D0D0),
@@ -109,7 +110,7 @@ class SenderCard extends StatelessWidget {
                             (context) => const CategorySheet());
                       },
                 leading: Text(
-                  "Category",
+                  context.tr("category"),
                   style: kHintNormal16Dark,
                 ),
                 trailing: Row(
@@ -123,14 +124,14 @@ class SenderCard extends StatelessWidget {
                             onComplete:
                                 (BuildContext context, data, String? message) {
                               return Text(
-                                provider.selectedCategory.name!.firstCapital(),
+                                context.tr(provider.selectedCategory.name!.firstCapital()),
                                 style: kNormal14Color7c,
                               );
                             },
                             onLoading: (_) {
                               return CustomShimmer(
                                 child: Text(
-                                  "Category",
+                                  context.tr("category"),
                                   style: kNormal14Color7c,
                                 ),
                               );

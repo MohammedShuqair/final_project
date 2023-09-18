@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
@@ -26,17 +27,17 @@ class ArchiveWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Archive Number',
+                context.tr('archive_number'),
                 style: kHintNormal16Dark,
               ),
               AppTextField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter archive number.';
+                    return context.tr('Please enter archive number.');
                   }
                   final regex = RegExp(r'^\d+/\d+$');
                   if (!regex.hasMatch(value)) {
-                    return 'Please enter valid archive number.';
+                    return context.tr('Please enter valid archive number.');
                   }
 
                   return null;

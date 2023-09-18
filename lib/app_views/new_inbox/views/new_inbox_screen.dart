@@ -13,6 +13,7 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/statu
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_sheet.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/image_picker.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class NewInbox extends StatelessWidget {
                     await provider.createEmail();
                     Navigator.pop(context);
                   },
-                  hint: 'New Inbox',
+                  hint: context.tr("new_inbox"),
                 );
               },
             ),
@@ -178,7 +179,7 @@ class NewInbox extends StatelessWidget {
             Consumer<NewInboxProvider>(
               builder: (context, provider, child) {
                 return ExpansionWidget(
-                  title: 'Activities',
+                    title: context.tr('activity'),
                   cards: provider.activities.map(
                     (activity) {
                       return ActivityCard(
