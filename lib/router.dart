@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/create_user/create_user.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/provider/single_status_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
@@ -20,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app_views/mail_details/details_provider/details_provider.dart';
+import 'app_views/users_management/users_management_screen.dart';
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -110,6 +112,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           child: StatusMailsView(),
         ),
       );
+    case CreateUserScreen.id:
+      return MaterialPageRoute(builder: (_) => const CreateUserScreen() );
+    case UsersManagement.id:
+      return MaterialPageRoute(builder: (_) => const UsersManagement());
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(
