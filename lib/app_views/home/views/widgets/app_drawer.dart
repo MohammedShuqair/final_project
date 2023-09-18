@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/users_management/users_management_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -102,23 +103,26 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  const Text(
-                    'إدارة المستخدمين',
-                    style: TextStyle(fontSize: 18, color: kWhite),
-                  ),
-                  const SizedBox(
-                    width: 28,
-                  ),
-                  Image.asset(
-                    'assets/icons/settings.png',
-                    height: 20,
-                    width: 20,
-                    fit: BoxFit.cover,
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: ()=> Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const UsersManagement())),
+                child: Row(
+                  children: [
+                    const Spacer(),
+                    const Text(
+                      'إدارة المستخدمين',
+                      style: TextStyle(fontSize: 18, color: kWhite),
+                    ),
+                    const SizedBox(
+                      width: 28,
+                    ),
+                    Image.asset(
+                      'assets/icons/settings.png',
+                      height: 20,
+                      width: 20,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
