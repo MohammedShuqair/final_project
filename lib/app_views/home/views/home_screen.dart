@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/views/widgets/app_drawer.dart';
 import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
@@ -74,14 +75,8 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: const [
-            SizedBox(
-              height: 500,
-            ),
-          ],
-        ),
+      drawer: const Drawer(
+        child: AppDrawer(),
       ),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
