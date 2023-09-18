@@ -54,6 +54,7 @@ extension ListMail on List {
     for (int i = 0; i < mails.length; i++) {
       if (i == mails.length - 1) {
         mailCards.add(MailCard(
+          index: i + 1,
           mail: mails[i],
           onTap: () {
             onTap(mails[i]);
@@ -64,6 +65,7 @@ extension ListMail on List {
           mainAxisSize: MainAxisSize.min,
           children: [
             MailCard(
+              index: i + 1,
               onTap: () {
                 onTap(mails[i]);
               },

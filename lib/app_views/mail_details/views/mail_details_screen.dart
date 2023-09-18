@@ -14,6 +14,7 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_t
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/image_picker.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
@@ -170,31 +171,42 @@ class MailDetailsView extends StatelessWidget {
           ),
           Consumer<DetailsProvider>(
             builder: (context, provider, child) {
-              return ExpansionWidget(
-                title: 'Activities',
-                cards: provider.activities.map(
-                  (activity) {
-                    return ActivityCard(
-                      key: ValueKey(activity.toString()),
-                      activity: activity,
-                      onTapSaveEdit: (body, activity) {
-                        provider.editActivityBody(body, activity);
-                      },
-                      onTapCancel: (activity) {
-                        provider.removeEditingActivity(activity);
-                      },
-                      onTapEdit: (Activity activity) {
-                        provider.addEditingActivity(activity);
-                      },
-                      onTapDelete: (Activity activity) {
-                        provider.removeActivity(activity);
-                      },
-                      editingMode:
-                          provider.editingActivities.contains(activity),
-                    );
-                  },
-                ).toList(),
-              );
+              if (provider.activities.isNotEmpty) {
+                return ExpansionWidget(
+                  title: 'Activities',
+                  cards: provider.activities.map(
+                    (activity) {
+                      return ActivityCard(
+                        key: ValueKey(activity.toString()),
+                        activity: activity,
+                        onTapSaveEdit: (body, activity) {
+                          provider.editActivityBody(body, activity);
+                        },
+                        onTapCancel: (activity) {
+                          provider.removeEditingActivity(activity);
+                        },
+                        onTapEdit: (Activity activity) {
+                          provider.addEditingActivity(activity);
+                        },
+                        onTapDelete: (Activity activity) {
+                          provider.removeActivity(activity);
+                        },
+                        editingMode:
+                            provider.editingActivities.contains(activity),
+                      );
+                    },
+                  ).toList(),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                      start: 16, bottom: 10, top: 10),
+                  child: Text(
+                    'Activities'.firstCapital(),
+                    style: tagTitleTextStyle,
+                  ),
+                );
+              }
             },
           ),
           const SSizedBox(

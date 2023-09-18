@@ -9,9 +9,11 @@ import "../../../core/util/colors.dart";
 import "../../../core/util/styles.dart";
 
 class MailCard extends StatelessWidget {
-  const MailCard({Key? key, required this.mail, required this.onTap})
+  const MailCard(
+      {Key? key, required this.mail, required this.onTap, required this.index})
       : super(key: key);
   final Mail mail;
+  final int index;
   final void Function() onTap;
 
   @override
@@ -21,13 +23,23 @@ class MailCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //Row1
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Text(
+                    '$index',
+                    style: kSearchText.copyWith(
+                        color: mail.status?.color == null
+                            ? null
+                            : Color(int.tryParse(
+                                mail.status?.color ?? '0xFFB2B2B2')!)),
+                  ),
+                  const SSizedBox(
+                    width: 2,
+                  ),
                   Container(
                     width: 12.w,
                     height: 12.w,
@@ -110,7 +122,7 @@ class MailCard extends StatelessWidget {
                   children: mail.attachments!
                       .map(
                         (e) => e.image == null || e.image!.isEmpty
-                            ? SizedBox()
+                            ? const SizedBox()
                             : MailImage(
                                 path: imageUrl + e.image!,
                               ),

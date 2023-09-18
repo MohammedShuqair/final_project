@@ -2,6 +2,7 @@ import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _ActivityCardState extends State<ActivityCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleImage(
-              imagePath: widget.activity.user?.image ?? '',
+              imagePath: '$imageUrl${widget.activity.user?.image}',
             ),
             const SSizedBox(
               width: 9,

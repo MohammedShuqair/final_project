@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _SendActivityBarState extends State<SendActivityBar> {
           prefixIcon: Padding(
             padding: const EdgeInsetsDirectional.only(start: 16, end: 9),
             child: CircleImage(
-              imagePath: getUser().image ?? '',
+              imagePath: '$imageUrl${getUser().image}',
             ),
           ),
           suffixIcon: IconButton(

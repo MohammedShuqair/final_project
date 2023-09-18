@@ -5,6 +5,7 @@ import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/features/auth/model/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/util/colors.dart';
 import '../../../../core/util/styles.dart';
 
@@ -19,9 +20,11 @@ class UserInformationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(28.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-      ),
+      // decoration: BoxDecoration(
+      //   color: kWhite,
+      //   borderRadius: BorderRadius.circular(30.0),
+      // ),
+      color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -29,7 +32,7 @@ class UserInformationDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                 child: CircleImage(
                   imagePath: '$imageUrl${user.image}',
                   size: 100,
@@ -40,14 +43,14 @@ class UserInformationDialog extends StatelessWidget {
               ),
               Text(
                 user.name?.firstCapital() ?? 'Name',
-                style: tagTitleTextStyle,
+                style: kTitleMailCard.copyWith(fontSize: 16.sp),
               ),
               const SSizedBox(
                 height: 8,
               ),
               Text(
                 user.role?.name ?? "Role",
-                style: textInUserInformation,
+                style: kNumArrowInExpansion,
               ),
               const SSizedBox(
                 height: 16,
@@ -65,15 +68,13 @@ class UserInformationDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Locale currentLocale = context.locale;
-                  if(currentLocale.languageCode == 'en'){
+                  if (currentLocale.languageCode == 'en') {
                     context.setLocale(const Locale('ar', 'AR'));
-                  }else{
+                  } else {
                     context.setLocale(const Locale('en', 'US'));
-
                   }
-
                 },
                 child: Row(
                   children: [
@@ -83,7 +84,7 @@ class UserInformationDialog extends StatelessWidget {
                     ),
                     Text(
                       context.tr("localization"),
-                      style: textInUserInformation,
+                      style: kStatusNameTextStyle,
                     ),
                   ],
                 ),
@@ -101,7 +102,7 @@ class UserInformationDialog extends StatelessWidget {
                     ),
                     Text(
                       context.tr("logout"),
-                      style: textInUserInformation,
+                      style: kStatusNameTextStyle,
                     ),
                   ],
                 ),

@@ -23,6 +23,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final User user = await _repository.getCurrentUser();
+      print('here ${user.image}');
       SharedHelper shared = SharedHelper();
       await shared.saveData(key: 'user', value: jsonEncode(user.toMap()));
 

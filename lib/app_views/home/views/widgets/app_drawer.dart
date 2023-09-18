@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/util/colors.dart';
 
@@ -13,22 +14,19 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kDarkSub,
-      body: Center(
+    return Container(
+      color: kDarkSub,
+      child: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 64,
-            ),
-            Image.asset(
-              'assets/images/palestine_bird.png',
-              height: 103,
-              width: 67,
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(
-              height: 64,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 64.0.h),
+              child: Image.asset(
+                'assets/images/palestine_bird.png',
+                height: 103,
+                width: 67,
+                fit: BoxFit.cover,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

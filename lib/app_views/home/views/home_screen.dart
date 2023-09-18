@@ -1,20 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/app_drawer.dart';
+import 'package:final_project/app_views/home/views/widgets/home_app_bar.dart';
 import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/home/views/widgets/user_Information.dart';
-import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
-import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/app_views/shared/mails_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
-import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
@@ -23,7 +20,6 @@ import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -38,52 +34,15 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, SearchView.id)
-                  .then((value) => context.read<HomeProvider>().init());
-            },
-            icon: const Icon(Icons.search),
-          ),
-          Consumer<UserProvider>(
-            builder: (context, provider, child) {
-              return ResponseBuilder(
-                  response: provider.currentUserResponse,
-                  onComplete: (_, user, __) {
-                    return PopupMenuButton(
-                      position: PopupMenuPosition.under,
-                      itemBuilder: (BuildContext context2) {
-                        return <PopupMenuEntry<dynamic>>[
-                          PopupMenuItem(
-                            child: UserInformationDialog(
-                              user: user,
-                              onTapLogout: () {
-                                _logout(context, provider);
-                              },
-                            ),
-                          ),
-                        ];
-                      },
-                      child: UserAccountImage(
-                        imagePath: user.image ?? '',
-                      ),
-                    );
-                  });
-            },
-          ),
-        ],
-      ),
+      appBar: const HomeAppBar(),
       drawer: const Drawer(
         child: AppDrawer(),
       ),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async {
-          await context.read<HomeProvider>().getAllTags();
-          await context.read<HomeProvider>().getAllStatus(false);
-          await context.read<HomeProvider>().getAllMailsByCategories();
+          context.read<HomeProvider>().init();
+          await context.read<UserProvider>().getCurrentUser();
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -175,43 +134,6 @@ class HomeView extends StatelessWidget {
               }).then((value) => context.read<HomeProvider>().init());
         },
         child: const InBoxButton(),
-      ),
-    );
-  }
-
-  void _logout(BuildContext context, UserProvider provider) async {
-    await provider.logout();
-    handelResponseStatus(
-      provider.currentUserResponse.status,
-      context,
-      message: provider.currentUserResponse.message,
-      onComplete: () {
-        Navigator.pushNamedAndRemoveUntil(
-            context, SplashView.id, (route) => false);
-      },
-    );
-  }
-}
-
-class UserAccountImage extends StatelessWidget {
-  const UserAccountImage({
-    super.key,
-    required this.imagePath,
-  });
-  final String imagePath;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsetsDirectional.only(end: 20.w),
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: kWhite,
-            width: 3,
-          )),
-      child: CircleImage(
-        imagePath: imagePath,
-        size: 40,
       ),
     );
   }

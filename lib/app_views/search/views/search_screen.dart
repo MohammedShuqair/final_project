@@ -190,7 +190,8 @@ class SearchView extends StatelessWidget {
                                               mail,
                                               context
                                                   .read<SearchProvider>()
-                                                  .search)),
+                                                  .search),
+                                        ),
                                     ),
                                   ),
                                 ],
