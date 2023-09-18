@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/archive_number.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/decision_field.dart';
@@ -179,7 +180,7 @@ class NewInbox extends StatelessWidget {
             Consumer<NewInboxProvider>(
               builder: (context, provider, child) {
                 return ExpansionWidget(
-                    title: context.tr('activity'),
+                  title: context.tr('activity'),
                   cards: provider.activities.map(
                     (activity) {
                       return ActivityCard(

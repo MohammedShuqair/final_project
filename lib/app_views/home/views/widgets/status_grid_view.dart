@@ -29,15 +29,18 @@ class StatusGridView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
+    /*Navigator.pushNamed(context, StatusMailsView.id,
+        arguments: defaultStatues[index]);*/
     return Column(
       children: [
         Row(
           children: [
-            Expanded(child: StatusWidget(
+            Expanded(
+                child: StatusWidget(
               statusColor: statusColorsList[0],
               statusText: statusTextsList[0],
-              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+              statusNumber:
+                  Consumer<HomeProvider>(builder: (_, provider, child) {
                 return ResponseBuilder(
                   response: provider.allStatus,
                   onComplete: (_, data, message) {
@@ -60,10 +63,12 @@ class StatusGridView extends StatelessWidget {
               }),
             )),
             SizedBox(width: 16.0),
-            Expanded(child: StatusWidget(
+            Expanded(
+                child: StatusWidget(
               statusColor: statusColorsList[1],
               statusText: statusTextsList[1],
-              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+              statusNumber:
+                  Consumer<HomeProvider>(builder: (_, provider, child) {
                 return ResponseBuilder(
                   response: provider.allStatus,
                   onComplete: (_, data, message) {
@@ -90,10 +95,12 @@ class StatusGridView extends StatelessWidget {
         SizedBox(height: 16.0),
         Row(
           children: [
-            Expanded(child: StatusWidget(
+            Expanded(
+                child: StatusWidget(
               statusColor: statusColorsList[2],
               statusText: statusTextsList[2],
-              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+              statusNumber:
+                  Consumer<HomeProvider>(builder: (_, provider, child) {
                 return ResponseBuilder(
                   response: provider.allStatus,
                   onComplete: (_, data, message) {
@@ -116,17 +123,19 @@ class StatusGridView extends StatelessWidget {
               }),
             )),
             SizedBox(width: 16.0),
-            Expanded(child: StatusWidget(
+            Expanded(
+                child: StatusWidget(
               statusColor: statusColorsList[3],
               statusText: statusTextsList[3],
-              statusNumber: Consumer<HomeProvider>(builder: (_, provider, child) {
+              statusNumber:
+                  Consumer<HomeProvider>(builder: (_, provider, child) {
                 return ResponseBuilder(
                   response: provider.allStatus,
                   onComplete: (_, data, message) {
                     String? mailCount = getCurrentMailCount(data, 3);
 
                     return Text(
-                      "${/*data.statuses![index].mailsCount*/ mailCount}",
+                      "${mailCount}",
                       style: kStatusNumberTextStyle,
                     );
                   },
