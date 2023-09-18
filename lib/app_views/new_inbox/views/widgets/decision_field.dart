@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
@@ -16,12 +17,12 @@ class DecisionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Decision",
+            context.tr("decision"),
             style: kTitleMailCard,
           ),
           AppTextField(
             controller: context.watch<NewInboxProvider>().decision,
-            hintText: "Decision",
+            hintText:  context.tr("decision"),
             hintStyle: kHintNormal14AF.copyWith(color: const Color(0xff898989)),
           ),
         ],

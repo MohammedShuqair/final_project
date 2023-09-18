@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
@@ -17,12 +18,12 @@ class TitleDescriptionCard extends StatelessWidget {
           AppTextField(
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter email title.';
+                return context.tr('Please enter email title.');
               }
               return null;
             },
             controller: context.watch<NewInboxProvider>().subject,
-            hintText: "Title of mail",
+            hintText: context.tr("title_of_mail"),
             hintStyle: kHintSimi20AF,
           ),
           const Divider(
@@ -30,7 +31,7 @@ class TitleDescriptionCard extends StatelessWidget {
           ),
           AppTextField(
             controller: context.watch<NewInboxProvider>().description,
-            hintText: "Description",
+            hintText: context.tr("description"),
             hintStyle: kHintNormal14AF,
           ),
         ],

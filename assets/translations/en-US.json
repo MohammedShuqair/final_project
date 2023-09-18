@@ -9,13 +9,13 @@
   "confirm_password": "Confirm password",
   "inbox": "Inbox",
   "pending": "Pending",
-  "in_progress": "In progress",
+  "In Progress": "In progress",
   "completed": "Completed",
-  "foreign": "Foreign",
-  "official_organization": "Official Organization",
-  "ngo": "NGOs",
+  "Foreign": "Foreign",
+  "Official Organizations": "Official Organizations",
+  "NGOs": "NGOs",
   "others": "Others",
-  "other": "Other",
+  "Other": "Other",
   "tags": "Tags",
   "new_inbox": "New Inbox",
   "search": "Search",
@@ -57,7 +57,18 @@
   "mail_details": "Mail Details",
   "users_management": "Users Management",
   "profile": "Personal Profile",
-  "delete_inbox": "Delete Inbox"
+  "delete_inbox": "Delete Inbox",
+  "localization": "عربي",
+  "logout": "Log out",
+  "address": "address",
+  "enter_sender": "Please enter sender name.",
+  "enter_mobile":"Please enter sender mobile number.",
+  "enter_valid_mobile":"Please enter valid mobile number.",
+  "enter_address": "الرجاء ادخال العنوان",
+  "Please enter email title.": "Please enter email title.",
+  "Please Select Status": "Please Select Status",
+  "Please Enter Tag Name": "Please Enter Tag Name"
+
 
 
 }

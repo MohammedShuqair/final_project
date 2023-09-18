@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/status_tile_item.dart';
@@ -19,7 +20,7 @@ class StatusTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField<Status?>(validator: (status) {
       if (selectedStatus == null) {
-        return 'Please Select Status';
+        return context.tr('Please Select Status');
       }
       return null;
     }, builder: (FormFieldState state) {
@@ -45,7 +46,7 @@ class StatusTile extends StatelessWidget {
                   ),
                 if (selectedStatus == null)
                   Text(
-                    "Status",
+                    context.tr("status"),
                     style: kHintNormal16Dark,
                   ),
                 const Spacer(),

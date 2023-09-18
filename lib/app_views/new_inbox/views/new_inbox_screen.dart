@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/archive_number.dart';
 import 'package:final_project/app_views/new_inbox/views/widgets/decision_field.dart';
@@ -50,7 +51,7 @@ class NewInbox extends StatelessWidget {
                     await provider.createEmail();
                     Navigator.pop(context);
                   },
-                  hint: 'New Inbox',
+                  hint: context.tr("new_inbox"),
                 );
               },
             ),
@@ -172,7 +173,7 @@ class NewInbox extends StatelessWidget {
             Consumer<NewInboxProvider>(
               builder: (context, provider, child) {
                 return ExpansionWidget(
-                  title: 'Activities',
+                  title: context.tr('activity'),
                   mailsCards: provider.activities.map(
                     (activity) {
                       return ActivityCard(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/constants.dart';
@@ -63,31 +64,43 @@ class UserInformationDialog extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
-                children: [
-                  Icon(Icons.language),
-                  SSizedBox(
-                    width: 16,
-                  ),
-                  Text(
-                    "Arabic",
-                    style: textInUserInformation,
-                  ),
-                ],
+              GestureDetector(
+                onTap: (){
+                  Locale currentLocale = context.locale;
+                  if(currentLocale.languageCode == 'en'){
+                    context.setLocale(const Locale('ar', 'AR'));
+                  }else{
+                    context.setLocale(const Locale('en', 'US'));
+
+                  }
+
+                },
+                child: Row(
+                  children: [
+                    const Icon(Icons.language),
+                    const SSizedBox(
+                      width: 16,
+                    ),
+                    Text(
+                      context.tr("localization"),
+                      style: textInUserInformation,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 24,
               ),
               InkWell(
                 onTap: onTapLogout,
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(Icons.logout),
-                    SizedBox(
+                    const Icon(Icons.logout),
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(
-                      "Log out",
+                      context.tr("logout"),
                       style: textInUserInformation,
                     ),
                   ],

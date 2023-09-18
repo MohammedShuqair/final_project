@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/select_icon.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -42,7 +43,7 @@ class StatusList extends StatelessWidget {
                       width: 16,
                     ),
                     Text(
-                      statuses[index].name!.firstCapital(),
+                      context.tr(statuses[index].name!.firstCapital()),
                       style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
                     ),
                     const Spacer(),

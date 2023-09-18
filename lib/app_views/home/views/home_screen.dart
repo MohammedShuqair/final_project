@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
@@ -125,7 +126,7 @@ class HomeView extends StatelessWidget {
                             String key = data.keys.elementAt(index);
                             List<Mail> mails = data[key] ?? [];
                             return ExpansionWidget(
-                              title: key,
+                              title: context.tr(key),
                               mailsCards: []..listMail(mails),
                             );
                           },
@@ -173,7 +174,7 @@ class HomeView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 16),
                       child: Text(
-                        "Tags",
+                        context.tr("tags"),
                         style: tagTitleTextStyle,
                       ),
                     ),

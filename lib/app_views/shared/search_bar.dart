@@ -1,3 +1,4 @@
+import "package:easy_localization/easy_localization.dart";
 import "package:final_project/core/util/colors.dart";
 import "package:flutter/material.dart";
 
@@ -43,7 +44,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       },
       decoration: InputDecoration(
           contentPadding: EdgeInsets.zero,
-          hintText: "Search",
+          hintText: context.tr("search"),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide.none),

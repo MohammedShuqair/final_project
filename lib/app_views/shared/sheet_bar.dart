@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class SheetBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ActionButton(
-          hint: 'Cancel',
+          hint: context.tr('cancel'),
           onTap: () {
             Navigator.pop(context, {});
           },
@@ -27,7 +28,7 @@ class SheetBar extends StatelessWidget {
           style: kTitleMailCard,
         ),
         ActionButton(
-          hint: 'Done',
+          hint: context.tr('done'),
           onTap: onTapDone,
         ),
       ],
