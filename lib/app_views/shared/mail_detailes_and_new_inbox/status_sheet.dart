@@ -63,7 +63,7 @@ class _StatusSheetState extends State<StatusSheet> {
         Core(
           child: ResponseBuilder(
             response: allStatus,
-            onComplete: (_, __, ___) => StatusList(
+            onComplete: (_, __, ___, more) => StatusList(
                 statuses: all,
                 selectedStatus: selected,
                 onTap: (s) {

@@ -51,7 +51,7 @@ class _CategorySheetState extends State<CategorySheet> {
               builder: (context, provider, child) {
                 return ResponseBuilder<List<Category>>(
                   response: provider.allCategoryResponse,
-                  onComplete: (_, data, __) {
+                  onComplete: (_, data, __, more) {
                     return CategoryList(
                       categories: data,
                       selectedCategory: selected,

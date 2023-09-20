@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 TextStyle kLogo = TextStyle(fontSize: 31.sp, color: kWhite);
+TextStyle kF16N = TextStyle(fontSize: 18.sp, color: kWhite);
+
 TextStyle kSelectedButton =
     TextStyle(fontSize: 14.sp, color: kWhite, fontWeight: FontWeight.w600);
 TextStyle kUnSelectedButton = TextStyle(fontSize: 14.sp, color: kDarkSub);

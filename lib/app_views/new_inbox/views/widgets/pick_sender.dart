@@ -1,40 +1,44 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_list.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/api_response.dart';
+import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/sender/models/sender_response.dart';
 import 'package:final_project/features/sender/repo/sender_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
-class PickSenderView extends StatefulWidget {
-  const PickSenderView({Key? key}) : super(key: key);
+class PickSenderView extends StatelessWidget {
+  const PickSenderView({
+    Key? key,
+    required this.onTapSender,
+    required this.onTapCreateSender,
+  }) : super(key: key);
+  final void Function(Sender sender) onTapSender;
+  final void Function(String newSender) onTapCreateSender;
 
-  @override
-  State<PickSenderView> createState() => _PickSenderViewState();
-}
-
-class _PickSenderViewState extends State<PickSenderView> {
-  String? senderName;
+  /* String? senderName;
 
   late ApiResponse<SenderResponse> allSenderResponse;
+
   @override
   void initState() {
     getAllSenders(1);
     super.initState();
-  }
+  }*/
 
-  Future<void> getAllSenders(
-    int pageNum,
-  ) async {
+  /*Future<void> getAllSenders(int pageNum,) async {
     allSenderResponse = ApiResponse.loading(message: 'logging...');
     setState(() {});
     try {
       final SenderResponse senderResponse =
-          await SenderRepository().getAllSender(pageNum, false);
+      await SenderRepository().getAllSender(pageNum, false);
       if (senderName != null && senderResponse.senders != null) {
         senderResponse.senders
             ?.removeWhere((sender) => !sender.name!.contains(senderName!));
@@ -47,7 +51,7 @@ class _PickSenderViewState extends State<PickSenderView> {
       allSenderResponse = ApiResponse.error(message: e.toString());
       setState(() {});
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +62,13 @@ class _PickSenderViewState extends State<PickSenderView> {
           Row(
             children: [
               Expanded(
-                child: CustomSearchBar(
-                  onSubmitted: (String value) {
-                    senderName = value;
-                    getAllSenders(1);
+                child: Consumer<SenderSearchProvider>(
+                  builder: (context, provider, child) {
+                    return CustomSearchBar(
+                      onSubmitted: (name) => provider.onSearchSubmitted(name),
+                      onCancel: () {},
+                    );
                   },
-                  onCancel: () {},
                 ),
               ),
               const SSizedBox(
@@ -83,29 +88,36 @@ class _PickSenderViewState extends State<PickSenderView> {
           const SSizedBox(
             height: 12,
           ),
-          ResponseBuilder(
-              response: allSenderResponse,
-              onComplete: (_, senderResponse, __) {
-                if (senderResponse.senders != null &&
-                    senderResponse.senders!.isNotEmpty) {
-                  return SenderList(
-                      senders: senderResponse.senders ?? [],
-                      onTapSender: (s) {
-                        Navigator.pop(context, {'sender': s});
-                      });
-                } else {
-                  if (senderName?.isNotEmpty ?? false) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.pop(context, {'name': senderName});
-                      },
-                      child: Text('create $senderName Sender'),
+          Consumer<SenderSearchProvider>(
+            builder: (context, provider, child) {
+              return ResponseBuilder(
+                  response: provider.allSenderResponse,
+                  onLoading: (_) {
+                    return SenderList(
+                      isShimmer: true,
+                      senders: List.generate(
+                          5, (index) => Sender(name: lorem(words: 1))),
                     );
-                  } else {
-                    return const SizedBox();
-                  }
-                }
-              }),
+                  },
+                  onComplete: (_, senderResponse, __, more) {
+                    if (senderResponse.senders != null &&
+                        senderResponse.senders!.isNotEmpty) {
+                      return SenderList(
+                          senders: senderResponse.senders ?? [],
+                          onTapSender: onTapSender);
+                    } else {
+                      if (provider.senderName?.isNotEmpty ?? false) {
+                        return InkWell(
+                          onTap: () => onTapCreateSender(provider.senderName!),
+                          child: Text('create ${provider.senderName} Sender'),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    }
+                  });
+            },
+          ),
         ],
       ),
     );

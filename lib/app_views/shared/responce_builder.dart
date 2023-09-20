@@ -6,8 +6,8 @@ class ResponseBuilder<T> extends StatelessWidget {
   final ApiResponse<T>? response;
   final Widget Function(BuildContext context, String? e)? onError;
   final Widget Function(BuildContext context)? onLoading;
-  final Widget Function(BuildContext context, T data, String? message)?
-      onComplete;
+  final Widget Function(
+      BuildContext context, T data, String? message, bool status)? onComplete;
   const ResponseBuilder(
       {Key? key,
       required this.response,
@@ -24,7 +24,8 @@ class ResponseBuilder<T> extends StatelessWidget {
       } else if (response?.status == ApiStatus.LOADING && onLoading != null) {
         return onLoading!(context);
       } else if (onComplete != null && response?.data != null) {
-        return onComplete!(context, response?.data as T, response?.message);
+        return onComplete!(context, response?.data as T, response?.message,
+            response!.status == ApiStatus.MORE);
       } else {
         return const SSizedBox();
       }

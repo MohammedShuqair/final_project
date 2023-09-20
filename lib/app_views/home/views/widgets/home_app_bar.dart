@@ -32,7 +32,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (context, provider, child) {
             return ResponseBuilder(
               response: provider.currentUserResponse,
-              onComplete: (_, user, __) {
+              onComplete: (_, user, __, more) {
                 return PopupMenuButton(
                   surfaceTintColor: Colors.white,
                   clipBehavior: Clip.hardEdge,

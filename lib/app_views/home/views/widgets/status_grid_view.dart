@@ -34,7 +34,7 @@ class StatusGridView extends StatelessWidget {
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
                     response: provider.allStatus,
-                    onComplete: (_, data, message) {
+                    onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 0);
                       return Text(
                         "$mailCount",
@@ -67,7 +67,7 @@ class StatusGridView extends StatelessWidget {
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
                     response: provider.allStatus,
-                    onComplete: (_, data, message) {
+                    onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 1);
 
                       return Text(
@@ -105,7 +105,7 @@ class StatusGridView extends StatelessWidget {
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
                     response: provider.allStatus,
-                    onComplete: (_, data, message) {
+                    onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 2);
 
                       return Text(
@@ -139,7 +139,7 @@ class StatusGridView extends StatelessWidget {
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
                     response: provider.allStatus,
-                    onComplete: (_, data, message) {
+                    onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 3);
 
                       return Text(

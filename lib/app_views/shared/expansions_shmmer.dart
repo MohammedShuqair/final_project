@@ -5,10 +5,12 @@ import 'package:final_project/core/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
-class MailsShimmer extends StatelessWidget {
-  const MailsShimmer({
+class ExpansionsShimmer extends StatelessWidget {
+  const ExpansionsShimmer({
     super.key,
+    required this.titles,
   });
+  final List<String?> titles;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class MailsShimmer extends StatelessWidget {
         return CustomShimmer(
           highlightColor: Colors.black,
           child: ExpansionWidget(
-            title: defaultCategories[index].name ?? lorem(words: 1),
+            title: titles[index] ?? lorem(words: 1),
             cards: const [],
           ),
         );
@@ -29,7 +31,7 @@ class MailsShimmer extends StatelessWidget {
           height: 14,
         );
       },
-      itemCount: defaultCategories.length,
+      itemCount: titles.length,
     );
   }
 }

@@ -46,7 +46,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                               itemCount: 1,
                             );
                           },
-                          onComplete: (context, data, message) {
+                          onComplete: (context, data, message, status) {
                             return Column(
                               children: [
                                 const SSizedBox(
@@ -145,7 +145,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                               itemCount: 1,
                             );
                           },
-                          onComplete: (context, data, message) {
+                          onComplete: (context, data, message, status) {
                             return Column(
                               children: [
                                 const SSizedBox(
@@ -243,7 +243,7 @@ class _TagDataListViewState extends State<TagDataListView> {
                             itemCount: 1,
                           );
                         },
-                        onComplete: (context, data, message) {
+                        onComplete: (context, data, message, status) {
                           return Column(
                             children: [
                               const SSizedBox(

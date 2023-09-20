@@ -40,7 +40,7 @@ class _DataListViewState extends State<DataListView> {
                 itemCount: 1,
               );
             },
-            onComplete: (context, data, message) {
+            onComplete: (context, data, message, status) {
               return ListView(
                 children: [
                   Row(

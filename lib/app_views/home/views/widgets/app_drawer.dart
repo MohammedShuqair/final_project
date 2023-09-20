@@ -1,4 +1,6 @@
+import 'package:final_project/app_views/sender/views/sender_view.dart';
 import 'package:final_project/app_views/users_management/users_management_screen.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,10 +19,10 @@ class _AppDrawerState extends State<AppDrawer> {
   Widget build(BuildContext context) {
     return Container(
       color: kDarkSub,
-      child: Center(
-        child: Column(
-          children: [
-            Padding(
+      child: ListView(
+        children: [
+          UnconstrainedBox(
+            child: Padding(
               padding: EdgeInsets.symmetric(vertical: 64.0.h),
               child: Image.asset(
                 'assets/images/palestine_bird.png',
@@ -29,104 +31,58 @@ class _AppDrawerState extends State<AppDrawer> {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  const Text(
-                    'الرئيسة',
-                    style: TextStyle(fontSize: 18, color: kWhite),
-                  ),
-                  const SizedBox(
-                    width: 28,
-                  ),
-                  Image.asset(
-                    'assets/icons/home.png',
-                    height: 20,
-                    width: 20,
-                    fit: BoxFit.cover,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  const Text(
-                    'الملف الشخصي',
-                    style: TextStyle(fontSize: 18, color: kWhite),
-                  ),
-                  const SizedBox(
-                    width: 28,
-                  ),
-                  Image.asset(
-                    'assets/icons/profile_user.png',
-                    height: 20,
-                    width: 20,
-                    fit: BoxFit.cover,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  const Text(
-                    'المرسلين',
-                    style: TextStyle(fontSize: 18, color: kWhite),
-                  ),
-                  const SizedBox(
-                    width: 28,
-                  ),
-                  Image.asset(
-                    'assets/icons/senders.png',
-                    height: 20,
-                    width: 20,
-                    fit: BoxFit.cover,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GestureDetector(
-                onTap: ()=> Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const UsersManagement())),
-                child: Row(
-                  children: [
-                    const Spacer(),
-                    const Text(
-                      'إدارة المستخدمين',
-                      style: TextStyle(fontSize: 18, color: kWhite),
-                    ),
-                    const SizedBox(
-                      width: 28,
-                    ),
-                    Image.asset(
-                      'assets/icons/settings.png',
-                      height: 20,
-                      width: 20,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+          DrawerTile(
+            title: 'Home',
+            onTap: () {},
+            iconPath: 'assets/icons/home.png',
+          ),
+          DrawerTile(
+            title: 'Profile',
+            onTap: () {},
+            iconPath: 'assets/icons/profile_user.png',
+          ),
+          DrawerTile(
+            title: 'Senders',
+            onTap: () => Navigator.pushNamed(context, SenderView.id),
+            iconPath: 'assets/icons/senders.png',
+          ),
+          DrawerTile(
+            title: 'Users Management',
+            onTap: () => Navigator.pushNamed(context, UsersManagement.id),
+            iconPath: 'assets/icons/settings.png',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DrawerTile extends StatelessWidget {
+  const DrawerTile({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.iconPath,
+  });
+  final String title;
+  final String iconPath;
+  final void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: onTap,
+      dense: true,
+      leading: Image.asset(
+        iconPath,
+        height: 20,
+        width: 20,
+        fit: BoxFit.cover,
+      ),
+      title: Text(
+        title,
+        style: kF16N,
       ),
     );
   }

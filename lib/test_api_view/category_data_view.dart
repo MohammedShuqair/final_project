@@ -41,7 +41,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                         itemCount: 1,
                       );
                     },
-                    onComplete: (context, data, message) {
+                    onComplete: (context, data, message, status) {
                       return Text(
                         'single category $data',
                         style: const TextStyle(
@@ -75,7 +75,7 @@ class _CategoryDataListViewState extends State<CategoryDataListView> {
                       itemCount: 1,
                     );
                   },
-                  onComplete: (context, data, message) {
+                  onComplete: (context, data, message, status) {
                     return Column(
                       children: [
                         const SSizedBox(

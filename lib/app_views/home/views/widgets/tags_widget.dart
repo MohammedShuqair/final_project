@@ -20,7 +20,7 @@ class Tags extends StatelessWidget {
         builder: (_, provider, child) {
           return ResponseBuilder(
             response: provider.allTagResponse,
-            onComplete: (_, data, message) {
+            onComplete: (_, data, message, more) {
               return Hero(
                 tag: 'tag',
                 child: Material(

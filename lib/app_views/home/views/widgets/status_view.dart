@@ -1,10 +1,11 @@
 import 'package:final_project/app_views/home/provider/single_status_provider.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
-import 'package:final_project/app_views/shared/mails_shmmer.dart';
+import 'package:final_project/app_views/shared/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -42,7 +43,7 @@ class StatusMailsView extends StatelessWidget {
         builder: (context, provider, child) {
           return ResponseBuilder(
             response: provider.singleStatus,
-            onComplete: (_, data, __) {
+            onComplete: (_, data, __, more) {
               return ListView.separated(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
                 itemBuilder: (_, index) {
@@ -70,7 +71,9 @@ class StatusMailsView extends StatelessWidget {
             },
             onLoading: (_) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
-              child: MailsShimmer(),
+              child: ExpansionsShimmer(
+                titles: defaultCategories.map((e) => e.name).toList(),
+              ),
             ),
           );
         },

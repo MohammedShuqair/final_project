@@ -7,7 +7,7 @@ import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
-import 'package:final_project/app_views/shared/mails_shmmer.dart';
+import 'package:final_project/app_views/shared/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
@@ -132,7 +132,7 @@ class SearchView extends StatelessWidget {
                 builder: (context, provider, child) {
                   return ResponseBuilder(
                     response: provider.searchResponse,
-                    onComplete: (_, data, message) {
+                    onComplete: (_, data, message, more) {
                       print(data);
                       if (data.isEmpty) {
                         return Padding(
@@ -208,7 +208,9 @@ class SearchView extends StatelessWidget {
                       );
                     },
                     onLoading: (_) {
-                      return const MailsShimmer();
+                      return ExpansionsShimmer(
+                        titles: defaultCategories.map((e) => e.name).toList(),
+                      );
                     },
                     onError: (_, message) {
                       return Text('$message');

@@ -1,5 +1,7 @@
 import 'package:final_project/router.dart';
 import 'package:final_project/core/util/themes.dart';
+import 'package:final_project/scroll_controller/when_size_change.dart';
+import 'package:final_project/scroll_controller/test_scroll_controller.dart';
 import 'package:flutter/material.dart';
 import 'features/auth/views/screens/splash_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         title: 'Final Project',
         theme: lightTheme,
         initialRoute: SplashView.id,
-        // home: PickView(),
+        // home: ScrollControllerDemo(),
         onGenerateRoute: generateRoute,
       ),
     );

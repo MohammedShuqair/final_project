@@ -76,12 +76,13 @@ class _TagSheetState extends State<TagSheet> {
           Padding(
             padding: EdgeInsets.only(top: 14.0.h, bottom: 57.h),
             child: SheetBar(
-                onTapDone: () => widget.onTapDone(selected), hint: context.tr('tags')),
+                onTapDone: () => widget.onTapDone(selected),
+                hint: context.tr('tags')),
           ),
           Core(
             child: ResponseBuilder<Set<Tag>>(
               response: allTagResponse,
-              onComplete: (_, ___, __) {
+              onComplete: (_, ___, __, more) {
                 return TagWrap(
                   tags: all,
                   leading: true,

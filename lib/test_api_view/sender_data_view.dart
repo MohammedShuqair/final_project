@@ -47,7 +47,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                               itemCount: 1,
                             );
                           },
-                          onComplete: (context, data, message) {
+                          onComplete: (context, data, message, status) {
                             List<Sender> senders = data.senders ?? [];
                             return Column(
                               children: [
@@ -147,7 +147,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                               itemCount: 1,
                             );
                           },
-                          onComplete: (context, data, message) {
+                          onComplete: (context, data, message, status) {
                             return Text('create sender $data');
                           }),
                     );
@@ -184,7 +184,7 @@ class _SenderDataListViewState extends State<SenderDataListView> {
                               itemCount: 1,
                             );
                           },
-                          onComplete: (context, data, message) {
+                          onComplete: (context, data, message, status) {
                             return Text('update data : $data');
                           }),
                     );

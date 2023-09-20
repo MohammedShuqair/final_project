@@ -1,8 +1,10 @@
 import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
 import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
+import 'package:final_project/app_views/shared/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
+import 'package:final_project/app_views/shared/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/tags_wrap.dart';
 import 'package:final_project/core/util/api_response.dart';
@@ -14,6 +16,7 @@ import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +39,12 @@ class _TagsViewState extends State<TagsView> {
   ApiResponse<List<Tag>>? tagsWithMailsResponse;
 
   Future<void> getTagsWithMails() async {
-    tagsWithMailsResponse = ApiResponse.loading(message: 'logging...');
+    if (tagsWithMailsResponse?.data == null) {
+      tagsWithMailsResponse = ApiResponse.loading(message: 'logging...');
+    } else {
+      tagsWithMailsResponse = ApiResponse.more(
+          message: 'logging...', data: tagsWithMailsResponse?.data);
+    }
     setState(() {});
     try {
       final List<Tag> tags = await _repository
@@ -109,26 +117,43 @@ class _TagsViewState extends State<TagsView> {
           ),
           ResponseBuilder(
             response: tagsWithMailsResponse,
-            onComplete: (_, data, __) {
-              return ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (_, index) {
-                  String key = body.keys.elementAt(index);
-                  List<Mail> mails = body[key] ?? [];
-                  return ExpansionWidget(
-                    title: key,
-                    cards: []..listMail(mails, (mail) {
-                        showMailDetailsSheet(context, mail, getTagsWithMails);
-                      }),
-                  );
-                },
-                separatorBuilder: (_, index) {
-                  return const SSizedBox(
-                    height: 14,
-                  );
-                },
-                itemCount: data.length,
+            onComplete: (_, data, __, more) {
+              return Column(
+                children: [
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (_, index) {
+                      String key = body.keys.elementAt(index);
+                      List<Mail> mails = body[key] ?? [];
+                      return ExpansionWidget(
+                        key: ValueKey(data.hashCode),
+                        title: key,
+                        cards: []..listMail(mails, (mail) {
+                            showMailDetailsSheet(
+                                context, mail, getTagsWithMails);
+                          }),
+                      );
+                    },
+                    separatorBuilder: (_, index) {
+                      return const SSizedBox(
+                        height: 14,
+                      );
+                    },
+                    itemCount: data.length,
+                  ),
+                  if (more)
+                    ExpansionsShimmer(
+                      titles: selected.map((e) => e.name).toList()
+                        ..removeWhere(
+                            (newTag) => data.any((old) => old.name == newTag)),
+                    )
+                ],
+              );
+            },
+            onLoading: (_) {
+              return ExpansionsShimmer(
+                titles: [widget.selected.name],
               );
             },
           )

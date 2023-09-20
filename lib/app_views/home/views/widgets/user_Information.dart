@@ -68,13 +68,14 @@ class UserInformationDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: () {
+                onTap: () async {
                   Locale currentLocale = context.locale;
                   if (currentLocale.languageCode == 'en') {
-                    context.setLocale(const Locale('ar', 'AR'));
+                    await context.setLocale(const Locale('ar', 'AR'));
                   } else {
-                    context.setLocale(const Locale('en', 'US'));
+                    await context.setLocale(const Locale('en', 'US'));
                   }
+                  Navigator.pop(context);
                 },
                 child: Row(
                   children: [

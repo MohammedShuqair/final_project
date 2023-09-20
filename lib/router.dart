@@ -1,4 +1,3 @@
-import 'package:final_project/app_views/create_user/create_user.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/provider/single_status_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
@@ -9,7 +8,9 @@ import 'package:final_project/app_views/mail_details/views/mail_details_screen.d
 import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
-import 'package:final_project/app_views/sender/views/widgets/sender_view.dart';
+import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
+import 'package:final_project/app_views/sender/views/sender_view.dart';
+import 'package:final_project/app_views/users_management/screens/create_user/create_user.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
@@ -39,7 +40,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case SenderView.id:
       return MaterialPageRoute(
         builder: (_) => ChangeNotifierProvider(
-          create: (BuildContext context) => SenderProvider(),
+          create: (BuildContext context) => SenderSearchProvider(false),
           child: const SenderView(),
         ),
       );
@@ -113,7 +114,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         ),
       );
     case CreateUserScreen.id:
-      return MaterialPageRoute(builder: (_) => const CreateUserScreen() );
+      return MaterialPageRoute(builder: (_) => const CreateUserScreen());
     case UsersManagement.id:
       return MaterialPageRoute(builder: (_) => const UsersManagement());
     default:

@@ -5,12 +5,9 @@ import 'package:final_project/app_views/home/views/widgets/home_app_bar.dart';
 import 'package:final_project/app_views/home/views/widgets/new_inbox_btn.dart';
 import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
-import 'package:final_project/app_views/home/views/widgets/user_Information.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
-import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/circleImage.dart';
-import 'package:final_project/app_views/shared/mails_shmmer.dart';
+import 'package:final_project/app_views/shared/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -18,7 +15,6 @@ import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
-import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +56,7 @@ class HomeView extends StatelessWidget {
                   builder: (context, provider, child) {
                     return ResponseBuilder(
                       response: provider.allMailsResponse,
-                      onComplete: (_, data, message) {
+                      onComplete: (_, data, message, more) {
                         return ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -87,7 +83,9 @@ class HomeView extends StatelessWidget {
                         );
                       },
                       onLoading: (_) {
-                        return const MailsShimmer();
+                        return ExpansionsShimmer(
+                          titles: defaultCategories.map((e) => e.name).toList(),
+                        );
                       },
                       onError: (_, message) {
                         return Text('$message');

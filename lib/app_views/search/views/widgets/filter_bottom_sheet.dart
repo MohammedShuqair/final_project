@@ -48,7 +48,7 @@ class FilterBottomSheet extends StatelessWidget {
                 builder: (context, value, child) {
                   return ResponseBuilder(
                     response: value,
-                    onComplete: (_, data, __) {
+                    onComplete: (_, data, __, more) {
                       return Consumer<FilterProvider>(
                         builder: (context, provider, child) {
                           return CategoryList(
@@ -90,7 +90,7 @@ class FilterBottomSheet extends StatelessWidget {
                 builder: (context, value, child) {
                   return ResponseBuilder(
                     response: value,
-                    onComplete: (_, data, __) {
+                    onComplete: (_, data, __, more) {
                       return Consumer<FilterProvider>(
                         builder: (context, provider, child) {
                           return StatusList(
