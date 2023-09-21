@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/auth/model/user.dart';
@@ -15,6 +16,8 @@ class DetailsProvider extends ChangeNotifier {
   late Mail mail;
   late MailRepository mailRepository;
   late TagRepository tagRepository;
+  ApiResponse<String>? deleteResponse;
+  ApiResponse<Mail>? updateResponse;
 
   Status? selectedStatus;
   Set<Tag> selectedTags = {};
@@ -35,21 +38,45 @@ class DetailsProvider extends ChangeNotifier {
     attachments.addAll(mail.attachments ?? []);
     activities.addAll(mail.activities?.toList() ?? []);
   }
+
+  Future<void> deleteMail() async {
+    deleteResponse = ApiResponse.loading(message: 'logging...');
+    notifyListeners();
+    try {
+      final String message = await mailRepository.deleteMail(mail.id!);
+      deleteResponse = ApiResponse.completed(message, message: message);
+      notifyListeners();
+    } catch (e, s) {
+      deleteResponse = ApiResponse.error(message: e.toString());
+      notifyListeners();
+    }
+  }
+
   Future<void> updateEmail() async {
     if (formKey.currentState?.validate() ?? false) {
-      List<int> tags = await getTagsIdList();
-      Mail updatedMail = await mailRepository.updateMail(
-        mailId: mail.id,
-        statusId: selectedStatus!.id.toString(),
-        decision: decision.text,
-        finalDecision: selectedStatus!.id == 4 ? decision.text : '',
-        tags: tags,
-        idAttachmentsForDelete: removedAttachments.map((e) => e.id!).toList(),
-        pathAttachmentsForDelete:
-            removedAttachments.map((e) => e.image ?? '').toList(),
-        activities: getNewActivities(),
-      );
-      await uploadAttachment(updatedMail);
+      updateResponse = ApiResponse.loading(message: 'updating...');
+      notifyListeners();
+      try {
+        List<int> tags = await getTagsIdList();
+        Mail updatedMail = await mailRepository.updateMail(
+          mailId: mail.id,
+          statusId: selectedStatus!.id.toString(),
+          decision: decision.text,
+          finalDecision: selectedStatus!.id == 4 ? decision.text : '',
+          tags: tags,
+          idAttachmentsForDelete: removedAttachments.map((e) => e.id!).toList(),
+          pathAttachmentsForDelete:
+              removedAttachments.map((e) => e.image ?? '').toList(),
+          activities: getNewActivities(),
+        );
+        await uploadAttachment(updatedMail);
+        updateResponse = ApiResponse.completed(updatedMail,
+            message: '${updatedMail.subject} Mail updated successfully');
+        notifyListeners();
+      } catch (e, s) {
+        updateResponse = ApiResponse.error(message: e.toString());
+        notifyListeners();
+      }
     }
   }
 

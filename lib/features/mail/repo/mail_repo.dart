@@ -73,4 +73,9 @@ class MailRepository with ApiBaseHelper {
         filePath: imagePath);
     return Attachment.fromMap(response['attachment']);
   }
+
+  Future<String> deleteMail(int id) async {
+    final response = await delete('mails/$id');
+    return response['message'];
+  }
 }

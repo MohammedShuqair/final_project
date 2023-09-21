@@ -18,6 +18,7 @@ mixin class ApiBaseHelper {
     try {
       final response =
           await http.get(Uri.parse(baseUrl + url), headers: headers);
+      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -71,6 +72,7 @@ mixin class ApiBaseHelper {
     try {
       final response = await http.delete(Uri.parse(baseUrl + url),
           body: body, headers: headers);
+      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');

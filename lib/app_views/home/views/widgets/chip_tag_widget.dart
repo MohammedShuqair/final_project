@@ -1,4 +1,4 @@
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';

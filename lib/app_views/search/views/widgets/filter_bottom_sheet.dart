@@ -1,10 +1,12 @@
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/date_picker.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
+import 'package:final_project/app_views/shared/shimmers/status_list_shimmer.dart';
 import 'package:final_project/app_views/shared/status_list.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
@@ -33,8 +35,8 @@ class FilterBottomSheet extends StatelessWidget {
                 Navigator.pop(context, {
                   'categories': context.read<FilterProvider>().categories,
                   'status_id': context.read<FilterProvider>().status,
-                  'end': null,
-                  'start': null,
+                  'end': context.read<FilterProvider>().endDate,
+                  'start': context.read<FilterProvider>().startDate,
                 });
               },
               hint: 'Filters',
@@ -103,19 +105,41 @@ class FilterBottomSheet extends StatelessWidget {
                         },
                       );
                     },
-                    onLoading: (_) {
-                      return CustomShimmer(
-                        highlightColor: kUnselect,
-                        child: StatusList(
-                          statuses: List.generate(defaultStatues.length,
-                              (index) => defaultStatues[index]),
-                          selectedStatus: null,
-                          onTap: (Status? s) {},
-                        ),
-                      );
-                    },
+                    onLoading: (_) => const StatusListShimmer(),
                     onError: (_, message) {
                       return Text(message ?? '');
+                    },
+                  );
+                },
+              ),
+            ),
+            const SSizedBox(
+              height: 16,
+            ),
+            Core(
+              child: Consumer<FilterProvider>(
+                builder: (context, provider, child) {
+                  return CustomDatePicker(
+                    hint: "From Date",
+                    selectedDate: provider.startDate ?? DateTime(2023),
+                    onChangeDate: (DateTime newDate) {
+                      provider.setStartDat(newDate);
+                    },
+                  );
+                },
+              ),
+            ),
+            const SSizedBox(
+              height: 8,
+            ),
+            Core(
+              child: Consumer<FilterProvider>(
+                builder: (context, provider, child) {
+                  return CustomDatePicker(
+                    hint: "To Date",
+                    selectedDate: provider.endDate ?? DateTime.now(),
+                    onChangeDate: (DateTime newDate) {
+                      provider.setEndDat(newDate);
                     },
                   );
                 },

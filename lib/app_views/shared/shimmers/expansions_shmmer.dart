@@ -1,4 +1,4 @@
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/core/util/constants.dart';

@@ -15,8 +15,8 @@ class SearchProvider extends ChangeNotifier {
 
   List<Category> categories = [];
   Status? status;
-  String? startDate;
-  String? endDate;
+  DateTime startDate = DateTime(2023);
+  DateTime endDate = DateTime.now();
   void setCategories(List<Category> categoriesFilter) {
     categories = categoriesFilter;
     notifyListeners();
@@ -27,7 +27,7 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setStartDat(String? date) {
+  void setStartDat(DateTime date) {
     startDate = date;
     notifyListeners();
   }
@@ -37,7 +37,7 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setEndDat(String? date) {
+  void setEndDat(DateTime date) {
     endDate = date;
     notifyListeners();
   }
@@ -58,8 +58,11 @@ class SearchProvider extends ChangeNotifier {
     try {
       final Map<String, List<Mail>> searchMap = await _searchRepository.search(
           searchFor: searchFor,
-          startDate: startDate,
-          endDate: endDate,
+          startDate: startDate == null
+              ? DateTime(2023).toString()
+              : startDate.toString(),
+          endDate:
+              endDate == null ? DateTime.now().toString() : endDate.toString(),
           statusId: status?.id,
           categoriesFilter: categories.map((e) => e.name!).toList());
       searchResponse = ApiResponse.completed(searchMap,

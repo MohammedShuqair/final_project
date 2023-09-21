@@ -58,6 +58,7 @@ class PickSenderView extends StatelessWidget {
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 70.h),
+        controller: context.watch<SenderSearchProvider>().scrollController,
         children: [
           Row(
             children: [
@@ -66,7 +67,7 @@ class PickSenderView extends StatelessWidget {
                   builder: (context, provider, child) {
                     return CustomSearchBar(
                       onSubmitted: (name) => provider.onSearchSubmitted(name),
-                      onCancel: () {},
+                      onCancel: () => provider.reset(),
                     );
                   },
                 ),
@@ -102,9 +103,19 @@ class PickSenderView extends StatelessWidget {
                   onComplete: (_, senderResponse, __, more) {
                     if (senderResponse.senders != null &&
                         senderResponse.senders!.isNotEmpty) {
-                      return SenderList(
-                          senders: senderResponse.senders ?? [],
-                          onTapSender: onTapSender);
+                      return Column(
+                        children: [
+                          SenderList(
+                              senders: senderResponse.senders ?? [],
+                              onTapSender: onTapSender),
+                          if (more)
+                            SenderList(
+                              isShimmer: true,
+                              senders: List.generate(
+                                  2, (index) => Sender(name: lorem(words: 1))),
+                            )
+                        ],
+                      );
                     } else {
                       if (provider.senderName?.isNotEmpty ?? false) {
                         return InkWell(

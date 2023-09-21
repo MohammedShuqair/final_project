@@ -5,7 +5,7 @@ import 'package:final_project/app_views/new_inbox/views/widgets/pick_sender.dart
 import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/colors.dart';

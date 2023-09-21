@@ -73,13 +73,6 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           child: const HomeView(),
         ),
       );
-    case MailOptionsSheet.id:
-      return MaterialPageRoute(
-        builder: (_) => ChangeNotifierProvider(
-          create: (BuildContext context) => SearchProvider(),
-          child: const MailOptionsSheet(),
-        ),
-      );
 
     case AppDrawer.id:
       return MaterialPageRoute(

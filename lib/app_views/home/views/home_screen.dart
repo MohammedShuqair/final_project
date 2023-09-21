@@ -7,7 +7,7 @@ import 'package:final_project/app_views/home/views/widgets/status_grid_view.dart
 import 'package:final_project/app_views/home/views/widgets/tags_widget.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/expansions_shmmer.dart';
+import 'package:final_project/app_views/shared/shimmers/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -57,29 +57,43 @@ class HomeView extends StatelessWidget {
                     return ResponseBuilder(
                       response: provider.allMailsResponse,
                       onComplete: (_, data, message, more) {
-                        return ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (_, index) {
-                            String key = data.keys.elementAt(index);
-                            List<Mail> mails = data[key] ?? [];
-                            return ExpansionWidget(
-                              cards: []..listMail(mails, (mail) {
-                                  showMailDetailsSheet(
-                                      context,
-                                      mail,
-                                      () async =>
-                                          context.read<HomeProvider>().init());
-                                }),
-                              title: context.tr(key),
-                            );
-                          },
-                          separatorBuilder: (_, index) {
-                            return const SSizedBox(
-                              height: 14,
-                            );
-                          },
-                          itemCount: data.length,
+                        return Column(
+                          children: [
+                            ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (_, index) {
+                                String key = data.keys.elementAt(index);
+                                List<Mail> mails = data[key] ?? [];
+                                return ExpansionWidget(
+                                  key: ValueKey(data.hashCode),
+                                  cards: []..listMail(mails, (mail) {
+                                      showMailDetailsSheet(
+                                          context,
+                                          mail,
+                                          () async => context
+                                              .read<HomeProvider>()
+                                              .init());
+                                    }),
+                                  title: context.tr(key),
+                                );
+                              },
+                              separatorBuilder: (_, index) {
+                                return const SSizedBox(
+                                  height: 14,
+                                );
+                              },
+                              itemCount: data.length,
+                            ),
+                            if (more)
+                              ExpansionsShimmer(
+                                titles: defaultCategories
+                                    .map((e) => e.name)
+                                    .toList()
+                                  ..removeWhere((newCat) => data.keys
+                                      .any((oldCat) => newCat == oldCat)),
+                              )
+                          ],
                         );
                       },
                       onLoading: (_) {

@@ -11,35 +11,9 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class SenderView extends StatefulWidget {
+class SenderView extends StatelessWidget {
   const SenderView({Key? key}) : super(key: key);
   static const String id = '/senderView';
-
-  @override
-  State<SenderView> createState() => _SenderViewState();
-}
-
-class _SenderViewState extends State<SenderView> {
-  late ScrollController scrollController;
-
-  @override
-  void initState() {
-    scrollController = ScrollController();
-    // context.read<SenderSearchProvider>().createListView().listen((page) {
-    //   print("page $page");
-    //   // currentPage = page;
-    //   // notifyListeners();
-    // })
-    // ;
-    scrollController.addListener(() {
-      print('start');
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        print("here");
-      }
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +56,6 @@ class _SenderViewState extends State<SenderView> {
                     return Column(
                       children: [
                         SenderList(
-                            controller: scrollController,
                             senders: senderResponse.senders ?? [],
                             onTapSender: (sender) {}),
                         if (more)

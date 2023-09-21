@@ -27,6 +27,7 @@ class NewInboxProvider extends ChangeNotifier {
   late SenderRepository senderRepository;
   ApiResponse<List<Category>>? allCategoryResponse;
   ApiResponse<Set<Tag>>? allTagResponse;
+  ApiResponse<bool>? createMailResponse;
 
   late Category selectedCategory;
   static NewInboxProvider get(context) => Provider.of(context);
@@ -66,23 +67,31 @@ class NewInboxProvider extends ChangeNotifier {
     archiveNumber = TextEditingController();
     // getAllCategories();
   }
-  Future<void> createEmail() async {
+  Future<void> createMail() async {
     if (formKey.currentState?.validate() ?? false) {
-      String senderId = await getSenderId();
-      List<int> tags = await getTagsIdList();
-      Mail mail = await mailRepository.createMail(
-        subject: subject.text,
-        archiveNumber: archiveNumber.text,
-        archiveDate: archiveDate.toString(),
-        statusId: selectedStatus!.id.toString(),
-        description: description.text,
-        senderId: senderId,
-        decision: decision.text,
-        finalDecision: selectedStatus!.id == 4 ? decision.text : '',
-        tags: tags,
-        activities: activities.map((e) => e.toMap()).toList(),
-      );
-      List<Attachment> attachments = await uploadAttachment(mail);
+      createMailResponse = ApiResponse.loading(message: 'creating...');
+      notifyListeners();
+      try {
+        String senderId = await getSenderId();
+        List<int> tags = await getTagsIdList();
+        Mail mail = await mailRepository.createMail(
+          subject: subject.text,
+          archiveNumber: archiveNumber.text,
+          archiveDate: archiveDate.toString(),
+          statusId: selectedStatus!.id.toString(),
+          description: description.text,
+          senderId: senderId,
+          decision: decision.text,
+          finalDecision: selectedStatus!.id == 4 ? decision.text : '',
+          tags: tags,
+          activities: activities.map((e) => e.toMap()).toList(),
+        );
+        List<Attachment> attachments = await uploadAttachment(mail);
+        createMailResponse = ApiResponse.completed(true,
+            message: '${mail.subject} created sucssesfully');
+      } catch (e) {
+        createMailResponse = ApiResponse.error(message: '$e');
+      }
     }
   }
 

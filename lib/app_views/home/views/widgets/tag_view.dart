@@ -1,10 +1,10 @@
 import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
 import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
-import 'package:final_project/app_views/shared/expansions_shmmer.dart';
+import 'package:final_project/app_views/shared/shimmers/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/tags_wrap.dart';
 import 'package:final_project/core/util/api_response.dart';

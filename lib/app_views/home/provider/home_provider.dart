@@ -16,9 +16,9 @@ class HomeProvider extends ChangeNotifier {
   late TagRepository _tagRepository;
   late MailRepository _mailRepository;
 
-  late ApiResponse<StatusResponse> allStatus;
-  late ApiResponse<Set<Tag>> allTagResponse;
-  late ApiResponse<Map<String, List<Mail>>> allMailsResponse;
+  ApiResponse<StatusResponse>? allStatus;
+  ApiResponse<Set<Tag>>? allTagResponse;
+  ApiResponse<Map<String, List<Mail>>>? allMailsResponse;
   Set<Tag> selectedTag = {};
   HomeProvider() {
     _statusRepository = StatusRepository();
@@ -41,8 +41,14 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getAllMailsByCategories() async {
-    allMailsResponse = ApiResponse.loading(message: 'logging...');
+    if (allMailsResponse?.data == null) {
+      allMailsResponse = ApiResponse.loading(message: 'logging...');
+    } else {
+      allMailsResponse =
+          ApiResponse.more(message: 'logging...', data: allMailsResponse?.data);
+    }
     notifyListeners();
+
     try {
       final List<Category> categories =
           await _categoryRepository.getAllCategory();
@@ -85,8 +91,14 @@ class HomeProvider extends ChangeNotifier {
   // }
 
   Future<void> getAllTags() async {
-    allTagResponse = ApiResponse.loading(message: 'logging...');
+    if (allTagResponse?.data == null) {
+      allTagResponse = ApiResponse.loading(message: 'logging...');
+    } else {
+      allTagResponse =
+          ApiResponse.more(message: 'logging...', data: allTagResponse?.data);
+    }
     notifyListeners();
+
     try {
       final List<Tag> tags = await _tagRepository.getAllTag();
       allTagResponse = ApiResponse.completed(tags.toSet(),
@@ -99,7 +111,12 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getAllStatus(bool withMails) async {
-    allStatus = ApiResponse.loading(message: 'logging...');
+    if (allStatus?.data == null) {
+      allStatus = ApiResponse.loading(message: 'logging...');
+    } else {
+      allStatus =
+          ApiResponse.more(message: 'logging...', data: allStatus?.data);
+    }
     notifyListeners();
     try {
       final StatusResponse statuses =

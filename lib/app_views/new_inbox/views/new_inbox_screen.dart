@@ -15,6 +15,7 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_s
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/image_picker.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
@@ -49,8 +50,13 @@ class NewInbox extends StatelessWidget {
               builder: (context, provider, child) {
                 return SheetBar(
                   onTapDone: () async {
-                    await provider.createEmail();
-                    Navigator.pop(context);
+                    await provider.createMail();
+                    handelResponseStatus(
+                        provider.createMailResponse!.status, context,
+                        message: provider.createMailResponse!.message,
+                        onComplete: () {
+                      Navigator.pop(context);
+                    });
                   },
                   hint: context.tr("new_inbox"),
                 );
@@ -72,7 +78,7 @@ class NewInbox extends StatelessWidget {
               children: [
                 Consumer<NewInboxProvider>(
                   builder: (context, provider, child) {
-                    return DatePiker(
+                    return CustomDatePicker(
                       selectedDate: provider.archiveDate,
                       onChangeDate: (DateTime newDate) {
                         provider.setArchiveDate(newDate);

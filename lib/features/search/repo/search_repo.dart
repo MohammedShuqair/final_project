@@ -14,9 +14,10 @@ class SearchRepository with ApiBaseHelper {
   }) async {
     String endpoint = 'search?'
         'text${searchFor != null ? '=$searchFor' : ''}'
-        '&start${startDate != null ? '=$startDate' : ''}'
-        '&end${endDate != null ? '=$endDate' : ''}'
+        '&start${startDate != null && startDate.isNotEmpty ? '=$startDate' : ''}'
+        '&end${endDate != null && endDate.isNotEmpty ? '=$endDate' : ''}'
         '&status_id${statusId != null ? '=$statusId' : ''}';
+    print(endpoint);
     final response = await get(endpoint);
     final List<Mail> mails = Mail.mapValueToList(response['mails']);
     final List<Category> categories =

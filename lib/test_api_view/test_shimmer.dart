@@ -1,5 +1,5 @@
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';

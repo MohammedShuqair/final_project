@@ -1,6 +1,6 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/status_view.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/home/views/widgets/status_widget.dart';
@@ -36,6 +36,14 @@ class StatusGridView extends StatelessWidget {
                     response: provider.allStatus,
                     onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 0);
+                      if (more) {
+                        return CustomShimmer(
+                          child: Text(
+                            '$mailCount',
+                            style: kStatusNumberTextStyle,
+                          ),
+                        );
+                      }
                       return Text(
                         "$mailCount",
                         style: kStatusNumberTextStyle,
@@ -69,6 +77,14 @@ class StatusGridView extends StatelessWidget {
                     response: provider.allStatus,
                     onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 1);
+                      if (more) {
+                        return CustomShimmer(
+                          child: Text(
+                            '$mailCount',
+                            style: kStatusNumberTextStyle,
+                          ),
+                        );
+                      }
 
                       return Text(
                         "$mailCount",
@@ -107,6 +123,14 @@ class StatusGridView extends StatelessWidget {
                     response: provider.allStatus,
                     onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 2);
+                      if (more) {
+                        return CustomShimmer(
+                          child: Text(
+                            '$mailCount',
+                            style: kStatusNumberTextStyle,
+                          ),
+                        );
+                      }
 
                       return Text(
                         "$mailCount",
@@ -141,6 +165,16 @@ class StatusGridView extends StatelessWidget {
                     response: provider.allStatus,
                     onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 3);
+                      print(more);
+                      if (more) {
+                        print("here");
+                        return CustomShimmer(
+                          child: Text(
+                            '$mailCount',
+                            style: kStatusNumberTextStyle,
+                          ),
+                        );
+                      }
 
                       return Text(
                         "$mailCount",

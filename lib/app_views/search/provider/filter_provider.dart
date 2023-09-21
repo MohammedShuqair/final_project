@@ -14,11 +14,13 @@ class FilterProvider extends ChangeNotifier {
 
   List<Category> categories = [];
   Status? status;
-  String? startDate;
-  String? endDate;
+  DateTime startDate = DateTime(2023);
+  DateTime endDate = DateTime.now();
 
   void handelCategories(Category category) {
-    if (categories.contains(category)) {
+    if (categories
+        .map((e) => e.name?.toLowerCase())
+        .contains(category.name?.toLowerCase())) {
       _unSelectCategory(category);
     } else {
       _selectCategory(category);
@@ -39,7 +41,8 @@ class FilterProvider extends ChangeNotifier {
   }
 
   void _unSelectCategory(Category category) {
-    categories.remove(category);
+    categories.removeWhere((element) =>
+        element.name?.toLowerCase() == category.name?.toLowerCase());
     notifyListeners();
   }
 
@@ -53,12 +56,12 @@ class FilterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setStartDat(String date) {
+  void setStartDat(DateTime date) {
     startDate = date;
     notifyListeners();
   }
 
-  void setEndDat(String date) {
+  void setEndDat(DateTime date) {
     endDate = date;
     notifyListeners();
   }
@@ -66,8 +69,8 @@ class FilterProvider extends ChangeNotifier {
   FilterProvider({
     this.categories = const [],
     this.status,
-    this.startDate,
-    this.endDate,
+    required this.startDate,
+    required this.endDate,
   }) {
     _categoryRepository = CategoryRepository();
     _statusRepository = StatusRepository();

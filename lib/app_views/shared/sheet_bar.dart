@@ -7,9 +7,9 @@ class SheetBar extends StatelessWidget {
   const SheetBar({
     super.key,
     required this.onTapDone,
-    required this.hint,
+    this.hint,
   });
-  final String hint;
+  final String? hint;
   final void Function() onTapDone;
 
   @override
@@ -23,10 +23,11 @@ class SheetBar extends StatelessWidget {
             Navigator.pop(context, {});
           },
         ),
-        Text(
-          hint,
-          style: kTitleMailCard,
-        ),
+        if (hint != null)
+          Text(
+            hint!,
+            style: kTitleMailCard,
+          ),
         ActionButton(
           hint: context.tr('done'),
           onTap: onTapDone,

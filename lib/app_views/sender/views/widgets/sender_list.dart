@@ -1,5 +1,5 @@
 import 'package:final_project/app_views/sender/views/widgets/sender_item.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:flutter/material.dart';
 

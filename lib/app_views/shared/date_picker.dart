@@ -6,18 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class DatePiker extends StatefulWidget {
-  const DatePiker(
-      {Key? key, required this.selectedDate, required this.onChangeDate})
+class CustomDatePicker extends StatefulWidget {
+  const CustomDatePicker(
+      {Key? key,
+      required this.selectedDate,
+      required this.onChangeDate,
+      this.hint = 'Date'})
       : super(key: key);
   final DateTime selectedDate;
   final void Function(DateTime newDate) onChangeDate;
+  final String hint;
 
   @override
-  State<DatePiker> createState() => _DatePikerState();
+  State<CustomDatePicker> createState() => _CustomDatePickerState();
 }
 
-class _DatePikerState extends State<DatePiker> {
+class _CustomDatePickerState extends State<CustomDatePicker> {
   bool isClose = true;
 
   @override
@@ -44,7 +48,7 @@ class _DatePikerState extends State<DatePiker> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Date',
+                  widget.hint,
                   style: kStatusName16RegDark,
                 ),
                 // ${DateFormat.yMMMMd().format(selectedDate)}

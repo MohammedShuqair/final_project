@@ -25,6 +25,7 @@ class Tags extends StatelessWidget {
                 tag: 'tag',
                 child: Material(
                   child: TagWrap(
+                    more: more,
                     onTap: (Tag tag) {
                       Navigator.pushNamed(context, TagsView.id,
                           arguments: {'tags': data, 'selected': tag});

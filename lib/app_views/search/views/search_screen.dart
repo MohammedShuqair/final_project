@@ -4,10 +4,10 @@ import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/widgets/filter_bottom_sheet.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
-import 'package:final_project/app_views/shared/expansions_shmmer.dart';
+import 'package:final_project/app_views/shared/shimmers/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
@@ -208,8 +208,15 @@ class SearchView extends StatelessWidget {
                       );
                     },
                     onLoading: (_) {
+                      List<String?> temp = defaultCategories
+                          .map((e) => e.name)
+                          .toList()
+                        ..removeWhere(
+                            (element) => element == null || element.isEmpty);
                       return ExpansionsShimmer(
-                        titles: defaultCategories.map((e) => e.name).toList(),
+                        titles: provider.categories.isNotEmpty
+                            ? provider.categories.map((e) => e.name).toList()
+                            : temp,
                       );
                     },
                     onError: (_, message) {

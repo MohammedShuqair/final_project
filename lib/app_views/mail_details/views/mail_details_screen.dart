@@ -1,4 +1,6 @@
+import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
+import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/mail_details/views/widgets/sender_date_title_descreption.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/activity_card.dart';
@@ -12,8 +14,10 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/statu
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_sheet.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_tile.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
+import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/image_picker.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/activity/models/activity.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
@@ -40,16 +44,56 @@ class MailDetailsView extends StatelessWidget {
         children: [
           Consumer<DetailsProvider>(
             builder: (context, provider, child) {
-              return SheetBar(
-                  onTapDone: () async {
-                    await provider.updateEmail();
-                    Navigator.pop(context, true);
-                  },
-                  hint: 'Mail Details');
+              return Row(
+                children: [
+                  Expanded(
+                    child: SheetBar(
+                      onTapDone: () async {
+                        await provider.updateEmail();
+                        handelResponseStatus(
+                            provider.updateResponse!.status, context,
+                            message: provider.updateResponse!.message);
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => MailOptionsSheet(
+                            subject: provider.mail.subject ?? '',
+                            onTapArchive: () {},
+                            onTapShare: () {},
+                            onTapDelete: () async {
+                              await provider.deleteMail();
+                              handelResponseStatus(
+                                  provider.deleteResponse!.status, context,
+                                  message: provider.deleteResponse!.message);
+                              Navigator.pop(context);
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.more_vert_outlined,
+                        color: kLightSub,
+                      )),
+                ],
+              );
             },
           ),
           const SSizedBox(
-            height: 17,
+            height: 4,
+          ),
+          Text(
+            'Mail Details',
+            style: kTitleMailCard,
+            textAlign: TextAlign.center,
+          ),
+          const SSizedBox(
+            height: 22,
           ),
           Consumer<DetailsProvider>(
             builder: (context, provider, child) {

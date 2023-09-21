@@ -24,6 +24,8 @@ TextStyle tagTitleTextStyle = TextStyle(
     fontWeight: FontWeight.w600); // also for title in expansion
 TextStyle textInTagTextStyle =
     TextStyle(color: kText, fontSize: 14.sp, fontWeight: FontWeight.w600);
+TextStyle kF14N =
+    TextStyle(color: kText, fontSize: 14.sp, fontWeight: FontWeight.normal);
 
 //inbox button
 TextStyle kInBoxButtonTextStyle =
