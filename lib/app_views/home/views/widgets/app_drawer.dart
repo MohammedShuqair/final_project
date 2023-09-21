@@ -1,4 +1,5 @@
 import 'package:final_project/app_views/sender/views/sender_view.dart';
+import 'package:final_project/app_views/users_management/profile_screen.dart';
 import 'package:final_project/app_views/users_management/users_management_screen.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,9 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           DrawerTile(
             title: 'Profile',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, ProfileScreen.id);
+            },
             iconPath: 'assets/icons/profile_user.png',
           ),
           DrawerTile(
