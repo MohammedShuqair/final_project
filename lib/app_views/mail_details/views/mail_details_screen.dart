@@ -1,4 +1,3 @@
-import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
 import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/mail_details/views/widgets/sender_date_title_descreption.dart';
@@ -49,11 +48,12 @@ class MailDetailsView extends StatelessWidget {
                   Expanded(
                     child: SheetBar(
                       onTapDone: () async {
-                        await provider.updateEmail();
-                        handelResponseStatus(
-                            provider.updateResponse!.status, context,
-                            message: provider.updateResponse!.message);
-                        Navigator.pop(context, true);
+                        provider.updateEmail().then((value) {
+                          handelResponseStatus(
+                              provider.updateResponse!.status, context,
+                              message: provider.updateResponse!.message);
+                          Navigator.pop(context, true);
+                        });
                       },
                     ),
                   ),
@@ -76,7 +76,7 @@ class MailDetailsView extends StatelessWidget {
                           ),
                         );
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.more_vert_outlined,
                         color: kLightSub,
                       )),

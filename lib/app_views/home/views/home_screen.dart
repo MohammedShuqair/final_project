@@ -133,17 +133,19 @@ class HomeView extends StatelessWidget {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
-              clipBehavior: Clip.hardEdge,
-              builder: (c2) {
-                return ChangeNotifierProvider(
-                  create: (context) => NewInboxProvider(),
-                  child: const NewInbox(),
-                );
-              }).then((value) => context.read<HomeProvider>().init());
+          showModalBottomSheet<bool?>(
+                  context: context,
+                  isScrollControlled: true,
+                  constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
+                  clipBehavior: Clip.hardEdge,
+                  builder: (c2) {
+                    return ChangeNotifierProvider(
+                      create: (context) => NewInboxProvider(),
+                      child: const NewInbox(),
+                    );
+                  })
+              .then((value) =>
+                  value ?? false ? context.read<HomeProvider>().init() : null);
         },
         child: const InBoxButton(),
       ),

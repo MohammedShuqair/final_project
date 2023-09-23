@@ -16,7 +16,7 @@ class SenderRepository with ApiBaseHelper {
     bool withMail,
   ) async {
     final response = await get('senders/$senderId?mail=$withMail');
-    return Sender.fromMap(response);
+    return Sender.fromMap(response['sender']);
   }
 
   Future<Sender?> createSender({

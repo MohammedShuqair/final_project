@@ -27,7 +27,7 @@ class AuthProvider extends ChangeNotifier {
       loginResponse =
           ApiResponse.completed(user, message: 'login completed successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       loginResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -47,10 +47,8 @@ class AuthProvider extends ChangeNotifier {
       registerResponse = ApiResponse.completed(user,
           message: 'register completed successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       registerResponse = ApiResponse.error(message: e.toString());
-      print(e);
-      print(s);
       notifyListeners();
     }
   }

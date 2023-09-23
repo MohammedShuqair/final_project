@@ -1,7 +1,4 @@
-import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
-import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/app_views/shared/shimmers/expansions_shmmer.dart';
@@ -16,9 +13,7 @@ import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 class TagsView extends StatefulWidget {
   const TagsView({Key? key, required this.selected, required this.tags})
@@ -56,7 +51,7 @@ class _TagsViewState extends State<TagsView> {
       tagsWithMailsResponse = ApiResponse.completed(tags,
           message: 'Tags with mails fetched successfully');
       setState(() {});
-    } catch (e, s) {
+    } catch (e) {
       tagsWithMailsResponse = ApiResponse.error(message: e.toString());
       setState(() {});
     }

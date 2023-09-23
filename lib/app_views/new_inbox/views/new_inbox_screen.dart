@@ -55,7 +55,7 @@ class NewInbox extends StatelessWidget {
                         provider.createMailResponse!.status, context,
                         message: provider.createMailResponse!.message,
                         onComplete: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, true);
                     });
                   },
                   hint: context.tr("new_inbox"),

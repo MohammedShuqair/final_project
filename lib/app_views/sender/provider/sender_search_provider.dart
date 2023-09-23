@@ -20,7 +20,7 @@ class SenderSearchProvider extends ChangeNotifier {
 
   SenderSearchProvider(this.withMails) {
     _repository = SenderRepository();
-    searchSenders();
+    getAllSenders();
     scrollController = ScrollController(
       onAttach: _handlePositionAttach,
       onDetach: _handlePositionDetach,
@@ -32,9 +32,8 @@ class SenderSearchProvider extends ChangeNotifier {
         currentPage <= (lastPage ?? firstPage) &&
         (allSenderResponse?.status != ApiStatus.LOADING ||
             allSenderResponse?.status != ApiStatus.MORE)) {
-      print('pagnation');
       currentPage++;
-      searchSenders();
+      getAllSenders();
       print('currentPage $currentPage');
     }
   }
@@ -50,10 +49,8 @@ class SenderSearchProvider extends ChangeNotifier {
   void onSearchSubmitted(String name) {
     senderName = name;
     reset();
-    print('here');
-    for (; currentPage <= (lastPage ?? firstPage); currentPage++) {
-      searchSenders();
-    }
+    search();
+
     notifyListeners();
   }
 
@@ -64,7 +61,34 @@ class SenderSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> searchSenders() async {
+  Future<void> search() async {
+    allSenderResponse = ApiResponse.loading(message: 'logging...');
+    notifyListeners();
+    SenderResponse? senderResponse;
+    try {
+      for (; currentPage <= (lastPage ?? firstPage); currentPage++) {
+        senderResponse = await _repository.getAllSender(currentPage, withMails);
+        lastPage = senderResponse.lastPage;
+
+        if (senderName != null && senderResponse.senders != null) {
+          senderResponse.senders?.removeWhere((sender) =>
+              !sender.name!.toLowerCase().contains(senderName!.toLowerCase()));
+        }
+        if (senderResponse.senders != null) {
+          store.addAll(senderResponse.senders!);
+        }
+      }
+      senderResponse?.senders = store;
+      allSenderResponse = ApiResponse.completed(senderResponse,
+          message: 'Senders fetched successfully');
+      notifyListeners();
+    } catch (e) {
+      allSenderResponse = ApiResponse.error(message: e.toString());
+      notifyListeners();
+    }
+  }
+
+  Future<void> getAllSenders() async {
     if (allSenderResponse?.data == null) {
       allSenderResponse = ApiResponse.loading(message: 'logging...');
     } else {
@@ -76,19 +100,18 @@ class SenderSearchProvider extends ChangeNotifier {
       final SenderResponse senderResponse =
           await _repository.getAllSender(currentPage, withMails);
       lastPage = senderResponse.lastPage;
-      if (senderName != null && senderResponse.senders != null) {
-        senderResponse.senders?.removeWhere((sender) =>
-            !sender.name!.toLowerCase().contains(senderName!.toLowerCase()));
-      }
+      // if (senderName != null && senderResponse.senders != null) {
+      //   senderResponse.senders?.removeWhere((sender) =>
+      //       !sender.name!.toLowerCase().contains(senderName!.toLowerCase()));
+      // }
       if (senderResponse.senders != null) {
         store.addAll(senderResponse.senders!);
         senderResponse.senders = store;
       }
-      print(senderResponse.senders?.length.toString());
       allSenderResponse = ApiResponse.completed(senderResponse,
           message: 'Senders fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       allSenderResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

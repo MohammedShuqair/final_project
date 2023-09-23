@@ -46,7 +46,7 @@ class DetailsProvider extends ChangeNotifier {
       final String message = await mailRepository.deleteMail(mail.id!);
       deleteResponse = ApiResponse.completed(message, message: message);
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       deleteResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -73,7 +73,7 @@ class DetailsProvider extends ChangeNotifier {
         updateResponse = ApiResponse.completed(updatedMail,
             message: '${updatedMail.subject} Mail updated successfully');
         notifyListeners();
-      } catch (e, s) {
+      } catch (e) {
         updateResponse = ApiResponse.error(message: e.toString());
         notifyListeners();
       }

@@ -25,7 +25,7 @@ class SenderProvider extends ChangeNotifier {
       allSenderResponse = ApiResponse.completed(senderResponse,
           message: 'Senders fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       allSenderResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -48,7 +48,7 @@ class SenderProvider extends ChangeNotifier {
       createSenderResponse =
           ApiResponse.completed(sender, message: 'Sender created successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       createSenderResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -76,7 +76,7 @@ class SenderProvider extends ChangeNotifier {
       updateSenderResponse =
           ApiResponse.completed(sender, message: 'Sender created successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       updateSenderResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -89,7 +89,7 @@ class SenderProvider extends ChangeNotifier {
       final String message = await _repository.deleteSender(id: senderId);
       deleteSenderResponse = ApiResponse.completed(message, message: message);
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       deleteSenderResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

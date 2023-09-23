@@ -165,9 +165,7 @@ class StatusGridView extends StatelessWidget {
                     response: provider.allStatus,
                     onComplete: (_, data, message, more) {
                       String? mailCount = getCurrentMailCount(data, 3);
-                      print(more);
                       if (more) {
-                        print("here");
                         return CustomShimmer(
                           child: Text(
                             '$mailCount',

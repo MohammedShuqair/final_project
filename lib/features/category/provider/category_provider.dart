@@ -22,7 +22,7 @@ class CategoryProvider extends ChangeNotifier {
       allCategory = ApiResponse.completed(categories,
           message: 'Categories fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       allCategory = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -39,7 +39,7 @@ class CategoryProvider extends ChangeNotifier {
       singleCategory = ApiResponse.completed(category,
           message: 'Category fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       singleCategory = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -53,7 +53,7 @@ class CategoryProvider extends ChangeNotifier {
       createdCategoryResponse = ApiResponse.completed(category,
           message: 'Category created successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       createdCategoryResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

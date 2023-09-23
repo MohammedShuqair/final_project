@@ -1,14 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_list.dart';
+import 'package:final_project/app_views/shared/action_button.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
-import 'package:final_project/app_views/shared/sheet_bar.dart';
-import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/features/sender/models/sender.dart';
-import 'package:final_project/features/sender/models/sender_response.dart';
-import 'package:final_project/features/sender/repo/sender_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +44,7 @@ class PickSenderView extends StatelessWidget {
           message: 'Senders fetched successfully');
 
       setState(() {});
-    } catch (e, s) {
+    } catch (e) {
       allSenderResponse = ApiResponse.error(message: e.toString());
       setState(() {});
     }

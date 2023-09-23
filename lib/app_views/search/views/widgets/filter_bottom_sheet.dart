@@ -71,7 +71,7 @@ class FilterBottomSheet extends StatelessWidget {
                               defaultCategories.length,
                               (index) => Category(
                                   name: defaultCategories[index].name)),
-                          selectedCategories: [],
+                          selectedCategories: const [],
                           onTap: (Category c) {},
                         ),
                       );
@@ -121,7 +121,7 @@ class FilterBottomSheet extends StatelessWidget {
                 builder: (context, provider, child) {
                   return CustomDatePicker(
                     hint: "From Date",
-                    selectedDate: provider.startDate ?? DateTime(2023),
+                    selectedDate: provider.startDate,
                     onChangeDate: (DateTime newDate) {
                       provider.setStartDat(newDate);
                     },
@@ -137,7 +137,7 @@ class FilterBottomSheet extends StatelessWidget {
                 builder: (context, provider, child) {
                   return CustomDatePicker(
                     hint: "To Date",
-                    selectedDate: provider.endDate ?? DateTime.now(),
+                    selectedDate: provider.endDate,
                     onChangeDate: (DateTime newDate) {
                       provider.setEndDat(newDate);
                     },

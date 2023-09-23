@@ -20,7 +20,7 @@ class StatusProvider extends ChangeNotifier {
       allStatus = ApiResponse.completed(statuses,
           message: 'Statuses fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       allStatus = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -34,7 +34,7 @@ class StatusProvider extends ChangeNotifier {
       singleStatus =
           ApiResponse.completed(status, message: 'Status fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       singleStatus = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

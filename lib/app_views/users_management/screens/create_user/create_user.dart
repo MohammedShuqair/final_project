@@ -8,7 +8,6 @@ import '../../../../core/util/shared_mrthodes.dart';
 import '../../../../features/auth/views/widgets/auth_button.dart';
 import '../../../shared/core_background.dart';
 
-
 class CreateUserScreen extends StatefulWidget {
   static const String id = "create-user";
 
@@ -54,15 +53,13 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
         body: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.only(top: 0.1.sh, left: 20, right: 20, bottom: 20),
+                padding: EdgeInsets.only(
+                    top: 0.1.sh, left: 20, right: 20, bottom: 20),
                 child: Core(
                   padding: const EdgeInsets.all(24.0),
                   child: Form(
                     key: _formKey,
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
                       const CustomTextFormField.username(),
                       CustomTextFormField.email(
                         controller: emailController,
@@ -127,9 +124,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       const SSizedBox(
                         height: 40,
                       ),
-                      AuthButton(
-                          onTap: (){},
-                          text: 'create user'),
+                      AuthButton(onTap: () {}, text: 'create user'),
+
                       // Consumer<AuthProvider>(
                       //   builder: (context, provider, child) {
                       //     return AuthButton(

@@ -1,9 +1,13 @@
-import 'package:final_project/app_views/sender/views/sender_view.dart';
-import 'package:final_project/app_views/users_management/profile_screen.dart';
+import 'package:final_project/app_views/current_user_profile/current_user_profile.dart';
+import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/home/provider/home_provider.dart';
+import 'package:final_project/app_views/sender/views/senders_view.dart';
 import 'package:final_project/app_views/users_management/users_management_screen.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/util/colors.dart';
 
@@ -41,18 +45,24 @@ class _AppDrawerState extends State<AppDrawer> {
           DrawerTile(
             title: 'Profile',
             onTap: () {
-              Navigator.pushNamed(context, ProfileScreen.id);
+              Navigator.pushNamed(context, CurrentUserProfileScreen.id)
+                  .then((value) => context.read<HomeProvider>().init());
             },
             iconPath: 'assets/icons/profile_user.png',
           ),
           DrawerTile(
             title: 'Senders',
-            onTap: () => Navigator.pushNamed(context, SenderView.id),
-            iconPath: 'assets/icons/senders.png',
+            onTap: () => Navigator.pushNamed(context, SendersView.id)
+                .then((value) => context.read<HomeProvider>().init()),
+            icon: const Icon(
+              Icons.send,
+              color: kWhite,
+            ),
           ),
           DrawerTile(
             title: 'Users Management',
-            onTap: () => Navigator.pushNamed(context, UsersManagement.id),
+            onTap: () => Navigator.pushNamed(context, UsersManagement.id)
+                .then((value) => context.read<HomeProvider>().init()),
             iconPath: 'assets/icons/settings.png',
           ),
         ],
@@ -66,10 +76,12 @@ class DrawerTile extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
-    required this.iconPath,
+    this.iconPath,
+    this.icon,
   });
   final String title;
-  final String iconPath;
+  final String? iconPath;
+  final Widget? icon;
   final void Function() onTap;
 
   @override
@@ -77,12 +89,14 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       dense: true,
-      leading: Image.asset(
-        iconPath,
-        height: 20,
-        width: 20,
-        fit: BoxFit.cover,
-      ),
+      leading: iconPath != null && icon == null
+          ? Image.asset(
+              iconPath!,
+              height: 20,
+              width: 20,
+              fit: BoxFit.cover,
+            )
+          : icon,
       title: Text(
         title,
         style: kF16N,

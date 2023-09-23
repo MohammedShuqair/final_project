@@ -31,7 +31,7 @@ class Tags extends StatelessWidget {
                           arguments: {'tags': data, 'selected': tag});
                     },
                     tags: data,
-                    selectedTags: {},
+                    selectedTags: const {},
                   ),
                 ),
               );

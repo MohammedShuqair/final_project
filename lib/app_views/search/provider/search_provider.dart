@@ -52,23 +52,19 @@ class SearchProvider extends ChangeNotifier {
   }
 
   Future<void> search() async {
-    print('here');
     searchResponse = ApiResponse.loading(message: 'logging...');
     notifyListeners();
     try {
       final Map<String, List<Mail>> searchMap = await _searchRepository.search(
           searchFor: searchFor,
-          startDate: startDate == null
-              ? DateTime(2023).toString()
-              : startDate.toString(),
-          endDate:
-              endDate == null ? DateTime.now().toString() : endDate.toString(),
+          startDate: startDate.toString(),
+          endDate: endDate.toString(),
           statusId: status?.id,
           categoriesFilter: categories.map((e) => e.name!).toList());
       searchResponse = ApiResponse.completed(searchMap,
           message: 'search completed successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       searchResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

@@ -1,6 +1,5 @@
 import 'package:final_project/app_views/home/provider/home_provider.dart';
-import 'package:final_project/app_views/home/views/home_screen.dart';
-import 'package:final_project/app_views/home/views/widgets/user_Information.dart';
+import 'package:final_project/app_views/home/views/widgets/user_information.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';

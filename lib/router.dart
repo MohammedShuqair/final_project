@@ -1,3 +1,4 @@
+import 'package:final_project/app_views/current_user_profile/current_user_profile.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/provider/single_status_provider.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
@@ -5,18 +6,17 @@ import 'package:final_project/app_views/home/views/widgets/app_drawer.dart';
 import 'package:final_project/app_views/home/views/widgets/status_view.dart';
 import 'package:final_project/app_views/home/views/widgets/tag_view.dart';
 import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
-import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
-import 'package:final_project/app_views/sender/views/sender_view.dart';
-import 'package:final_project/app_views/users_management/profile_screen.dart';
+import 'package:final_project/app_views/sender/provider/single_sender_provider.dart';
+import 'package:final_project/app_views/sender/views/sender_mails.dart';
+import 'package:final_project/app_views/sender/views/senders_view.dart';
 import 'package:final_project/app_views/users_management/screens/create_user/create_user.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
-import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:final_project/features/mail/models/mail.dart';
-import 'package:final_project/features/sender/provider/sender_provider.dart';
+import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +38,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           child: const AuthView(),
         ),
       );
-    case SenderView.id:
+    case SendersView.id:
       return MaterialPageRoute(
         builder: (_) => ChangeNotifierProvider(
-          create: (BuildContext context) => SenderSearchProvider(false),
-          child: const SenderView(),
+          create: (BuildContext context) => SenderSearchProvider(true),
+          child: const SendersView(),
         ),
       );
 
@@ -55,22 +55,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       );
     case HomeView.id:
       return MaterialPageRoute(
-        builder: (_) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-            // ChangeNotifierProvider(create: (_) => UserProvider()),
-            // ChangeNotifierProvider(create: (_) => StatusProvider()),
-            // ChangeNotifierProvider(create: (_) => CategoryProvider()),
-            // ChangeNotifierProxyProvider<CategoryProvider, MailProvider>(
-            //   create: (_) => MailProvider(),
-            //   update: (_, categoryProvider, mailProvider) {
-            //     mailProvider?.setData(categoryProvider.allCategory.data ?? []);
-            //     return mailProvider ?? MailProvider();
-            //   },
-            // ),
-            // ChangeNotifierProvider(create: (_) => TagProvider()),
-            ChangeNotifierProvider(create: (_) => HomeProvider()),
-          ],
+        builder: (_) => ChangeNotifierProvider(
+          create: (_) => HomeProvider(),
           child: const HomeView(),
         ),
       );
@@ -96,7 +82,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         builder: (_) => ChangeNotifierProvider(
           create: (BuildContext context) =>
               DetailsProvider(settings.arguments as Mail),
-          child: MailDetailsView(),
+          child: const MailDetailsView(),
         ),
       );
     case StatusMailsView.id:
@@ -104,15 +90,23 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
         builder: (_) => ChangeNotifierProvider(
           create: (BuildContext context) =>
               SingleStatusProvider(settings.arguments as Status),
-          child: StatusMailsView(),
+          child: const StatusMailsView(),
         ),
       );
     case CreateUserScreen.id:
       return MaterialPageRoute(builder: (_) => const CreateUserScreen());
     case UsersManagement.id:
       return MaterialPageRoute(builder: (_) => const UsersManagement());
-    case ProfileScreen.id:
-      return MaterialPageRoute(builder: (_)=> const ProfileScreen());
+    case CurrentUserProfileScreen.id:
+      return MaterialPageRoute(
+          builder: (_) => const CurrentUserProfileScreen());
+    case SenderMailsView.id:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (BuildContext context) =>
+                    SingleSenderProvider(settings.arguments as Sender),
+                child: const SenderMailsView(),
+              ));
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

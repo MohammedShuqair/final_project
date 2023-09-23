@@ -1,7 +1,6 @@
 import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
-import 'package:final_project/core/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 

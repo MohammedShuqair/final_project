@@ -6,7 +6,6 @@ class CurrentUserRepository with ApiBaseHelper {
     final response = await get(
       'user',
     );
-    print(response);
     return User.fromMap(response['user']);
   }
 

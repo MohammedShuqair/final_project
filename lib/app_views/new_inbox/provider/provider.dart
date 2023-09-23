@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:final_project/core/util/api_response.dart';
@@ -16,7 +15,6 @@ import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:final_project/features/tag/repo/tag_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -86,7 +84,7 @@ class NewInboxProvider extends ChangeNotifier {
           tags: tags,
           activities: activities.map((e) => e.toMap()).toList(),
         );
-        List<Attachment> attachments = await uploadAttachment(mail);
+        await uploadAttachment(mail);
         createMailResponse = ApiResponse.completed(true,
             message: '${mail.subject} created sucssesfully');
       } catch (e) {
@@ -211,7 +209,7 @@ class NewInboxProvider extends ChangeNotifier {
   }
 
   void removeActivity(Activity activity) {
-    bool x = activities.remove(activity);
+    activities.remove(activity);
     notifyListeners();
   }
 
@@ -250,7 +248,7 @@ class NewInboxProvider extends ChangeNotifier {
         }
 
         notifyListeners();
-      } catch (e, s) {
+      } catch (e) {
         allCategoryResponse = ApiResponse.error(message: e.toString());
         notifyListeners();
       }

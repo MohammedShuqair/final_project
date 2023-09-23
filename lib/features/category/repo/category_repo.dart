@@ -24,7 +24,6 @@ class CategoryRepository with ApiBaseHelper {
 
   Future<Category> createCategory(String name) async {
     final response = await post('categories', {"name": name});
-    print('create category response $response');
     return Category.fromMap(response['category']);
   }
 }

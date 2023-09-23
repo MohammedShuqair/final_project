@@ -88,7 +88,7 @@ class FilterProvider extends ChangeNotifier {
       categoriesResponse = ApiResponse.completed(categories,
           message: 'Categories fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       categoriesResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -103,7 +103,7 @@ class FilterProvider extends ChangeNotifier {
       statusResponse = ApiResponse.completed(statuses,
           message: 'Statuses fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       statusResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

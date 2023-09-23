@@ -76,7 +76,7 @@ class _CategorySheetState extends State<CategorySheet> {
                                     name: lorem(
                                   words: 1,
                                 ))),
-                        selectedCategories: [],
+                        selectedCategories: const [],
                         onTap: (Category c) {},
                       ),
                     );

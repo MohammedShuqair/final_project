@@ -19,25 +19,31 @@ class UserProvider extends ChangeNotifier {
     }
   }
   Future<void> getCurrentUser() async {
-    currentUserResponse = ApiResponse.loading(message: 'fetching user data...');
+    if (currentUserResponse.data == null) {
+      currentUserResponse =
+          ApiResponse.loading(message: 'fetching user data...');
+    } else {
+      currentUserResponse = ApiResponse.more(
+          message: 'fetching user data...', data: currentUserResponse.data);
+    }
     notifyListeners();
     try {
       final User user = await _repository.getCurrentUser();
-      print('here ${user.image}');
       SharedHelper shared = SharedHelper();
       await shared.saveData(key: 'user', value: jsonEncode(user.toMap()));
 
       currentUserResponse = ApiResponse.completed(user,
           message: 'user data fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       currentUserResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
   }
 
-  void updateUser(String name, {String? imagePath}) async {
-    currentUserResponse = ApiResponse.loading(message: 'updating user data...');
+  Future<void> updateUser(String name, {String? imagePath}) async {
+    currentUserResponse = ApiResponse.more(
+        message: 'updating user data...', data: currentUserResponse.data);
     notifyListeners();
     try {
       final User user = await _repository.updateUser(name, imagePath);
@@ -47,7 +53,7 @@ class UserProvider extends ChangeNotifier {
       currentUserResponse = ApiResponse.completed(user,
           message: 'user data updated successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       currentUserResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -65,7 +71,7 @@ class UserProvider extends ChangeNotifier {
       currentUserResponse = ApiResponse.completed(null,
           message: response['response'] ?? 'logout completed');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       currentUserResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

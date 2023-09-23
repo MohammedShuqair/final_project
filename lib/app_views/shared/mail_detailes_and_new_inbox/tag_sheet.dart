@@ -32,7 +32,6 @@ class _TagSheetState extends State<TagSheet> {
   void initState() {
     controller = TextEditingController();
     selected.addAll(widget.selected);
-    print(selected.map((e) => e.name));
     getAllTags();
     super.initState();
   }
@@ -54,9 +53,8 @@ class _TagSheetState extends State<TagSheet> {
         }
       });
       setState(() {});
-    } catch (e, s) {
+    } catch (e) {
       allTagResponse = ApiResponse.error(message: e.toString());
-      print(s);
       setState(() {});
     }
   }
@@ -88,8 +86,6 @@ class _TagSheetState extends State<TagSheet> {
                   leading: true,
                   selectedTags: selected,
                   onTap: (t) {
-                    print(selected.map((e) => e.id));
-                    print(t.id);
                     setState(() {
                       if (!selected.map((e) => e.id).contains(t.id)) {
                         selected.add(t);

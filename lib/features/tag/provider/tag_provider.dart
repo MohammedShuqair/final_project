@@ -21,7 +21,7 @@ class TagProvider extends ChangeNotifier {
       allTagResponse =
           ApiResponse.completed(tags, message: 'Tags fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       allTagResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -35,7 +35,7 @@ class TagProvider extends ChangeNotifier {
       tagsWithMailsResponse = ApiResponse.completed(tags,
           message: 'Tags with mails fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       tagsWithMailsResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }
@@ -49,7 +49,7 @@ class TagProvider extends ChangeNotifier {
       getMailTagsResponse = ApiResponse.completed(tags,
           message: 'Mail tags fetched successfully');
       notifyListeners();
-    } catch (e, s) {
+    } catch (e) {
       getMailTagsResponse = ApiResponse.error(message: e.toString());
       notifyListeners();
     }

@@ -4,6 +4,8 @@ import 'package:final_project/app_views/mail_details/details_provider/details_pr
 import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/shared/alert.dart';
 import 'package:final_project/core/util/api_response.dart';
+import 'package:final_project/core/util/constants.dart';
+import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/data/local/local_pref.dart';
 import 'package:final_project/features/auth/model/user.dart';
 import 'package:final_project/features/mail/models/mail.dart';
@@ -50,4 +52,12 @@ void showMailDetailsSheet(
           child: const MailDetailsView(),
         );
       }).then((value) => value ?? false ? onDone() : null);
+}
+
+Map<String, List<Mail>> mailsToCategoriesMap(List<Mail> mails) {
+  Map<String, List<Mail>> data = {};
+  data.filterMailsByCategory(defaultCategories, mails);
+  data.removeWhere((key, value) => value.isEmpty);
+  data.sortMailMap();
+  return data;
 }

@@ -18,7 +18,6 @@ mixin class ApiBaseHelper {
     try {
       final response =
           await http.get(Uri.parse(baseUrl + url), headers: headers);
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -40,7 +39,6 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -56,7 +54,6 @@ mixin class ApiBaseHelper {
     try {
       final response = await http.put(Uri.parse(baseUrl + url),
           body: body, headers: headers);
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -72,7 +69,6 @@ mixin class ApiBaseHelper {
     try {
       final response = await http.delete(Uri.parse(baseUrl + url),
           body: body, headers: headers);
-      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -89,7 +85,7 @@ mixin class ApiBaseHelper {
       var request = http.MultipartRequest("POST", Uri.parse(baseUrl + url));
       var pic = await http.MultipartFile.fromPath('image', filePath);
 
-      request.fields.addAll(body as Map<String, String>);
+      request.fields.addAll(body);
 
       request.files.add(pic);
 
@@ -102,7 +98,6 @@ mixin class ApiBaseHelper {
 
       return _returnResponse(responseString, response.statusCode);
     } else {
-      body.addAll({'image': ''});
       return await post(url, body);
     }
   }

@@ -73,8 +73,6 @@ class _MailImageState extends State<MailImage> {
           width: 36.w,
           height: 36.w,
           errorBuilder: (_, e, ___) {
-            print(e);
-            print(___);
             return fallBack;
           },
         ),
@@ -83,8 +81,11 @@ class _MailImageState extends State<MailImage> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (_) => Center(
-                  child: SizedBox.square(dimension: 0.7.sw, child: child)));
+              builder: (_) => Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 40.0.w, vertical: 50.h),
+                    child: child,
+                  ));
         },
         child: child,
       );

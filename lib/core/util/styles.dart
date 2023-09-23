@@ -2,6 +2,24 @@ import 'package:final_project/core/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+const TextStyle k18Normal =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: Colors.black);
+const TextStyle k16Normal =
+    TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.black);
+const TextStyle k14Normal =
+    TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.black);
+const TextStyle k12Normal =
+    TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.black);
+
+const TextStyle k18Seme =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black);
+const TextStyle k16Seme =
+    TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black);
+const TextStyle k14Seme =
+    TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black);
+const TextStyle k12Seme =
+    TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black);
+
 TextStyle kLogo = TextStyle(fontSize: 31.sp, color: kWhite);
 TextStyle kF16N = TextStyle(fontSize: 18.sp, color: kWhite);
 

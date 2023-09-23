@@ -17,7 +17,6 @@ class SearchRepository with ApiBaseHelper {
         '&start${startDate != null && startDate.isNotEmpty ? '=$startDate' : ''}'
         '&end${endDate != null && endDate.isNotEmpty ? '=$endDate' : ''}'
         '&status_id${statusId != null ? '=$statusId' : ''}';
-    print(endpoint);
     final response = await get(endpoint);
     final List<Mail> mails = Mail.mapValueToList(response['mails']);
     final List<Category> categories =
@@ -25,7 +24,6 @@ class SearchRepository with ApiBaseHelper {
     Map<String, List<Mail>> data = {};
     data.filterMailsByCategory(categories, mails);
     data.removeWhere((key, value) => value.isEmpty);
-    print(categoriesFilter);
     if (categoriesFilter.isNotEmpty) {
       data.removeWhere((key, value) => !categoriesFilter
           .map((e) => e.toLowerCase())

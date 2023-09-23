@@ -1,8 +1,6 @@
 import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CircleImage extends StatefulWidget {
   const CircleImage({
@@ -68,12 +66,11 @@ class _CircleImageState extends State<CircleImage> {
           border: Border.all(color: kUnselect),
         ),
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(widget.size),
             child: Image.network(
               widget.imagePath,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               errorBuilder: (_, e, ___) {
-                print(e);
                 return fallBack;
               },
             )),

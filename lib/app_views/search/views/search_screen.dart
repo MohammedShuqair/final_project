@@ -1,12 +1,8 @@
-import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
-import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/widgets/filter_bottom_sheet.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/expansion_tile.dart';
 import 'package:final_project/app_views/shared/shimmers/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
@@ -17,7 +13,6 @@ import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -65,7 +60,6 @@ class SearchView extends StatelessWidget {
                       return Expanded(
                         child: CustomSearchBar(
                           onSubmitted: (String value) {
-                            print(value);
                             if (value.isNotEmpty) {
                               provider
                                 ..setSearchFor(value)
@@ -133,7 +127,6 @@ class SearchView extends StatelessWidget {
                   return ResponseBuilder(
                     response: provider.searchResponse,
                     onComplete: (_, data, message, more) {
-                      print(data);
                       if (data.isEmpty) {
                         return Padding(
                           padding: const EdgeInsets.only(top: 38.0),

@@ -1,4 +1,5 @@
 import 'package:final_project/features/category/models/category.dart';
+import 'package:final_project/features/mail/models/mail.dart';
 
 class Sender {
   int? id;
@@ -12,6 +13,7 @@ class Sender {
 
   //just id and name of category
   Category? category;
+  List<Mail>? mails;
 
   Sender(
       {this.id,
@@ -22,10 +24,11 @@ class Sender {
       this.createdAt,
       this.updatedAt,
       this.mailCount,
-      this.category});
+      this.category,
+      this.mails});
   @override
   String toString() {
-    return 'Sender {id: $id, name: $name, mobile: $mobile, address: $address, categoryId: $categoryId, createdAt: $createdAt, updatedAt: $updatedAt, mail count: $mailCount, category: $category}';
+    return 'Sender {id: $id, name: $name, mobile: $mobile, address: $address, categoryId: $categoryId, createdAt: $createdAt, updatedAt: $updatedAt, mail count: $mailCount, category: $category mails:$mails}';
   }
 
   static List<Sender> mapValueToList(List? response) {
@@ -49,6 +52,12 @@ class Sender {
     mailCount = json['mails_count'];
     category =
         json['category'] != null ? Category.fromMap(json['category']) : null;
+    if (json['mails'] != null) {
+      mails = <Mail>[];
+      json['mails'].forEach((v) {
+        mails!.add(Mail.fromMap(v));
+      });
+    }
   }
 
   Map<String, dynamic> toMap() {
@@ -63,6 +72,9 @@ class Sender {
     data['mails_count'] = mailCount;
     if (category != null) {
       data['category'] = category!.toMap();
+    }
+    if (mails != null) {
+      data['mails'] = mails!.map((v) => v.toMap()).toList();
     }
     return data;
   }

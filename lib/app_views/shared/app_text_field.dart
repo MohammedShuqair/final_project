@@ -15,6 +15,7 @@ class AppTextField extends StatelessWidget {
     this.enabled = true,
     this.focusNode,
     this.maxLines = 1,
+    this.border,
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -26,6 +27,7 @@ class AppTextField extends StatelessWidget {
   final bool enabled;
   final FocusNode? focusNode;
   final int? maxLines;
+  final InputBorder? border;
   @override
   Widget build(BuildContext context) {
     Widget? suffixIcon2;
@@ -52,9 +54,10 @@ class AppTextField extends StatelessWidget {
                 : kHintSimi16AF.copyWith(color: Colors.black),
             controller: controller,
             decoration: InputDecoration(
-              border: const UnderlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
+              border: border ??
+                  const UnderlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
               hintStyle: hintStyle ?? kHintSimi16AF,
               hintText: hintText,
               prefixIconConstraints: prefixIcon != null

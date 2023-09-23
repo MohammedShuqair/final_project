@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
+import 'package:final_project/app_views/sender/views/sender_mails.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_list.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
-import 'package:final_project/core/util/api_response.dart';
+import 'package:final_project/app_views/shared/sub_app_bar.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +13,18 @@ import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class SenderView extends StatelessWidget {
-  const SenderView({Key? key}) : super(key: key);
+class SendersView extends StatelessWidget {
+  const SendersView({Key? key}) : super(key: key);
   static const String id = '/senderView';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: SubAppBar(
+        title: context.tr("Senders"),
+      ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 70.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         controller: context.watch<SenderSearchProvider>().scrollController,
         children: [
           Consumer<SenderSearchProvider>(
@@ -57,7 +62,9 @@ class SenderView extends StatelessWidget {
                       children: [
                         SenderList(
                             senders: senderResponse.senders ?? [],
-                            onTapSender: (sender) {}),
+                            onTapSender: (sender) => Navigator.pushNamed(
+                                context, SenderMailsView.id,
+                                arguments: sender)),
                         if (more)
                           SenderList(
                             isShimmer: true,
