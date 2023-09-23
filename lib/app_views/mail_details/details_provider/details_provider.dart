@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
-import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/mail/models/activity.dart';
 import 'package:final_project/features/auth/model/user.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:final_project/features/mail/models/mail.dart';

@@ -1,4 +1,4 @@
-import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/mail/models/activity.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/status/models/status.dart';

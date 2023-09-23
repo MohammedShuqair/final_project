@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TagTiles extends StatelessWidget {
   static const String id = "/tagTiles";
   final Set<Tag> tags;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   const TagTiles({super.key, required this.tags, required this.onTap});
 

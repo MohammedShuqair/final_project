@@ -1,3 +1,4 @@
+import 'package:final_project/features/auth/model/role.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/status/models/status.dart';
 
@@ -46,4 +47,12 @@ List<Status> defaultStatues = [
     color: "0xff77d16f",
     name: "Completed",
   ),
+];
+int adminId = 4;
+
+List<Role> defaultRoles = [
+  Role(id: 1, name: 'guest'),
+  Role(id: 2, name: 'user'),
+  Role(id: 3, name: 'editor'),
+  Role(id: 4, name: 'admin'),
 ];

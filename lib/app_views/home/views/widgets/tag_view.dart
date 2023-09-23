@@ -81,78 +81,84 @@ class _TagsViewState extends State<TagsView> {
           ),
         ),
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        children: [
-          Hero(
-            tag: 'tag',
-            child: Material(
-              child: Core(
-                child: TagWrap(
-                  tags: widget.tags.toSet(),
-                  leading: true,
-                  selectedTags: selected,
-                  onTap: (t) {
-                    setState(() {
-                      if (!selected.map((e) => e.id).contains(t.id)) {
-                        selected.add(t);
-                      } else {
-                        selected.removeWhere((e) => e.id == t.id);
-                      }
-                      getTagsWithMails();
-                    });
-                    // Navigator.pop(context, c);
-                  },
+      body: RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        onRefresh: () async {
+          await getTagsWithMails();
+        },
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          children: [
+            Hero(
+              tag: 'tag',
+              child: Material(
+                child: Core(
+                  child: TagWrap(
+                    tags: widget.tags.toSet(),
+                    leading: true,
+                    selectedTags: selected,
+                    onTap: (t) {
+                      setState(() {
+                        if (!selected.map((e) => e.id).contains(t.id)) {
+                          selected.add(t);
+                        } else {
+                          selected.removeWhere((e) => e.id == t.id);
+                        }
+                        getTagsWithMails();
+                      });
+                      // Navigator.pop(context, c);
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          const SSizedBox(
-            height: 48,
-          ),
-          ResponseBuilder(
-            response: tagsWithMailsResponse,
-            onComplete: (_, data, __, more) {
-              return Column(
-                children: [
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (_, index) {
-                      String key = body.keys.elementAt(index);
-                      List<Mail> mails = body[key] ?? [];
-                      return ExpansionWidget(
-                        key: ValueKey(data.hashCode),
-                        title: key,
-                        cards: []..listMail(mails, (mail) {
-                            showMailDetailsSheet(
-                                context, mail, getTagsWithMails);
-                          }),
-                      );
-                    },
-                    separatorBuilder: (_, index) {
-                      return const SSizedBox(
-                        height: 14,
-                      );
-                    },
-                    itemCount: data.length,
-                  ),
-                  if (more)
-                    ExpansionsShimmer(
-                      titles: selected.map((e) => e.name).toList()
-                        ..removeWhere(
-                            (newTag) => data.any((old) => old.name == newTag)),
-                    )
-                ],
-              );
-            },
-            onLoading: (_) {
-              return ExpansionsShimmer(
-                titles: [widget.selected.name],
-              );
-            },
-          )
-        ],
+            const SSizedBox(
+              height: 48,
+            ),
+            ResponseBuilder(
+              response: tagsWithMailsResponse,
+              onComplete: (_, data, __, more) {
+                return Column(
+                  children: [
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (_, index) {
+                        String key = body.keys.elementAt(index);
+                        List<Mail> mails = body[key] ?? [];
+                        return ExpansionWidget(
+                          key: ValueKey(data.hashCode),
+                          title: key,
+                          cards: []..listMail(mails, (mail) {
+                              showMailDetailsSheet(
+                                  context, mail, getTagsWithMails);
+                            }),
+                        );
+                      },
+                      separatorBuilder: (_, index) {
+                        return const SSizedBox(
+                          height: 14,
+                        );
+                      },
+                      itemCount: data.length,
+                    ),
+                    if (more)
+                      ExpansionsShimmer(
+                        titles: selected.map((e) => e.name).toList()
+                          ..removeWhere((newTag) =>
+                              data.any((old) => old.name == newTag)),
+                      )
+                  ],
+                );
+              },
+              onLoading: (_) {
+                return ExpansionsShimmer(
+                  titles: [widget.selected.name],
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }

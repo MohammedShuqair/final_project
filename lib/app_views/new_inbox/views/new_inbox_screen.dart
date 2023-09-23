@@ -24,7 +24,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/activity_card.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/send_activity_bar.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_tile.dart';
-import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/mail/models/activity.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 

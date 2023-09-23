@@ -25,44 +25,51 @@ class StatusMailsView extends StatelessWidget {
         title:
             context.read<SingleStatusProvider>().selectedStatus.name ?? 'Tag',
       ),
-      body: Consumer<SingleStatusProvider>(
-        builder: (context, provider, child) {
-          return ResponseBuilder(
-            response: provider.singleStatus,
-            onComplete: (_, data, __, more) {
-              return ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
-                itemBuilder: (_, index) {
-                  String key = data.keys.elementAt(index);
-                  List<Mail> mails = data[key] ?? [];
-                  return ExpansionWidget(
-                    title: key,
-                    cards: []..listMail(mails, (mail) {
-                        showMailDetailsSheet(
-                            context,
-                            mail,
-                            () async => context
-                                .read<SingleStatusProvider>()
-                                .getSingleStatus());
-                      }),
-                  );
-                },
-                separatorBuilder: (_, index) {
-                  return const SSizedBox(
-                    height: 14,
-                  );
-                },
-                itemCount: data.length,
-              );
-            },
-            onLoading: (_) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
-              child: ExpansionsShimmer(
-                titles: defaultCategories.map((e) => e.name).toList(),
-              ),
-            ),
-          );
+      body: RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        onRefresh: () async {
+          await context.read<SingleStatusProvider>().getSingleStatus();
         },
+        child: Consumer<SingleStatusProvider>(
+          builder: (context, provider, child) {
+            return ResponseBuilder(
+              response: provider.singleStatus,
+              onComplete: (_, data, __, more) {
+                return ListView.separated(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
+                  itemBuilder: (_, index) {
+                    String key = data.keys.elementAt(index);
+                    List<Mail> mails = data[key] ?? [];
+                    return ExpansionWidget(
+                      title: key,
+                      cards: []..listMail(mails, (mail) {
+                          showMailDetailsSheet(
+                              context,
+                              mail,
+                              () async => context
+                                  .read<SingleStatusProvider>()
+                                  .getSingleStatus());
+                        }),
+                    );
+                  },
+                  separatorBuilder: (_, index) {
+                    return const SSizedBox(
+                      height: 14,
+                    );
+                  },
+                  itemCount: data.length,
+                );
+              },
+              onLoading: (_) => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 17.h),
+                child: ExpansionsShimmer(
+                  titles: defaultCategories.map((e) => e.name).toList(),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,6 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:final_project/app_views/shared/alert.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
+import 'package:final_project/app_views/shared/sub_app_bar.dart';
 import 'package:final_project/app_views/users_management/users_management_screen.dart';
+import 'package:final_project/core/util/constants.dart';
+import 'package:final_project/features/auth/model/role.dart';
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
+import 'package:final_project/features/user_management/repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +29,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
   late TextEditingController usernameController;
   late TextEditingController passwordController;
   late TextEditingController confPasswordController;
-
+  int? roleId;
   @override
   void initState() {
     _init();
@@ -36,19 +42,23 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     usernameController = TextEditingController();
     passwordController = TextEditingController();
     confPasswordController = TextEditingController();
+    roleId = null;
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    confPasswordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Create User"),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, UsersManagement.id),
-          ),
+        appBar: SubAppBar(
+          title: context.tr("Create User"),
         ),
         body: Scaffold(
           body: SingleChildScrollView(
@@ -60,16 +70,26 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   child: Form(
                     key: _formKey,
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      const CustomTextFormField.username(),
+                      CustomTextFormField.username(
+                        controller: usernameController,
+                        validator: (value) {
+                          if (testEmpty(value)) {
+                            return context.tr('Please enter username');
+                          }
+                          return null;
+                        },
+                      ),
                       CustomTextFormField.email(
                         controller: emailController,
                         validator: (value) {
                           if (testNull(value)) {
-                            return 'Please click on the email field and enter your email';
+                            return context.tr(
+                                'Please click on the email field and enter your email');
                           } else if (testEmpty(value)) {
-                            return 'Please enter the email and do not leave the field empty';
+                            return context.tr(
+                                'Please enter the email and do not leave the field empty');
                           } else if (!testEmailValidation(value)) {
-                            return 'Please enter a valid email';
+                            return context.tr('Please enter a valid email');
                           }
                           return null;
                         },
@@ -81,11 +101,14 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         controller: passwordController,
                         validator: (value) {
                           if (testNull(value)) {
-                            return 'Please click on the password field and enter your password';
+                            return context.tr(
+                                'Please click on the password field and enter your password');
                           } else if (testEmpty(value)) {
-                            return 'Please enter the password and do not leave the field empty';
+                            return context.tr(
+                                'Please enter the password and do not leave the field empty');
                           } else if (testPasswordLength(value)) {
-                            return 'The password must contain at least 6 characters';
+                            return context.tr(
+                                'The password must contain at least 6 characters');
                           }
                           return null;
                         },
@@ -95,17 +118,21 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         child: CustomTextFormField.password(
                           controller: confPasswordController,
                           textInputAction: TextInputAction.done,
-                          hint: 'Confirm Password',
+                          hint: context.tr('Confirm Password'),
                           validator: (value) {
                             if (testNull(value)) {
-                              return 'Please click on the confirm password field and enter your password';
+                              return context.tr(
+                                  'Please click on the confirm password field and enter your password');
                             } else if (testEmpty(value)) {
-                              return 'Please enter the confirm password and do not leave the field empty';
+                              return context.tr(
+                                  'Please enter the confirm password and do not leave the field empty');
                             } else if (testPasswordLength(value)) {
-                              return 'The confirm password must contain at least 6 characters';
+                              return context.tr(
+                                  'The confirm password must contain at least 6 characters');
                             } else if (passwordController.text !=
                                 confPasswordController.text) {
-                              return 'The confirm password must be the same as password';
+                              return context.tr(
+                                  'The confirm password must be the same as password');
                             }
                             return null;
                           },
@@ -114,31 +141,68 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       const SSizedBox(
                         height: 24,
                       ),
-                      DropdownButtonFormField<String>(
-                        hint: const Text("Role"),
-                        items: const [
-                          DropdownMenuItem(child: Text("ali")),
+                      Row(
+                        children: [
+                          Text(context.tr("Role")),
+                          const SSizedBox(
+                            width: 16,
+                          ),
+                          Expanded(
+                            child: DropdownButtonFormField<int>(
+                              validator: (v) {
+                                if (v == null) {
+                                  return 'Please select user role';
+                                }
+                                return null;
+                              },
+                              value: roleId,
+                              hint: Text(context.tr("select role")),
+                              items: defaultRoles
+                                  .map(
+                                    (e) => DropdownMenuItem<int>(
+                                      onTap: () => setState(() {
+                                        roleId = e.id;
+                                      }),
+                                      value: e.id,
+                                      child: Text(context.tr(e.name ?? 'Name')),
+                                    ),
+                                  )
+                                  .toList() /*const [
+                                DropdownMenuItem(child: Text("ali")),
+                              ]*/
+                              ,
+                              onChanged: (_) {},
+                            ),
+                          ),
                         ],
-                        onChanged: (_) {},
                       ),
                       const SSizedBox(
                         height: 40,
                       ),
-                      AuthButton(onTap: () {}, text: 'create user'),
-
-                      // Consumer<AuthProvider>(
-                      //   builder: (context, provider, child) {
-                      //     return AuthButton(
-                      //         onTap: () async {
-                      //           if (isSignin) {
-                      //             await signIn(provider, context);
-                      //           } else {
-                      //             await signUp(provider, context);
-                      //           }
-                      //         },
-                      //         text: isSignin ? 'Sign in' : 'Sign up');
-                      //   },
-                      // ),
+                      AuthButton(
+                          onTap: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              UserManagementRepository()
+                                  .createUser(
+                                      emailController.text,
+                                      usernameController.text,
+                                      passwordController.text,
+                                      confPasswordController.text,
+                                      roleId!.toString())
+                                  .then((user) {
+                                showAlert(context,
+                                    message:
+                                        '${user.name} created successfully',
+                                    isError: false);
+                                setState(() {
+                                  _init();
+                                });
+                              }).catchError((e) {
+                                showAlert(context, message: e.toString());
+                              });
+                            }
+                          },
+                          text: context.tr('create user')),
                     ]),
                   ),
                 )),

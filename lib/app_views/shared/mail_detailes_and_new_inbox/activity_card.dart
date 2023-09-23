@@ -4,7 +4,7 @@ import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/styles.dart';
-import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/mail/models/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

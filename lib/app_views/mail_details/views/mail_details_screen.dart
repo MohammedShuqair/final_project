@@ -14,16 +14,16 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_s
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_tile.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/image_picker.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
-import 'package:final_project/features/activity/models/activity.dart';
+import 'package:final_project/features/mail/models/activity.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class MailDetailsView extends StatelessWidget {
@@ -41,49 +41,53 @@ class MailDetailsView extends StatelessWidget {
           horizontal: 20.w,
         ),
         children: [
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return Row(
-                children: [
-                  Expanded(
-                    child: SheetBar(
-                      onTapDone: () async {
-                        provider.updateEmail().then((value) {
-                          handelResponseStatus(
-                              provider.updateResponse!.status, context,
-                              message: provider.updateResponse!.message);
-                          Navigator.pop(context, true);
-                        });
-                      },
+          if (getUser().role?.id == adminId)
+            Consumer<DetailsProvider>(
+              builder: (context, provider, child) {
+                return Row(
+                  children: [
+                    Expanded(
+                      child: SheetBar(
+                        onTapDone: () async {
+                          provider.updateEmail().then((value) {
+                            handelResponseStatus(
+                                provider.updateResponse!.status, context,
+                                message: provider.updateResponse!.message);
+                            Navigator.pop(context, true);
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) => MailOptionsSheet(
-                            subject: provider.mail.subject ?? '',
-                            onTapArchive: () {},
-                            onTapShare: () {},
-                            onTapDelete: () async {
-                              await provider.deleteMail();
-                              handelResponseStatus(
-                                  provider.deleteResponse!.status, context,
-                                  message: provider.deleteResponse!.message);
-                              Navigator.pop(context);
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.more_vert_outlined,
-                        color: kLightSub,
-                      )),
-                ],
-              );
-            },
-          ),
+                    IconButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) => MailOptionsSheet(
+                              subject: provider.mail.subject ?? '',
+                              onTapArchive: () {},
+                              onTapShare: () {},
+                              onTapDelete: () {
+                                provider.deleteMail().then((value) =>
+                                    handelResponseStatus(
+                                        provider.deleteResponse!.status,
+                                        context,
+                                        message: provider.deleteResponse!
+                                            .message, onComplete: () {
+                                      Navigator.pop(context);
+                                      Navigator.pop(context, true);
+                                    }));
+                              },
+                            ),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.more_vert_outlined,
+                          color: kLightSub,
+                        )),
+                  ],
+                );
+              },
+            ),
           const SSizedBox(
             height: 4,
           ),
@@ -116,23 +120,25 @@ class MailDetailsView extends StatelessWidget {
                 key: provider.formKey,
                 child: TagTiles(
                   tags: provider.selectedTags,
-                  onTap: () {
-                    showModalBottomSheet(
-                        isScrollControlled: true,
-                        clipBehavior: Clip.hardEdge,
-                        constraints:
-                            BoxConstraints.tightFor(height: 1.sh - 60.h),
-                        builder: (context) => TagSheet(
-                              onTapDone: (selected) {
-                                provider.setTags(selected);
-                                Navigator.pop(
-                                  context,
-                                );
-                              },
-                              selected: provider.selectedTags,
-                            ),
-                        context: context);
-                  },
+                  onTap: getUser().role?.id == adminId
+                      ? () {
+                          showModalBottomSheet(
+                              isScrollControlled: true,
+                              clipBehavior: Clip.hardEdge,
+                              constraints:
+                                  BoxConstraints.tightFor(height: 1.sh - 60.h),
+                              builder: (context) => TagSheet(
+                                    onTapDone: (selected) {
+                                      provider.setTags(selected);
+                                      Navigator.pop(
+                                        context,
+                                      );
+                                    },
+                                    selected: provider.selectedTags,
+                                  ),
+                              context: context);
+                        }
+                      : null,
                 ),
               );
             },
@@ -143,20 +149,23 @@ class MailDetailsView extends StatelessWidget {
           Consumer<DetailsProvider>(
             builder: (context, provider, child) {
               return InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                    clipBehavior: Clip.hardEdge,
-                    constraints: BoxConstraints.tightFor(height: 1.sh - 60.h),
-                    builder: (context) => StatusSheet(
-                        selectedStatus: provider.selectedStatus,
-                        onTapDone: (selectedStatus) {
-                          provider.setStatus(selectedStatus);
-                          Navigator.pop(context);
-                        }),
-                    context: context,
-                  );
-                },
+                onTap: getUser().role?.id == adminId
+                    ? () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          clipBehavior: Clip.hardEdge,
+                          constraints:
+                              BoxConstraints.tightFor(height: 1.sh - 60.h),
+                          builder: (context) => StatusSheet(
+                              selectedStatus: provider.selectedStatus,
+                              onTapDone: (selectedStatus) {
+                                provider.setStatus(selectedStatus);
+                                Navigator.pop(context);
+                              }),
+                          context: context,
+                        );
+                      }
+                    : null,
                 child: StatusTile(
                   selectedStatus: provider.selectedStatus,
                 ),
@@ -170,7 +179,8 @@ class MailDetailsView extends StatelessWidget {
             builder: (context, provider, child) {
               return DecisionCard(
                 controller: provider.decision,
-                enabled: provider.selectedStatus?.id != 4,
+                enabled: getUser().role?.id == adminId &&
+                    provider.selectedStatus?.id != 4,
               );
             },
           ),
@@ -184,22 +194,24 @@ class MailDetailsView extends StatelessWidget {
                 onTapAddImage: () {
                   Scaffold.of(context).showBottomSheet(
                     (context) => PickImageSheet(
-                      onTapCamera: () async {
-                        XFile? file = await pickCameraImage();
-                        if (file != null) {
-                          provider
-                              .addAttachment([Attachment(image: file.path)]);
-                          Navigator.pop(context);
-                        }
+                      onTapCamera: () {
+                        pickCameraImage().then((file) {
+                          if (file != null) {
+                            provider
+                                .addAttachment([Attachment(image: file.path)]);
+                            Navigator.pop(context);
+                          }
+                        });
                       },
                       onTapGallery: () async {
-                        List<XFile> files = await pickMullImage();
-                        if (files.isNotEmpty) {
-                          provider.addAttachment(files
-                              .map((e) => Attachment(image: e.path))
-                              .toList());
-                          Navigator.pop(context);
-                        }
+                        pickMullImage().then((files) {
+                          if (files.isNotEmpty) {
+                            provider.addAttachment(files
+                                .map((e) => Attachment(image: e.path))
+                                .toList());
+                            Navigator.pop(context);
+                          }
+                        });
                       },
                     ),
                   );
@@ -253,23 +265,25 @@ class MailDetailsView extends StatelessWidget {
               }
             },
           ),
-          const SSizedBox(
-            height: 12,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return SendActivityBar(
-                onSubmitted: (String value) {
-                  try {
-                    provider.addActivity(value);
-                  } catch (e) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, AuthView.id, (route) => false);
-                  }
-                },
-              );
-            },
-          ),
+          if (getUser().role?.id == adminId) ...[
+            const SSizedBox(
+              height: 12,
+            ),
+            Consumer<DetailsProvider>(
+              builder: (context, provider, child) {
+                return SendActivityBar(
+                  onSubmitted: (String value) {
+                    try {
+                      provider.addActivity(value);
+                    } catch (e) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AuthView.id, (route) => false);
+                    }
+                  },
+                );
+              },
+            ),
+          ]
         ],
       ),
     );

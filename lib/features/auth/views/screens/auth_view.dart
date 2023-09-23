@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/views/home_screen.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/assets.dart';
@@ -122,10 +123,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 controller: usernameController,
                 focusNode: usernameNode,
                 validator: (value) {
-                  if (testNull(value)) {
-                    return 'Please click on the email field and enter your email';
-                  } else if (testEmpty(value)) {
-                    return 'Please enter the email and do not leave the field empty';
+                  if (testEmpty(value)) {
+                    return context.tr('Please enter your username');
+                    ;
                   }
                   return null;
                 },

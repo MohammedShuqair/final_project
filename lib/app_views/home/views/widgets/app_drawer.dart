@@ -4,6 +4,8 @@ import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/sender/views/senders_view.dart';
 import 'package:final_project/app_views/users_management/users_management_screen.dart';
+import 'package:final_project/core/util/constants.dart';
+import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,21 +52,23 @@ class _AppDrawerState extends State<AppDrawer> {
             },
             iconPath: 'assets/icons/profile_user.png',
           ),
-          DrawerTile(
-            title: 'Senders',
-            onTap: () => Navigator.pushNamed(context, SendersView.id)
-                .then((value) => context.read<HomeProvider>().init()),
-            icon: const Icon(
-              Icons.send,
-              color: kWhite,
+          if (getUser().role?.id == adminId)
+            DrawerTile(
+              title: 'Senders',
+              onTap: () => Navigator.pushNamed(context, SendersView.id)
+                  .then((value) => context.read<HomeProvider>().init()),
+              icon: const Icon(
+                Icons.send,
+                color: kWhite,
+              ),
             ),
-          ),
-          DrawerTile(
-            title: 'Users Management',
-            onTap: () => Navigator.pushNamed(context, UsersManagement.id)
-                .then((value) => context.read<HomeProvider>().init()),
-            iconPath: 'assets/icons/settings.png',
-          ),
+          if (getUser().role?.id == adminId)
+            DrawerTile(
+              title: 'Users Management',
+              onTap: () => Navigator.pushNamed(context, UsersManagement.id)
+                  .then((value) => context.read<HomeProvider>().init()),
+              iconPath: 'assets/icons/settings.png',
+            ),
         ],
       ),
     );
