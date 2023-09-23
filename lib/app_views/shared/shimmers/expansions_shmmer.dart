@@ -13,6 +13,7 @@ class ExpansionsShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(titles);
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

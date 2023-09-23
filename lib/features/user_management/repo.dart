@@ -33,4 +33,28 @@ class UserManagementRepository with ApiBaseHelper {
     }
     return roles;
   }
+
+  Future<String> deleteUser(int id) async {
+    final response = await delete('users/$id');
+    return response['message'];
+  }
+
+  Future<User> getSingleUser(
+    int userId,
+  ) async {
+    final response = await get('users/$userId');
+    return User.fromMap(response['user']);
+  }
+
+  Future<User> updateUser(int uid, String? name, int? roleId) async {
+    late User user;
+    if (name != null) {
+      final response = await put('users/$uid?name=$name', null);
+      user = User.fromMap(response['user']);
+    }
+    if (roleId != null) {
+      user = await changeRole(uid.toString(), roleId.toString());
+    }
+    return user;
+  }
 }

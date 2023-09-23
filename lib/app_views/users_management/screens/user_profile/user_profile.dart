@@ -1,27 +1,24 @@
 import "package:easy_localization/easy_localization.dart";
 import "package:final_project/app_views/current_user_profile/views/widgets/info_tile.dart";
-import "package:final_project/app_views/current_user_profile/views/widgets/update_dialog.dart";
 import "package:final_project/app_views/shared/circleImage.dart";
 import "package:final_project/app_views/shared/core_background.dart";
 import "package:final_project/app_views/shared/custom_sized_box.dart";
 import "package:final_project/app_views/shared/responce_builder.dart";
 import "package:final_project/app_views/shared/sub_app_bar.dart";
+import "package:final_project/app_views/users_management/providers/global_user_provider.dart";
+import "package:final_project/app_views/users_management/screens/user_profile/widgets/update_user_dialog.dart";
 import "package:final_project/core/util/colors.dart";
 import "package:final_project/core/util/constants.dart";
 import "package:final_project/core/util/extensions.dart";
-import "package:final_project/core/util/shared_mrthodes.dart";
 import "package:final_project/core/util/styles.dart";
-import "package:final_project/features/auth/views/screens/splash_view.dart";
-import "package:final_project/features/auth/views/widgets/auth_button.dart";
-import "package:final_project/features/current_user/provider/current_user_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:provider/provider.dart";
 
-class CurrentUserProfileScreen extends StatelessWidget {
-  static const id = "/currentUserProfileScreen";
+class UserProfileScreen extends StatelessWidget {
+  static const id = "/userProfileScreen";
 
-  const CurrentUserProfileScreen({Key? key}) : super(key: key);
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +26,19 @@ class CurrentUserProfileScreen extends StatelessWidget {
       appBar: SubAppBar(
         title: context.tr("Profile"),
         actions: [
-          Consumer<UserProvider>(
+          Consumer<GlobalUserProvider>(
             builder: (context, provider, child) {
               return IconButton(
                   onPressed: () {
                     showDialog(
                         context: context,
-                        builder: (_) => ResponseBuilder(
-                              response: provider.currentUserResponse,
-                              onComplete: (_, user, __, ___) {
-                                return UpdateDialog(
-                                  onTapSave:
-                                      (String? name, String? path) async {
-                                    await provider
-                                        .updateUser(name ?? user.name!,
-                                            imagePath: path)
-                                        .then((value) {
-                                      handelResponseStatus(
-                                          provider.currentUserResponse.status,
-                                          context,
-                                          message: provider
-                                              .currentUserResponse.message,
-                                          onComplete: () =>
-                                              Navigator.pop(context));
-                                    });
-                                  },
-                                );
-                              },
-                            ));
+                        builder: (_) {
+                          return UpdateUserDialog(onTapSave: (name, roleId) {
+                            provider
+                                .updateUser(name, roleId)
+                                .then((value) => Navigator.pop(context));
+                          });
+                        });
                   },
                   icon: const Icon(Icons.edit));
             },
@@ -64,15 +46,16 @@ class CurrentUserProfileScreen extends StatelessWidget {
         ],
       ),
       body: RefreshIndicator(
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
         onRefresh: () async {
-          await context.read<UserProvider>().getCurrentUser();
+          context.read<GlobalUserProvider>().getSingleUser();
         },
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Consumer<UserProvider>(
+          child: Consumer<GlobalUserProvider>(
             builder: (context, provider, child) {
               return ResponseBuilder(
-                response: provider.currentUserResponse,
+                response: provider.singleUser,
                 onComplete: (_, user, __, ___) => ListView(
                   children: [
                     UnconstrainedBox(
@@ -126,21 +109,6 @@ class CurrentUserProfileScreen extends StatelessWidget {
                     const SSizedBox(
                       height: 40,
                     ),
-                    AuthButton(
-                        gradient: [kUnselect, kSubText],
-                        textColor: kDarkText,
-                        onTap: () {
-                          provider.logout().then((value) {
-                            handelResponseStatus(
-                                provider.currentUserResponse.status, context,
-                                message: provider.currentUserResponse.message,
-                                onComplete: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, SplashView.id, (route) => false);
-                            });
-                          });
-                        },
-                        text: context.tr('logout'))
                   ],
                 ),
                 onLoading: (_) {

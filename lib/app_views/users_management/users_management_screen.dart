@@ -16,12 +16,6 @@ class UsersManagement extends StatelessWidget {
     return Scaffold(
       appBar: SubAppBar(
         title: context.tr("User Management"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

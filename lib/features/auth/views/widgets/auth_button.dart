@@ -6,12 +6,16 @@ class AuthButton extends StatelessWidget {
   final Function()? onTap;
   final double? width;
   final String text;
+  final List<Color>? gradient;
+  final Color? textColor;
 
   const AuthButton(
       {super.key,
       required this.onTap,
       this.width = double.infinity,
-      required this.text});
+      required this.text,
+      this.gradient,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +26,13 @@ class AuthButton extends StatelessWidget {
         height: 50,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [Color(0XFF6488FF), kDarkSub]),
+          gradient: LinearGradient(
+              colors: gradient ?? [const Color(0XFF6488FF), kDarkSub]),
           borderRadius: BorderRadius.circular(25),
         ),
         child: Text(
           text,
-          style: kSelectedButton,
+          style: kSelectedButton.copyWith(color: textColor),
         ),
       ),
     );

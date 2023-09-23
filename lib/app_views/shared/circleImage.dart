@@ -19,13 +19,14 @@ class _CircleImageState extends State<CircleImage> {
   bool? isValid;
   @override
   void initState() {
-    if (mounted) {
-      widget.imagePath.isImageValid().then((value) {
+    widget.imagePath.isImageValid().then((value) {
+      if (mounted) {
         setState(() {
           isValid = value;
         });
-      });
-    }
+      }
+    });
+
     super.initState();
   }
 

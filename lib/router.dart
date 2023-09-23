@@ -12,9 +12,12 @@ import 'package:final_project/app_views/sender/provider/sender_search_provider.d
 import 'package:final_project/app_views/sender/provider/single_sender_provider.dart';
 import 'package:final_project/app_views/sender/views/sender_mails.dart';
 import 'package:final_project/app_views/sender/views/senders_view.dart';
-import 'package:final_project/app_views/users_management/management_provider/management_provider.dart';
+import 'package:final_project/app_views/users_management/providers/global_user_provider.dart';
+import 'package:final_project/app_views/users_management/providers/management_provider.dart';
 import 'package:final_project/app_views/users_management/screens/all_users/all_users.dart';
 import 'package:final_project/app_views/users_management/screens/create_user/create_user.dart';
+import 'package:final_project/app_views/users_management/screens/user_profile/user_profile.dart';
+import 'package:final_project/features/auth/model/user.dart';
 import 'package:final_project/features/auth/provider/auth_provider.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/mail/models/mail.dart';
@@ -108,6 +111,13 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
                 create: (BuildContext context) =>
                     SingleSenderProvider(settings.arguments as Sender),
                 child: const SenderMailsView(),
+              ));
+    case UserProfileScreen.id:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (BuildContext context) =>
+                    GlobalUserProvider(settings.arguments as User),
+                child: const UserProfileScreen(),
               ));
     case AllUsersView.id:
       return MaterialPageRoute(

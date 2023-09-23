@@ -11,7 +11,7 @@ class SingleSenderProvider extends ChangeNotifier {
   late Sender selectedSender;
   SingleSenderProvider(Sender sender) {
     selectedSender = sender;
-    singleSender = singleSender = ApiResponse.completed(
+    singleSender = ApiResponse.completed(
         mailsToCategoriesMap(sender.mails ?? []),
         message: 'Sender fetched successfully');
     _repository = SenderRepository();

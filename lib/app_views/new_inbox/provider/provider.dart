@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/shared_mrthodes.dart';
 import 'package:final_project/features/mail/models/activity.dart';
@@ -86,7 +87,7 @@ class NewInboxProvider extends ChangeNotifier {
         );
         await uploadAttachment(mail);
         createMailResponse = ApiResponse.completed(true,
-            message: '${mail.subject} created sucssesfully');
+            message: '${mail.subject} ${'created successfully'.tr()}');
       } catch (e) {
         createMailResponse = ApiResponse.error(message: '$e');
       }
