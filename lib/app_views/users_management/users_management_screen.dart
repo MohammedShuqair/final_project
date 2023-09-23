@@ -3,6 +3,7 @@ import 'package:final_project/app_views/home/views/home_screen.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/sub_app_bar.dart';
+import 'package:final_project/app_views/users_management/screens/all_users/all_users.dart';
 import 'package:final_project/app_views/users_management/screens/create_user/create_user.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,9 @@ class UsersManagement extends StatelessWidget {
           children: [
             Core(
               child: ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, AllUsersView.id);
+                },
                 leading: const Icon(Icons.group),
                 trailing: const Icon(Icons.arrow_forward_ios),
                 title: Text(context.tr("Get all users")),
