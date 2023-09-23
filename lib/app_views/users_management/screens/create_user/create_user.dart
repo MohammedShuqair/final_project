@@ -74,7 +74,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         controller: usernameController,
                         validator: (value) {
                           if (testEmpty(value)) {
-                            return context.tr('Please enter username');
+                            return context.tr('pl_username');
                           }
                           return null;
                         },
@@ -84,12 +84,12 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         validator: (value) {
                           if (testNull(value)) {
                             return context.tr(
-                                'Please click on the email field and enter your email');
+                                'pl_email');
                           } else if (testEmpty(value)) {
                             return context.tr(
-                                'Please enter the email and do not leave the field empty');
+                                'pl_email');
                           } else if (!testEmailValidation(value)) {
-                            return context.tr('Please enter a valid email');
+                            return context.tr('pl_valid_email');
                           }
                           return null;
                         },
@@ -102,13 +102,13 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         validator: (value) {
                           if (testNull(value)) {
                             return context.tr(
-                                'Please click on the password field and enter your password');
+                                'pl_password');
                           } else if (testEmpty(value)) {
                             return context.tr(
-                                'Please enter the password and do not leave the field empty');
+                                'pl_password');
                           } else if (testPasswordLength(value)) {
                             return context.tr(
-                                'The password must contain at least 6 characters');
+                                'pl_len');
                           }
                           return null;
                         },
@@ -118,21 +118,21 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         child: CustomTextFormField.password(
                           controller: confPasswordController,
                           textInputAction: TextInputAction.done,
-                          hint: context.tr('Confirm Password'),
+                          hint: context.tr('enter_confirm'),
                           validator: (value) {
                             if (testNull(value)) {
                               return context.tr(
-                                  'Please click on the confirm password field and enter your password');
+                                  'pl_confirm');
                             } else if (testEmpty(value)) {
                               return context.tr(
-                                  'Please enter the confirm password and do not leave the field empty');
+                                  'pl_confirm');
                             } else if (testPasswordLength(value)) {
                               return context.tr(
-                                  'The confirm password must contain at least 6 characters');
+                                  'pl_len');
                             } else if (passwordController.text !=
                                 confPasswordController.text) {
                               return context.tr(
-                                  'The confirm password must be the same as password');
+                                  'pl_match');
                             }
                             return null;
                           },
@@ -151,7 +151,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                             child: DropdownButtonFormField<int>(
                               validator: (v) {
                                 if (v == null) {
-                                  return 'Please select user role';
+                                  return context.tr('Please select user role');
                                 }
                                 return null;
                               },

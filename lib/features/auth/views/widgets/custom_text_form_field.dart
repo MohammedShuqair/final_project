@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField.username({
     super.key,
     this.onChanged,
-    this.hint = 'Enter username',
+    this.hint = 'enter_username',
     this.password = false,
     this.keyboardType = TextInputType.name,
     this.validator,
@@ -41,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField.email({
     super.key,
     this.onChanged,
-    this.hint = 'Enter your email',
+    this.hint = 'enter_email',
     this.password = false,
     this.keyboardType = TextInputType.emailAddress,
     this.validator,
@@ -54,7 +55,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField.password({
     super.key,
     this.onChanged,
-    this.hint = 'Enter your password',
+    this.hint = 'enter_password',
     this.password = true,
     this.keyboardType = TextInputType.visiblePassword,
     this.validator,
@@ -85,7 +86,7 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        hintText: hint,
+        hintText: hint != null ? context.tr(hint!) : hint,
         hintStyle: const TextStyle(fontSize: 12, color: kSubText),
         enabledBorder:
             const UnderlineInputBorder(borderSide: BorderSide(color: kBorder)),
