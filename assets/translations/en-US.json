@@ -19,7 +19,7 @@
   "tags": "Tags",
   "new_inbox": "New Inbox",
   "search": "Search",
-  "home": "Home",
+  "Home": "Home",
   "decision": "Decision",
   "add_image": "Add Image",
   "Activities": "Activity",
@@ -29,7 +29,7 @@
   "delete": "Delete",
   "cancel": "Cancel",
   "done": "Done",
-  "senders": "Senders",
+  "Senders": "Senders",
   "sender": "Sender",
   "mobile": "mobile",
   "category": "Category",
@@ -57,7 +57,7 @@
   "there_is_no_mails": "There is no mails",
   "mail_details": "Mail Details",
   "users_management": "Users Management",
-  "profile": "Personal Profile",
+  "Profile": "Profile",
   "delete_inbox": "Delete Inbox",
   "localization": "عربي",
   "logout": "Log out",
@@ -91,5 +91,7 @@
   "Edit":"Edit",
   "Delete": "Delete",
   "Please_enter_archive_number.": "Please enter archive number.",
-  "Please_enter_valid_archive_number.": "Please enter valid archive number."
+  "Please_enter_valid_archive_number.": "Please enter valid archive number.",
+  "Users Management": "Users Management",
+  "Personal Information": "Personal Information"
 }
