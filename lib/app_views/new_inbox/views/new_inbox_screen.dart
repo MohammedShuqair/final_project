@@ -188,7 +188,7 @@ class NewInbox extends StatelessWidget {
               builder: (context, provider, child) {
                 if (provider.activities.isNotEmpty) {
                   return ExpansionWidget(
-                    title: context.tr('activity'),
+                    title: context.tr('Activities'),
                     cards: provider.activities.map(
                       (activity) {
                         return ActivityCard(
@@ -217,7 +217,7 @@ class NewInbox extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.only(
                         start: 16, bottom: 10, top: 10),
                     child: Text(
-                      'Activities'.firstCapital(),
+                     context.tr( 'Activities'.firstCapital()),
                       style: tagTitleTextStyle,
                     ),
                   );

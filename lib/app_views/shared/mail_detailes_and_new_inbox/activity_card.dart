@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/app_text_field.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
@@ -104,7 +105,7 @@ class _ActivityCardState extends State<ActivityCard> {
                       onPressed: () {
                         widget.onTapSaveEdit!(controller.text, widget.activity);
                       },
-                      child: const Text('save')),
+                      child: Text(context.tr('save'))),
                   const SSizedBox(
                     width: 4,
                   ),
@@ -113,7 +114,7 @@ class _ActivityCardState extends State<ActivityCard> {
                         controller.text = widget.activity.body ?? '';
                         widget.onTapCancel!(widget.activity);
                       },
-                      child: const Text('cancel')),
+                      child: Text(context.tr('cancel'))),
                 ],
               )
             ],
@@ -125,14 +126,14 @@ class _ActivityCardState extends State<ActivityCard> {
                           onTap: () {
                             widget.onTapDelete(widget.activity);
                           },
-                          child: const Text('Delete'),
+                          child: Text(context.tr('Delete')),
                         ),
                         if (widget.onTapEdit != null)
                           PopupMenuItem(
                             onTap: () {
                               widget.onTapEdit!(widget.activity);
                             },
-                            child: const Text('Edit'),
+                            child: Text(context.tr('Edit')),
                           ),
                       ]),
           ],
