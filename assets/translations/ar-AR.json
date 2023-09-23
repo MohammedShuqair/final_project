@@ -91,7 +91,10 @@
   "From_Gallery": "الاستديو",
   "save": "حفظ",
   "Edit":"تعديل",
-  "Delete": "حذف"
+  "Delete": "حذف",
+  "Please_enter_archive_number.": "رقم الارشيف مطلوب",
+  "Please_enter_valid_archive_number.": "رقم الارشيف غير صحيح"
+
 
 
 
