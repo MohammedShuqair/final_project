@@ -89,5 +89,7 @@
   "From_Gallery": "From Gallery",
   "save": "save",
   "Edit":"Edit",
-  "Delete": "Delete"
+  "Delete": "Delete",
+  "Please_enter_archive_number.": "Please enter archive number.",
+  "Please_enter_valid_archive_number.": "Please enter valid archive number."
 }

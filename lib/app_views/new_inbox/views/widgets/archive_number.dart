@@ -33,11 +33,11 @@ class ArchiveWidget extends StatelessWidget {
               AppTextField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return context.tr('Please enter archive number.');
+                    return context.tr('Please_enter_archive_number.');
                   }
                   final regex = RegExp(r'^\d+/\d+$');
                   if (!regex.hasMatch(value)) {
-                    return context.tr('Please enter valid archive number.');
+                    return context.tr('Please_enter_valid_archive_number.');
                   }
 
                   return null;
