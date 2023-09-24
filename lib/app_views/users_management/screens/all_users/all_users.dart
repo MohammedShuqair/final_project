@@ -129,14 +129,6 @@ class AllUsersView extends StatelessWidget {
                             )),
                           )
                         ],
-                        if (more)
-                          ExpansionsShimmer(
-                            titles: defaultRoles.map((e) => e.name).toList()
-                              ..removeWhere((newCat) => roles
-                                  .map((e) => e.name?.firstCapital().tr())
-                                  .toList()
-                                  .any((oldCat) => newCat == oldCat)),
-                          )
                       ],
                     );
                   },

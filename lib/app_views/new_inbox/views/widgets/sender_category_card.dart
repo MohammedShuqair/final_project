@@ -77,6 +77,7 @@ class SenderCard extends StatelessWidget {
                 color: Color(0xFFD0D0D0),
               ),
               AppTextField(
+                keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return context.tr('enter_mobile');

@@ -123,6 +123,9 @@
   "update username or user role before saving changes": "update username or user role before saving changes",
   "update name": "update name",
   "deleted successfully": "deleted successfully",
+  "please edit sender info": "please edit sender info",
+  "updated successfully": "updated successfully",
+  "add sender": "Add sender",
   "": ""
 
 }

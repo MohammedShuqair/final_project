@@ -16,6 +16,7 @@ class AppTextField extends StatelessWidget {
     this.focusNode,
     this.maxLines = 1,
     this.border,
+    this.keyboardType,
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -28,6 +29,7 @@ class AppTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final int? maxLines;
   final InputBorder? border;
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     Widget? suffixIcon2;
@@ -41,6 +43,7 @@ class AppTextField extends StatelessWidget {
       children: [
         Expanded(
           child: TextFormField(
+            keyboardType: keyboardType,
             onTapOutside: (s) {
               FocusScope.of(context).requestFocus(FocusNode());
             },

@@ -26,6 +26,16 @@ class Category {
     this.sendersCount,
     this.senders,
   });
+
+  void copyWith({required Category category}) {
+    id = category.id;
+    name = category.name;
+    createdAt = category.createdAt;
+    updatedAt = category.updatedAt;
+    sendersCount = category.sendersCount;
+    senders = category.senders;
+  }
+
   @override
   String toString() {
     return 'Category {id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, sendersCount: $sendersCount, senders: $senders}';

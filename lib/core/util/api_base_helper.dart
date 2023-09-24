@@ -121,7 +121,7 @@ mixin class ApiBaseHelper {
       case 500:
       default:
         throw FetchDataException(
-            'Error occurred while Communication with Server with StatusCode : ${statusCode}');
+            '${responseJson['message'] ?? 'Error occurred while Communication with Server with StatusCode : ${statusCode}'}');
     }
   }
 }

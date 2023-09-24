@@ -123,5 +123,8 @@
   "update username or user role before saving changes": "قم بتحديث أسم المستخدم أو الصلاحية قبل حفظ التعديلات",
   "update name": "تغيير الأسم",
   "deleted successfully": "حذف بنجاح",
+  "please edit sender info": "الرجاء تعديل معلومات المرسل",
+  "updated successfully": "حدث بنجاح",
+  "add sender": "اضافة مرسل",
   "": ""
 }

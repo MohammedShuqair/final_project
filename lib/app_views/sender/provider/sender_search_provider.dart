@@ -12,6 +12,7 @@ class SenderSearchProvider extends ChangeNotifier {
   ApiResponse<SenderResponse>? allSenderResponse;
   ApiResponse<String>? deleteResponse;
   ApiResponse<Sender>? updateSenderResponse;
+  ApiResponse<Sender>? createSenderResponse;
 
   late ScrollController scrollController;
   String? senderName;
@@ -34,6 +35,7 @@ class SenderSearchProvider extends ChangeNotifier {
     if ((scrollController.position.maxScrollExtent ==
             scrollController.position.pixels) &&
         currentPage <= (lastPage ?? firstPage) &&
+        senderName == null &&
         (allSenderResponse?.status != ApiStatus.LOADING ||
             allSenderResponse?.status != ApiStatus.MORE)) {
       currentPage++;
@@ -62,7 +64,28 @@ class SenderSearchProvider extends ChangeNotifier {
     allSenderResponse?.data = null;
     store = [];
     currentPage = 1;
-    getAllSenders();
+    // getAllSenders();
+  }
+
+  Future<void> createSender(
+    String name,
+    String mobile,
+    String address,
+    String categoryId,
+  ) async {
+    createSenderResponse = ApiResponse.loading(message: 'logging...');
+    notifyListeners();
+    try {
+      final Sender? sender = await _repository.createSender(
+          name: name, mobile: mobile, address: address, categoryId: categoryId);
+
+      createSenderResponse = ApiResponse.completed(sender,
+          message: '$name ${'created_successfully'.tr()}');
+      notifyListeners();
+    } catch (e) {
+      createSenderResponse = ApiResponse.error(message: e.toString());
+      notifyListeners();
+    }
   }
 
   Future<void> updateSender(
@@ -82,8 +105,8 @@ class SenderSearchProvider extends ChangeNotifier {
           address: address,
           categoryId: categoryId);
 
-      updateSenderResponse =
-          ApiResponse.completed(sender, message: 'Sender created successfully');
+      updateSenderResponse = ApiResponse.completed(sender,
+          message: '${sender.name} ${"updated successfully".tr()}');
       notifyListeners();
     } catch (e) {
       updateSenderResponse = ApiResponse.error(message: e.toString());
@@ -117,8 +140,14 @@ class SenderSearchProvider extends ChangeNotifier {
           senderResponse.senders?.removeWhere((sender) =>
               !sender.name!.toLowerCase().contains(senderName!.toLowerCase()));
         }
-        if (senderResponse.senders != null) {
+        if (senderResponse.senders != null &&
+            senderResponse.senders!.isNotEmpty) {
           store.addAll(senderResponse.senders!);
+          allSenderResponse = ApiResponse.more(
+              data: SenderResponse(senders: store),
+              message: 'Senders fetched successfully');
+          notifyListeners();
+          print(store.map((e) => e.name));
         }
       }
       senderResponse?.senders = store;
