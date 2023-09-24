@@ -35,257 +35,264 @@ class MailDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.symmetric(
-          vertical: 14.h,
-          horizontal: 20.w,
-        ),
-        children: [
-          if (getUser().role?.id == adminId)
+    return RepaintBoundary(
+      key: context.watch<DetailsProvider>().globalKey,
+      child: Scaffold(
+        body: ListView(
+          padding: EdgeInsets.symmetric(
+            vertical: 14.h,
+            horizontal: 20.w,
+          ),
+          children: [
+            if (getUser().role?.id == adminId)
+              Consumer<DetailsProvider>(
+                builder: (context, provider, child) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: SheetBar(
+                          onTapDone: () async {
+                            provider.updateEmail().then((value) {
+                              handelResponseStatus(
+                                  provider.updateResponse!.status, context,
+                                  message: provider.updateResponse!.message);
+                              Navigator.pop(context, true);
+                            });
+                          },
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) => MailOptionsSheet(
+                                subject: provider.mail.subject ?? '',
+                                onTapArchive: () {},
+                                onTapShare: () {
+                                  provider
+                                      .capturePng(context, true)
+                                      .then((value) => Navigator.pop(context));
+                                },
+                                onTapDelete: () {
+                                  provider.deleteMail().then((value) =>
+                                      handelResponseStatus(
+                                          provider.deleteResponse!.status,
+                                          context,
+                                          message: provider.deleteResponse!
+                                              .message, onComplete: () {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context, true);
+                                      }));
+                                },
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.more_vert_outlined,
+                            color: kLightSub,
+                          )),
+                    ],
+                  );
+                },
+              ),
+            const SSizedBox(
+              height: 4,
+            ),
+            Text(
+              context.tr('Mail Details'),
+              style: kTitleMailCard,
+              textAlign: TextAlign.center,
+            ),
+            const SSizedBox(
+              height: 22,
+            ),
             Consumer<DetailsProvider>(
               builder: (context, provider, child) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: SheetBar(
-                        onTapDone: () async {
-                          provider.updateEmail().then((value) {
-                            handelResponseStatus(
-                                provider.updateResponse!.status, context,
-                                message: provider.updateResponse!.message);
-                            Navigator.pop(context, true);
-                          });
-                        },
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) => MailOptionsSheet(
-                              subject: provider.mail.subject ?? '',
-                              onTapArchive: () {},
-                              onTapShare: () {},
-                              onTapDelete: () {
-                                provider.deleteMail().then((value) =>
-                                    handelResponseStatus(
-                                        provider.deleteResponse!.status,
-                                        context,
-                                        message: provider.deleteResponse!
-                                            .message, onComplete: () {
-                                      Navigator.pop(context);
-                                      Navigator.pop(context, true);
-                                    }));
-                              },
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.more_vert_outlined,
-                          color: kLightSub,
-                        )),
-                  ],
+                return SenderDataTitleDescription(
+                  senderName: provider.mail.sender?.name ?? '',
+                  categoryName: provider.mail.sender?.category?.name ?? '',
+                  date: provider.mail.archiveDate?.formatArriveTime() ?? '',
+                  archiveNumber: provider.mail.archiveNumber ?? '',
+                  title: provider.mail.subject ?? '',
+                  description: provider.mail.description,
                 );
               },
             ),
-          const SSizedBox(
-            height: 4,
-          ),
-          Text(
-            context.tr('Mail Details'),
-            style: kTitleMailCard,
-            textAlign: TextAlign.center,
-          ),
-          const SSizedBox(
-            height: 22,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return SenderDataTitleDescription(
-                senderName: provider.mail.sender?.name ?? '',
-                categoryName: provider.mail.sender?.category?.name ?? '',
-                date: provider.mail.archiveDate?.formatArriveTime() ?? '',
-                archiveNumber: provider.mail.archiveNumber ?? '',
-                title: provider.mail.subject ?? '',
-                description: provider.mail.description,
-              );
-            },
-          ),
-          const SSizedBox(
-            height: 17,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return Form(
-                key: provider.formKey,
-                child: TagTiles(
-                  tags: provider.selectedTags,
-                  onTap: getUser().role?.id == adminId
-                      ? () {
-                          showModalBottomSheet(
-                              isScrollControlled: true,
-                              clipBehavior: Clip.hardEdge,
-                              constraints:
-                                  BoxConstraints.tightFor(height: 1.sh - 60.h),
-                              builder: (context) => TagSheet(
-                                    onTapDone: (selected) {
-                                      provider.setTags(selected);
-                                      Navigator.pop(
-                                        context,
-                                      );
-                                    },
-                                    selected: provider.selectedTags,
-                                  ),
-                              context: context);
-                        }
-                      : null,
-                ),
-              );
-            },
-          ),
-          const SSizedBox(
-            height: 12,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return InkWell(
-                onTap: getUser().role?.id == adminId
-                    ? () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          clipBehavior: Clip.hardEdge,
-                          constraints:
-                              BoxConstraints.tightFor(height: 1.sh - 60.h),
-                          builder: (context) => StatusSheet(
-                              selectedStatus: provider.selectedStatus,
-                              onTapDone: (selectedStatus) {
-                                provider.setStatus(selectedStatus);
-                                Navigator.pop(context);
-                              }),
-                          context: context,
-                        );
-                      }
-                    : null,
-                child: StatusTile(
-                  selectedStatus: provider.selectedStatus,
-                ),
-              );
-            },
-          ),
-          const SSizedBox(
-            height: 12,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return DecisionCard(
-                controller: provider.decision,
-                enabled: getUser().role?.id == adminId &&
-                    provider.selectedStatus?.id != 4,
-              );
-            },
-          ),
-          const SSizedBox(
-            height: 12,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              return PickImageView(
-                images: provider.attachments,
-                onTapAddImage: () {
-                  Scaffold.of(context).showBottomSheet(
-                    (context) => PickImageSheet(
-                      onTapCamera: () {
-                        pickCameraImage().then((file) {
-                          if (file != null) {
-                            provider
-                                .addAttachment([Attachment(image: file.path)]);
-                            Navigator.pop(context);
+            const SSizedBox(
+              height: 17,
+            ),
+            Consumer<DetailsProvider>(
+              builder: (context, provider, child) {
+                return Form(
+                  key: provider.formKey,
+                  child: TagTiles(
+                    tags: provider.selectedTags,
+                    onTap: getUser().role?.id == adminId
+                        ? () {
+                            showModalBottomSheet(
+                                isScrollControlled: true,
+                                clipBehavior: Clip.hardEdge,
+                                constraints: BoxConstraints.tightFor(
+                                    height: 1.sh - 60.h),
+                                builder: (context) => TagSheet(
+                                      onTapDone: (selected) {
+                                        provider.setTags(selected);
+                                        Navigator.pop(
+                                          context,
+                                        );
+                                      },
+                                      selected: provider.selectedTags,
+                                    ),
+                                context: context);
                           }
-                        });
-                      },
-                      onTapGallery: () async {
-                        pickMullImage().then((files) {
-                          if (files.isNotEmpty) {
-                            provider.addAttachment(files
-                                .map((e) => Attachment(image: e.path))
-                                .toList());
-                            Navigator.pop(context);
-                          }
-                        });
-                      },
-                    ),
-                  );
-                },
-                onTapDelete: (String path) {
-                  provider.removeAttachment(path);
-                },
-              );
-            },
-          ),
-          const SSizedBox(
-            height: 16,
-          ),
-          Consumer<DetailsProvider>(
-            builder: (context, provider, child) {
-              if (provider.activities.isNotEmpty) {
-                return ExpansionWidget(
-                  title: context.tr('Activities'),
-                  cards: provider.activities.map(
-                    (activity) {
-                      return ActivityCard(
-                        key: ValueKey(activity.toString()),
-                        activity: activity,
-                        onTapSaveEdit: (body, activity) {
-                          provider.editActivityBody(body, activity);
-                        },
-                        onTapCancel: (activity) {
-                          provider.removeEditingActivity(activity);
-                        },
-                        onTapEdit: (Activity activity) {
-                          provider.addEditingActivity(activity);
-                        },
-                        onTapDelete: (Activity activity) {
-                          provider.removeActivity(activity);
-                        },
-                        editingMode:
-                            provider.editingActivities.contains(activity),
-                      );
-                    },
-                  ).toList(),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                      start: 16, bottom: 10, top: 10),
-                  child: Text(
-                    context.tr('Activities'.firstCapital()),
-                    style: tagTitleTextStyle,
+                        : null,
                   ),
                 );
-              }
-            },
-          ),
-          if (getUser().role?.id == adminId) ...[
+              },
+            ),
             const SSizedBox(
               height: 12,
             ),
             Consumer<DetailsProvider>(
               builder: (context, provider, child) {
-                return SendActivityBar(
-                  onSubmitted: (String value) {
-                    try {
-                      provider.addActivity(value);
-                    } catch (e) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, AuthView.id, (route) => false);
-                    }
+                return InkWell(
+                  onTap: getUser().role?.id == adminId
+                      ? () {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            clipBehavior: Clip.hardEdge,
+                            constraints:
+                                BoxConstraints.tightFor(height: 1.sh - 60.h),
+                            builder: (context) => StatusSheet(
+                                selectedStatus: provider.selectedStatus,
+                                onTapDone: (selectedStatus) {
+                                  provider.setStatus(selectedStatus);
+                                  Navigator.pop(context);
+                                }),
+                            context: context,
+                          );
+                        }
+                      : null,
+                  child: StatusTile(
+                    selectedStatus: provider.selectedStatus,
+                  ),
+                );
+              },
+            ),
+            const SSizedBox(
+              height: 12,
+            ),
+            Consumer<DetailsProvider>(
+              builder: (context, provider, child) {
+                return DecisionCard(
+                  controller: provider.decision,
+                  enabled: getUser().role?.id == adminId &&
+                      provider.selectedStatus?.id != 4,
+                );
+              },
+            ),
+            const SSizedBox(
+              height: 12,
+            ),
+            Consumer<DetailsProvider>(
+              builder: (context, provider, child) {
+                return PickImageView(
+                  images: provider.attachments,
+                  onTapAddImage: () {
+                    Scaffold.of(context).showBottomSheet(
+                      (context) => PickImageSheet(
+                        onTapCamera: () {
+                          pickCameraImage().then((file) {
+                            if (file != null) {
+                              provider.addAttachment(
+                                  [Attachment(image: file.path)]);
+                              Navigator.pop(context);
+                            }
+                          });
+                        },
+                        onTapGallery: () async {
+                          pickMullImage().then((files) {
+                            if (files.isNotEmpty) {
+                              provider.addAttachment(files
+                                  .map((e) => Attachment(image: e.path))
+                                  .toList());
+                              Navigator.pop(context);
+                            }
+                          });
+                        },
+                      ),
+                    );
+                  },
+                  onTapDelete: (String path) {
+                    provider.removeAttachment(path);
                   },
                 );
               },
             ),
-          ]
-        ],
+            const SSizedBox(
+              height: 16,
+            ),
+            Consumer<DetailsProvider>(
+              builder: (context, provider, child) {
+                if (provider.activities.isNotEmpty) {
+                  return ExpansionWidget(
+                    title: context.tr('Activities'),
+                    cards: provider.activities.map(
+                      (activity) {
+                        return ActivityCard(
+                          key: ValueKey(activity.toString()),
+                          activity: activity,
+                          onTapSaveEdit: (body, activity) {
+                            provider.editActivityBody(body, activity);
+                          },
+                          onTapCancel: (activity) {
+                            provider.removeEditingActivity(activity);
+                          },
+                          onTapEdit: (Activity activity) {
+                            provider.addEditingActivity(activity);
+                          },
+                          onTapDelete: (Activity activity) {
+                            provider.removeActivity(activity);
+                          },
+                          editingMode:
+                              provider.editingActivities.contains(activity),
+                        );
+                      },
+                    ).toList(),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 16, bottom: 10, top: 10),
+                    child: Text(
+                      context.tr('Activities'.firstCapital()),
+                      style: tagTitleTextStyle,
+                    ),
+                  );
+                }
+              },
+            ),
+            if (getUser().role?.id == adminId) ...[
+              const SSizedBox(
+                height: 12,
+              ),
+              Consumer<DetailsProvider>(
+                builder: (context, provider, child) {
+                  return SendActivityBar(
+                    onSubmitted: (String value) {
+                      try {
+                        provider.addActivity(value);
+                      } catch (e) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, AuthView.id, (route) => false);
+                      }
+                    },
+                  );
+                },
+              ),
+            ]
+          ],
+        ),
       ),
     );
   }

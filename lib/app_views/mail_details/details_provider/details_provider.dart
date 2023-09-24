@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:final_project/core/util/api_response.dart';
+import 'package:final_project/core/util/share_screen_shot.dart';
 import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/features/mail/models/activity.dart';
 import 'package:final_project/features/auth/model/user.dart';
@@ -37,6 +38,12 @@ class DetailsProvider extends ChangeNotifier {
     decision = TextEditingController(text: mail.decision ?? '');
     attachments.addAll(mail.attachments ?? []);
     activities.addAll(mail.activities?.toList() ?? []);
+  }
+  GlobalKey globalKey = GlobalKey();
+
+  Future<void> capturePng(BuildContext context, bool mounted) async {
+    ShareScreenHelper.capturePng(context,
+        mounted: mounted, globalKey: globalKey);
   }
 
   Future<void> deleteMail() async {
