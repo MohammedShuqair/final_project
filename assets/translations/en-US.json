@@ -93,5 +93,19 @@
   "Please_enter_archive_number.": "Please enter archive number.",
   "Please_enter_valid_archive_number.": "Please enter valid archive number.",
   "Users Management": "Users Management",
-  "Personal Information": "Personal Information"
+  "Personal Information": "Personal Information",
+  "User Management": "User Management",
+  "Get all users": "Get all users",
+  "Create users": "Create users",
+  "Create User": "Create User",
+  "Role": "Role",
+  "select role": "select role",
+  "All Users": "All Users",
+  "Guest": "Guest",
+  "User":"User",
+  "Editor": "Editor",
+  "Admin": "Admin",
+  "create user": "create user",
+  "Please select user role": "Please select user role"
+
 }

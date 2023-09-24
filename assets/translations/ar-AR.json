@@ -95,6 +95,21 @@
   "Please_enter_archive_number.": "رقم الارشيف مطلوب",
   "Please_enter_valid_archive_number.": "رقم الارشيف غير صحيح",
   "Users Management": "إدارة المستخدمين",
-  "Personal Information": "المعلومات الشخصية"
+  "Personal Information": "المعلومات الشخصية",
+  "User Management": "إدارة المستخدمين",
+  "Get all users": "جلب المستخدمين",
+  "Create users": "إنشاء مستخدمين",
+  "Role": "الصلاحية",
+  "Create User": "إنشاء مستخدم",
+  "select role": "اختر صلاحية",
+  "All Users": "كل المستخدمين",
+  "Guest": "زائر",
+  "User":"مستخدم",
+  "Editor": "محرر",
+  "Admin": "مسؤول",
+  "create user": "انشاء مستخدم",
+  "Please select user role": "اختر الصلاحية"
+
+
 
 }
