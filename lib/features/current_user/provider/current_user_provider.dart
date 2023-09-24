@@ -16,6 +16,7 @@ class UserProvider extends ChangeNotifier {
     if (userString != null && userString.isNotEmpty) {
       currentUserResponse =
           ApiResponse.completed(User.fromMap(jsonDecode(userString)));
+      notifyListeners();
     }
   }
   Future<void> getCurrentUser() async {

@@ -17,10 +17,10 @@ class AuthOption extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 6),
         alignment: Alignment.center,
-        decoration: selectFactor
+        /*decoration: selectFactor
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(50), color: kDarkSub)
-            : null,
+            : null,*/
         child: Text(
           label,
           style: selectFactor ? kSelectedButton : kUnSelectedButton,

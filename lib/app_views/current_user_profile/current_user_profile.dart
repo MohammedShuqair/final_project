@@ -56,6 +56,9 @@ class CurrentUserProfileScreen extends StatelessWidget {
                                   },
                                 );
                               },
+                              onError: (_, message) {
+                                return Text('$message');
+                              },
                             ));
                   },
                   icon: const Icon(Icons.edit));
@@ -67,90 +70,92 @@ class CurrentUserProfileScreen extends StatelessWidget {
         onRefresh: () async {
           await context.read<UserProvider>().getCurrentUser();
         },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Consumer<UserProvider>(
-            builder: (context, provider, child) {
-              return ResponseBuilder(
-                response: provider.currentUserResponse,
-                onComplete: (_, user, __, ___) => ListView(
-                  children: [
-                    UnconstrainedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleImage(
-                          imagePath: '$imageUrl${user.image}',
-                          size: 200.w,
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            Consumer<UserProvider>(
+              builder: (context, provider, child) {
+                return ResponseBuilder(
+                  response: provider.currentUserResponse,
+                  onComplete: (_, user, __, ___) => Column(
+                    children: [
+                      UnconstrainedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleImage(
+                            imagePath: '$imageUrl${user.image}',
+                            size: 200.w,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 32.0,
-                    ),
-                    Core(
-                        child: Column(
-                      children: [
-                        Text(
-                          context.tr('Personal Information'),
-                          style: k18Seme.copyWith(color: kText),
-                        ),
-                        if (user.name != null) ...[
-                          const SSizedBox(
-                            height: 8,
+                      const SizedBox(
+                        height: 32.0,
+                      ),
+                      Core(
+                          child: Column(
+                        children: [
+                          Text(
+                            context.tr('Personal Information'),
+                            style: k18Seme.copyWith(color: kText),
                           ),
-                          InfoTile(
-                            hint: '${context.tr('Name')}:',
-                            info: user.name!.firstCapital(),
-                          ),
+                          if (user.name != null) ...[
+                            const SSizedBox(
+                              height: 8,
+                            ),
+                            InfoTile(
+                              hint: '${context.tr('Name')}:',
+                              info: user.name!.firstCapital(),
+                            ),
+                          ],
+                          if (user.role != null && user.role?.name != null) ...[
+                            const SSizedBox(
+                              height: 8,
+                            ),
+                            InfoTile(
+                              hint: '${context.tr('Role')}:',
+                              info: user.role!.name!.firstCapital(),
+                            ),
+                          ],
+                          if (user.email != null) ...[
+                            const SSizedBox(
+                              height: 8,
+                            ),
+                            InfoTile(
+                              hint: '${context.tr('Email')}:',
+                              info: user.email ?? context.tr('Email'),
+                            ),
+                          ],
                         ],
-                        if (user.role != null && user.role?.name != null) ...[
-                          const SSizedBox(
-                            height: 8,
-                          ),
-                          InfoTile(
-                            hint: '${context.tr('Role')}:',
-                            info: user.role!.name!.firstCapital(),
-                          ),
-                        ],
-                        if (user.email != null) ...[
-                          const SSizedBox(
-                            height: 8,
-                          ),
-                          InfoTile(
-                            hint: '${context.tr('Email')}:',
-                            info: user.email ?? context.tr('Email'),
-                          ),
-                        ],
-                      ],
-                    )),
-                    const SSizedBox(
-                      height: 40,
-                    ),
-                    AuthButton(
-                        gradient: const [kUnselect, kSubText],
-                        textColor: kDarkText,
-                        onTap: () {
-                          provider.logout().then((value) {
-                            handelResponseStatus(
-                                provider.currentUserResponse.status, context,
-                                message: provider.currentUserResponse.message,
-                                onComplete: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, SplashView.id, (route) => false);
+                      )),
+                      const SSizedBox(
+                        height: 40,
+                      ),
+                      AuthButton(
+                          gradient: const [kUnselect, kSubText],
+                          textColor: kDarkText,
+                          onTap: () {
+                            provider.logout().then((value) {
+                              handelResponseStatus(
+                                  provider.currentUserResponse.status, context,
+                                  message: provider.currentUserResponse.message,
+                                  onComplete: () {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, SplashView.id, (route) => false);
+                              });
                             });
-                          });
-                        },
-                        text: context.tr('logout'))
-                  ],
-                ),
-                onLoading: (_) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              );
-            },
-          ),
+                          },
+                          text: context.tr('logout'))
+                    ],
+                  ),
+                  onLoading: (_) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

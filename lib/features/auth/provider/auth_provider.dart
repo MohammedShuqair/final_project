@@ -39,11 +39,19 @@ class AuthProvider extends ChangeNotifier {
     String password,
     String passwordConfirmation,
   ) async {
+    print(passwordConfirmation);
+    print(password);
     registerResponse = ApiResponse.loading(message: 'registering...');
     notifyListeners();
     try {
       final UserResponse user = await _repository.register(
           email, name, password, passwordConfirmation);
+      if (user.user != null) {
+        SharedHelper shared = SharedHelper();
+        shared.setToken(user.token!);
+        await shared.saveData(
+            key: 'user', value: jsonEncode(user.user!.toMap()));
+      }
       registerResponse = ApiResponse.completed(user,
           message: 'register completed successfully');
       notifyListeners();

@@ -9,6 +9,7 @@ import 'package:final_project/features/auth/views/widgets/auth_option_button.dar
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/auth/views/widgets/curved_bacground.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/util/shared_methodes.dart';
@@ -49,7 +50,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
   late FocusNode usernameNode;
   bool isSignin = true;
   bool get isSignup => !isSignin;
-
+  Duration duration = const Duration(milliseconds: 700);
   @override
   void initState() {
     _init();
@@ -77,59 +78,83 @@ class _RegistrationFormState extends State<RegistrationForm> {
               borderRadius: BorderRadius.circular(50),
               border: Border.all(color: kBorder),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      if (isSignup) {
-                        setState(() {
-                          isSignin = true;
-                        });
-                        _sginInFocus();
-                      }
-                    },
-                    child: AuthOption(
-                      selectFactor: isSignin,
-                      label: context.tr('login'),
+            child: IntrinsicHeight(
+              child: Stack(
+                children: [
+                  AnimatedAlign(
+                    alignment: isSignin
+                        ? AlignmentDirectional.centerStart
+                        : AlignmentDirectional.centerEnd,
+                    duration: duration,
+                    child: Container(
+                      // height: 70,
+                      width: 120.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: kDarkSub),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      if (isSignin) {
-                        setState(() {
-                          isSignin = false;
-                          // ;
-                        });
-                        _signUpFocus();
-                      }
-                    },
-                    child: AuthOption(
-                      selectFactor: isSignup,
-                      label: context.tr('signup'),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            if (isSignup) {
+                              setState(() {
+                                isSignin = true;
+                              });
+                              _sginInFocus();
+                            }
+                          },
+                          child: AuthOption(
+                            selectFactor: isSignin,
+                            label: context.tr('login'),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            if (isSignin) {
+                              setState(() {
+                                isSignin = false;
+                                // ;
+                              });
+                              _signUpFocus();
+                            }
+                          },
+                          child: AuthOption(
+                            selectFactor: isSignup,
+                            label: context.tr('signup'),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          if (isSignup)
-            Padding(
-              padding: const EdgeInsets.only(top: 14.0),
-              child: CustomTextFormField.username(
-                controller: usernameController,
-                focusNode: usernameNode,
-                validator: (value) {
-                  if (testEmpty(value)) {
-                    return context.tr('pl_username');
-                  }
-                  return null;
-                },
+                ],
               ),
             ),
+          ),
+          AnimatedContainer(
+            duration: duration,
+            height: isSignup ? 60 : 0,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 14.0),
+              child: CustomTextFormField.username(
+                controller: isSignup ? usernameController : null,
+                focusNode: isSignup ? usernameNode : null,
+                validator: isSignup
+                    ? (value) {
+                        if (testEmpty(value)) {
+                          return context.tr('pl_username');
+                        }
+                        return null;
+                      }
+                    : null,
+              ),
+            ),
+          ),
           const SSizedBox(
             height: 14,
           ),
@@ -166,29 +191,34 @@ class _RegistrationFormState extends State<RegistrationForm> {
               return null;
             },
           ),
-          if (isSignup)
-            Padding(
+          AnimatedContainer(
+            duration: duration,
+            height: isSignup ? 60 : 0,
+            child: Padding(
               padding: const EdgeInsets.only(top: 14.0),
               child: CustomTextFormField.password(
-                controller: confPasswordController,
-                focusNode: confPasslNode,
+                controller: isSignup ? confPasswordController : null,
+                focusNode: isSignup ? confPasslNode : null,
                 textInputAction: TextInputAction.done,
                 hint: context.tr('confirm_password'),
-                validator: (value) {
-                  if (testNull(value)) {
-                    return context.tr("pl_confirm");
-                  } else if (testEmpty(value)) {
-                    return context.tr("pl_confirm");
-                  } else if (testPasswordLength(value)) {
-                    return context.tr("pl_len");
-                  } else if (passwordController.text !=
-                      confPasswordController.text) {
-                    return context.tr("pl_match");
-                  }
-                  return null;
-                },
+                validator: isSignup
+                    ? (value) {
+                        if (testNull(value)) {
+                          return context.tr("pl_confirm");
+                        } else if (testEmpty(value)) {
+                          return context.tr("pl_confirm");
+                        } else if (testPasswordLength(value)) {
+                          return context.tr("pl_len");
+                        } else if (passwordController.text !=
+                            confPasswordController.text) {
+                          return context.tr("pl_match");
+                        }
+                        return null;
+                      }
+                    : null,
               ),
             ),
+          ),
           const SSizedBox(
             height: 24,
           ),

@@ -39,6 +39,7 @@ mixin class ApiBaseHelper {
         headers: headers,
         body: body,
       );
+      print(response.body);
       responseJson = _returnResponse(response.body, response.statusCode);
     } on SocketException {
       throw FetchDataException('No Internet connection');
