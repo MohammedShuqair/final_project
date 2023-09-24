@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -42,7 +43,7 @@ class MailOptionsSheet extends StatelessWidget {
               Expanded(
                 child: OptionButton(
                   iconPath: 'assets/icons/archive_option.svg',
-                  title: 'Archive',
+                  title: context.tr('Archive'),
                   onTap: onTapArchive,
                 ),
               ),
@@ -53,7 +54,7 @@ class MailOptionsSheet extends StatelessWidget {
                 child: OptionButton(
                   color: kLightSub,
                   iconPath: 'assets/icons/share.svg',
-                  title: 'Share',
+                  title: context.tr('Share'),
                   onTap: onTapShare,
                 ),
               ),
@@ -64,7 +65,7 @@ class MailOptionsSheet extends StatelessWidget {
                 child: OptionButton(
                   color: kInbox,
                   iconPath: 'assets/icons/delete.svg',
-                  title: 'Delete',
+                  title: context.tr('Delete'),
                   onTap: onTapDelete,
                 ),
               ),

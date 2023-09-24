@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
 import 'package:final_project/app_views/mail_details/views/widgets/mail_options_sheet.dart';
 import 'package:final_project/app_views/mail_details/views/widgets/sender_date_title_descreption.dart';
@@ -92,7 +93,7 @@ class MailDetailsView extends StatelessWidget {
             height: 4,
           ),
           Text(
-            'Mail Details',
+            context.tr('Mail Details'),
             style: kTitleMailCard,
             textAlign: TextAlign.center,
           ),
@@ -229,7 +230,7 @@ class MailDetailsView extends StatelessWidget {
             builder: (context, provider, child) {
               if (provider.activities.isNotEmpty) {
                 return ExpansionWidget(
-                  title: 'Activities',
+                  title: context.tr('Activities'),
                   cards: provider.activities.map(
                     (activity) {
                       return ActivityCard(
@@ -258,7 +259,7 @@ class MailDetailsView extends StatelessWidget {
                   padding: const EdgeInsetsDirectional.only(
                       start: 16, bottom: 10, top: 10),
                   child: Text(
-                    'Activities'.firstCapital(),
+                    context.tr('Activities'.firstCapital()),
                     style: tagTitleTextStyle,
                   ),
                 );
