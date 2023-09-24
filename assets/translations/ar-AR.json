@@ -106,8 +106,22 @@
   "Editor": "محرر",
   "Admin": "مسؤول",
   "create user": "انشاء مستخدم",
-  "Please select user role": "اختر الصلاحية"
-
-
-
+  "Please select user role": "اختر الصلاحية",
+  "seconds":"ثواني",
+  "Yesterday": "أمس",
+  "hour": "ساعة",
+  "min ago": "دقيقة",
+  "like": "مثل",
+  "From Date": "من تاريخ",
+  "To Date": "الى تاريخ",
+  "No Mails Found": "لا يوجد بريد",
+  "Total": "المجموع",
+  "No senders found": "لم يتم ايجاد مرسلين",
+  "No users found": "لم يتم ايجاد مستخدمين",
+  "Name": "الاسم",
+  "Update user information": "تحديث بيانات المستخدم",
+  "update username or user role before saving changes": "قم بتحديث أسم المستخدم أو الصلاحية قبل حفظ التعديلات",
+  "update name": "تغيير الأسم",
+  "deleted successfully": "حذف بنجاح",
+  "": ""
 }

@@ -43,7 +43,7 @@ class ArchiveWidget extends StatelessWidget {
                   return null;
                 },
                 controller: context.watch<NewInboxProvider>().archiveNumber,
-                hintText: "like 1010/2023...",
+                hintText: "${'like'.tr()} 1010/2023...",
                 hintStyle: kSubTitleMailCard.copyWith(fontSize: 12.sp),
               )
             ],

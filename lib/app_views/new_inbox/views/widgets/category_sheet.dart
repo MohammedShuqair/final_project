@@ -1,13 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/new_inbox/provider/provider.dart';
 import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
-import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/category_shimmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
-import 'package:final_project/core/util/colors.dart';
+import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +44,7 @@ class _CategorySheetState extends State<CategorySheet> {
                     context,
                   );
                 },
-                hint: 'Category'),
+                hint: 'category'.tr().firstCapital()),
           ),
           Core(
             child: Consumer<NewInboxProvider>(
@@ -67,19 +67,7 @@ class _CategorySheetState extends State<CategorySheet> {
                     return Text(message ?? '');
                   },
                   onLoading: (_) {
-                    return CustomShimmer(
-                      highlightColor: kUnselect,
-                      child: CategoryList(
-                        categories: List.generate(
-                            5,
-                            (index) => Category(
-                                    name: lorem(
-                                  words: 1,
-                                ))),
-                        selectedCategories: const [],
-                        onTap: (Category c) {},
-                      ),
-                    );
+                    return const CategoryShimmer();
                   },
                 );
               },

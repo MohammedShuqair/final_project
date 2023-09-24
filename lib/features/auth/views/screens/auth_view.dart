@@ -11,7 +11,7 @@ import 'package:final_project/features/auth/views/widgets/curved_bacground.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/util/shared_mrthodes.dart';
+import '../../../../core/util/shared_methodes.dart';
 
 class AuthView extends StatelessWidget {
   static const String id = '/authView';
@@ -125,7 +125,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 validator: (value) {
                   if (testEmpty(value)) {
                     return context.tr('pl_username');
-
                   }
                   return null;
                 },
@@ -206,7 +205,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   text: isSignin ? context.tr('login') : context.tr('signup'));
             },
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.symmetric(vertical: 25.0),
             child: Text(
               context.tr('or'),

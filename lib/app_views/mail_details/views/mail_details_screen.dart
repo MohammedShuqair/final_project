@@ -18,7 +18,7 @@ import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/image_picker.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/activity.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';

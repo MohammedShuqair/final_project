@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/mail_card.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/mail/models/mail.dart';
@@ -116,28 +117,28 @@ extension DateFormat on String {
         if (arriveTime.day.compareTo(now.day) == 0) {
           if (now.hour == arriveTime.hour) {
             if (now.minute == arriveTime.minute) {
-              return "${now.second - arriveTime.second} seconds";
+              return "${now.second - arriveTime.second} ${'seconds'.tr()}";
             } else {
-              return "${now.minute - arriveTime.minute} min ago";
+              return "${now.minute - arriveTime.minute} ${'min ago'.tr()}";
             }
           } else {
             if (now.hour - 1 == arriveTime.hour) {
               if (now.minute + (60 - arriveTime.minute) < 60) {
-                return "${now.minute + (60 - arriveTime.minute)} min ago";
+                return "${now.minute + (60 - arriveTime.minute)} ${'min ago'.tr()}";
               } else {
-                return "${((now.minute + (60 - arriveTime.minute)) / 60).floor()} hour,${(now.minute + (60 - arriveTime.minute)) % 60} min ago";
+                return "${((now.minute + (60 - arriveTime.minute)) / 60).floor()} ${'hour'.tr()},${(now.minute + (60 - arriveTime.minute)) % 60} ${'min ago'.tr()}";
               }
             } else {
               if ((now.minute - arriveTime.minute).isNegative) {
-                return "${(now.hour - 1) - arriveTime.hour} hour,${(now.minute + 60) - arriveTime.minute} min ago";
+                return "${(now.hour - 1) - arriveTime.hour} ${'hour'.tr()},${(now.minute + 60) - arriveTime.minute} ${'min ago'.tr()}";
               } else {
-                return "${now.hour - arriveTime.hour} hour,${now.minute - arriveTime.minute} min ago";
+                return "${now.hour - arriveTime.hour} ${'hour'.tr()},${now.minute - arriveTime.minute} ${'min ago'.tr()}";
               }
             }
           }
         } else {
           if (now.day - 1 == arriveTime.day) {
-            return "Yesterday ${formatterTime.format(arriveTime)}";
+            return "${'Yesterday'.tr()} ${formatterTime.format(arriveTime)}";
           } else {
             return formatterDate.format(arriveTime);
           }

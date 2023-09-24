@@ -1,5 +1,5 @@
 import 'package:final_project/core/util/api_response.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:final_project/features/sender/repo/sender_repo.dart';

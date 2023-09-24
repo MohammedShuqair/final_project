@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
@@ -62,7 +63,7 @@ class _SenderDataTitleDescriptionState
                             height: 2,
                           ),
                           Text(
-                            widget.categoryName,
+                            widget.categoryName.tr(),
                             style: kSearchText,
                           ),
                         ],

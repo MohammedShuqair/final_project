@@ -6,7 +6,6 @@ import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/tag/models/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class TagTiles extends StatelessWidget {
   static const String id = "/tagTiles";
@@ -23,14 +22,13 @@ class TagTiles extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: [
-            SvgPicture.asset(
-              'assets/icons/hashtag.svg',
-              width: 12.0.w,
-              height: 27.0.h,
+            const Text(
+              '#',
+              style: TextStyle(color: kText),
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.only(start: 18.w, end: 10.w),
+                padding: EdgeInsetsDirectional.only(start: 10.w, end: 10.w),
                 child: Text(
                   tags.isEmpty
                       ? context.tr("tags")
@@ -46,10 +44,10 @@ class TagTiles extends StatelessWidget {
                 ),
               ),
             ),
-            SvgPicture.asset(
-              'assets/icons/arrow_gray.svg',
-              width: 18.0,
-              height: 12.0,
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: kSubText,
+              size: 19,
             ),
           ],
         ),

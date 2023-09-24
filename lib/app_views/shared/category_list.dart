@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/select_icon.dart';
-import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class CategoryList extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 14.0.h),
               child: Row(children: [
                 Text(
-                  categories[index].name!.firstCapital(),
+                  categories[index].name!.tr(),
                   style: kSubTitleMailCard.copyWith(fontSize: 16.sp),
                 ),
                 const Spacer(),

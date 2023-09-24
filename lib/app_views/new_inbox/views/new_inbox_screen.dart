@@ -15,7 +15,7 @@ import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/tag_s
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/image_picker.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/auth/views/screens/auth_view.dart';
 import 'package:final_project/features/mail/models/attachment.dart';
@@ -49,13 +49,14 @@ class NewInbox extends StatelessWidget {
             Consumer<NewInboxProvider>(
               builder: (context, provider, child) {
                 return SheetBar(
-                  onTapDone: () async {
-                    await provider.createMail();
-                    handelResponseStatus(
-                        provider.createMailResponse!.status, context,
-                        message: provider.createMailResponse!.message,
-                        onComplete: () {
-                      Navigator.pop(context, true);
+                  onTapDone: () {
+                    provider.createMail().then((value) {
+                      handelResponseStatus(
+                          provider.createMailResponse!.status, context,
+                          message: provider.createMailResponse!.message,
+                          onComplete: () {
+                        Navigator.pop(context, true);
+                      });
                     });
                   },
                   hint: context.tr("new_inbox"),
@@ -217,7 +218,7 @@ class NewInbox extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.only(
                         start: 16, bottom: 10, top: 10),
                     child: Text(
-                     context.tr( 'Activities'.firstCapital()),
+                      context.tr('Activities'.firstCapital()),
                       style: tagTitleTextStyle,
                     ),
                   );

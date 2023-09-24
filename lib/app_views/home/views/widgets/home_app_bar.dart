@@ -4,7 +4,7 @@ import 'package:final_project/app_views/search/views/search_screen.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/constants.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/features/auth/views/screens/splash_view.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';
 import 'package:flutter/material.dart';
@@ -79,17 +79,18 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  void _logout(BuildContext context, UserProvider provider) async {
-    await provider.logout();
-    handelResponseStatus(
-      provider.currentUserResponse.status,
-      context,
-      message: provider.currentUserResponse.message,
-      onComplete: () {
-        Navigator.pushNamedAndRemoveUntil(
-            context, SplashView.id, (route) => false);
-      },
-    );
+  void _logout(BuildContext context, UserProvider provider) {
+    provider.logout().then((value) {
+      handelResponseStatus(
+        provider.currentUserResponse.status,
+        context,
+        message: provider.currentUserResponse.message,
+        onComplete: () {
+          Navigator.pushNamedAndRemoveUntil(
+              context, SplashView.id, (route) => false);
+        },
+      );
+    });
   }
 
   @override

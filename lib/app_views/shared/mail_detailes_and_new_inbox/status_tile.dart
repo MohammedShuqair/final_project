@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/mail_detailes_and_new_inbox/status_tile_item.dart';
+import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/status/models/status.dart';
 
@@ -50,11 +51,11 @@ class StatusTile extends StatelessWidget {
                     style: kHintNormal16Dark,
                   ),
                 const Spacer(),
-                SvgPicture.asset(
-                  'assets/icons/arrow_gray.svg',
-                  width: 18.0,
-                  height: 12.0,
-                ),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: kSubText,
+                  size: 19,
+                )
               ],
             ),
             const SSizedBox(

@@ -64,8 +64,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       ),
       trailing: isClose
           ? const Icon(
-              Icons.keyboard_arrow_right,
-              size: 24,
+              Icons.arrow_forward_ios,
+              size: 19,
               color: kSubText,
             )
           : const Icon(

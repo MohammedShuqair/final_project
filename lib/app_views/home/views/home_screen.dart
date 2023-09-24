@@ -11,7 +11,7 @@ import 'package:final_project/app_views/shared/shimmers/expansions_shmmer.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/current_user/provider/current_user_provider.dart';

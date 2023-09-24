@@ -49,7 +49,7 @@ class UserInformationDialog extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                user.role?.name ?? "Role",
+                user.role?.name!.firstCapital().tr() ?? "Role",
                 style: kNumArrowInExpansion,
               ),
               const SSizedBox(
@@ -67,7 +67,7 @@ class UserInformationDialog extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
+              InkWell(
                 onTap: () async {
                   Locale currentLocale = context.locale;
                   if (currentLocale.languageCode == 'en') {

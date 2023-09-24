@@ -1,16 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/shared/category_list.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/date_picker.dart';
-import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
+import 'package:final_project/app_views/shared/shimmers/category_shimmer.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/app_views/shared/shimmers/status_list_shimmer.dart';
 import 'package:final_project/app_views/shared/status_list.dart';
 import 'package:final_project/core/util/api_response.dart';
-import 'package:final_project/core/util/colors.dart';
-import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/features/category/models/category.dart';
 import 'package:final_project/features/status/models/status.dart';
 import 'package:final_project/features/status/models/status_response.dart';
@@ -39,7 +38,7 @@ class FilterBottomSheet extends StatelessWidget {
                   'start': context.read<FilterProvider>().startDate,
                 });
               },
-              hint: 'Filters',
+              hint: 'filters'.tr(),
             ),
             const SSizedBox(
               height: 57,
@@ -64,17 +63,7 @@ class FilterBottomSheet extends StatelessWidget {
                       );
                     },
                     onLoading: (_) {
-                      return CustomShimmer(
-                        highlightColor: kUnselect,
-                        child: CategoryList(
-                          categories: List.generate(
-                              defaultCategories.length,
-                              (index) => Category(
-                                  name: defaultCategories[index].name)),
-                          selectedCategories: const [],
-                          onTap: (Category c) {},
-                        ),
-                      );
+                      return const CategoryShimmer();
                     },
                     onError: (_, message) {
                       return Text(message ?? '');
@@ -120,7 +109,7 @@ class FilterBottomSheet extends StatelessWidget {
               child: Consumer<FilterProvider>(
                 builder: (context, provider, child) {
                   return CustomDatePicker(
-                    hint: "From Date",
+                    hint: "From Date".tr(),
                     selectedDate: provider.startDate,
                     onChangeDate: (DateTime newDate) {
                       provider.setStartDat(newDate);
@@ -136,7 +125,7 @@ class FilterBottomSheet extends StatelessWidget {
               child: Consumer<FilterProvider>(
                 builder: (context, provider, child) {
                   return CustomDatePicker(
-                    hint: "To Date",
+                    hint: "To Date".tr(),
                     selectedDate: provider.endDate,
                     onChangeDate: (DateTime newDate) {
                       provider.setEndDat(newDate);

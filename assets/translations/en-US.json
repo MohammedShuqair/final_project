@@ -106,6 +106,23 @@
   "Editor": "Editor",
   "Admin": "Admin",
   "create user": "create user",
-  "Please select user role": "Please select user role"
+  "Please select user role": "Please select user role",
+  "seconds":"seconds",
+  "Yesterday":"Yesterday",
+  "hour": "hour",
+  "min ago": "min ago",
+  "like": "like",
+  "From Date": "From Date",
+  "To Date": "To Date",
+  "No Mails Found": "No Mails Found",
+  "Total": "Total",
+  "No senders found": "No senders found",
+  "No users found": "No users found",
+  "Name": "Name",
+  "Update user information": "Update user information",
+  "update username or user role before saving changes": "update username or user role before saving changes",
+  "update name": "update name",
+  "deleted successfully": "deleted successfully",
+  "": ""
 
 }

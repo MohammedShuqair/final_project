@@ -1,5 +1,4 @@
 import 'package:final_project/features/auth/model/user.dart';
-import 'package:final_project/features/mail/models/mail.dart';
 
 class Role {
   int? id;

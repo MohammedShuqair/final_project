@@ -2,15 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/alert.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/sub_app_bar.dart';
-import 'package:final_project/app_views/users_management/users_management_screen.dart';
 import 'package:final_project/core/util/constants.dart';
-import 'package:final_project/features/auth/model/role.dart';
+import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/features/auth/views/widgets/custom_text_form_field.dart';
 import 'package:final_project/features/user_management/repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/util/shared_mrthodes.dart';
+import '../../../../core/util/shared_methodes.dart';
 import '../../../../features/auth/views/widgets/auth_button.dart';
 import '../../../shared/core_background.dart';
 
@@ -83,11 +82,9 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         controller: emailController,
                         validator: (value) {
                           if (testNull(value)) {
-                            return context.tr(
-                                'pl_email');
+                            return context.tr('pl_email');
                           } else if (testEmpty(value)) {
-                            return context.tr(
-                                'pl_email');
+                            return context.tr('pl_email');
                           } else if (!testEmailValidation(value)) {
                             return context.tr('pl_valid_email');
                           }
@@ -101,14 +98,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         controller: passwordController,
                         validator: (value) {
                           if (testNull(value)) {
-                            return context.tr(
-                                'pl_password');
+                            return context.tr('pl_password');
                           } else if (testEmpty(value)) {
-                            return context.tr(
-                                'pl_password');
+                            return context.tr('pl_password');
                           } else if (testPasswordLength(value)) {
-                            return context.tr(
-                                'pl_len');
+                            return context.tr('pl_len');
                           }
                           return null;
                         },
@@ -121,18 +115,14 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                           hint: context.tr('enter_confirm'),
                           validator: (value) {
                             if (testNull(value)) {
-                              return context.tr(
-                                  'pl_confirm');
+                              return context.tr('pl_confirm');
                             } else if (testEmpty(value)) {
-                              return context.tr(
-                                  'pl_confirm');
+                              return context.tr('pl_confirm');
                             } else if (testPasswordLength(value)) {
-                              return context.tr(
-                                  'pl_len');
+                              return context.tr('pl_len');
                             } else if (passwordController.text !=
                                 confPasswordController.text) {
-                              return context.tr(
-                                  'pl_match');
+                              return context.tr('pl_match');
                             }
                             return null;
                           },
@@ -164,7 +154,9 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                                         roleId = e.id;
                                       }),
                                       value: e.id,
-                                      child: Text(context.tr(e.name ?? 'Name')),
+                                      child: Text(context.tr(
+                                          e.name?.firstCapital().tr() ??
+                                              'Name')),
                                     ),
                                   )
                                   .toList() /*const [

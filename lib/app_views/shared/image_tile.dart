@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/mail_image.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ImageTile extends StatelessWidget {
           path: image,
           fromNetwork: fromNetwork,
         ),
-        TextButton(onPressed: onTapDelete, child: const Text("Delete"))
+        TextButton(onPressed: onTapDelete, child: Text("Delete".tr()))
       ],
     );
   }

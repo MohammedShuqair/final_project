@@ -1,12 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/current_user_profile/current_user_profile.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
-import 'package:final_project/app_views/home/provider/home_provider.dart';
-import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/sender/views/senders_view.dart';
 import 'package:final_project/app_views/users_management/users_management_screen.dart';
 import 'package:final_project/core/util/constants.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

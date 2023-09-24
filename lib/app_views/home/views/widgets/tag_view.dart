@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
@@ -7,7 +8,7 @@ import 'package:final_project/app_views/shared/tags_wrap.dart';
 import 'package:final_project/core/util/api_response.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:final_project/features/tag/models/tag.dart';
@@ -70,13 +71,13 @@ class _TagsViewState extends State<TagsView> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Tags",
+          "tags".tr().firstCapital(),
           style: kTitleMailCard,
         ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
-            Icons.arrow_back_ios_new,
+            Icons.arrow_back_ios,
             color: kLightSub,
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -10,8 +11,12 @@ class SenderItem extends StatelessWidget {
   const SenderItem({
     Key? key,
     required this.sender,
+    this.onTapDelete,
+    this.onTapEdit,
   }) : super(key: key);
   final Sender sender;
+  final void Function()? onTapDelete;
+  final void Function()? onTapEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,20 @@ class SenderItem extends StatelessWidget {
           )
         ],
       ),
+      trailing: onTapDelete == null && onTapEdit == null
+          ? null
+          : PopupMenuButton(
+              position: PopupMenuPosition.under,
+              itemBuilder: (_) => [
+                    PopupMenuItem(
+                      onTap: onTapDelete,
+                      child: Text('Delete'.tr()),
+                    ),
+                    PopupMenuItem(
+                      onTap: onTapEdit,
+                      child: Text(context.tr('Edit')),
+                    ),
+                  ]),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/search/provider/filter_provider.dart';
 import 'package:final_project/app_views/search/provider/search_provider.dart';
 import 'package:final_project/app_views/search/views/widgets/filter_bottom_sheet.dart';
@@ -9,7 +10,7 @@ import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/constants.dart';
 import 'package:final_project/core/util/extensions.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/mail/models/mail.dart';
 import 'package:flutter/material.dart';
@@ -35,12 +36,12 @@ class SearchView extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.arrow_back_ios_new,
+                  Icons.arrow_back_ios,
                   size: 14.sp,
                   color: kDarkSub,
                 ),
                 Text(
-                  "Home",
+                  "Home".tr(),
                   style: TextStyle(color: kLightSub, fontSize: 18.sp),
                 )
               ],
@@ -131,7 +132,7 @@ class SearchView extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.only(top: 38.0),
                           child: Text(
-                            'No Mails Found',
+                            'No Mails Found'.tr(),
                             style: kLogo.copyWith(color: Colors.black),
                           ),
                         );
@@ -142,7 +143,7 @@ class SearchView extends StatelessWidget {
                             height: 15,
                           ),
                           Text(
-                            'Total ${data.values.toList().totalLength2D()} Found',
+                            '${'Total'.tr()} ${data.values.toList().totalLength2D()}',
                             style: kSubTitleMailCard.copyWith(
                                 color: kText,
                                 decoration: TextDecoration.underline),
@@ -161,11 +162,11 @@ class SearchView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        key.firstCapital(),
+                                        key.tr().firstCapital(),
                                         style: kTitleMailCard,
                                       ),
                                       Text(
-                                        '${mails.length} Found',
+                                        '${mails.length} ${'found'.tr()}',
                                         style: kSubTitleMailCard.copyWith(
                                             color: kSubText),
                                       ),

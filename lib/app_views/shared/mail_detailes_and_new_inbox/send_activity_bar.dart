@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/circleImage.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/constants.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

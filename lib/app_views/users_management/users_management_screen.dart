@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:final_project/app_views/home/views/home_screen.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/sub_app_bar.dart';
@@ -29,7 +28,7 @@ class UsersManagement extends StatelessWidget {
                 },
                 leading: const Icon(Icons.group),
                 trailing: const Icon(Icons.arrow_forward_ios),
-                title: Text(context.tr("Get all users")),
+                title: Text(context.tr("All Users")),
               ),
             ),
             const SSizedBox(

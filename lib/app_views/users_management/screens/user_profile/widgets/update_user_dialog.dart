@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/action_button.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
-import 'package:final_project/app_views/shared/sheet_bar.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/constants.dart';
+import 'package:final_project/core/util/extensions.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +55,7 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
                   },
                   decoration: InputDecoration(
                     isDense: true,
-                    hintText: 'Name',
+                    hintText: 'Name'.tr(),
                     hintStyle: k14Normal,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30)),
@@ -85,7 +85,8 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
                                 roleId = e.id;
                               }),
                               value: e.id,
-                              child: Text(context.tr(e.name ?? 'Name')),
+                              child: Text(context
+                                  .tr(e.name?.firstCapital().tr() ?? 'Name')),
                             ),
                           )
                           .toList() /*const [
@@ -112,7 +113,7 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
         }),
         actions: [
           ActionButton(
-            hint: 'cancel',
+            hint: 'cancel'.tr(),
             onTap: () => Navigator.pop(context),
             color: kText,
           ),
@@ -120,7 +121,7 @@ class _UpdateUserDialogState extends State<UpdateUserDialog> {
             width: 8,
           ),
           ActionButton(
-            hint: 'save',
+            hint: 'save'.tr(),
             onTap: () {
               if (formKey.currentState?.validate() ?? false) {
                 widget.onTapSave(name?.trim(), roleId);

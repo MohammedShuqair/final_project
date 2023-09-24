@@ -9,7 +9,7 @@ import "package:final_project/app_views/shared/sub_app_bar.dart";
 import "package:final_project/core/util/colors.dart";
 import "package:final_project/core/util/constants.dart";
 import "package:final_project/core/util/extensions.dart";
-import "package:final_project/core/util/shared_mrthodes.dart";
+import "package:final_project/core/util/shared_methodes.dart";
 import "package:final_project/core/util/styles.dart";
 import "package:final_project/features/auth/views/screens/splash_view.dart";
 import "package:final_project/features/auth/views/widgets/auth_button.dart";
@@ -127,7 +127,7 @@ class CurrentUserProfileScreen extends StatelessWidget {
                       height: 40,
                     ),
                     AuthButton(
-                        gradient: [kUnselect, kSubText],
+                        gradient: const [kUnselect, kSubText],
                         textColor: kDarkText,
                         onTap: () {
                           provider.logout().then((value) {

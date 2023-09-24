@@ -9,7 +9,9 @@ import 'package:final_project/app_views/shared/sub_app_bar.dart';
 import 'package:final_project/app_views/users_management/providers/management_provider.dart';
 import 'package:final_project/app_views/users_management/screens/user_profile/user_profile.dart';
 import 'package:final_project/core/util/constants.dart';
-import 'package:final_project/core/util/shared_mrthodes.dart';
+import 'package:final_project/core/util/extensions.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
+import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -60,63 +62,78 @@ class AllUsersView extends StatelessWidget {
                   onComplete: (_, roles, message, more) {
                     return Column(
                       children: [
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (_, index) {
-                            return ExpansionWidget(
-                              key: ValueKey(roles[index].hashCode),
-                              cards: roles[index]
-                                      .users
-                                      ?.map((e) => ListTile(
-                                            key: ValueKey(e.hashCode),
-                                            onTap: () => Navigator.pushNamed(
-                                                    context,
-                                                    UserProfileScreen.id,
-                                                    arguments: e)
-                                                .then((value) =>
-                                                    provider.getAllRoles()),
-                                            leading: CircleImage(
-                                                imagePath:
-                                                    '$imageUrl${e.image}'),
-                                            title: Text(e.name ?? 'name'),
-                                            subtitle: Text(e.email ?? 'email'),
-                                            trailing: TextButton(
-                                                onPressed: () {
-                                                  provider
-                                                      .deleteUser(e.id!)
-                                                      .then((value) {
-                                                    handelResponseStatus(
-                                                        provider.deleteResponse!
-                                                            .status,
-                                                        context,
-                                                        message: provider
-                                                            .deleteResponse
-                                                            ?.message,
-                                                        onComplete: () {
-                                                      provider.getAllRoles();
+                        if (roles.isNotEmpty) ...[
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (_, index) {
+                              return ExpansionWidget(
+                                key: ValueKey(roles[index].hashCode),
+                                cards: roles[index]
+                                        .users
+                                        ?.map((e) => ListTile(
+                                              key: ValueKey(e.hashCode),
+                                              onTap: () => Navigator.pushNamed(
+                                                      context,
+                                                      UserProfileScreen.id,
+                                                      arguments: e)
+                                                  .then((value) =>
+                                                      provider.getAllRoles()),
+                                              leading: CircleImage(
+                                                  imagePath:
+                                                      '$imageUrl${e.image}'),
+                                              title: Text(e.name ?? 'name'),
+                                              subtitle:
+                                                  Text(e.email ?? 'email'),
+                                              trailing: TextButton(
+                                                  onPressed: () {
+                                                    provider
+                                                        .deleteUser(e.id!)
+                                                        .then((value) {
+                                                      handelResponseStatus(
+                                                          provider
+                                                              .deleteResponse!
+                                                              .status,
+                                                          context,
+                                                          message: provider
+                                                              .deleteResponse
+                                                              ?.message,
+                                                          onComplete: () {
+                                                        provider.getAllRoles();
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                child: const Text('delete')),
-                                          ))
-                                      .toList() ??
-                                  [],
-                              title: context.tr(roles[index].name ?? 'Role'),
-                            );
-                          },
-                          separatorBuilder: (_, index) {
-                            return const SSizedBox(
-                              height: 14,
-                            );
-                          },
-                          itemCount: roles.length,
-                        ),
+                                                  },
+                                                  child: const Text('delete')),
+                                            ))
+                                        .toList() ??
+                                    [],
+                                title: context.tr(
+                                    roles[index].name?.firstCapital().tr() ??
+                                        'Role'),
+                              );
+                            },
+                            separatorBuilder: (_, index) {
+                              return const SSizedBox(
+                                height: 14,
+                              );
+                            },
+                            itemCount: roles.length,
+                          ),
+                        ] else ...[
+                          Padding(
+                            padding: EdgeInsets.only(top: 0.1.sh),
+                            child: Center(
+                                child: Text(
+                              'No users found'.tr(),
+                              style: kStatusNumberTextStyle,
+                            )),
+                          )
+                        ],
                         if (more)
                           ExpansionsShimmer(
                             titles: defaultRoles.map((e) => e.name).toList()
                               ..removeWhere((newCat) => roles
-                                  .map((e) => e.name)
+                                  .map((e) => e.name?.firstCapital().tr())
                                   .toList()
                                   .any((oldCat) => newCat == oldCat)),
                           )
@@ -125,7 +142,9 @@ class AllUsersView extends StatelessWidget {
                   },
                   onLoading: (_) {
                     return ExpansionsShimmer(
-                      titles: defaultRoles.map((e) => e.name).toList(),
+                      titles: defaultRoles
+                          .map((e) => e.name?.firstCapital().tr())
+                          .toList(),
                     );
                   },
                   onError: (_, message) {

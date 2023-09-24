@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
 import 'package:final_project/app_views/shared/status_list.dart';
 import 'package:final_project/core/util/constants.dart';
@@ -17,7 +18,7 @@ class StatusListShimmer extends StatelessWidget {
         statuses: List.generate(
             defaultStatues.length,
             (index) => Status(
-                name: defaultStatues[index].name ?? lorem(words: 1),
+                name: defaultStatues[index].name?.tr() ?? lorem(words: 1),
                 color: defaultStatues[index].color ?? '')),
         onTap: (s) {},
       ),

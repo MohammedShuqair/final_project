@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/sender/provider/sender_search_provider.dart';
 import 'package:final_project/app_views/sender/views/sender_mails.dart';
 import 'package:final_project/app_views/sender/views/widgets/sender_list.dart';
+import 'package:final_project/app_views/sender/views/widgets/update_sender_sheet.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/search_bar.dart';
 import 'package:final_project/app_views/shared/sub_app_bar.dart';
+import 'package:final_project/core/util/shared_methodes.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:final_project/features/sender/models/sender.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +55,7 @@ class SendersView extends StatelessWidget {
                       padding: EdgeInsets.only(top: 0.1.sh),
                       child: Center(
                           child: Text(
-                        'No senders found',
+                        'No senders found'.tr(),
                         style: kStatusNumberTextStyle,
                       )),
                     );
@@ -61,6 +63,22 @@ class SendersView extends StatelessWidget {
                     return Column(
                       children: [
                         SenderList(
+                            onTapDelete: (sender) =>
+                                provider.deleteSender(sender).then((value) {
+                                  handelResponseStatus(
+                                      provider.deleteResponse!.status, context,
+                                      message: provider.deleteResponse?.message,
+                                      onComplete: () {
+                                    provider.reset();
+                                  });
+                                }),
+                            onTapEdit: (sender) {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) {
+                                    return UpdateSenderSheet();
+                                  });
+                            },
                             senders: senderResponse.senders ?? [],
                             onTapSender: (sender) => Navigator.pushNamed(
                                 context, SenderMailsView.id,

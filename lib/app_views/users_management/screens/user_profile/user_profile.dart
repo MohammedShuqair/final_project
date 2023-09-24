@@ -100,8 +100,8 @@ class UserProfileScreen extends StatelessWidget {
                             height: 8,
                           ),
                           InfoTile(
-                            hint: '${context.tr('Email')}:',
-                            info: user.email ?? context.tr('Email'),
+                            hint: '${context.tr('email')}:',
+                            info: user.email ?? context.tr('email'),
                           ),
                         ],
                       ],

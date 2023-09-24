@@ -132,8 +132,9 @@ class SenderCard extends StatelessWidget {
                             onComplete: (BuildContext context, data,
                                 String? message, status) {
                               return Text(
-                                context.tr(provider.selectedCategory.name!
-                                    .firstCapital()),
+                                context
+                                    .tr(provider.selectedCategory.name!)
+                                    .firstCapital(),
                                 style: kNormal14Color7c,
                               );
                             },
@@ -148,7 +149,7 @@ class SenderCard extends StatelessWidget {
                           );
                         } else {
                           return Text(
-                            provider.selectedCategory.name!.firstCapital(),
+                            provider.selectedCategory.name!.tr().firstCapital(),
                             style: kNormal14Color7c,
                           );
                         }

@@ -42,7 +42,7 @@ class SenderRepository with ApiBaseHelper {
     }
   }
 
-  Future<Sender?> updateSender({
+  Future<Sender> updateSender({
     required int id,
     required String name,
     required String mobile,
@@ -65,6 +65,6 @@ class SenderRepository with ApiBaseHelper {
     required int id,
   }) async {
     final response = await delete('senders/$id');
-    return response['sender'];
+    return response['message'];
   }
 }

@@ -9,12 +9,16 @@ class SenderList extends StatelessWidget {
       required this.senders,
       this.onTapSender,
       this.isShimmer = false,
-      this.controller})
+      this.controller,
+      this.onTapDelete,
+      this.onTapEdit})
       : super(key: key);
   final List<Sender> senders;
   final void Function(Sender sender)? onTapSender;
   final bool isShimmer;
   final ScrollController? controller;
+  final void Function(Sender sender)? onTapDelete;
+  final void Function(Sender sender)? onTapEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +47,10 @@ class SenderList extends StatelessWidget {
         itemBuilder: (_, index) => InkWell(
           onTap: () => onTapSender!(senders[index]),
           child: SenderItem(
+            onTapEdit:
+                onTapEdit == null ? null : () => onTapEdit!(senders[index]),
+            onTapDelete:
+                onTapDelete == null ? null : () => onTapDelete!(senders[index]),
             sender: senders[index],
           ),
         ),

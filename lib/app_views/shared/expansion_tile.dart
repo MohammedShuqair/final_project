@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/core/util/edited_expansion_tile.dart' as ed;
 import 'package:flutter/material.dart';
 import 'package:final_project/core/util/extensions.dart';
@@ -30,7 +31,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
         title: Padding(
           padding: const EdgeInsetsDirectional.only(start: 16),
           child: Text(
-            widget.title.firstCapital(),
+            widget.title.tr().firstCapital(),
             style: tagTitleTextStyle,
           ),
         ),
