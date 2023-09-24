@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/provider/single_status_provider.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/app_views/shared/expansion_tile.dart';
@@ -23,7 +24,7 @@ class StatusMailsView extends StatelessWidget {
     return Scaffold(
       appBar: SubAppBar(
         title:
-            context.read<SingleStatusProvider>().selectedStatus.name ?? 'Tag',
+            context.read<SingleStatusProvider>().selectedStatus.name?.tr() ?? 'Tag',
       ),
       body: RefreshIndicator(
         triggerMode: RefreshIndicatorTriggerMode.anywhere,

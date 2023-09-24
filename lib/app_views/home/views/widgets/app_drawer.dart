@@ -38,11 +38,11 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
             ),
           ),
-          DrawerTile(
+          /*DrawerTile(
             title: context.tr('Home'),
             onTap: () {},
             iconPath: 'assets/icons/home.png',
-          ),
+          ),*/
           DrawerTile(
             title: context.tr('Profile'),
             onTap: () {
