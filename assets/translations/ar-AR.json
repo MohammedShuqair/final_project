@@ -19,7 +19,7 @@
   "tags": "الوسوم",
   "new_inbox": "بريد جديد",
   "search": "بحث",
-  "home": "رئيسية",
+  "Home": "رئيسية",
   "decision": "التأشيرة",
   "add_image": "إضافة صورة",
   "Activities": "الإجراءات",
@@ -29,7 +29,7 @@
   "delete": "احذف",
   "cancel": "إلغاء",
   "done": "حفظ",
-  "senders": "المرسلين",
+  "Senders": "المرسلين",
   "sender": "المرسل",
   "mobile": "رقم الجوال",
   "category": "الفئة",
@@ -57,7 +57,7 @@
   "there_is_no_mails": "ليس هناك أي بريد",
   "mail_details": "تفاصيل البريد",
   "users_management": "إدارة المستخدمين",
-  "profile": "الملف الشخصي",
+  "Profile": "الملف الشخصي",
   "delete_inbox": "حذف بريد",
   "localization": "English",
   "logout": "تسجيل الخروج",
@@ -93,14 +93,8 @@
   "Edit":"تعديل",
   "Delete": "حذف",
   "Please_enter_archive_number.": "رقم الارشيف مطلوب",
-  "Please_enter_valid_archive_number.": "رقم الارشيف غير صحيح"
-
-
-
-
-
-
-
-
+  "Please_enter_valid_archive_number.": "رقم الارشيف غير صحيح",
+  "Users Management": "إدارة المستخدمين",
+  "Personal Information": "المعلومات الشخصية"
 
 }

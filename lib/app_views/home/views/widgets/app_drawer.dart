@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/current_user_profile/current_user_profile.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
@@ -40,12 +41,12 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ),
           DrawerTile(
-            title: 'Home',
+            title: context.tr('Home'),
             onTap: () {},
             iconPath: 'assets/icons/home.png',
           ),
           DrawerTile(
-            title: 'Profile',
+            title: context.tr('Profile'),
             onTap: () {
               Navigator.pushNamed(context, CurrentUserProfileScreen.id)
                   .then((value) => context.read<HomeProvider>().init());
@@ -54,7 +55,7 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           if (getUser().role?.id == adminId)
             DrawerTile(
-              title: 'Senders',
+              title: context.tr('Senders'),
               onTap: () => Navigator.pushNamed(context, SendersView.id)
                   .then((value) => context.read<HomeProvider>().init()),
               icon: const Icon(
@@ -64,7 +65,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           if (getUser().role?.id == adminId)
             DrawerTile(
-              title: 'Users Management',
+              title: context.tr('Users Management'),
               onTap: () => Navigator.pushNamed(context, UsersManagement.id)
                   .then((value) => context.read<HomeProvider>().init()),
               iconPath: 'assets/icons/settings.png',
