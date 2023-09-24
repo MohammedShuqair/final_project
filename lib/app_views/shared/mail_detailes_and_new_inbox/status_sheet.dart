@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/app_views/shared/responce_builder.dart';
 import 'package:final_project/app_views/shared/sheet_bar.dart';
@@ -57,7 +58,7 @@ class _StatusSheetState extends State<StatusSheet> {
         Padding(
           padding: EdgeInsets.only(top: 14.0.h, bottom: 57.h),
           child: SheetBar(
-              onTapDone: () => widget.onTapDone(selected), hint: 'Statuses'),
+              onTapDone: () => widget.onTapDone(selected), hint: context.tr('Statuses')),
         ),
         Core(
           child: ResponseBuilder(

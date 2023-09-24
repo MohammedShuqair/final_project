@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/home/provider/home_provider.dart';
 import 'package:final_project/app_views/home/views/widgets/status_view.dart';
 import 'package:final_project/app_views/shared/shimmers/custom_shimmer.dart';
@@ -29,7 +30,7 @@ class StatusGridView extends StatelessWidget {
               },
               child: StatusWidget(
                 statusColor: Color(int.tryParse(defaultStatues[0].color!)!),
-                statusText: defaultStatues[0].name!,
+                statusText: context.tr(defaultStatues[0].name!),
                 statusNumber:
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
@@ -39,7 +40,7 @@ class StatusGridView extends StatelessWidget {
                       if (more) {
                         return CustomShimmer(
                           child: Text(
-                            '$mailCount',
+                           '$mailCount',
                             style: kStatusNumberTextStyle,
                           ),
                         );
@@ -70,7 +71,7 @@ class StatusGridView extends StatelessWidget {
               },
               child: StatusWidget(
                 statusColor: Color(int.tryParse(defaultStatues[1].color!)!),
-                statusText: defaultStatues[1].name!,
+                statusText: context.tr(defaultStatues[1].name!),
                 statusNumber:
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
@@ -116,7 +117,7 @@ class StatusGridView extends StatelessWidget {
               },
               child: StatusWidget(
                 statusColor: Color(int.tryParse(defaultStatues[2].color!)!),
-                statusText: defaultStatues[2].name!,
+                statusText: context.tr(defaultStatues[2].name!),
                 statusNumber:
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(
@@ -158,7 +159,7 @@ class StatusGridView extends StatelessWidget {
               },
               child: StatusWidget(
                 statusColor: Color(int.tryParse(defaultStatues[3].color!)!),
-                statusText: defaultStatues[3].name!,
+                statusText: context.tr(defaultStatues[3].name!),
                 statusNumber:
                     Consumer<HomeProvider>(builder: (_, provider, child) {
                   return ResponseBuilder(

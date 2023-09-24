@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/mail_details/details_provider/details_provider.dart';
 import 'package:final_project/app_views/mail_details/views/mail_details_screen.dart';
 import 'package:final_project/app_views/shared/alert.dart';
@@ -16,11 +17,11 @@ import 'package:provider/provider.dart';
 void handelResponseStatus(ApiStatus status, BuildContext context,
     {String? message, void Function()? onComplete}) {
   if (status == ApiStatus.LOADING) {
-    showAlert(context, message: message ?? 'logging...', isError: false);
+    showAlert(context, message: message ?? context.tr('logging...'), isError: false);
   } else if (status == ApiStatus.ERROR) {
-    showAlert(context, message: message ?? 'error');
+    showAlert(context, message: message ?? context.tr('error'));
   } else {
-    showAlert(context, message: message ?? 'done successfully', isError: false);
+    showAlert(context, message: message ?? context.tr('done_successfully'), isError: false);
     if (onComplete != null) {
       onComplete();
     }

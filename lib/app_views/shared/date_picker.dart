@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/colors.dart';
 import 'package:final_project/core/util/styles.dart';
@@ -48,7 +49,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.hint,
+                  context.tr(widget.hint),
                   style: kStatusName16RegDark,
                 ),
                 // ${DateFormat.yMMMMd().format(selectedDate)}

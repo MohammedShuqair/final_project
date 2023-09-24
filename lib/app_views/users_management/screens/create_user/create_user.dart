@@ -192,7 +192,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                                   .then((user) {
                                 showAlert(context,
                                     message:
-                                        '${user.name} created successfully',
+                                        '${user.name} ${context.tr("created_successfully")}',
                                     isError: false);
                                 setState(() {
                                   _init();

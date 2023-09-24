@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/core_background.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class PickImageSheet extends StatelessWidget {
               onTap: onTapCamera,
               leading: const Icon(Icons.camera),
               title: Text(
-                "From Camera",
+                context.tr("From_Camera"),
                 style: kStatusName16RegDark,
               ),
             ),
@@ -30,7 +31,7 @@ class PickImageSheet extends StatelessWidget {
               onTap: onTapGallery,
               leading: const Icon(Icons.image),
               title: Text(
-                "From Gallery",
+                context.tr("From_Gallery"),
                 style: kStatusName16RegDark,
               ),
             ),
