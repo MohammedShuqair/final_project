@@ -67,7 +67,19 @@
   "enter_address": "الرجاء ادخال العنوان",
   "Please enter email title.": "الرجاء ادخال عنوان الايميل",
   "Please Select Status": "رجاءا اختر حالة",
-  "Please Enter Tag Name": "رجاءا ادخل اسم الوسم"
+  "Please Enter Tag Name": "رجاءا ادخل اسم الوسم",
+
+  "enter_username": "ادخل اسم المستخدم",
+  "enter_email": "ادخل الايميل",
+  "enter_password": "ادخل كلمة المرور",
+  "enter_confirm": "ادخل تأكيد كلمة المرور",
+  "pl_username": "اسم المستخدم مطلوب",
+  "pl_email": "الايميل مطلوب",
+  "pl_valid_email": "الايميل غير صحيح",
+  "pl_password": "كلمة المرور مطلوبة",
+  "pl_confirm": "تأكيد كلمة المرور مطلوب",
+  "pl_len": "كلمة المرور يجب أن تتوي على الأقل 6 أحرف",
+  "pl_match": "تأكيد كلمة المرور لا يتطابق مع كلمة السر"
 
 
 

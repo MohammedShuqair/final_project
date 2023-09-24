@@ -92,7 +92,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     },
                     child: AuthOption(
                       selectFactor: isSignin,
-                      label: 'sign in',
+                      label: context.tr('login'),
                     ),
                   ),
                 ),
@@ -109,7 +109,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     },
                     child: AuthOption(
                       selectFactor: isSignup,
-                      label: 'sign up',
+                      label: context.tr('signup'),
                     ),
                   ),
                 ),
@@ -124,8 +124,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 focusNode: usernameNode,
                 validator: (value) {
                   if (testEmpty(value)) {
-                    return context.tr('Please enter your username');
-                    ;
+                    return context.tr('pl_username');
+
                   }
                   return null;
                 },
@@ -139,11 +139,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
             focusNode: emailNode,
             validator: (value) {
               if (testNull(value)) {
-                return 'Please click on the email field and enter your email';
+                return context.tr('pl_email');
               } else if (testEmpty(value)) {
-                return 'Please enter the email and do not leave the field empty';
+                return context.tr('pl_email');
               } else if (!testEmailValidation(value)) {
-                return 'Please enter a valid email';
+                return context.tr('pl_valid_email');
               }
               return null;
             },
@@ -158,11 +158,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 isSignin ? TextInputAction.done : TextInputAction.next,
             validator: (value) {
               if (testNull(value)) {
-                return 'Please click on the password field and enter your password';
+                return context.tr("pl_password");
               } else if (testEmpty(value)) {
-                return 'Please enter the password and do not leave the field empty';
+                return context.tr("pl_password");
               } else if (testPasswordLength(value)) {
-                return 'The password must contain at least 6 characters';
+                return context.tr("pl_len");
               }
               return null;
             },
@@ -174,17 +174,17 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 controller: confPasswordController,
                 focusNode: confPasslNode,
                 textInputAction: TextInputAction.done,
-                hint: 'Confirm Password',
+                hint: context.tr('confirm_password'),
                 validator: (value) {
                   if (testNull(value)) {
-                    return 'Please click on the confirm password field and enter your password';
+                    return context.tr("pl_confirm");
                   } else if (testEmpty(value)) {
-                    return 'Please enter the confirm password and do not leave the field empty';
+                    return context.tr("pl_confirm");
                   } else if (testPasswordLength(value)) {
-                    return 'The confirm password must contain at least 6 characters';
+                    return context.tr("pl_len");
                   } else if (passwordController.text !=
                       confPasswordController.text) {
-                    return 'The confirm password must be the same as password';
+                    return context.tr("pl_match");
                   }
                   return null;
                 },
@@ -203,14 +203,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       await signUp(provider, context);
                     }
                   },
-                  text: isSignin ? 'Sign in' : 'Sign up');
+                  text: isSignin ? context.tr('login') : context.tr('signup'));
             },
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 25.0),
+           Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25.0),
             child: Text(
-              'OR',
-              style: TextStyle(
+              context.tr('or'),
+              style: const TextStyle(
                 color: kSubText,
               ),
             ),

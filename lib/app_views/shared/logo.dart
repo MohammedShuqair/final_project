@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:final_project/app_views/shared/custom_sized_box.dart';
 import 'package:final_project/core/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class Logo extends StatelessWidget {
             height: margin,
           ),
           Text(
-            'ديوان رئيس الوزراء',
+            context.tr('prime_ministers_office'),
             style: style,
           )
         ],

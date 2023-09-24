@@ -1,7 +1,7 @@
 {
   "prime_ministers_office": "Prime Minister's Office",
-  "login": "Log In",
-  "signup": "Sign Up",
+  "login": "Sign in",
+  "signup": "Sign up",
   "email": "email",
   "or": "Or",
   "enter_email_username": "Enter email or username",
@@ -67,7 +67,21 @@
   "enter_address": "الرجاء ادخال العنوان",
   "Please enter email title.": "Please enter email title.",
   "Please Select Status": "Please Select Status",
-  "Please Enter Tag Name": "Please Enter Tag Name"
+  "Please Enter Tag Name": "Please Enter Tag Name",
+
+  "enter_username": "Enter user name",
+  "enter_email": "Enter email",
+  "enter_password": "Enter password",
+  "enter_confirm": "Enter confirm password",
+  "pl_username": "Please enter user name ",
+  "pl_email": "Please enter email",
+  "pl_valid_email": "Please enter valid email",
+  "pl_password": "Please enter password",
+  "pl_confirm": "Please enter confirm password",
+  "pl_len": "Password must contain at least six characters",
+  "pl_match": "Confirm Password not match"
+
+
 
 
 
